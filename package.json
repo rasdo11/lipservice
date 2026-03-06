@@ -1,0 +1,13 @@
+{
+  "name": "lip-service",
+  "version": "1.0.0",
+  "description": "Lip Service — Daily Beauty Newsletter",
+  "type": "module",
+  "scripts": {
+    "generate": "node generate.js",
+    "start": "node generate.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0"
+  }
+}
