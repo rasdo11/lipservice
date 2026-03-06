@@ -31,10 +31,10 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
-      - name: Commit and push updated index.html
+      - name: Commit and push updated files
         run: |
           git config user.name "Lip Service Bot"
           git config user.email "bot@lipservice.dev"
-          git add index.html
+          git add index.html issues/
           git diff --staged --quiet || git commit -m "Daily newsletter: $(TZ='America/Los_Angeles' date +'%B %d, %Y')"
           git push

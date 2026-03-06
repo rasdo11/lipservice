@@ -6,43 +6,38 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // ─── Curated content pools ────────────────────────────────────────────────────
-// Add more to each pool — the generator cycles through them by day of year.
+// Add more entries to each pool — the generator cycles through them by day of year.
 
 const BEAUTY_IMAGES = [
   {
     photoId: '1596462502278-27bfdc403348',
     alt: 'Bold lip art editorial beauty 2026',
-    caption: 'SS26 · Statement Lip Moment',
   },
   {
     photoId: '1512207736890-6ffed8a84e8d',
     alt: 'Luxury beauty editorial close up',
-    caption: 'SS26 · Beauty Close-Up',
   },
   {
     photoId: '1522335789203-aabd1fc54bc9',
     alt: 'Fashion editorial runway beauty',
-    caption: 'SS26 · Runway Beauty',
   },
   {
     photoId: '1487412720507-265dfe4c7f77',
     alt: 'Portrait fashion editorial',
-    caption: 'SS26 · The Face',
   },
   {
     photoId: '1516975080664-ed2fc6a32937',
     alt: 'Beauty industry editorial',
-    caption: 'SS26 · Industry Moment',
   },
 ];
 
 // Each story has a YouTube video ID + context for Claude to write from.
-// Verify video IDs are still live before adding them.
+// Verify video IDs are still live before adding new entries.
 const TEARS_STORIES = [
   {
     videoId: 'bktozJWbLQg',
     context:
-      'Alice Barker was a Harlem Renaissance chorus dancer — the Apollo, the Cotton Club, the Zanzibar — performing alongside Frank Sinatra, Gene Kelly, and Ella Fitzgerald. She made television history as one of the first Black dancers to perform on TV with a white man. She ended up in a Brooklyn nursing home with no photos, no footage, no proof that any of it happened. In 2015, a man spent three years tracking down her films and brought an iPad to her room and pressed play. She was 102. It was the first time she had ever seen herself dance.',
+      'Alice Barker was a Harlem Renaissance chorus dancer — the Apollo, the Cotton Club, the Zanzibar — performing alongside Frank Sinatra, Gene Kelly, and Ella Fitzgerald. She made television history as one of the first Black dancers to perform on TV with a white man. She ended up in a Brooklyn nursing home with no proof that any of it happened. In 2015, a man spent three years tracking down her films and brought an iPad to her room. She was 102. It was the first time she had ever seen herself dance.',
     videoLabel: "40 million people have watched this. You'll know why in 30 seconds.",
   },
   {
@@ -59,7 +54,7 @@ const TEARS_STORIES = [
   },
 ];
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+// ─── Date helpers ─────────────────────────────────────────────────────────────
 
 function dayOfYear(date) {
   const start = new Date(date.getFullYear(), 0, 0);
@@ -82,6 +77,13 @@ function formatDate(date) {
   });
 }
 
+// YYYY-MM-DD in Pacific time — used as the archive key and filename
+function dateKey(date) {
+  return date.toLocaleDateString('en-CA', { timeZone: 'America/Los_Angeles' });
+}
+
+// ─── HTML builders ────────────────────────────────────────────────────────────
+
 function buildHearItemsHtml(items) {
   return items
     .map(
@@ -95,16 +97,63 @@ function buildHearItemsHtml(items) {
     .join('\n');
 }
 
+// Archive section shown on index.html below all content, above footer
+function buildArchiveSectionHtml(archive) {
+  // Only show past issues (skip today = first entry)
+  const past = archive.slice(1);
+  if (past.length === 0) return '';
+
+  const items = past
+    .map(
+      (entry) => `
+      <a href="issues/${entry.date}.html" class="archive-item">
+        <div class="archive-item-meta">
+          <span class="archive-item-label">${entry.issueLabel}</span>
+          <span class="archive-item-date">${entry.issueDate}</span>
+        </div>
+        <div class="archive-item-teaser">${entry.heroText}</div>
+      </a>`
+    )
+    .join('\n');
+
+  return `
+  <div class="section archive-section">
+    <div class="section-label">
+      <div class="section-number" style="font-size:13px; line-height:1;">↩</div>
+      <div class="section-title">Past Issues</div>
+    </div>
+    <div class="archive-list">
+      ${items}
+    </div>
+  </div>`;
+}
+
+// Standalone issue page: no archive list, just a back-to-today nav bar
+function buildIssuePage(html, issueLabel, issueDate) {
+  const navBar = `<div class="issue-nav-bar">
+  <a href="../index.html">← Today's issue</a>
+  <span>${issueLabel} &middot; ${issueDate}</span>
+</div>`;
+
+  const backLink = `
+  <div class="section" style="text-align:center; padding:20px 24px; border-bottom:none;">
+    <a href="../index.html" style="font-size:11px;color:var(--rouge);text-decoration:none;letter-spacing:2px;text-transform:uppercase;font-weight:500;">← Today's issue</a>
+  </div>`;
+
+  return html
+    .replace('<div class="email-wrapper">', `${navBar}\n<div class="email-wrapper">`)
+    .replace('{{ARCHIVE_SECTION}}', backLink);
+}
+
 // ─── Content generation ───────────────────────────────────────────────────────
 
 async function generateContent(date, story) {
   const client = new Anthropic();
-
   const dateStr = formatDate(date);
 
   const prompt = `You are writing today's issue of LIP SERVICE — a sharp, witty, beautifully written daily newsletter about beauty, fashion, culture, and the things women actually care about.
 
-Voice: Personal, specific, slightly wry. Think a brilliant friend who reads PubMed AND sends the unhinged meme. Never condescending, never preachy. The kind of writing that makes you feel like you were let in on something. Mix real beauty intel with cultural observation.
+Voice: Personal, specific, slightly wry. Think a brilliant friend who reads PubMed AND sends the unhinged meme. Never condescending, never preachy. The kind of writing that makes you feel like you were let in on something.
 
 Today is ${dateStr}. Write all sections in this exact JSON format. Return ONLY valid, parseable JSON — no markdown fences, no explanation, no trailing commas.
 
@@ -113,7 +162,7 @@ Today is ${dateStr}. Write all sections in this exact JSON format. Return ONLY v
 
   "opening_headline": "A 2-line headline. Line 1 is plain text, line 2 uses <em> tags. Personal and slightly dark. E.g.: 'I went to the derm.<br><em>She was not impressed.</em>'",
 
-  "opening_body": "3-4 paragraphs of personal essay. Wrap paragraphs in <p> tags. The FIRST paragraph must open with <p class=\\"drop-cap\\">. First-person voice, specific beauty or self-care incident, landing on a broader truth about beauty culture. End with a warm welcome to this issue. No placeholder names — write as the newsletter author.",
+  "opening_body": "3-4 paragraphs of personal essay. Wrap paragraphs in <p> tags. The FIRST paragraph must open with <p class=\\"drop-cap\\">. First-person voice, specific beauty or self-care incident, landing on a broader truth about beauty culture. End with a warm welcome to this issue.",
 
   "hear_headline": "2-line headline. E.g.: 'The group chat<br><em>is going off.</em>'",
 
@@ -123,51 +172,43 @@ Today is ${dateStr}. Write all sections in this exact JSON format. Return ONLY v
       "headline": "A specific, slightly arch headline — like a WSJ beauty section",
       "body": "2-3 sentences. Specific, opinionated, dry. Include a detail that makes it feel reported."
     },
-    {
-      "tag": "...",
-      "headline": "...",
-      "body": "..."
-    },
-    {
-      "tag": "...",
-      "headline": "...",
-      "body": "..."
-    }
+    { "tag": "...", "headline": "...", "body": "..." },
+    { "tag": "...", "headline": "...", "body": "..." }
   ],
 
   "know_headline": "An ingredient or beauty science topic. 2 lines, second in <em> tags. E.g.: 'Salmon sperm is<br><em>in your serum now.</em>'",
 
-  "know_intro": "A single paragraph (no <p> tags — parent already handles it) introducing the ingredient or trend. Where it came from, why it's having a moment right now.",
+  "know_intro": "A single paragraph (no <p> tags) introducing the ingredient or trend.",
 
-  "know_callout": "The scientific mechanism in 2-3 sentences. Use <strong> tags around the key scientific term. Factual but not dry.",
+  "know_callout": "The scientific mechanism in 2-3 sentences. Use <strong> tags around the key scientific term.",
 
-  "know_body": "2 paragraphs (no <p> tags). Who's using it, why it matters, the 360-degree context — the lifestyle factors (sleep, stress, gut health) that interact with it. End with something slightly uncomfortable-but-true.",
+  "know_body": "2 paragraphs separated by a blank line (no <p> tags). Who's using it, the lifestyle context, something uncomfortable-but-true.",
 
   "know_quote": "A real-feeling expert quote. Format: \\"Quote text.\\" — First Last, Title, Organization",
 
-  "see_headline": "2-3 lines. Someone did something with makeup, fashion, or beauty. Specific. Second or third line in <em>. E.g.: 'Simone Rocha put<br><em>words on lips.</em><br>Literally.'",
+  "see_headline": "2-3 lines. Someone did something with makeup or fashion. Second or third line in <em>. Specific.",
 
-  "see_body": "2 paragraphs (no <p> tags). A specific SS26 or AW26 runway or editorial beauty moment — real or plausibly real. End with a connection back to Lip Service.",
+  "see_body": "2 paragraphs (no <p> tags). A specific SS26 or AW26 runway or editorial beauty moment. End with a connection to Lip Service.",
 
   "see_image_caption": "Season · Short description. E.g.: 'SS26 · Statement Lip Moment'",
 
   "help_headline": "Beauty as an act<br><em>of [something].</em>",
 
-  "help_intro": "2-3 sentences introducing a real or real-feeling beauty charity or initiative. Include how and why it started.",
+  "help_intro": "2-3 sentences introducing a real beauty charity or initiative. Include founding context.",
 
-  "help_stat_number": "An impactful stat number. E.g.: '50K+' or '$1.2M' or '300'",
+  "help_stat_number": "An impactful stat. E.g.: '50K+' or '$1.2M' or '300'",
 
-  "help_stat_label": "What that number represents. Short, specific, lowercase.",
+  "help_stat_label": "What that number represents — short, specific, lowercase.",
 
-  "help_body": "2-3 sentences (no <p> tags). One specific story or person who shows why this organization matters. End with what they need — volunteers, donors, awareness.",
+  "help_body": "2-3 sentences (no <p> tags). One specific story that shows why this organization matters. End with what they need.",
 
-  "help_cta_url": "https://[charity website]/donate or /get-involved — use a real charity's URL",
+  "help_cta_url": "https://[charity website]/donate or /get-involved",
 
   "help_cta_text": "Donate to [Charity Name]",
 
   "tears_headline": "A poetic multi-line headline about the story below. Use <br> between lines, <em> for italic lines. Specific to the person and what happened.",
 
-  "tears_body": "3-4 paragraphs (no <p> tags, separate with \\n\\n) about this story: ${story.context}\\n\\nWrite it fresh — do not copy the context verbatim. Start with the person and their world. Build to the moment. End with either a direct quote or a line that lands the emotional truth."
+  "tears_body": "3-4 paragraphs about this story: ${story.context}\\n\\nWrite it fresh — do not copy the context verbatim. Start with the person and their world. Build to the moment. End with either a direct quote from the person or a line that lands the emotional truth."
 }`;
 
   console.log('Calling Claude API...');
@@ -203,6 +244,7 @@ async function main() {
   const issueNum = issueNumber(today);
   const issueLabel = `Issue No. ${issueNum}`;
   const issueDate = formatDate(today);
+  const key = dateKey(today);
 
   const image = BEAUTY_IMAGES[day % BEAUTY_IMAGES.length];
   const story = TEARS_STORIES[day % TEARS_STORIES.length];
@@ -211,11 +253,30 @@ async function main() {
 
   const content = await generateContent(today, story);
 
+  // ── Archive ───────────────────────────────────────────────────────────────
+  const issuesDir = path.join(__dirname, 'issues');
+  await fs.mkdir(issuesDir, { recursive: true });
+
+  const archivePath = path.join(issuesDir, 'archive.json');
+  let archive = [];
+  try {
+    archive = JSON.parse(await fs.readFile(archivePath, 'utf-8'));
+  } catch {
+    // First run — archive doesn't exist yet
+  }
+
+  // Upsert today's entry at the top
+  archive = archive.filter((e) => e.date !== key);
+  archive.unshift({ date: key, issueLabel, issueDate, heroText: content.hero_text });
+
+  await fs.writeFile(archivePath, JSON.stringify(archive, null, 2), 'utf-8');
+
+  // ── Build newsletter HTML (ARCHIVE_SECTION left as placeholder for now) ───
   const template = await fs.readFile(path.join(__dirname, 'template.html'), 'utf-8');
 
   const hearItemsHtml = buildHearItemsHtml(content.hear_items);
 
-  // Opening body: wrap bare paragraphs in <p> if Claude returned plain text blocks
+  // Opening body: ensure drop-cap on first paragraph
   const openingBody = content.opening_body.includes('<p')
     ? content.opening_body
     : content.opening_body
@@ -223,6 +284,14 @@ async function main() {
         .map((p, i) =>
           i === 0 ? `<p class="drop-cap">${p.trim()}</p>` : `<p>${p.trim()}</p>`
         )
+        .join('\n');
+
+  // tears_body: wrap bare paragraph breaks in <p> tags if needed
+  const tearsBody = content.tears_body.includes('<p')
+    ? content.tears_body
+    : content.tears_body
+        .split(/\n\n+/)
+        .map((p) => `<p>${p.trim()}</p>`)
         .join('\n');
 
   const html = template
@@ -251,14 +320,21 @@ async function main() {
     .replace('{{HELP_CTA_URL}}', content.help_cta_url)
     .replace('{{HELP_CTA_TEXT}}', content.help_cta_text)
     .replace('{{TEARS_HEADLINE}}', content.tears_headline)
-    .replace('{{TEARS_BODY}}', content.tears_body.replace(/\n\n/g, '</p>\n<p>'))
+    .replace('{{TEARS_BODY}}', tearsBody)
     .replace('{{TEARS_VIDEO_URL}}', `https://www.youtube.com/watch?v=${story.videoId}`)
     .replace('{{TEARS_THUMB_URL}}', `https://img.youtube.com/vi/${story.videoId}/hqdefault.jpg`)
     .replace('{{TEARS_VIDEO_ALT}}', `Healthy Tears · ${issueDate}`)
     .replace('{{TEARS_VIDEO_LABEL}}', story.videoLabel);
 
-  await fs.writeFile(path.join(__dirname, 'index.html'), html, 'utf-8');
-  console.log(`✓ index.html written — ${issueLabel}`);
+  // ── Write standalone issue page ───────────────────────────────────────────
+  const issuePageHtml = buildIssuePage(html, issueLabel, issueDate);
+  await fs.writeFile(path.join(issuesDir, `${key}.html`), issuePageHtml, 'utf-8');
+  console.log(`  ✓ issues/${key}.html`);
+
+  // ── Write index.html with archive section ─────────────────────────────────
+  const indexHtml = html.replace('{{ARCHIVE_SECTION}}', buildArchiveSectionHtml(archive));
+  await fs.writeFile(path.join(__dirname, 'index.html'), indexHtml, 'utf-8');
+  console.log(`  ✓ index.html (${issueLabel})`);
 }
 
 main().catch((err) => {
