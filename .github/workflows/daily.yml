@@ -1,0 +1,40 @@
+name: Daily Newsletter
+
+on:
+  schedule:
+    # 6am PST = 14:00 UTC (winter) / 6am PDT = 13:00 UTC (summer)
+    # This runs at 14:00 UTC year-round — one hour late in summer, adjust if needed
+    - cron: '0 14 * * *'
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate today's newsletter
+        run: npm run generate
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Commit and push updated index.html
+        run: |
+          git config user.name "Lip Service Bot"
+          git config user.email "bot@lipservice.dev"
+          git add index.html
+          git diff --staged --quiet || git commit -m "Daily newsletter: $(TZ='America/Los_Angeles' date +'%B %d, %Y')"
+          git push
