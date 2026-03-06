@@ -236,47 +236,17 @@ Today is ${dateStr}. Write all sections in this exact JSON format. Return ONLY v
   }
 }
 
-// ─── Main ─────────────────────────────────────────────────────────────────────
+// ─── Mode ─────────────────────────────────────────────────────────────────────
+// PREVIEW=1  → generate tomorrow's issue to preview/index.html (no live site change)
+// (default)  → promote preview/index.html if it exists, otherwise generate fresh
 
-async function main() {
-  const today = new Date();
-  const day = dayOfYear(today);
-  const issueNum = issueNumber(today);
-  const issueLabel = `Issue No. ${issueNum}`;
-  const issueDate = formatDate(today);
-  const key = dateKey(today);
+const PREVIEW_MODE = process.env.PREVIEW === '1';
 
-  const image = BEAUTY_IMAGES[day % BEAUTY_IMAGES.length];
-  const story = TEARS_STORIES[day % TEARS_STORIES.length];
+// ─── Shared render helper ─────────────────────────────────────────────────────
 
-  console.log(`Generating ${issueLabel} — ${issueDate}`);
-
-  const content = await generateContent(today, story);
-
-  // ── Archive ───────────────────────────────────────────────────────────────
-  const issuesDir = path.join(__dirname, 'issues');
-  await fs.mkdir(issuesDir, { recursive: true });
-
-  const archivePath = path.join(issuesDir, 'archive.json');
-  let archive = [];
-  try {
-    archive = JSON.parse(await fs.readFile(archivePath, 'utf-8'));
-  } catch {
-    // First run — archive doesn't exist yet
-  }
-
-  // Upsert today's entry at the top
-  archive = archive.filter((e) => e.date !== key);
-  archive.unshift({ date: key, issueLabel, issueDate, heroText: content.hero_text });
-
-  await fs.writeFile(archivePath, JSON.stringify(archive, null, 2), 'utf-8');
-
-  // ── Build newsletter HTML (ARCHIVE_SECTION left as placeholder for now) ───
-  const template = await fs.readFile(path.join(__dirname, 'template.html'), 'utf-8');
-
+function renderHtml(template, content, image, story, issueLabel, issueDate) {
   const hearItemsHtml = buildHearItemsHtml(content.hear_items);
 
-  // Opening body: ensure drop-cap on first paragraph
   const openingBody = content.opening_body.includes('<p')
     ? content.opening_body
     : content.opening_body
@@ -286,7 +256,6 @@ async function main() {
         )
         .join('\n');
 
-  // tears_body: wrap bare paragraph breaks in <p> tags if needed
   const tearsBody = content.tears_body.includes('<p')
     ? content.tears_body
     : content.tears_body
@@ -294,7 +263,7 @@ async function main() {
         .map((p) => `<p>${p.trim()}</p>`)
         .join('\n');
 
-  const html = template
+  return template
     .replace(/\{\{ISSUE_LABEL\}\}/g, issueLabel)
     .replace(/\{\{ISSUE_DATE\}\}/g, issueDate)
     .replace('{{HERO_TEXT}}', content.hero_text)
@@ -325,16 +294,130 @@ async function main() {
     .replace('{{TEARS_THUMB_URL}}', `https://img.youtube.com/vi/${story.videoId}/hqdefault.jpg`)
     .replace('{{TEARS_VIDEO_ALT}}', `Healthy Tears · ${issueDate}`)
     .replace('{{TEARS_VIDEO_LABEL}}', story.videoLabel);
+}
 
-  // ── Write standalone issue page ───────────────────────────────────────────
-  const issuePageHtml = buildIssuePage(html, issueLabel, issueDate);
-  await fs.writeFile(path.join(issuesDir, `${key}.html`), issuePageHtml, 'utf-8');
-  console.log(`  ✓ issues/${key}.html`);
+// ─── Promote preview → live ───────────────────────────────────────────────────
 
-  // ── Write index.html with archive section ─────────────────────────────────
-  const indexHtml = html.replace('{{ARCHIVE_SECTION}}', buildArchiveSectionHtml(archive));
+const PREVIEW_PLACEHOLDER = '<!-- ARCHIVE_SECTION_PREVIEW_PLACEHOLDER -->';
+
+async function promotePreview() {
+  const previewDir = path.join(__dirname, 'preview');
+  const previewHtml = await fs.readFile(path.join(previewDir, 'index.html'), 'utf-8');
+  const meta = JSON.parse(await fs.readFile(path.join(previewDir, 'meta.json'), 'utf-8'));
+  const { date: key, issueLabel, issueDate, heroText } = meta;
+
+  console.log(`Promoting preview → live: ${issueLabel} — ${issueDate}`);
+
+  // Update archive
+  const issuesDir = path.join(__dirname, 'issues');
+  await fs.mkdir(issuesDir, { recursive: true });
+  const archivePath = path.join(issuesDir, 'archive.json');
+  let archive = [];
+  try { archive = JSON.parse(await fs.readFile(archivePath, 'utf-8')); } catch {}
+  archive = archive.filter((e) => e.date !== key);
+  archive.unshift({ date: key, issueLabel, issueDate, heroText });
+  await fs.writeFile(archivePath, JSON.stringify(archive, null, 2), 'utf-8');
+
+  // Replace archive placeholder with real archive section
+  const indexHtml = previewHtml.replace(PREVIEW_PLACEHOLDER, buildArchiveSectionHtml(archive));
   await fs.writeFile(path.join(__dirname, 'index.html'), indexHtml, 'utf-8');
   console.log(`  ✓ index.html (${issueLabel})`);
+
+  // Build standalone issue page (replace placeholder with back link)
+  const backLink = `
+  <div class="section" style="text-align:center; padding:20px 24px; border-bottom:none;">
+    <a href="../index.html" style="font-size:11px;color:var(--rouge);text-decoration:none;letter-spacing:2px;text-transform:uppercase;font-weight:500;">← Today's issue</a>
+  </div>`;
+  const navBar = `<div class="issue-nav-bar">
+  <a href="../index.html">← Today's issue</a>
+  <span>${issueLabel} &middot; ${issueDate}</span>
+</div>`;
+  const issueHtml = previewHtml
+    .replace('<div class="email-wrapper">', `${navBar}\n<div class="email-wrapper">`)
+    .replace(PREVIEW_PLACEHOLDER, backLink);
+  await fs.writeFile(path.join(issuesDir, `${key}.html`), issueHtml, 'utf-8');
+  console.log(`  ✓ issues/${key}.html`);
+
+  // Clean up preview/
+  await fs.rm(previewDir, { recursive: true });
+  console.log('  ✓ preview/ cleaned up');
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+
+async function main() {
+  // ── Publish mode: promote preview if available ─────────────────────────────
+  if (!PREVIEW_MODE) {
+    let previewExists = false;
+    try { await fs.access(path.join(__dirname, 'preview', 'index.html')); previewExists = true; } catch {}
+    if (previewExists) {
+      await promotePreview();
+      return;
+    }
+    console.log('No preview found — generating fresh...');
+  }
+
+  // ── Determine target date ──────────────────────────────────────────────────
+  // Preview mode generates tomorrow's issue (running at 10pm PST means UTC is already tomorrow)
+  // We add 24h so that dateKey() in Pacific time gives us the next Pacific calendar day.
+  const today = PREVIEW_MODE
+    ? new Date(Date.now() + 24 * 60 * 60 * 1000)
+    : new Date();
+
+  const day = dayOfYear(today);
+  const issueNum = issueNumber(today);
+  const issueLabel = `Issue No. ${issueNum}`;
+  const issueDate = formatDate(today);
+  const key = dateKey(today);
+
+  const image = BEAUTY_IMAGES[day % BEAUTY_IMAGES.length];
+  const story = TEARS_STORIES[day % TEARS_STORIES.length];
+
+  console.log(`${PREVIEW_MODE ? 'Previewing' : 'Generating'} ${issueLabel} — ${issueDate}`);
+
+  const content = await generateContent(today, story);
+  const template = await fs.readFile(path.join(__dirname, 'template.html'), 'utf-8');
+  const html = renderHtml(template, content, image, story, issueLabel, issueDate);
+
+  if (PREVIEW_MODE) {
+    // ── Write preview/ (no changes to live site) ───────────────────────────
+    const previewDir = path.join(__dirname, 'preview');
+    await fs.mkdir(previewDir, { recursive: true });
+
+    // Replace archive section with a visible placeholder for the preview viewer
+    const previewNavBar = `<div class="issue-nav-bar" style="background:var(--rouge);color:#fff;">
+  <span>👁 PREVIEW — goes live at 6am PST</span>
+  <span>${issueLabel} &middot; ${issueDate}</span>
+</div>`;
+    const previewHtml = html
+      .replace('<div class="email-wrapper">', `${previewNavBar}\n<div class="email-wrapper">`)
+      .replace('{{ARCHIVE_SECTION}}', PREVIEW_PLACEHOLDER);
+
+    await fs.writeFile(path.join(previewDir, 'index.html'), previewHtml, 'utf-8');
+    await fs.writeFile(path.join(previewDir, 'meta.json'), JSON.stringify(
+      { date: key, issueLabel, issueDate, heroText: content.hero_text }, null, 2
+    ), 'utf-8');
+    console.log(`  ✓ preview/index.html (${issueLabel}) — live at /preview/`);
+  } else {
+    // ── Normal publish: write issues/ and index.html ───────────────────────
+    const issuesDir = path.join(__dirname, 'issues');
+    await fs.mkdir(issuesDir, { recursive: true });
+
+    const archivePath = path.join(issuesDir, 'archive.json');
+    let archive = [];
+    try { archive = JSON.parse(await fs.readFile(archivePath, 'utf-8')); } catch {}
+    archive = archive.filter((e) => e.date !== key);
+    archive.unshift({ date: key, issueLabel, issueDate, heroText: content.hero_text });
+    await fs.writeFile(archivePath, JSON.stringify(archive, null, 2), 'utf-8');
+
+    const issuePageHtml = buildIssuePage(html, issueLabel, issueDate);
+    await fs.writeFile(path.join(issuesDir, `${key}.html`), issuePageHtml, 'utf-8');
+    console.log(`  ✓ issues/${key}.html`);
+
+    const indexHtml = html.replace('{{ARCHIVE_SECTION}}', buildArchiveSectionHtml(archive));
+    await fs.writeFile(path.join(__dirname, 'index.html'), indexHtml, 'utf-8');
+    console.log(`  ✓ index.html (${issueLabel})`);
+  }
 }
 
 main().catch((err) => {

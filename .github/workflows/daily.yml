@@ -2,10 +2,20 @@ name: Daily Newsletter
 
 on:
   schedule:
-    # 6am PST = 14:00 UTC (winter) / 6am PDT = 13:00 UTC (summer)
-    # This runs at 14:00 UTC year-round — one hour late in summer, adjust if needed
+    # Preview: 10pm PST = 06:00 UTC (generates tomorrow's issue to preview/)
+    - cron: '0 6 * * *'
+    # Publish: 6am PST = 14:00 UTC (promotes preview → live, or generates fresh)
     - cron: '0 14 * * *'
-  workflow_dispatch: # Allow manual trigger from GitHub UI
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Run mode'
+        required: false
+        default: 'publish'
+        type: choice
+        options:
+          - publish
+          - preview
 
 jobs:
   generate:
@@ -26,15 +36,25 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Generate today's newsletter
-        run: npm run generate
+      - name: Generate newsletter
+        run: |
+          SCHEDULE="${{ github.event.schedule }}"
+          INPUT_MODE="${{ inputs.mode }}"
+          if [ "$SCHEDULE" = "0 6 * * *" ] || [ "$INPUT_MODE" = "preview" ]; then
+            echo "Running in PREVIEW mode (tomorrow's issue → preview/)"
+            PREVIEW=1 npm run generate
+          else
+            echo "Running in PUBLISH mode (promote preview or generate fresh)"
+            npm run generate
+          fi
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
-      - name: Commit and push updated files
+      - name: Commit and push
         run: |
           git config user.name "Lip Service Bot"
           git config user.email "bot@lipservice.dev"
-          git add index.html issues/
+          git add index.html issues/ preview/ 2>/dev/null || true
+          git add -u
           git diff --staged --quiet || git commit -m "Daily newsletter: $(TZ='America/Los_Angeles' date +'%B %d, %Y')"
           git push
