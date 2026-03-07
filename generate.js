@@ -320,8 +320,9 @@ async function promotePreview() {
   archive.unshift({ date: key, issueLabel, issueDate, heroText });
   await fs.writeFile(archivePath, JSON.stringify(archive, null, 2), 'utf-8');
 
-  // Replace archive placeholder with real archive section
-  const indexHtml = previewHtml.replace(PREVIEW_PLACEHOLDER, buildArchiveSectionHtml(archive));
+  // Strip preview nav bar and replace archive placeholder with real archive section
+  const cleanHtml = previewHtml.replace(/<div class="issue-nav-bar"[^>]*>[\s\S]*?<\/div>\n?/, '');
+  const indexHtml = cleanHtml.replace(PREVIEW_PLACEHOLDER, buildArchiveSectionHtml(archive));
   await fs.writeFile(path.join(__dirname, 'index.html'), indexHtml, 'utf-8');
   console.log(`  ✓ index.html (${issueLabel})`);
 
