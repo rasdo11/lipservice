@@ -217,15 +217,18 @@ Today is ${dateStr}. Write all sections in this exact JSON format. Return ONLY v
 
   const stream = client.messages.stream({
     model: 'claude-opus-4-6',
-    max_tokens: 4000,
-    thinking: { type: 'adaptive' },
+    max_tokens: 8000,
     messages: [{ role: 'user', content: prompt }],
   });
 
   const message = await stream.finalMessage();
 
   const textBlock = message.content.find((b) => b.type === 'text');
-  if (!textBlock) throw new Error('No text content in Claude response');
+  if (!textBlock) {
+    console.error('stop_reason:', message.stop_reason);
+    console.error('content blocks:', JSON.stringify(message.content.map((b) => b.type)));
+    throw new Error('No text content in Claude response');
+  }
 
   // Strip any accidental markdown code fences
   const raw = textBlock.text.trim().replace(/^```json?\s*/i, '').replace(/```\s*$/i, '');
