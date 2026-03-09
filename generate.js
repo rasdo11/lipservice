@@ -366,6 +366,15 @@ async function promotePreview() {
 async function main() {
   // ── Publish mode: promote preview if available ─────────────────────────────
   if (!PREVIEW_MODE) {
+    // Idempotency: skip if today's issue already exists (handles retry crons)
+    const todayKey = dateKey(new Date());
+    const issueFile = path.join(__dirname, 'issues', `${todayKey}.html`);
+    try {
+      await fs.access(issueFile);
+      console.log(`Today's issue already published (${todayKey}), skipping.`);
+      return;
+    } catch {}
+
     let previewExists = false;
     try { await fs.access(path.join(__dirname, 'preview', 'index.html')); previewExists = true; } catch {}
     if (previewExists) {
