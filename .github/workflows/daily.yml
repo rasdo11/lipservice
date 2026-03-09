@@ -6,9 +6,12 @@ on:
     - cron: '0 6 * * *'
     # Preview: 10pm PDT (Mar–Nov) = 05:00 UTC
     - cron: '0 5 * * *'
-    # Publish: 6am PST (Nov–Mar) = 14:00 UTC
+    # Publish: 6am PST (Nov–Mar) = 14:00 UTC  +retries at 15, 16, 17
     - cron: '0 14 * * *'
-    # Publish: 6am PDT (Mar–Nov) = 13:00 UTC
+    - cron: '0 15 * * *'
+    - cron: '0 16 * * *'
+    - cron: '0 17 * * *'
+    # Publish: 6am PDT (Mar–Nov) = 13:00 UTC  +retries at 14, 15, 16
     - cron: '0 13 * * *'
   workflow_dispatch:
     inputs:
