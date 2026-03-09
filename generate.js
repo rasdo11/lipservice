@@ -117,7 +117,7 @@ function buildArchiveSectionHtml(archive) {
     .join('\n');
 
   return `
-  <div class="section archive-section">
+  <div id="past-issues" class="section archive-section">
     <div class="section-label">
       <div class="section-number" style="font-size:13px; line-height:1;">↩</div>
       <div class="section-title">Past Issues</div>
