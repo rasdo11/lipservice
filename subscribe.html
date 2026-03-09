@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subscribe — Lip Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:     #16120E;
+    --cream:   #FAF7F2;
+    --rouge:   #C13333;
+    --nude:    #D4A898;
+    --blush:   #EDD5CB;
+    --warm:    #9A8880;
+    --divider: #E4DBD4;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.4;
+  }
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .top-bar-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .top-bar-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--warm);
+    font-weight: 400;
+  }
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex: 1;
+  }
+  .hero-left {
+    background: var(--ink);
+    padding: 72px 48px 72px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    bottom: -120px;
+    left: -80px;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(193,51,51,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--nude);
+    font-weight: 400;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: var(--rouge);
+    flex-shrink: 0;
+  }
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    color: var(--cream);
+    margin-bottom: 24px;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--rouge);
+    display: block;
+  }
+  .hero-sub {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(250,247,242,0.55);
+    font-weight: 300;
+    max-width: 340px;
+  }
+  .hero-sub strong {
+    color: rgba(250,247,242,0.85);
+    font-weight: 400;
+  }
+  .hero-right {
+    background: var(--cream);
+    padding: 72px 40px 72px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .form-kicker {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .form-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 2.5vw, 32px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .form-sub {
+    font-size: 14px;
+    color: var(--warm);
+    line-height: 1.65;
+    font-weight: 300;
+    margin-bottom: 32px;
+    max-width: 320px;
+  }
+  .subscribe-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .form-input {
+    width: 100%;
+    padding: 15px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink);
+    background: #fff;
+    border: 1.5px solid var(--divider);
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-input::placeholder { color: #BFB5AF; font-weight: 300; }
+  .form-input:focus {
+    border-color: var(--ink);
+    box-shadow: 0 0 0 3px rgba(22,18,14,0.06);
+  }
+  .form-submit {
+    width: 100%;
+    padding: 16px 24px;
+    background: var(--rouge);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .form-submit:hover { background: #A82B2B; transform: translateY(-1px); }
+  .form-submit:active { transform: translateY(0); }
+  .form-fine {
+    font-size: 11px;
+    color: #C0B5AE;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+  .success-msg {
+    display: none;
+    padding: 20px 0;
+  }
+  .success-msg.visible { display: block; }
+  .success-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .success-sub { font-size: 13px; color: var(--warm); font-weight: 300; }
+  footer {
+    border-top: 1px solid var(--divider);
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--ink);
+  }
+  .footer-copy { font-size: 11px; color: #C0B5AE; font-weight: 300; }
+  @media (max-width: 768px) {
+    .top-bar { padding: 18px 20px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 48px 24px 40px; }
+    .hero-right { padding: 40px 24px 48px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top-bar">
+  <a href="index.html" class="top-bar-logo">Lip Service</a>
+  <span class="top-bar-label">Weekly · Free · Unapologetic</span>
+</header>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">A beauty newsletter</div>
+    <h1 class="hero-headline">
+      Someone sent you this.
+      <em>That means they like you.</em>
+    </h1>
+    <p class="hero-sub">
+      Beauty gossip, ingredient science, fashion moments, and one video guaranteed to wreck your mascara — <strong>delivered weekly to women who are done being talked to like they just discovered SPF.</strong>
+    </p>
+  </div>
+  <div class="hero-right">
+    <div class="form-kicker">Join the list</div>
+    <h2 class="form-headline">Get Lip Service<br>in your inbox.</h2>
+    <p class="form-sub">Free. Weekly. Exactly five minutes. We will never sell your email — that would be embarrassing.</p>
+    <form class="subscribe-form" id="subForm" onsubmit="handleSubmit(event)">
+      <input class="form-input" type="text" name="firstName" placeholder="First name" autocomplete="given-name" required />
+      <input class="form-input" type="email" name="email" placeholder="Email address" autocomplete="email" required />
+      <button class="form-submit" type="submit">Subscribe to Lip Service</button>
+    </form>
+    <div class="success-msg" id="subSuccess">
+      <div class="success-headline">You're in. Welcome to the list.</div>
+      <div class="success-sub">Check your inbox — something good is coming Thursday.</div>
+    </div>
+    <p class="form-fine">Unsubscribe anytime, no guilt trip.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Lip Service</div>
+  <div class="footer-copy">Weekly beauty. No apologies. © 2026</div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('subForm').style.display = 'none';
+    document.getElementById('subSuccess').classList.add('visible');
+  }
+</script>
+</body>
+</html>

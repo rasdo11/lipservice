@@ -3,705 +3,562 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lip Service — Issue No. 5</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<title>Lip Service — The Beauty Newsletter</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #FAF7F2;
-    --ink: #1A1410;
-    --blush: #E8C4B8;
-    --rouge: #C94040;
-    --nude: #D4A898;
-    --charcoal: #3D3530;
-    --warm-gray: #9A8F89;
-    --divider: #E2DAD3;
+    --ink:     #16120E;
+    --cream:   #FAF7F2;
+    --rouge:   #C13333;
+    --nude:    #D4A898;
+    --blush:   #EDD5CB;
+    --warm:    #9A8880;
+    --divider: #E4DBD4;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    background-color: var(--cream);
+    background: var(--cream);
     color: var(--ink);
     font-family: 'DM Sans', sans-serif;
     font-size: 16px;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
-  .email-wrapper {
-    max-width: 600px;
-    margin: 0 auto;
-    background: var(--cream);
-  }
-  .header {
-    background-color: var(--ink);
-    padding: 28px 24px 20px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--rouge), var(--nude), var(--blush));
-  }
-  .masthead {
-    font-family: 'Playfair Display', serif;
-    font-size: 42px;
-    font-weight: 900;
-    color: var(--cream);
-    letter-spacing: -1px;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-  .tagline {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 300;
-    color: var(--nude);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  .header-meta {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    font-size: 11px;
-    color: var(--warm-gray);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 400;
-    padding-top: 14px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-  .hero {
-    background: var(--ink);
-    padding: 0 24px 32px;
-  }
-  .hero-box {
-    background: var(--rouge);
-    padding: 20px 22px;
-    border-radius: 2px;
-  }
-  .hero-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
-  .hero-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-style: italic;
-    color: #fff;
-    line-height: 1.4;
-    font-weight: 400;
-  }
-  .section {
-    padding: 36px 24px;
-    border-bottom: 1px solid var(--divider);
-  }
-  .section:last-of-type {
-    border-bottom: none;
-  }
-  .section-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  .section-number {
-    width: 24px;
-    height: 24px;
-    background: var(--ink);
-    color: var(--cream);
-    font-size: 10px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 0.5px;
-    flex-shrink: 0;
-    border-radius: 50%;
-  }
-  .section-title {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 3.5px;
-    text-transform: uppercase;
-    color: var(--rouge);
-  }
-  .section-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--ink);
-    margin-bottom: 16px;
-    letter-spacing: -0.3px;
-  }
-  .section-headline em {
-    font-style: italic;
-    color: var(--rouge);
-  }
-  .body-text {
-    font-size: 15.5px;
-    line-height: 1.75;
-    color: var(--charcoal);
-    font-weight: 300;
-  }
-  .body-text p {
-    margin-bottom: 14px;
-  }
-  .body-text p:last-child {
-    margin-bottom: 0;
-  }
-  .body-text strong {
-    font-weight: 500;
-    color: var(--ink);
-  }
-  .opening .section-headline {
-    font-size: 28px;
-  }
-  .drop-cap::first-letter {
-    font-family: 'Playfair Display', serif;
-    font-size: 58px;
-    font-weight: 900;
-    line-height: 0.8;
-    float: left;
-    margin-right: 6px;
-    margin-top: 8px;
-    color: var(--rouge);
-  }
-  .gossip-item {
-    padding: 18px 0;
-    border-bottom: 1px solid var(--divider);
-  }
-  .gossip-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-  .gossip-item:first-child {
-    padding-top: 0;
-  }
-  .gossip-tag {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--rouge);
-    margin-bottom: 6px;
-  }
-  .gossip-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 8px;
-    line-height: 1.3;
-  }
-  .gossip-body {
-    font-size: 14.5px;
-    line-height: 1.7;
-    color: var(--charcoal);
-    font-weight: 300;
-  }
-  .know-callout {
-    background: var(--ink);
-    color: var(--cream);
-    padding: 22px;
-    margin: 20px 0;
-    border-radius: 2px;
-  }
-  .know-callout-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--nude);
-    margin-bottom: 10px;
-    font-weight: 500;
-  }
-  .know-callout-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-style: italic;
-    line-height: 1.5;
-    font-weight: 400;
-  }
-  .know-callout-text strong {
-    font-style: normal;
-    font-weight: 700;
-    color: var(--blush);
-  }
-  .see-image-wrapper {
-    width: 100%;
-    margin-bottom: 18px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 2px;
-  }
-  .see-image-wrapper img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-  }
-  .see-image-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px 14px;
-    background: linear-gradient(transparent, rgba(26,20,16,0.8));
-    font-size: 11px;
-    color: rgba(255,255,255,0.8);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 400;
-  }
-  .help-section {
-    background: #F0EBE5;
-  }
-  .help-stat {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    margin: 16px 0;
-  }
-  .help-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 42px;
-    font-weight: 900;
-    color: var(--rouge);
-    line-height: 1;
-  }
-  .help-number-label {
-    font-size: 13px;
-    color: var(--charcoal);
-    font-weight: 300;
-    line-height: 1.4;
-    max-width: 200px;
-  }
-  .cta-button {
-    display: inline-block;
-    background: var(--rouge);
-    color: #fff;
-    padding: 13px 24px;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 1px;
-    margin-top: 16px;
-    transition: opacity 0.2s;
-  }
-  .cta-button:hover { opacity: 0.88; }
-  .tears-section {
-    background: var(--ink);
-    color: var(--cream);
-  }
-  .tears-section .section-title { color: var(--nude); }
-  .tears-section .section-headline { color: var(--cream); }
-  .tears-section .body-text { color: rgba(250,247,242,0.75); }
-  .video-thumb {
-    display: block;
-    position: relative;
-    width: 100%;
-    border-radius: 2px;
-    overflow: hidden;
-    margin-top: 18px;
-    text-decoration: none;
-  }
-  .video-thumb img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-    filter: brightness(0.75);
-  }
-  .play-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 54px;
-    height: 54px;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(4px);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1.5px solid rgba(255,255,255,0.4);
-  }
-  .play-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
-  .video-label {
-    position: absolute;
-    bottom: 12px;
-    left: 14px;
-    right: 14px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.8);
-    letter-spacing: 0.5px;
-    font-style: italic;
-  }
-  .footer {
-    background: var(--ink);
-    padding: 28px 24px;
-    text-align: center;
-    border-top: 3px solid var(--rouge);
-  }
-  .footer-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 900;
-    color: var(--cream);
-    letter-spacing: -0.5px;
-    margin-bottom: 8px;
-  }
-  .footer-text {
-    font-size: 12px;
-    color: var(--warm-gray);
     line-height: 1.6;
-    margin-bottom: 16px;
-    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.4;
   }
-  .footer-links a {
-    font-size: 10px;
-    color: var(--warm-gray);
-    text-decoration: none;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 400;
-  }
-  .footer-links a:hover { color: var(--nude); }
-  .ornament {
-    text-align: center;
-    color: var(--rouge);
-    font-size: 18px;
-    letter-spacing: 8px;
-    padding: 8px 0 0;
-    opacity: 0.5;
-  }
-  .pill {
-    display: inline-block;
-    background: var(--blush);
-    color: var(--ink);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 20px;
-    margin-bottom: 12px;
-  }
-  a.inline-link {
-    color: var(--rouge);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    font-weight: 400;
-  }
-  .pull-quote {
-    border-left: 3px solid var(--rouge);
-    padding: 4px 16px;
-    margin: 18px 0;
-  }
-  .pull-quote p {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-style: italic;
-    color: var(--ink);
-    line-height: 1.5;
-    font-weight: 400;
-  }
-  /* ARCHIVE */
-  .archive-section {
-    background: var(--cream);
-  }
-  .archive-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .archive-item {
-    display: block;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--divider);
-    text-decoration: none;
-    color: inherit;
-  }
-  .archive-item:first-child {
-    padding-top: 0;
-  }
-  .archive-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-  .archive-item:hover .archive-item-label {
-    color: var(--rouge);
-  }
-  .archive-item-meta {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    margin-bottom: 4px;
-  }
-  .archive-item-label {
-    font-family: 'Playfair Display', serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--ink);
-    transition: color 0.15s;
-  }
-  .archive-item-date {
-    font-size: 11px;
-    color: var(--warm-gray);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 400;
-  }
-  .archive-item-teaser {
-    font-size: 13.5px;
-    color: var(--charcoal);
-    font-weight: 300;
-    line-height: 1.55;
-    font-style: italic;
-  }
-  /* ISSUE NAV BAR (standalone issue pages only) */
-  .issue-nav-bar {
-    background: var(--ink);
-    padding: 11px 24px;
+  .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 600px;
-    margin: 0 auto;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--divider);
+    animation: fadeDown 0.6s ease both;
   }
-  .issue-nav-bar a {
-    font-size: 10px;
-    color: var(--nude);
+  .top-bar-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--ink);
     text-decoration: none;
+  }
+  .top-bar-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+  .top-bar-nav a {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--warm);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .top-bar-nav a:hover { color: var(--ink); }
+  .top-bar-nav a.nav-cta { color: var(--rouge); font-weight: 500; }
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 65px);
+  }
+  .hero-left {
+    background: var(--ink);
+    padding: 60px 48px 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    bottom: -120px;
+    left: -80px;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(193,51,51,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--nude);
+    font-weight: 400;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: var(--rouge);
+    flex-shrink: 0;
+  }
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -2px;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+  .hero-headline em { font-style: italic; color: var(--rouge); display: block; }
+  .hero-subhead {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(250,247,242,0.6);
+    font-weight: 300;
+    max-width: 360px;
+    margin-bottom: 48px;
+  }
+  .hero-subhead strong { color: rgba(250,247,242,0.9); font-weight: 400; }
+  .hero-proof {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .proof-item { text-align: left; }
+  .proof-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .proof-label {
+    font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
+    color: var(--warm);
     font-weight: 400;
   }
-  .issue-nav-bar a:hover { color: var(--cream); }
-  .issue-nav-bar span {
-    font-size: 10px;
-    color: var(--warm-gray);
-    letter-spacing: 1px;
+  .proof-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255,255,255,0.1);
+    flex-shrink: 0;
+  }
+  .hero-right {
+    background: var(--cream);
+    padding: 60px 40px 60px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+  .form-kicker {
+    font-size: 11px;
+    letter-spacing: 3px;
     text-transform: uppercase;
+    color: var(--rouge);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .form-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3vw, 38px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .form-subtext {
+    font-size: 14px;
+    color: var(--warm);
+    line-height: 1.65;
+    font-weight: 300;
+    margin-bottom: 36px;
+    max-width: 340px;
+  }
+  .subscribe-form { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+  .form-input {
+    width: 100%;
+    padding: 16px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink);
+    background: #fff;
+    border: 1.5px solid var(--divider);
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-input::placeholder { color: #BFB5AF; font-weight: 300; }
+  .form-input:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(22,18,14,0.06); }
+  .form-submit {
+    width: 100%;
+    padding: 17px 24px;
+    background: var(--rouge);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .form-submit:hover { background: #A82B2B; transform: translateY(-1px); }
+  .form-submit:active { transform: translateY(0); }
+  .form-submit::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .form-fine { font-size: 11px; color: #C0B5AE; line-height: 1.5; font-weight: 300; }
+  .section-rule {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0 40px;
+    padding: 48px 0 0;
+  }
+  .section-rule span {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--warm);
+    font-weight: 400;
+    white-space: nowrap;
+  }
+  .section-rule::before, .section-rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--divider);
+  }
+  .what-section { padding: 48px 40px 80px; animation: fadeUp 0.8s ease 0.3s both; }
+  .what-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--divider);
+    border: 1px solid var(--divider);
+    margin-top: 40px;
+  }
+  .what-item { background: var(--cream); padding: 36px 28px; }
+  .what-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--rouge);
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .what-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+  .what-title em { font-style: italic; color: var(--rouge); }
+  .what-desc { font-size: 13.5px; color: var(--warm); line-height: 1.65; font-weight: 300; }
+  .promise-strip {
+    background: var(--ink);
+    padding: 64px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+  .promise-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 900;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.15;
+    letter-spacing: -1px;
+  }
+  .promise-attr {
+    margin-top: 20px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--warm);
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .promise-attr::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--rouge); }
+  .promise-right { display: flex; flex-direction: column; gap: 24px; }
+  .promise-item { display: flex; gap: 16px; align-items: flex-start; }
+  .promise-dot { width: 6px; height: 6px; background: var(--rouge); border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+  .promise-text { font-size: 14.5px; color: rgba(250,247,242,0.65); line-height: 1.65; font-weight: 300; }
+  .promise-text strong { color: var(--cream); font-weight: 400; }
+  .bottom-cta {
+    padding: 80px 40px;
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto;
+    animation: fadeUp 0.8s ease 0.5s both;
+  }
+  .bottom-cta-kicker { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--rouge); font-weight: 500; margin-bottom: 16px; }
+  .bottom-cta-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .bottom-cta-headline em { font-style: italic; color: var(--rouge); }
+  .bottom-cta-sub { font-size: 15px; color: var(--warm); line-height: 1.7; font-weight: 300; margin-bottom: 40px; }
+  .bottom-form {
+    display: flex;
+    max-width: 440px;
+    margin: 0 auto 16px;
+    border: 1.5px solid var(--ink);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .bottom-input {
+    flex: 1;
+    padding: 15px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink);
+    background: #fff;
+    border: none;
+    outline: none;
+  }
+  .bottom-input::placeholder { color: #C0B5AE; }
+  .bottom-submit {
+    padding: 15px 24px;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .bottom-submit:hover { background: var(--rouge); }
+  .bottom-fine { font-size: 11px; color: #C0B5AE; font-weight: 300; }
+  footer {
+    border-top: 1px solid var(--divider);
+    padding: 28px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: var(--ink); letter-spacing: -0.3px; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 11px; color: #C0B5AE; font-weight: 300; text-decoration: none; letter-spacing: 0.5px; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--warm); }
+  .footer-copy { font-size: 11px; color: #C0B5AE; font-weight: 300; letter-spacing: 0.5px; }
+  .success-msg { display: none; text-align: center; padding: 20px; }
+  .success-msg.visible { display: block; }
+  .success-headline { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; font-style: italic; color: var(--ink); margin-bottom: 8px; }
+  .success-sub { font-size: 13px; color: var(--warm); font-weight: 300; }
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeUp   { from { opacity:0; transform:translateY(20px);  } to { opacity:1; transform:translateY(0); } }
+  @media (max-width: 768px) {
+    .top-bar { padding: 18px 20px; }
+    .top-bar-nav { gap: 16px; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 48px 24px 40px; }
+    .hero-right { padding: 40px 24px 48px; }
+    .hero-proof { flex-wrap: wrap; gap: 16px; }
+    .what-section { padding: 40px 20px 60px; }
+    .what-grid { grid-template-columns: 1fr; }
+    .section-rule { margin: 0 20px; }
+    .promise-strip { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px; }
+    .bottom-cta { padding: 60px 24px; }
+    .bottom-form { flex-direction: column; border: none; gap: 12px; }
+    .bottom-input { border: 1.5px solid var(--ink); border-radius: 2px; padding: 15px 18px; }
+    .bottom-submit { border-radius: 2px; padding: 16px 24px; text-align: center; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 20px; }
+    .footer-links { justify-content: center; }
   }
   @media (max-width: 480px) {
-    .masthead { font-size: 36px; }
-    .section { padding: 28px 20px; }
-    .hero { padding: 0 20px 28px; }
-    .section-headline { font-size: 23px; }
-    .help-number { font-size: 36px; }
+    .hero-headline { font-size: 38px; letter-spacing: -1.5px; }
+    .what-item { padding: 28px 20px; }
   }
 </style>
 </head>
 <body>
-<div class="email-wrapper">
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="masthead">Lip Service</div>
-    <div class="tagline">The most fun a girl can have without taking her clothes off</div>
-    <div class="header-meta">
-      <span>Issue No. 5</span>
-      <span>·</span>
-      <span>March 8, 2026</span>
-      <span>·</span>
-      <span>Daily</span>
-    </div>
-  </div>
+<header class="top-bar">
+  <a href="index.html" class="top-bar-logo">Lip Service</a>
+  <nav class="top-bar-nav">
+    <a href="archive.html">Archive</a>
+    <a href="newsletter.html" class="nav-cta">Latest issue →</a>
+  </nav>
+</header>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-box">
-      <div class="hero-label">Today</div>
-      <div class="hero-text">Today: Glossier's quiet war with its own subreddit, the polyglutamic acid moment nobody asked for but everybody needs, Dries Van Noten's final bow at AW26, and a charity putting lipstick in the hands of women rebuilding after incarceration. Happy International Women's Day — let's get into it.</div>
+<section class="hero">
+  <div class="hero-left">
+    <div>
+      <div class="hero-eyebrow">A beauty newsletter</div>
+      <h1 class="hero-headline">
+        The most fun<br>a girl can have
+        <em>without taking<br>her clothes off.</em>
+      </h1>
+      <p class="hero-subhead">
+        Beauty gossip, ingredient science, fashion moments, charitable flexing, and one video guaranteed to wreck your mascara — <strong>delivered weekly to women who are completely done being talked to like they just discovered SPF.</strong>
+      </p>
     </div>
-  </div>
-
-  <!-- 01 OPENING STATEMENT -->
-  <div class="section opening">
-    <div class="section-label">
-      <div class="section-number">01</div>
-      <div class="section-title">Opening Statement</div>
-    </div>
-    <div class="section-headline">I bought a ring light for my bathroom.<br><em>Now I can't unsee anything.</em></div>
-    <div class="body-text">
-      <p class="drop-cap">There is a specific kind of hubris that leads a woman to install professional lighting in the room where she washes her face. I did it last Tuesday. I told myself it was about "seeing my skincare better," which is the kind of lie that sounds reasonable until you're standing in 5600K daylight at 6 AM, staring at a pore you're fairly certain has its own zip code.</p><p>The thing about beauty culture in 2026 is that we've made observation into a competitive sport. We have devices that photograph our skin at the cellular level, apps that track our wrinkles like stock tickers, mirrors that tell us our moisture barrier is "compromised" like it's a national security briefing. We have, in short, made it very easy to look and very hard to see.</p><p>Because the point was never the pore. The point was the fifteen minutes I spend every morning doing something just for myself — the ritual, the quiet, the warm water, the feeling of a serum that costs too much sinking into skin I've decided to be tender with. The ring light doesn't help with that. I'm returning it.</p><p>Welcome to Sunday's Lip Service. It's International Women's Day, which means today's issue is a little longer, a little louder, and entirely devoted to the things that make us feel like ourselves. Pull up a chair.</p>
-    </div>
-    <div class="ornament">— ✦ —</div>
-  </div>
-
-  <!-- 02 DID YOU HEAR -->
-  <div class="section">
-    <div class="section-label">
-      <div class="section-number">02</div>
-      <div class="section-title">Did You Hear?</div>
-    </div>
-    <div class="section-headline">The group chat<br><em>is going off.</em></div>
-    
-    <div class="gossip-item">
-      <div class="gossip-tag">Brand Drama</div>
-      <div class="gossip-headline">Glossier is reportedly sending cease-and-desists to its own fan communities</div>
-      <div class="gossip-body">Multiple moderators of r/glossier and two fan-run Instagram accounts say they received legal notices this week over "unauthorized use of trade dress" — essentially, posting swatches in layouts that look too much like Glossier's own grid. The irony of a brand built on user-generated content lawyering up against its most devoted users has not been lost on anyone. A Glossier spokesperson told Business of Fashion the notices were "routine IP protection."</div>
-    </div>
-
-    <div class="gossip-item">
-      <div class="gossip-tag">Industry Moves</div>
-      <div class="gossip-headline">LVMH taps a 31-year-old chemist to lead Dior Beauty's new biotech division</div>
-      <div class="gossip-body">Dr. Inès Kamal, previously at Ginkgo Bioworks, will head a newly created fermentation-science unit within Parfums Christian Dior, tasked with developing lab-grown fragrance molecules. She's the youngest division lead in LVMH beauty history. The appointment signals the luxury sector's pivot from sourcing rare naturals to growing them — and the talent war with biotech that comes with it.</div>
-    </div>
-
-    <div class="gossip-item">
-      <div class="gossip-tag">Runway Intel</div>
-      <div class="gossip-headline">At Dries Van Noten AW26, the models cried — and so did he</div>
-      <div class="gossip-body">Dries Van Noten's final collection shown yesterday in Paris was 48 looks of accumulated beauty — vintage textiles reworked with live brushstrokes of pigment applied backstage by artist Peter Doig. The makeup, by Lucia Pica, was deliberately unfinished: smudged gold leaf on lids, lips blotted with raw sienna. Three models visibly wept during the finale walk. Van Noten took his bow in a gardening jacket.</div>
-    </div>
-  </div>
-
-  <!-- 03 DID YOU KNOW -->
-  <div class="section">
-    <div class="section-label">
-      <div class="section-number">03</div>
-      <div class="section-title">Did You Know?</div>
-    </div>
-    <div class="section-headline">Polyglutamic acid is<br><em>making hyaluronic acid nervous.</em></div>
-    <div class="body-text">
-      <p>If you've noticed a new three-letter abbreviation — PGA — showing up on every new serum launch this quarter, congratulations, you've stumbled into the moisturizer succession war of 2026. Polyglutamic acid has been used in Japanese fermented soybean dishes for centuries. Now it wants your top shelf.</p>
-    </div>
-    <div class="know-callout">
-      <div class="know-callout-label">The Science, Briefly</div>
-      <div class="know-callout-text"><strong>Polyglutamic acid (γ-PGA)</strong> is a naturally occurring biopolymer produced by Bacillus subtilis fermentation. It holds up to five thousand times its weight in water — roughly four times the moisture-binding capacity of hyaluronic acid — and forms a thin film on the skin's surface that reduces transepidermal water loss rather than relying solely on deep-layer hydration.</div>
-    </div>
-    <div class="body-text">
-      <p>The Ordinary launched a 10% PGA serum in January that sold out in eleven hours. Tatcha followed with a PGA-infused mist. Even CeraVe's R&D team has reportedly been testing PGA blends for their next moisturizer reformulation, per a patent filing spotted in late February. The ingredient is showing up fastest in the K-beauty pipeline, where brands like Laneige and Cosrx have been layering it under existing HA products — the idea being that PGA locks in what HA pulls in.
-
-Here's the uncomfortable part: PGA is not a replacement for hyaluronic acid. It works differently — on the surface, not in the dermis — and the five-thousand-times-its-weight claim, while technically accurate in a lab setting, depends entirely on molecular weight and formulation pH. The hype cycle is already outrunning the science, which means a lot of women are about to spend forty dollars on something that works best as a supporting actor, not a lead.</p>
-    </div>
-    <div class="pull-quote">
-      <p>"PGA is genuinely exciting, but the marketing is doing that thing where it turns a good ingredient into a miracle. Use it over your hyaluronic acid serum, not instead of it, and manage your expectations." — Dr. Shereene Idriss, Board-Certified Dermatologist, Idriss Dermatology NYC</p>
-    </div>
-  </div>
-
-  <!-- 04 DID YOU SEE -->
-  <div class="section">
-    <div class="section-label">
-      <div class="section-number">04</div>
-      <div class="section-title">Did You See?</div>
-    </div>
-    <div class="section-headline">Lucia Pica smudged gold leaf<br>on a model's cheekbone<br><em>and called it a goodbye.</em></div>
-    <div class="see-image-wrapper">
-      <img src="https://images.unsplash.com/photo-1487412720507-265dfe4c7f77?w=600&q=80" alt="Portrait fashion editorial" />
-      <div class="see-image-caption">AW26 · Gold leaf and raw pigment at Dries Van Noten's final show</div>
-    </div>
-    <div class="body-text">
-      <p>At the Dries Van Noten AW26 show in Paris yesterday, makeup artist Lucia Pica created what she described as "beauty that remembers." Each model's face was treated individually — no unified look, no brief sheet. Some wore raw pigment pressed into damp skin. Others had fragments of gold leaf applied to the brow bone or jawline with a dry brush, left to crack and lift under the lights. One model walked with nothing but a smear of burnt orange across her closed eyelid, visible only when she blinked. The collection was Van Noten's last, and Pica said she wanted the makeup to feel like "the last page of a book you didn't want to end."
-
-What made it extraordinary wasn't the artistry — though the artistry was staggering — but the refusal to be clean, to be finished, to be optimized. In a season dominated by "glass skin" and algorithmic perfection, Pica sent out faces that looked like they'd been touched by human hands and weren't sorry about it. It's the kind of beauty moment that reminds you why fashion exists beyond commerce — and exactly the kind of thing we started Lip Service to talk about.</p>
-    </div>
-  </div>
-
-  <!-- 05 DID YOU HELP -->
-  <div class="section help-section">
-    <div class="section-label">
-      <div class="section-number">05</div>
-      <div class="section-title">Did You Help?</div>
-    </div>
-    <div class="section-headline">Beauty as an act<br><em>of re-entry.</em></div>
-    <div class="body-text">
-      <p>Lipstick Angels was founded in 2015 by Renata Helfman after she began volunteering beauty services in hospital cancer wards and realized that the simple act of applying lipstick gave patients back a sense of identity that illness had stripped away. The organization has since expanded to serve women re-entering society after incarceration — providing beauty kits, skincare education, and interview-prep grooming sessions in transitional housing facilities.</p>
-    </div>
-    <div class="help-stat">
-      <div class="help-number">18,000+</div>
-      <div class="help-number-label">women served with beauty kits and grooming support since 2015</div>
-    </div>
-    <div class="body-text">
-      <p>A woman named Danielle, released from a facility in California in 2024 after seven years, told Lipstick Angels volunteers that the hardest part of her first job interview wasn't the questions — it was not recognizing her own face in the bathroom mirror beforehand. A volunteer helped her with a simple routine: moisturizer, concealer, a berry lip. She got the job. She still uses that shade. They need funding for kits and trained volunteers in twelve new cities this year.</p>
-    </div>
-    <a href="https://www.lipstickangels.org/donate" class="cta-button" target="_blank">Donate to Lipstick Angels →</a>
-  </div>
-
-  <!-- 06 HEALTHY TEARS -->
-  <div class="section tears-section">
-    <div class="section-label">
-      <div class="section-number">06</div>
-      <div class="section-title">Healthy Tears</div>
-    </div>
-    <div class="section-headline">Seventy-two thousand people<br>in a stadium.<br><em>One man with a broken mic stand</em><br><em>and absolutely no intention of stopping.</em></div>
-    <div class="body-text">
-      <p><p>By the summer of 1985, Freddie Mercury had been told — in various tones of corporate diplomacy — that Queen was fading. Album sales had dipped. American radio had cooled on them after the "I Want to Break Free" video, the one where they dressed in drag, horrified the Bible Belt, and didn't apologize. The band hadn't toured the U.S. in years. When Bob Geldof called about Live Aid, the slot offered was twenty minutes. The promoters apparently suggested they play it safe. Pick the hits. Don't overdo it.</p>
-<p>What happened instead, on July 13th at Wembley Stadium, is something that still defies clean explanation. Mercury walked out in a white tank top and grabbed the microphone like he was resuming an argument. He didn't ease the crowd in. He opened his mouth and seventy-two thousand people became a single instrument he played with his body. The call-and-response section — that impossible, wordless vocal volley where he riffed and the entire stadium followed, note for note, like they'd rehearsed it — lasted nearly three minutes. He hadn't planned it. He just trusted that the sound would come back to him, and it did.</p>
-<p>He ran six minutes over his allotted time. The stage managers signaled. The other acts waited in the wings. He did not care. He played "Bohemian Rhapsody" into "Radio Ga Ga" into "We Are the Champions" with the energy of a man who understood, on some cellular level, that this was the room and this was the moment and no one was going to give him a bigger one. Music journalists have spent forty years trying to articulate what made those twenty-one minutes different from every other live performance in rock history. Most of them land on the same word: command. Not showmanship. Command.</p>
-<p>He was thirty-eight years old. He had six years left. He didn't know that yet — or maybe, in the way that people who burn at that frequency sometimes know things, he did. After the show, he reportedly said very little about it. His bandmate Brian May, decades later, put it simply: "He just walked out there and owned the whole place. And I don't think any of us — including him — fully understood how." Some performances are remembered because they were perfect. Wembley is remembered because it was inevitable — like weather, like gravity, like a voice that refused, for twenty-one minutes, to be anything less than the biggest thing in the world.</p></p>
-    </div>
-    <a href="https://www.youtube.com/watch?v=fJ9rUzIMcZQ" target="_blank" class="video-thumb">
-      <img src="https://img.youtube.com/vi/fJ9rUzIMcZQ/hqdefault.jpg" alt="Healthy Tears · March 8, 2026" />
-      <div class="play-btn">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <div class="hero-proof">
+      <div class="proof-item">
+        <div class="proof-number">Free</div>
+        <div class="proof-label">Always</div>
       </div>
-      <div class="video-label">The performance every musician studies. You'll understand after 30 seconds.</div>
-    </a>
-  </div>
-
-  
-  <div class="section archive-section">
-    <div class="section-label">
-      <div class="section-number" style="font-size:13px; line-height:1;">↩</div>
-      <div class="section-title">Past Issues</div>
-    </div>
-    <div class="archive-list">
-      
-      <a href="issues/2026-03-07.html" class="archive-item">
-        <div class="archive-item-meta">
-          <span class="archive-item-label">Issue No. 4</span>
-          <span class="archive-item-date">March 7, 2026</span>
-        </div>
-        <div class="archive-item-teaser">Today: Drunk Elephant's messy reformulation drama, the biotech peptide that's quietly replacing retinol in clinical trials, Dries Van Noten's final collection moment that made three editors cry, and why Look Good Feel Better deserves your attention this weekend.</div>
-      </a>
-
-      <a href="issues/2026-03-06.html" class="archive-item">
-        <div class="archive-item-meta">
-          <span class="archive-item-label">Issue No. 2</span>
-          <span class="archive-item-date">March 6, 2026</span>
-        </div>
-        <div class="archive-item-teaser">Mascara that doesn't flake is apparently still a pipe dream — but one lab in Seoul thinks they've cracked it. Also: Charlotte Tilbury's latest acquisition is either brilliant or very, very worrying. We've got the scent ingredient your nervous system actually likes, Valentino's lip moment from Milan, and a woman who makes wigs for cancer patients out of hair she collects from salon floors.</div>
-      </a>
+      <div class="proof-divider"></div>
+      <div class="proof-item">
+        <div class="proof-number">Weekly</div>
+        <div class="proof-label">Every Thursday</div>
+      </div>
+      <div class="proof-divider"></div>
+      <div class="proof-item">
+        <div class="proof-number">5 min</div>
+        <div class="proof-label">Read time</div>
+      </div>
     </div>
   </div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    <div class="footer-logo">Lip Service</div>
-    <div class="footer-text">
-      Daily. Opinionated. Never preachy.<br>
-      You're receiving this because you have excellent taste.<br><br>
-      <em style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</em>
+  <div class="hero-right">
+    <div class="form-kicker">Join the list</div>
+    <h2 class="form-headline">She's done being<br>talked down to.</h2>
+    <p class="form-subtext">Lip Service treats you like you already know what you're talking about. Because you do.</p>
+    <form class="subscribe-form" id="heroForm" onsubmit="handleSubmit(event,'heroSuccess','heroForm','heroFine')">
+      <input class="form-input" type="text" name="firstName" placeholder="First name" autocomplete="given-name" required />
+      <input class="form-input" type="email" name="email" placeholder="Email address" autocomplete="email" required />
+      <button class="form-submit" type="submit">Subscribe to Lip Service</button>
+    </form>
+    <div class="success-msg" id="heroSuccess">
+      <div class="success-headline">You're in. Welcome to the list.</div>
+      <div class="success-sub">Check your inbox — something good is coming Thursday.</div>
     </div>
-    <div class="footer-links">
-      <a href="#">View in browser</a>
-      <a href="#">Archive</a>
-      <a href="#">Forward this</a>
-      <a href="#">Unsubscribe</a>
+    <p class="form-fine" id="heroFine">Weekly. Free. Unsubscribe whenever you want, no guilt trip.<br>We will never sell your email. That would be embarrassing.</p>
+  </div>
+</section>
+
+<div class="section-rule"><span>What's inside every issue</span></div>
+<section class="what-section">
+  <div class="what-grid">
+    <div class="what-item">
+      <span class="what-number">01</span>
+      <div class="what-title">Did You<br><em>Hear?</em></div>
+      <p class="what-desc">Industry gossip. The reformulation nobody announced, the brand drama everyone's pretending not to notice, the derm who said something unhinged on a podcast. This is the group chat section.</p>
+    </div>
+    <div class="what-item">
+      <span class="what-number">02</span>
+      <div class="what-title">Did You<br><em>Know?</em></div>
+      <p class="what-desc">One ingredient, one study, one mechanism — explained like a smart friend at dinner, not a white paper. Beauty is 360. Skin, sleep, gut health, cortisol. We cover all of it.</p>
+    </div>
+    <div class="what-item">
+      <span class="what-number">03</span>
+      <div class="what-title">Did You<br><em>See?</em></div>
+      <p class="what-desc">One moment from beauty or fashion this week. A campaign, a runway look, a product launch that's either genius or a disaster. Short take, strong opinion, no hedging.</p>
+    </div>
+    <div class="what-item">
+      <span class="what-number">04</span>
+      <div class="what-title">Did You<br><em>Help?</em></div>
+      <p class="what-desc">One cause, one action, zero guilt. Charitable as a flex. Because being generous and being a person with excellent skincare are not mutually exclusive.</p>
+    </div>
+    <div class="what-item">
+      <span class="what-number">05</span>
+      <div class="what-title">Healthy<br><em>Tears</em></div>
+      <p class="what-desc">One video. One sentence of context. A link. Something that will either make you laugh until you cry or cry until it's actually kind of funny. We close every issue here on purpose.</p>
+    </div>
+    <div class="what-item" style="background:var(--ink);display:flex;flex-direction:column;justify-content:center;">
+      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;font-style:italic;color:var(--cream);line-height:1.3;margin-bottom:16px;">"She sends the PubMed link <em style="color:var(--rouge);font-style:normal;">and</em> the unhinged meme in the same breath."</div>
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);font-weight:400;">That's the reader.<br>That's you.</div>
     </div>
   </div>
+</section>
 
-</div>
+<section class="promise-strip">
+  <div>
+    <div class="promise-quote">"The beauty newsletter that treats you like you already know what you're talking about."</div>
+    <div class="promise-attr">The Lip Service Promise</div>
+  </div>
+  <div class="promise-right">
+    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Never preachy.</strong> We are not going to tell you to drink more water. You know about water.</div></div>
+    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Science-first, gossip-always.</strong> They are not mutually exclusive. We refuse to choose.</div></div>
+    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Dark humor welcome.</strong> Beauty is serious business and also completely absurd. We hold both.</div></div>
+    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Five minutes, every Thursday.</strong> Tight. Opinionated. Then we leave you alone until next week.</div></div>
+  </div>
+</section>
+
+<section class="bottom-cta">
+  <div class="bottom-cta-kicker">Free. Weekly. Yours.</div>
+  <h2 class="bottom-cta-headline">Your inbox deserves<br><em>better than this.</em></h2>
+  <p class="bottom-cta-sub">Lip Service arrives every Thursday. It will be the most interesting thing in your inbox that day. We stand behind that completely.</p>
+  <form id="bottomForm" onsubmit="handleSubmit(event,'bottomSuccess','bottomFormWrap','bottomFine')">
+    <div class="bottom-form" id="bottomFormWrap">
+      <input class="bottom-input" type="email" name="email" placeholder="Your email address" autocomplete="email" required />
+      <button class="bottom-submit" type="submit">Subscribe →</button>
+    </div>
+  </form>
+  <div class="success-msg" id="bottomSuccess">
+    <div class="success-headline">You're in. Welcome to the list.</div>
+    <div class="success-sub">Check your inbox Thursday.</div>
+  </div>
+  <p class="bottom-fine" id="bottomFine">Free forever. No spam. Unsubscribe anytime.</p>
+</section>
+
+<footer>
+  <div class="footer-logo">Lip Service</div>
+  <div class="footer-links">
+    <a href="archive.html">Archive</a>
+    <a href="newsletter.html">Latest issue</a>
+  </div>
+  <div class="footer-copy">Weekly beauty. No apologies. © 2026</div>
+</footer>
+
+<script>
+  function handleSubmit(e, successId, formId, fineId) {
+    e.preventDefault();
+    const el = document.getElementById(formId);
+    if (el) el.style.display = 'none';
+    document.getElementById(successId).classList.add('visible');
+    const fine = document.getElementById(fineId);
+    if (fine) fine.style.opacity = '0.3';
+  }
+</script>
 </body>
 </html>
