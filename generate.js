@@ -97,52 +97,73 @@ function buildHearItemsHtml(items) {
     .join('\n');
 }
 
-// Archive section shown on index.html below all content, above footer
-function buildArchiveSectionHtml(archive) {
-  // Only show past issues (skip today = first entry)
-  const past = archive.slice(1);
-  if (past.length === 0) return '';
+// Standalone archive page: clean list of all issues, newest to oldest
+function buildArchivePage(archive) {
+  const items = archive.length === 0
+    ? '<li class="archive-empty">No issues published yet.</li>'
+    : archive.map((entry) => `
+      <li class="archive-item">
+        <span class="archive-meta">
+          <span class="archive-label">${entry.issueLabel}</span>
+          <span class="archive-dot">·</span>
+          <span class="archive-date">${entry.issueDate}</span>
+        </span>
+        <span class="archive-teaser">${entry.heroText}</span>
+      </li>`).join('\n');
 
-  const items = past
-    .map(
-      (entry) => `
-      <a href="issues/${entry.date}.html" class="archive-item">
-        <div class="archive-item-meta">
-          <span class="archive-item-label">${entry.issueLabel}</span>
-          <span class="archive-item-date">${entry.issueDate}</span>
-        </div>
-        <div class="archive-item-teaser">${entry.heroText}</div>
-      </a>`
-    )
-    .join('\n');
-
-  return `
-  <div id="past-issues" class="section archive-section">
-    <div class="section-label">
-      <div class="section-number" style="font-size:13px; line-height:1;">↩</div>
-      <div class="section-title">Past Issues</div>
-    </div>
-    <div class="archive-list">
-      ${items}
-    </div>
-  </div>`;
-}
-
-// Standalone issue page: no archive list, just a back-to-today nav bar
-function buildIssuePage(html, issueLabel, issueDate) {
-  const navBar = `<div class="issue-nav-bar">
-  <a href="../index.html">← Today's issue</a>
-  <span>${issueLabel} &middot; ${issueDate}</span>
-</div>`;
-
-  const backLink = `
-  <div class="section" style="text-align:center; padding:20px 24px; border-bottom:none;">
-    <a href="../index.html" style="font-size:11px;color:var(--rouge);text-decoration:none;letter-spacing:2px;text-transform:uppercase;font-weight:500;">← Today's issue</a>
-  </div>`;
-
-  return html
-    .replace('<div class="email-wrapper">', `${navBar}\n<div class="email-wrapper">`)
-    .replace('{{ARCHIVE_SECTION}}', backLink);
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archive — Lip Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#16120E; --cream:#FAF7F2; --rouge:#C13333; --warm:#9A8880; --divider:#E4DBD4; }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--cream); color:var(--ink); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column; }
+  body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:100; opacity:0.4; }
+  .top-bar { display:flex; justify-content:space-between; align-items:center; padding:20px 40px; border-bottom:1px solid var(--divider); }
+  .top-bar-logo { font-family:'Playfair Display',serif; font-size:22px; font-weight:900; letter-spacing:-0.5px; color:var(--ink); text-decoration:none; }
+  .top-bar-back { font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--warm); text-decoration:none; font-weight:400; transition:color 0.2s; }
+  .top-bar-back:hover { color:var(--ink); }
+  main { flex:1; max-width:720px; width:100%; margin:0 auto; padding:64px 40px 80px; }
+  .page-eyebrow { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--rouge); font-weight:500; margin-bottom:16px; display:flex; align-items:center; gap:12px; }
+  .page-eyebrow::before { content:''; display:inline-block; width:24px; height:1px; background:var(--rouge); }
+  .page-headline { font-family:'Playfair Display',serif; font-size:clamp(36px,5vw,56px); font-weight:900; line-height:1.05; letter-spacing:-2px; color:var(--ink); margin-bottom:48px; }
+  .page-headline em { font-style:italic; color:var(--rouge); }
+  .archive-list { list-style:none; border-top:1px solid var(--divider); }
+  .archive-item { padding:24px 0; border-bottom:1px solid var(--divider); display:flex; flex-direction:column; gap:8px; }
+  .archive-empty { padding:24px 0; color:var(--warm); font-size:14px; font-weight:300; }
+  .archive-meta { display:flex; align-items:center; gap:10px; }
+  .archive-label { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:var(--ink); letter-spacing:-0.2px; }
+  .archive-dot { color:var(--rouge); font-size:12px; }
+  .archive-date { font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--warm); font-weight:400; }
+  .archive-teaser { font-size:14px; color:var(--warm); line-height:1.6; font-weight:300; max-width:600px; }
+  footer { border-top:1px solid var(--divider); padding:24px 40px; display:flex; justify-content:space-between; align-items:center; }
+  .footer-logo { font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:var(--ink); }
+  .footer-copy { font-size:11px; color:#C0B5AE; font-weight:300; }
+  @media (max-width:600px) { .top-bar { padding:18px 20px; } main { padding:48px 20px 60px; } footer { flex-direction:column; gap:8px; text-align:center; padding:20px; } }
+</style>
+</head>
+<body>
+<header class="top-bar">
+  <a href="index.html" class="top-bar-logo">Lip Service</a>
+  <a href="index.html" class="top-bar-back">← Home</a>
+</header>
+<main>
+  <div class="page-eyebrow">Every issue</div>
+  <h1 class="page-headline">The <em>archive.</em></h1>
+  <ul class="archive-list">
+    ${items}
+  </ul>
+</main>
+<footer>
+  <div class="footer-logo">Lip Service</div>
+  <div class="footer-copy">Weekly beauty. No apologies. © 2026</div>
+</footer>
+</body>
+</html>`;
 }
 
 // ─── Content generation ───────────────────────────────────────────────────────
@@ -323,26 +344,17 @@ async function promotePreview() {
   archive.unshift({ date: key, issueLabel, issueDate, heroText });
   await fs.writeFile(archivePath, JSON.stringify(archive, null, 2), 'utf-8');
 
-  // Strip preview nav bar and replace archive placeholder with real archive section
+  // Strip preview nav bar, replace archive placeholder with nothing (inbox-only)
   const cleanHtml = previewHtml.replace(/<div class="issue-nav-bar"[^>]*>[\s\S]*?<\/div>\n?/, '');
-  const indexHtml = cleanHtml.replace(PREVIEW_PLACEHOLDER, buildArchiveSectionHtml(archive));
-  await fs.writeFile(path.join(__dirname, 'index.html'), indexHtml, 'utf-8');
-  console.log(`  ✓ index.html (${issueLabel})`);
+  const newsletterHtml = cleanHtml
+    .replace(PREVIEW_PLACEHOLDER, '')
+    .replace(/\{\{ROOT\}\}/g, '');
+  await fs.writeFile(path.join(__dirname, 'newsletter.html'), newsletterHtml, 'utf-8');
+  console.log(`  ✓ newsletter.html (${issueLabel})`);
 
-  // Build standalone issue page (replace placeholder with back link)
-  const backLink = `
-  <div class="section" style="text-align:center; padding:20px 24px; border-bottom:none;">
-    <a href="../index.html" style="font-size:11px;color:var(--rouge);text-decoration:none;letter-spacing:2px;text-transform:uppercase;font-weight:500;">← Today's issue</a>
-  </div>`;
-  const navBar = `<div class="issue-nav-bar">
-  <a href="../index.html">← Today's issue</a>
-  <span>${issueLabel} &middot; ${issueDate}</span>
-</div>`;
-  const issueHtml = previewHtml
-    .replace('<div class="email-wrapper">', `${navBar}\n<div class="email-wrapper">`)
-    .replace(PREVIEW_PLACEHOLDER, backLink);
-  await fs.writeFile(path.join(issuesDir, `${key}.html`), issueHtml, 'utf-8');
-  console.log(`  ✓ issues/${key}.html`);
+  // Write archive page
+  await fs.writeFile(path.join(__dirname, 'archive.html'), buildArchivePage(archive), 'utf-8');
+  console.log(`  ✓ archive.html (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
 
   // Clean up preview/
   await fs.rm(previewDir, { recursive: true });
@@ -397,7 +409,8 @@ async function main() {
 </div>`;
     const previewHtml = html
       .replace('<div class="email-wrapper">', `${previewNavBar}\n<div class="email-wrapper">`)
-      .replace('{{ARCHIVE_SECTION}}', PREVIEW_PLACEHOLDER);
+      .replace('{{ARCHIVE_SECTION}}', PREVIEW_PLACEHOLDER)
+      .replace(/\{\{ROOT\}\}/g, '../');
 
     await fs.writeFile(path.join(previewDir, 'index.html'), previewHtml, 'utf-8');
     await fs.writeFile(path.join(previewDir, 'meta.json'), JSON.stringify(
@@ -405,7 +418,7 @@ async function main() {
     ), 'utf-8');
     console.log(`  ✓ preview/index.html (${issueLabel}) — live at /preview/`);
   } else {
-    // ── Normal publish: write issues/ and index.html ───────────────────────
+    // ── Normal publish: write newsletter.html + archive.html ───────────────
     const issuesDir = path.join(__dirname, 'issues');
     await fs.mkdir(issuesDir, { recursive: true });
 
@@ -416,13 +429,14 @@ async function main() {
     archive.unshift({ date: key, issueLabel, issueDate, heroText: content.hero_text });
     await fs.writeFile(archivePath, JSON.stringify(archive, null, 2), 'utf-8');
 
-    const issuePageHtml = buildIssuePage(html, issueLabel, issueDate);
-    await fs.writeFile(path.join(issuesDir, `${key}.html`), issuePageHtml, 'utf-8');
-    console.log(`  ✓ issues/${key}.html`);
+    const newsletterHtml = html
+      .replace('{{ARCHIVE_SECTION}}', '')
+      .replace(/\{\{ROOT\}\}/g, '');
+    await fs.writeFile(path.join(__dirname, 'newsletter.html'), newsletterHtml, 'utf-8');
+    console.log(`  ✓ newsletter.html (${issueLabel})`);
 
-    const indexHtml = html.replace('{{ARCHIVE_SECTION}}', buildArchiveSectionHtml(archive));
-    await fs.writeFile(path.join(__dirname, 'index.html'), indexHtml, 'utf-8');
-    console.log(`  ✓ index.html (${issueLabel})`);
+    await fs.writeFile(path.join(__dirname, 'archive.html'), buildArchivePage(archive), 'utf-8');
+    console.log(`  ✓ archive.html (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
   }
 }
 
