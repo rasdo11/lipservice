@@ -27,13 +27,55 @@
   .archive-dot { color:var(--rouge); font-size:12px; }
   .archive-date { font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--warm); font-weight:400; }
   .archive-teaser { font-size:14px; color:var(--warm); line-height:1.6; font-weight:300; max-width:600px; }
-  .archive-item-link { display:flex; flex-direction:column; gap:8px; text-decoration:none; color:inherit; padding:24px 0; border-bottom:1px solid var(--divider); transition:opacity 0.15s; }
+  .archive-item-link { display:flex; flex-direction:column; gap:8px; text-decoration:none; color:inherit; padding:24px 0; border-bottom:1px solid var(--divider); transition:opacity 0.15s; cursor:pointer; }
   .archive-item-link:hover { opacity:0.7; }
   .archive-item-link:hover .archive-label { color:var(--rouge); }
   footer { border-top:1px solid var(--divider); padding:24px 40px; display:flex; justify-content:space-between; align-items:center; }
   .footer-logo { font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:var(--ink); }
   .footer-copy { font-size:11px; color:#C0B5AE; font-weight:300; }
   @media (max-width:600px) { .top-bar { padding:18px 20px; } main { padding:48px 20px 60px; } footer { flex-direction:column; gap:8px; text-align:center; padding:20px; } }
+
+  /* ── Drawer ── */
+  .drawer-backdrop {
+    position:fixed; inset:0; background:rgba(22,18,14,0.55);
+    z-index:200; opacity:0; pointer-events:none;
+    transition:opacity 0.3s ease;
+  }
+  body.drawer-open .drawer-backdrop { opacity:1; pointer-events:auto; }
+  body.drawer-open { overflow:hidden; }
+
+  .issue-drawer {
+    position:fixed; top:0; right:0; height:100dvh;
+    width:min(700px, 100vw);
+    background:var(--cream); z-index:201;
+    display:flex; flex-direction:column;
+    transform:translateX(100%);
+    transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
+    box-shadow:-8px 0 40px rgba(22,18,14,0.12);
+  }
+  body.drawer-open .issue-drawer { transform:translateX(0); }
+
+  .drawer-header {
+    display:flex; align-items:center; gap:16px;
+    padding:0 24px; height:52px; flex-shrink:0;
+    border-bottom:1px solid var(--divider);
+    background:var(--cream);
+  }
+  .drawer-close {
+    width:32px; height:32px; border:none; background:none;
+    font-size:18px; color:var(--warm); cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:4px; transition:color 0.15s, background 0.15s;
+    flex-shrink:0;
+  }
+  .drawer-close:hover { color:var(--ink); background:var(--divider); }
+  .drawer-label {
+    font-family:'Playfair Display',serif; font-size:13px; font-weight:700;
+    color:var(--ink); letter-spacing:-0.2px;
+  }
+  .drawer-frame {
+    flex:1; width:100%; border:none; display:block;
+  }
 </style>
 </head>
 <body>
@@ -59,27 +101,75 @@
         list.innerHTML = issues.map(issue => {
           const d = new Date(issue.date + 'T12:00:00');
           const dateStr = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-          const link = issue.url ? `<a href="${issue.url}" class="archive-item-link">` : '<div class="archive-item">';
-          const close = issue.url ? '</a>' : '</div>';
+          if (issue.url) {
+            return `
+              <li>
+                <div class="archive-item-link" role="button" tabindex="0"
+                     data-url="${issue.url}" data-label="${dateStr}">
+                  <span class="archive-meta">
+                    <span class="archive-label">${dateStr}</span>
+                  </span>
+                  <span class="archive-teaser">${issue.preview}</span>
+                </div>
+              </li>`;
+          }
           return `
             <li>
-              ${link}
+              <div class="archive-item">
                 <span class="archive-meta">
                   <span class="archive-label">${dateStr}</span>
                 </span>
                 <span class="archive-teaser">${issue.preview}</span>
-              ${close}
+              </div>
             </li>`;
         }).join('');
+
+        list.addEventListener('click', e => {
+          const item = e.target.closest('[data-url]');
+          if (item) openDrawer(item.dataset.url, item.dataset.label);
+        });
+        list.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            const item = e.target.closest('[data-url]');
+            if (item) { e.preventDefault(); openDrawer(item.dataset.url, item.dataset.label); }
+          }
+        });
       })
       .catch(() => {
         document.getElementById('archive-list').innerHTML = '<li class="archive-empty">Could not load issues.</li>';
       });
+
+    function openDrawer(url, label) {
+      document.getElementById('drawer-frame').src = url;
+      document.getElementById('drawer-label').textContent = label;
+      document.getElementById('issue-drawer').setAttribute('aria-hidden', 'false');
+      document.body.classList.add('drawer-open');
+    }
+
+    function closeDrawer() {
+      document.body.classList.remove('drawer-open');
+      document.getElementById('issue-drawer').setAttribute('aria-hidden', 'true');
+      // reset src after transition so it doesn't flash on reopen
+      setTimeout(() => { document.getElementById('drawer-frame').src = 'about:blank'; }, 320);
+    }
+
+    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+    document.getElementById('drawer-backdrop').addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
   </script>
 </main>
 <footer>
   <div class="footer-logo">Lip Service</div>
   <div class="footer-copy">Weekly beauty. No apologies. © 2026</div>
 </footer>
+
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<aside class="issue-drawer" id="issue-drawer" aria-hidden="true" aria-label="Issue viewer">
+  <div class="drawer-header">
+    <button class="drawer-close" id="drawer-close" aria-label="Close issue">✕</button>
+    <span class="drawer-label" id="drawer-label"></span>
+  </div>
+  <iframe class="drawer-frame" id="drawer-frame" title="Issue content" src="about:blank"></iframe>
+</aside>
 </body>
 </html>
