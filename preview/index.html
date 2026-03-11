@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lip Service — Issue No. 8</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --ink: #1A1410;
+    --blush: #E8C4B8;
+    --rouge: #C94040;
+    --nude: #D4A898;
+    --charcoal: #3D3530;
+    --warm-gray: #9A8F89;
+    --divider: #E2DAD3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .email-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--cream);
+  }
+  .header {
+    background-color: var(--ink);
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rouge), var(--nude), var(--blush));
+  }
+  .masthead {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--nude);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero {
+    background: var(--ink);
+    padding: 0 24px 32px;
+  }
+  .hero-box {
+    background: var(--rouge);
+    padding: 20px 22px;
+    border-radius: 2px;
+  }
+  .hero-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .hero-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  .section {
+    padding: 36px 24px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .section:last-of-type {
+    border-bottom: none;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-number {
+    width: 24px;
+    height: 24px;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+  }
+  .section-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+  .section-headline em {
+    font-style: italic;
+    color: var(--rouge);
+  }
+  .body-text {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .body-text p {
+    margin-bottom: 14px;
+  }
+  .body-text p:last-child {
+    margin-bottom: 0;
+  }
+  .body-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .opening .section-headline {
+    font-size: 28px;
+  }
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 58px;
+    font-weight: 900;
+    line-height: 0.8;
+    float: left;
+    margin-right: 6px;
+    margin-top: 8px;
+    color: var(--rouge);
+  }
+  .gossip-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .gossip-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .gossip-item:first-child {
+    padding-top: 0;
+  }
+  .gossip-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 6px;
+  }
+  .gossip-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .gossip-body {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .know-callout {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 22px;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .know-callout-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nude);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .know-callout-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .know-callout-text strong {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--blush);
+  }
+  .see-image-wrapper {
+    width: 100%;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .see-image-wrapper img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+  .see-image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 14px;
+    background: linear-gradient(transparent, rgba(26,20,16,0.8));
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .help-section {
+    background: #F0EBE5;
+  }
+  .help-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .help-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--rouge);
+    line-height: 1;
+  }
+  .help-number-label {
+    font-size: 13px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.4;
+    max-width: 200px;
+  }
+  .cta-button {
+    display: inline-block;
+    background: var(--rouge);
+    color: #fff;
+    padding: 13px 24px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 1px;
+    margin-top: 16px;
+    transition: opacity 0.2s;
+  }
+  .cta-button:hover { opacity: 0.88; }
+  .tears-section {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .tears-section .section-title { color: var(--nude); }
+  .tears-section .section-headline { color: var(--cream); }
+  .tears-section .body-text { color: rgba(250,247,242,0.75); }
+  .video-thumb {
+    display: block;
+    position: relative;
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 18px;
+    text-decoration: none;
+  }
+  .video-thumb img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.75);
+  }
+  .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255,255,255,0.4);
+  }
+  .play-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+  .video-label {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    right: 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.5px;
+    font-style: italic;
+  }
+  .footer {
+    background: var(--ink);
+    padding: 28px 24px;
+    text-align: center;
+    border-top: 3px solid var(--rouge);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .footer-text {
+    font-size: 12px;
+    color: var(--warm-gray);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    font-size: 10px;
+    color: var(--warm-gray);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .footer-links a:hover { color: var(--nude); }
+  .ornament {
+    text-align: center;
+    color: var(--rouge);
+    font-size: 18px;
+    letter-spacing: 8px;
+    padding: 8px 0 0;
+    opacity: 0.5;
+  }
+  .pill {
+    display: inline-block;
+    background: var(--blush);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  a.inline-link {
+    color: var(--rouge);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
+  }
+  .pull-quote {
+    border-left: 3px solid var(--rouge);
+    padding: 4px 16px;
+    margin: 18px 0;
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  /* ARCHIVE */
+  .archive-section {
+    background: var(--cream);
+  }
+  .archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .archive-item {
+    display: block;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--divider);
+    text-decoration: none;
+    color: inherit;
+  }
+  .archive-item:first-child {
+    padding-top: 0;
+  }
+  .archive-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .archive-item:hover .archive-item-label {
+    color: var(--rouge);
+  }
+  .archive-item-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .archive-item-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    transition: color 0.15s;
+  }
+  .archive-item-date {
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .archive-item-teaser {
+    font-size: 13.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.55;
+    font-style: italic;
+  }
+  /* ISSUE NAV BAR (standalone issue pages only) */
+  .issue-nav-bar {
+    background: var(--ink);
+    padding: 11px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .issue-nav-bar a {
+    font-size: 10px;
+    color: var(--nude);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .issue-nav-bar a:hover { color: var(--cream); }
+  .issue-nav-bar span {
+    font-size: 10px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 480px) {
+    .masthead { font-size: 36px; }
+    .section { padding: 28px 20px; }
+    .hero { padding: 0 20px 28px; }
+    .section-headline { font-size: 23px; }
+    .help-number { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+<div class="issue-nav-bar" style="background:var(--rouge);color:#fff;">
+  <span>👁 PREVIEW — goes live at 6am PST</span>
+  <span>Issue No. 8 &middot; March 11, 2026</span>
+</div>
+<div class="email-wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="masthead">Lip Service</div>
+    <div class="tagline">The most fun a girl can have without taking her clothes off</div>
+    <div class="header-meta">
+      <span>Issue No. 8</span>
+      <span>·</span>
+      <span>March 11, 2026</span>
+      <span>·</span>
+      <span>Daily</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-box">
+      <div class="hero-label">Today</div>
+      <div class="hero-text">Today: Glossier's quiet legal skirmish over a three-letter word, the biotech ingredient turning pig collagen into a K-beauty obsession, Haider Ackermann's kohl-smudged AW26 moment in Paris, and the charity bringing free skincare to women in shelters. Buckle in.</div>
+    </div>
+  </div>
+
+  <!-- 01 OPENING STATEMENT -->
+  <div class="section opening">
+    <div class="section-label">
+      <div class="section-number">01</div>
+      <div class="section-title">Opening Statement</div>
+    </div>
+    <div class="section-headline">I bought a lip liner at 2 a.m.<br><em>It was a cry for help disguised as a cart.</em></div>
+    <div class="body-text">
+      <p class="drop-cap">There's a particular flavor of self-delusion that only hits when you're three tabs deep in a beauty site at a time no reasonable person should be awake. I told myself I needed the liner because my current one — which is fine, which has been fine for fourteen months — was "pulling too cool." That's not a real problem. That's a woman who had a bad day and decided the solution was rosewood.</p><p>The package arrived yesterday. It is, predictably, almost identical to the one I already own. I held them side by side under three different light sources like a forensic analyst and concluded that maybe — maybe — there's a half-shade difference in the undertone. My husband glanced over and said, "Those are the same." Reader, they are not the same. They are also, functionally, the same.</p><p>But here's the thing beauty culture never quite admits out loud: half the purchases aren't about the product. They're about the ritual of choosing, the micro-thrill of the add-to-cart, the little fiction that one slightly warmer nude is going to rearrange your entire face. It won't. But the wanting is its own pleasure, and I think we should stop pretending otherwise.</p><p>Anyway, welcome to today's Lip Service, where we talk about what's actually happening in beauty without making you feel weird about your 2 a.m. cart. Let's get into it.</p>
+    </div>
+    <div class="ornament">— ✦ —</div>
+  </div>
+
+  <!-- 02 DID YOU HEAR -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">02</div>
+      <div class="section-title">Did You Hear?</div>
+    </div>
+    <div class="section-headline">The group chat<br><em>is losing it today.</em></div>
+    
+    <div class="gossip-item">
+      <div class="gossip-tag">Brand Drama</div>
+      <div class="gossip-headline">Glossier is suing a small Australian brand over the word 'dew'</div>
+      <div class="gossip-body">Glossier's legal team filed a trademark opposition in the Southern District of New York against Melbourne-based label Dewskin, claiming the name creates consumer confusion with its Futuredew line. Dewskin's founder, who has eleven employees and launched in 2023, posted a single-sentence response on Instagram: "We're not confused. Are you?" The filing was made public Monday and beauty Twitter is, predictably, having a field day.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Industry Moves</div>
+      <div class="gossip-headline">L'Oréal just quietly acquired a biofermentation lab in Seoul</div>
+      <div class="gossip-body">Per a Korean regulatory filing spotted by Business of Fashion, L'Oréal completed a $340 million acquisition of BioGenne Labs, a firm specializing in lab-grown collagen peptides derived from porcine cell cultures. The deal closed February 28 but wasn't announced — because when you're the world's largest beauty company buying a pig collagen lab, you maybe don't lead with a press release. Expect to see "biofermented" on a Lancôme jar by Q4.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Runway Intel</div>
+      <div class="gossip-headline">Haider Ackermann gave every model a black eye — on purpose</div>
+      <div class="gossip-body">At his AW26 show for Tom Ford in Paris last Saturday, Ackermann sent models out with deliberately smudged kohl pooling under the lower lash line, somewhere between "slept in my makeup" and "just emerged from a Caravaggio painting." Lead makeup artist Lucia Pica used a single product — a reformulated Tom Ford Noir de Noir eye pencil that won't retail until September. The beauty internet is already trying to reverse-engineer it with existing sticks.</div>
+    </div>
+  </div>
+
+  <!-- 03 DID YOU KNOW -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">03</div>
+      <div class="section-title">Did You Know?</div>
+    </div>
+    <div class="section-headline">Pig collagen is<br><em>having its moment.</em></div>
+    <div class="body-text">
+      <p>Porcine-derived collagen has been used in wound care for decades, but a new wave of Korean and French skincare brands are putting biofermented versions of it into serums, essences, and sheet masks — and the clinical data is annoyingly compelling.</p>
+    </div>
+    <div class="know-callout">
+      <div class="know-callout-label">The Science, Briefly</div>
+      <div class="know-callout-text">Unlike bovine or marine collagen, porcine collagen's amino acid profile is the closest match to human skin. When processed through <strong>precision biofermentation</strong>, the resulting peptides are small enough to penetrate the stratum corneum rather than just sitting on top of it pretending to work. A 2025 study in the Journal of Dermatological Science showed a 23% improvement in transepidermal water loss after eight weeks of topical application.</div>
+    </div>
+    <div class="body-text">
+      <p>Korean brands got there first, obviously. Beauty of Joseon released a Porcine Collagen Bounce Serum in January that sold out in eleven minutes on Olive Young; a reformulated version with niacinamide drops next month. BioGenne's lab-grown version — the one L'Oréal just bought — skips the animal entirely, growing the collagen from porcine cells in bioreactors, which makes it technically vegan-adjacent in a way that will absolutely spark a Reddit war.
+
+Here's the uncomfortable part: this works better than most plant-based collagen alternatives, and the sustainability argument is genuinely complicated. The biofermented route uses roughly 90% less water than traditional extraction, but the cell culture process still requires fetal bovine serum as a growth medium in many labs. The industry is racing to fix that, but for now, the supply chain has an asterisk. If you care about the ethics — and you should — read the sourcing page, not just the front label.</p>
+    </div>
+    <div class="pull-quote">
+      <p>"We're seeing a convergence of clinical efficacy and scalable biotechnology that wasn't possible five years ago. Porcine-derived peptides are not a trend — they're a platform." — Dr. Soo-Yeon Park, Director of Biomaterials Research, Seoul National University</p>
+    </div>
+  </div>
+
+  <!-- 04 DID YOU SEE -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">04</div>
+      <div class="section-title">Did You See?</div>
+    </div>
+    <div class="section-headline">Lucia Pica gave Tom Ford's models<br><em>the most beautiful bruise</em><br><em>you've ever seen.</em></div>
+    <div class="see-image-wrapper">
+      <img src="https://images.unsplash.com/photo-1512207736890-6ffed8a84e8d?w=600&q=80" alt="Luxury beauty editorial close up" />
+      <div class="see-image-caption">AW26 · Tom Ford kohl-smudged eye by Lucia Pica</div>
+    </div>
+    <div class="body-text">
+      <p>The look at Haider Ackermann's AW26 Tom Ford show wasn't editorial in the way we usually mean — editorial meaning "no one will actually wear this." It was editorial in the old sense: it told a story. Pica took a single kohl pencil and worked it under the lower lash line with her ring finger, letting the pigment bleed and pool into the hollows. No concealer, no correction, no clean edge anywhere. The skin everywhere else was bare and slightly dewy, which made the darkness look deliberate and almost tender, like the eye had been handled carefully rather than painted.
+
+What made it stick — and why it's still circulating five days later — is that it looked like something you might actually wake up with. The difference was intention. Ackermann's clothes were sharp-shouldered, liquid-hemmed, precise; the makeup was the opposite, soft and human and slightly undone. It's the tension that made it work. It's also the kind of beauty moment Lip Service lives for: one where technique matters more than product count, and the whole thing could be done with a single pencil and a willingness to smudge.</p>
+    </div>
+  </div>
+
+  <!-- 05 DID YOU HELP -->
+  <div class="section help-section">
+    <div class="section-label">
+      <div class="section-number">05</div>
+      <div class="section-title">Did You Help?</div>
+    </div>
+    <div class="section-headline">Beauty as an act<br><em>of restoration.</em></div>
+    <div class="body-text">
+      <p>Beauty Bus Foundation, founded in 2013 by Courtney Coats after her mother's terminal illness, brings free beauty and grooming services to people living with serious illness, domestic violence survivors, and women in transitional housing across Southern California. What started as a single mobile unit now operates three buses and a network of 400+ volunteer beauty professionals.</p>
+    </div>
+    <div class="help-stat">
+      <div class="help-number">48,000+</div>
+      <div class="help-number-label">free beauty services provided since founding</div>
+    </div>
+    <div class="body-text">
+      <p>Last year, a licensed cosmetologist named Maria volunteered at a domestic violence shelter in Long Beach and gave a woman her first haircut in three years. The woman had kept her hair long because her abuser had demanded it. Maria cut it to her chin. The shelter director later said it was the first time she'd seen the woman look in a mirror without flinching. Beauty Bus runs on donated products and volunteer hours — they need both, always.</p>
+    </div>
+    <a href="https://www.beautybus.org/donate" class="cta-button" target="_blank">Donate to Beauty Bus Foundation →</a>
+  </div>
+
+  <!-- 06 HEALTHY TEARS -->
+  <div class="section tears-section">
+    <div class="section-label">
+      <div class="section-number">06</div>
+      <div class="section-title">Healthy Tears</div>
+    </div>
+    <div class="section-headline">He had twenty minutes.<br><em>He took everything.</em><br>Freddie Mercury at Live Aid,<br><em>July 13, 1985.</em></div>
+    <div class="body-text">
+      <p><p>By the summer of 1985, Queen was supposed to be fading. The band hadn't had a major U.S. hit in years. Critics had been writing the obituary since Hot Space. Freddie Mercury was thirty-eight, living hard, and privately beginning to suspect something was wrong with his body — though the diagnosis wouldn't come for another year. They were booked for Live Aid at Wembley Stadium almost as an afterthought, slotted between U2 and David Bowie on a bill designed to remind the world that rock music could still matter for something beyond itself.</p>
+<p>The organizers told every act to keep it tight. Twenty minutes, no encores, move along — there were seventy-two thousand people in the stadium and a billion and a half watching on television, and the whole thing ran on a merciless clock. Mercury walked out in a white tank top and a studded armband, sat at the piano, and opened with "Bohemian Rhapsody" like a dare. Within seconds it was clear he wasn't performing for the cameras or the cause or the lineup. He was performing at the audience — calling and answering, conducting their voices with his fist, pulling sound out of seventy-two thousand strangers like they were a single instrument he'd been playing his whole life.</p>
+<p>What happened over the next twenty-one minutes has been studied, rewatched, and dissected by music historians who keep arriving at the same inadequate conclusion: it shouldn't have worked that well. He did "Radio Ga Ga" and the entire stadium clapped in unison without being asked. He did "We Are the Champions" and the crowd sang the melody back with a precision that made the band almost redundant. He did a call-and-response vocal run — no song, no lyrics, just his voice arcing into the July sky — and the crowd followed every note. The other performers watched from backstage. Elton John reportedly turned to someone and said, "That's it. We might as well all go home."</p>
+<p>Mercury never spoke publicly about Live Aid in any profound way. He didn't mythologize it. In a later interview, when someone asked how he commanded a crowd like that, he gave an answer that was either perfectly humble or perfectly Freddie: "I just do what I do, darling. I'm not going to be doing this forever, so I might as well do it properly."</p></p>
+    </div>
+    <a href="https://www.youtube.com/watch?v=fJ9rUzIMcZQ" target="_blank" class="video-thumb">
+      <img src="https://img.youtube.com/vi/fJ9rUzIMcZQ/hqdefault.jpg" alt="Healthy Tears · March 11, 2026" />
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="video-label">The performance every musician studies. You'll understand after 30 seconds.</div>
+    </a>
+  </div>
+
+  <!-- ARCHIVE_SECTION_PREVIEW_PLACEHOLDER -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Lip Service</div>
+    <div class="footer-text">
+      Daily. Opinionated. Never preachy.<br>
+      You're receiving this because you have excellent taste.<br><br>
+      <em style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</em>
+    </div>
+    <div class="footer-links">
+      <a href="#">View in browser</a>
+      <a href="../archive.html">Archive</a>
+      <a href="../subscribe.html" target="_blank">Forward this</a>
+      <a href="#">Unsubscribe</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
