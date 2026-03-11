@@ -352,6 +352,10 @@ async function promotePreview() {
   await fs.writeFile(path.join(__dirname, 'newsletter.html'), newsletterHtml, 'utf-8');
   console.log(`  ✓ newsletter.html (${issueLabel})`);
 
+  // Write individual issue file (required for idempotency check on retry crons)
+  await fs.writeFile(path.join(issuesDir, `${key}.html`), newsletterHtml, 'utf-8');
+  console.log(`  ✓ issues/${key}.html`);
+
   // Write archive page
   await fs.writeFile(path.join(__dirname, 'archive.html'), buildArchivePage(archive), 'utf-8');
   console.log(`  ✓ archive.html (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
@@ -443,6 +447,10 @@ async function main() {
       .replace(/\{\{ROOT\}\}/g, '');
     await fs.writeFile(path.join(__dirname, 'newsletter.html'), newsletterHtml, 'utf-8');
     console.log(`  ✓ newsletter.html (${issueLabel})`);
+
+    // Write individual issue file (required for idempotency check on retry crons)
+    await fs.writeFile(path.join(issuesDir, `${key}.html`), newsletterHtml, 'utf-8');
+    console.log(`  ✓ issues/${key}.html`);
 
     await fs.writeFile(path.join(__dirname, 'archive.html'), buildArchivePage(archive), 'utf-8');
     console.log(`  ✓ archive.html (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
