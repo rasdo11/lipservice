@@ -61,11 +61,11 @@ function dayOfYear(date) {
   return Math.floor((date - start) / 86400000);
 }
 
-function issueNumber(date) {
-  // Issue 1 launched March 5, 2026
-  const launch = new Date('2026-03-05T00:00:00');
-  const diff = Math.floor((date - launch) / 86400000) + 1;
-  return Math.max(1, diff);
+function issueNumber(archive) {
+  // Derive next issue number from the existing archive (max + 1)
+  if (!archive || archive.length === 0) return 1;
+  const max = Math.max(...archive.map((e) => e.issue || 0));
+  return max + 1;
 }
 
 function formatDate(date) {
@@ -395,13 +395,19 @@ async function main() {
     : new Date();
 
   const day = dayOfYear(today);
-  const issueNum = issueNumber(today);
-  const issueLabel = `Issue No. ${issueNum}`;
   const issueDate = formatDate(today);
   const key = dateKey(today);
 
   const image = BEAUTY_IMAGES[day % BEAUTY_IMAGES.length];
   const story = TEARS_STORIES[day % TEARS_STORIES.length];
+
+  // Read existing archive early so we can derive the next issue number
+  const issuesJsonPath = path.join(__dirname, 'issues.json');
+  let archive = [];
+  try { archive = JSON.parse(await fs.readFile(issuesJsonPath, 'utf-8')); } catch {}
+
+  const issueNum = issueNumber(archive.filter((e) => e.date !== key));
+  const issueLabel = `Issue No. ${issueNum}`;
 
   console.log(`${PREVIEW_MODE ? 'Previewing' : 'Generating'} ${issueLabel} — ${issueDate}`);
 
@@ -434,9 +440,6 @@ async function main() {
     const issuesDir = path.join(__dirname, 'issues');
     await fs.mkdir(issuesDir, { recursive: true });
 
-    const issuesJsonPath = path.join(__dirname, 'issues.json');
-    let archive = [];
-    try { archive = JSON.parse(await fs.readFile(issuesJsonPath, 'utf-8')); } catch {}
     archive = archive.filter((e) => e.date !== key);
     archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: content.hero_text, slug: key, url: `./issues/${key}.html` });
     await fs.writeFile(issuesJsonPath, JSON.stringify(archive, null, 2), 'utf-8');
