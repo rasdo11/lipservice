@@ -334,15 +334,16 @@ async function promotePreview() {
 
   console.log(`Promoting preview → live: ${issueLabel} — ${issueDate}`);
 
-  // Update archive
+  // Update issues.json
   const issuesDir = path.join(__dirname, 'issues');
   await fs.mkdir(issuesDir, { recursive: true });
-  const archivePath = path.join(issuesDir, 'archive.json');
+  const issuesJsonPath = path.join(__dirname, 'issues.json');
   let archive = [];
-  try { archive = JSON.parse(await fs.readFile(archivePath, 'utf-8')); } catch {}
+  try { archive = JSON.parse(await fs.readFile(issuesJsonPath, 'utf-8')); } catch {}
+  const issueNum = parseInt((issueLabel.match(/\d+/) || ['0'])[0], 10);
   archive = archive.filter((e) => e.date !== key);
-  archive.unshift({ date: key, issueLabel, issueDate, heroText });
-  await fs.writeFile(archivePath, JSON.stringify(archive, null, 2), 'utf-8');
+  archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: heroText, slug: key, url: `./issues/${key}.html` });
+  await fs.writeFile(issuesJsonPath, JSON.stringify(archive, null, 2), 'utf-8');
 
   // Strip preview nav bar, replace archive placeholder with nothing (inbox-only)
   const cleanHtml = previewHtml.replace(/<div class="issue-nav-bar"[^>]*>[\s\S]*?<\/div>\n?/, '');
@@ -356,9 +357,7 @@ async function promotePreview() {
   await fs.writeFile(path.join(issuesDir, `${key}.html`), newsletterHtml, 'utf-8');
   console.log(`  ✓ issues/${key}.html`);
 
-  // Write archive page
-  await fs.writeFile(path.join(__dirname, 'archive.html'), buildArchivePage(archive), 'utf-8');
-  console.log(`  ✓ archive.html (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
+  console.log(`  ✓ issues.json (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
 
   // Clean up preview/
   await fs.rm(previewDir, { recursive: true });
@@ -431,16 +430,16 @@ async function main() {
     ), 'utf-8');
     console.log(`  ✓ preview/index.html (${issueLabel}) — live at /preview/`);
   } else {
-    // ── Normal publish: write newsletter.html + archive.html ───────────────
+    // ── Normal publish: write newsletter.html + issues.json ───────────────
     const issuesDir = path.join(__dirname, 'issues');
     await fs.mkdir(issuesDir, { recursive: true });
 
-    const archivePath = path.join(issuesDir, 'archive.json');
+    const issuesJsonPath = path.join(__dirname, 'issues.json');
     let archive = [];
-    try { archive = JSON.parse(await fs.readFile(archivePath, 'utf-8')); } catch {}
+    try { archive = JSON.parse(await fs.readFile(issuesJsonPath, 'utf-8')); } catch {}
     archive = archive.filter((e) => e.date !== key);
-    archive.unshift({ date: key, issueLabel, issueDate, heroText: content.hero_text });
-    await fs.writeFile(archivePath, JSON.stringify(archive, null, 2), 'utf-8');
+    archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: content.hero_text, slug: key, url: `./issues/${key}.html` });
+    await fs.writeFile(issuesJsonPath, JSON.stringify(archive, null, 2), 'utf-8');
 
     const newsletterHtml = html
       .replace('{{ARCHIVE_SECTION}}', '')
@@ -452,8 +451,7 @@ async function main() {
     await fs.writeFile(path.join(issuesDir, `${key}.html`), newsletterHtml, 'utf-8');
     console.log(`  ✓ issues/${key}.html`);
 
-    await fs.writeFile(path.join(__dirname, 'archive.html'), buildArchivePage(archive), 'utf-8');
-    console.log(`  ✓ archive.html (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
+    console.log(`  ✓ issues.json (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
   }
 }
 
