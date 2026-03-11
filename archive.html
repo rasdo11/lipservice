@@ -27,6 +27,9 @@
   .archive-dot { color:var(--rouge); font-size:12px; }
   .archive-date { font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--warm); font-weight:400; }
   .archive-teaser { font-size:14px; color:var(--warm); line-height:1.6; font-weight:300; max-width:600px; }
+  .archive-item-link { display:flex; flex-direction:column; gap:8px; text-decoration:none; color:inherit; padding:24px 0; border-bottom:1px solid var(--divider); transition:opacity 0.15s; }
+  .archive-item-link:hover { opacity:0.7; }
+  .archive-item-link:hover .archive-label { color:var(--rouge); }
   footer { border-top:1px solid var(--divider); padding:24px 40px; display:flex; justify-content:space-between; align-items:center; }
   .footer-logo { font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:var(--ink); }
   .footer-copy { font-size:11px; color:#C0B5AE; font-weight:300; }
@@ -41,44 +44,41 @@
 <main>
   <div class="page-eyebrow">Every issue</div>
   <h1 class="page-headline">The <em>archive.</em></h1>
-  <ul class="archive-list">
-    
-      <li class="archive-item">
-        <span class="archive-meta">
-          <span class="archive-label">Issue No. 5</span>
-          <span class="archive-dot">·</span>
-          <span class="archive-date">March 9, 2026</span>
-        </span>
-        <span class="archive-teaser">Today: Glossier's quiet rebrand is louder than they think, the biotech ingredient turning up in every "clean" moisturizer this spring, a runway lip from Marni SS26 that made me gasp audibly, and why Dress for Success deserves your attention this International Women's Week.</span>
-      </li>
-
-      <li class="archive-item">
-        <span class="archive-meta">
-          <span class="archive-label">Issue No. 5</span>
-          <span class="archive-dot">·</span>
-          <span class="archive-date">March 8, 2026</span>
-        </span>
-        <span class="archive-teaser">Today: Glossier's quiet war with its own subreddit, the polyglutamic acid moment nobody asked for but everybody needs, Dries Van Noten's final bow at AW26, and a charity putting lipstick in the hands of women rebuilding after incarceration. Happy International Women's Day — let's get into it.</span>
-      </li>
-
-      <li class="archive-item">
-        <span class="archive-meta">
-          <span class="archive-label">Issue No. 4</span>
-          <span class="archive-dot">·</span>
-          <span class="archive-date">March 7, 2026</span>
-        </span>
-        <span class="archive-teaser">Today: Drunk Elephant's messy reformulation drama, the biotech peptide that's quietly replacing retinol in clinical trials, Dries Van Noten's final collection moment that made three editors cry, and why Look Good Feel Better deserves your attention this weekend.</span>
-      </li>
-
-      <li class="archive-item">
-        <span class="archive-meta">
-          <span class="archive-label">Issue No. 2</span>
-          <span class="archive-dot">·</span>
-          <span class="archive-date">March 6, 2026</span>
-        </span>
-        <span class="archive-teaser">Mascara that doesn't flake is apparently still a pipe dream — but one lab in Seoul thinks they've cracked it. Also: Charlotte Tilbury's latest acquisition is either brilliant or very, very worrying. We've got the scent ingredient your nervous system actually likes, Valentino's lip moment from Milan, and a woman who makes wigs for cancer patients out of hair she collects from salon floors.</span>
-      </li>
+  <ul class="archive-list" id="archive-list">
+    <li class="archive-empty">Loading issues…</li>
   </ul>
+  <script>
+    fetch('issues.json')
+      .then(r => r.json())
+      .then(issues => {
+        const list = document.getElementById('archive-list');
+        if (!issues.length) {
+          list.innerHTML = '<li class="archive-empty">No issues yet. Check back soon.</li>';
+          return;
+        }
+        list.innerHTML = issues.map(issue => {
+          const d = new Date(issue.date + 'T12:00:00');
+          const dateStr = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+          const label = issue.title.startsWith('Issue') ? issue.title : `Issue No. ${String(issue.issue).padStart(3, '0')}`;
+          const link = issue.url ? `<a href="${issue.url}" class="archive-item-link">` : '<div class="archive-item">';
+          const close = issue.url ? '</a>' : '</div>';
+          return `
+            <li>
+              ${link}
+                <span class="archive-meta">
+                  <span class="archive-label">${label}</span>
+                  <span class="archive-dot">·</span>
+                  <span class="archive-date">${dateStr}</span>
+                </span>
+                <span class="archive-teaser">${issue.preview}</span>
+              ${close}
+            </li>`;
+        }).join('');
+      })
+      .catch(() => {
+        document.getElementById('archive-list').innerHTML = '<li class="archive-empty">Could not load issues.</li>';
+      });
+  </script>
 </main>
 <footer>
   <div class="footer-logo">Lip Service</div>
