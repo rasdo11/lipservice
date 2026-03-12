@@ -33,6 +33,8 @@ const BEAUTY_IMAGES = [
 
 // Each story has a YouTube video ID + context for Claude to write from.
 // Verify video IDs are still live before adding new entries.
+// ADD MORE ENTRIES here to reduce repeat frequency — aim for 10+ videos.
+// Stories cycle by issue number (not day of year), so the pool should be large.
 const TEARS_STORIES = [
   {
     videoId: 'bktozJWbLQg',
@@ -51,6 +53,12 @@ const TEARS_STORIES = [
     context:
       "Freddie Mercury performing at Live Aid in 1985. 72,000 people in the stadium. He ran the crowd for 21 minutes with a level of command that music historians still describe as unrepeatable. He'd been told to cut the set short. He did not.",
     videoLabel: "The performance every musician studies. You'll understand after 30 seconds.",
+  },
+  {
+    videoId: 'RxPZh4AnWyk',
+    context:
+      "Susan Boyle walked onto the Britain's Got Talent stage in 2009. She was 47, from a small Scottish village, wore a frumpy beige dress, and announced she wanted to be a professional singer. The audience laughed. Simon Cowell raised an eyebrow. Then she opened her mouth and sang \"I Dreamed a Dream,\" and within thirty seconds you could see the exact moment every person in that room realized they had made a catastrophic error in judgment. The clip was watched 47 million times in the first week. She became the best-selling debut artist in UK chart history that year.",
+    videoLabel: "The 30 seconds that humbled an entire room.",
   },
 ];
 
@@ -177,6 +185,8 @@ async function generateContent(date, story) {
 Voice: Personal, specific, slightly wry. Think a brilliant friend who reads PubMed AND sends the unhinged meme. Never condescending, never preachy. The kind of writing that makes you feel like you were let in on something.
 
 IMPORTANT: Never use the words "preview", "draft", or "test" anywhere in the content. Write as if this is the final published issue.
+
+IMPORTANT: Never use an em dash (—) anywhere in the writing. Rewrite any sentence that would require one. Use a comma, a period, or restructure the sentence instead.
 
 Today is ${dateStr}. Write all sections in this exact JSON format. Return ONLY valid, parseable JSON — no markdown fences, no explanation, no trailing commas.
 
@@ -351,7 +361,8 @@ async function promotePreview() {
     .replace(PREVIEW_PLACEHOLDER, '')
     .replace(/\{\{ROOT\}\}/g, '');
   await fs.writeFile(path.join(__dirname, 'newsletter.html'), newsletterHtml, 'utf-8');
-  console.log(`  ✓ newsletter.html (${issueLabel})`);
+  await fs.writeFile(path.join(__dirname, 'index.html'), newsletterHtml, 'utf-8');
+  console.log(`  ✓ newsletter.html + index.html (${issueLabel})`);
 
   // Write individual issue file (required for idempotency check on retry crons)
   await fs.writeFile(path.join(issuesDir, `${key}.html`), newsletterHtml, 'utf-8');
@@ -394,19 +405,19 @@ async function main() {
     ? new Date(Date.now() + 24 * 60 * 60 * 1000)
     : new Date();
 
-  const day = dayOfYear(today);
   const issueDate = formatDate(today);
   const key = dateKey(today);
 
-  const image = BEAUTY_IMAGES[day % BEAUTY_IMAGES.length];
-  const story = TEARS_STORIES[day % TEARS_STORIES.length];
-
-  // Read existing archive early so we can derive the next issue number
+  // Read existing archive first so we can derive the next issue number,
+  // then use issueNum to select the image/story (avoids day-based repeats).
   const issuesJsonPath = path.join(__dirname, 'issues.json');
   let archive = [];
   try { archive = JSON.parse(await fs.readFile(issuesJsonPath, 'utf-8')); } catch {}
 
   const issueNum = issueNumber(archive.filter((e) => e.date !== key));
+
+  const image = BEAUTY_IMAGES[issueNum % BEAUTY_IMAGES.length];
+  const story = TEARS_STORIES[issueNum % TEARS_STORIES.length];
   const issueLabel = `Issue No. ${issueNum}`;
 
   console.log(`${PREVIEW_MODE ? 'Previewing' : 'Generating'} ${issueLabel} — ${issueDate}`);
@@ -448,7 +459,8 @@ async function main() {
       .replace('{{ARCHIVE_SECTION}}', '')
       .replace(/\{\{ROOT\}\}/g, '');
     await fs.writeFile(path.join(__dirname, 'newsletter.html'), newsletterHtml, 'utf-8');
-    console.log(`  ✓ newsletter.html (${issueLabel})`);
+    await fs.writeFile(path.join(__dirname, 'index.html'), newsletterHtml, 'utf-8');
+    console.log(`  ✓ newsletter.html + index.html (${issueLabel})`);
 
     // Write individual issue file (required for idempotency check on retry crons)
     await fs.writeFile(path.join(issuesDir, `${key}.html`), newsletterHtml, 'utf-8');

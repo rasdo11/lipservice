@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Subscribe — Lip Service</title>
+<title>Unsubscribe — Lip Service</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -11,7 +11,6 @@
     --cream:   #FAF7F2;
     --rouge:   #C13333;
     --nude:    #D4A898;
-    --blush:   #EDD5CB;
     --warm:    #9A8880;
     --divider: #E4DBD4;
   }
@@ -51,119 +50,69 @@
     color: var(--ink);
     text-decoration: none;
   }
-  .top-bar-label {
+  .top-bar-back {
     font-size: 11px;
-    letter-spacing: 3px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
     color: var(--warm);
+    text-decoration: none;
     font-weight: 400;
+    transition: color 0.2s;
   }
-  .hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .top-bar-back:hover { color: var(--ink); }
+  main {
     flex: 1;
-  }
-  .hero-left {
-    background: var(--ink);
-    padding: 72px 48px 72px 40px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
+    padding: 64px 40px;
   }
-  .hero-left::after {
-    content: '';
-    position: absolute;
-    bottom: -120px;
-    left: -80px;
-    width: 320px;
-    height: 320px;
-    background: radial-gradient(circle, rgba(193,51,51,0.18) 0%, transparent 70%);
-    pointer-events: none;
+  .card {
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
   }
-  .hero-eyebrow {
+  .card-eyebrow {
     font-size: 10px;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--nude);
+    color: var(--warm);
     font-weight: 400;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
   }
-  .hero-eyebrow::before {
+  .card-eyebrow::before,
+  .card-eyebrow::after {
     content: '';
     display: inline-block;
-    width: 28px;
+    width: 20px;
     height: 1px;
-    background: var(--rouge);
-    flex-shrink: 0;
+    background: var(--divider);
   }
-  .hero-headline {
+  .card-headline {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 4vw, 56px);
+    font-size: clamp(28px, 4vw, 40px);
     font-weight: 900;
-    line-height: 1.05;
-    letter-spacing: -2px;
-    color: var(--cream);
-    margin-bottom: 24px;
-  }
-  .hero-headline em {
-    font-style: italic;
-    color: var(--rouge);
-    display: block;
-  }
-  .hero-sub {
-    font-size: 15px;
-    line-height: 1.75;
-    color: rgba(250,247,242,0.55);
-    font-weight: 300;
-    max-width: 340px;
-  }
-  .hero-sub strong {
-    color: rgba(250,247,242,0.85);
-    font-weight: 400;
-  }
-  .hero-right {
-    background: var(--cream);
-    padding: 72px 40px 72px 48px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .form-kicker {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--rouge);
-    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: var(--ink);
     margin-bottom: 14px;
   }
-  .form-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(24px, 2.5vw, 32px);
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  .form-sub {
+  .card-headline em { font-style: italic; color: var(--rouge); }
+  .card-sub {
     font-size: 14px;
     color: var(--warm);
-    line-height: 1.65;
+    line-height: 1.7;
     font-weight: 300;
-    margin-bottom: 32px;
-    max-width: 320px;
+    margin-bottom: 36px;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .subscribe-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
+  .unsub-form { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
   .form-input {
     width: 100%;
     padding: 15px 18px;
@@ -177,17 +126,15 @@
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
     -webkit-appearance: none;
+    text-align: left;
   }
   .form-input::placeholder { color: #BFB5AF; font-weight: 300; }
-  .form-input:focus {
-    border-color: var(--ink);
-    box-shadow: 0 0 0 3px rgba(22,18,14,0.06);
-  }
+  .form-input:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(22,18,14,0.06); }
   .form-submit {
     width: 100%;
     padding: 16px 24px;
-    background: var(--rouge);
-    color: #fff;
+    background: var(--ink);
+    color: var(--cream);
     font-family: 'DM Sans', sans-serif;
     font-size: 11px;
     font-weight: 500;
@@ -198,7 +145,7 @@
     cursor: pointer;
     transition: background 0.2s, transform 0.15s;
   }
-  .form-submit:hover { background: #A82B2B; transform: translateY(-1px); }
+  .form-submit:hover { background: var(--rouge); transform: translateY(-1px); }
   .form-submit:active { transform: translateY(0); }
   .form-fine {
     font-size: 11px;
@@ -206,20 +153,34 @@
     line-height: 1.5;
     font-weight: 300;
   }
-  .success-msg {
-    display: none;
-    padding: 20px 0;
-  }
+  .success-msg { display: none; }
   .success-msg.visible { display: block; }
   .success-headline {
     font-family: 'Playfair Display', serif;
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 700;
     font-style: italic;
     color: var(--ink);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
-  .success-sub { font-size: 13px; color: var(--warm); font-weight: 300; }
+  .success-sub {
+    font-size: 14px;
+    color: var(--warm);
+    font-weight: 300;
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
+  .back-link {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--warm);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--ink); }
   footer {
     border-top: 1px solid var(--divider);
     padding: 24px 40px;
@@ -234,11 +195,9 @@
     color: var(--ink);
   }
   .footer-copy { font-size: 11px; color: #C0B5AE; font-weight: 300; }
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     .top-bar { padding: 18px 20px; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-left { padding: 48px 24px 40px; }
-    .hero-right { padding: 40px 24px 48px; }
+    main { padding: 48px 20px; }
     footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px; }
   }
 </style>
@@ -247,36 +206,28 @@
 
 <header class="top-bar">
   <a href="index.html" class="top-bar-logo">Lip Service</a>
-  <span class="top-bar-label">Weekly · Free · Unapologetic</span>
+  <a href="index.html" class="top-bar-back">← Latest issue</a>
 </header>
 
-<section class="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow">A beauty newsletter</div>
-    <h1 class="hero-headline">
-      Someone sent you this.
-      <em>That means they like you.</em>
-    </h1>
-    <p class="hero-sub">
-      Beauty gossip, ingredient science, fashion moments, and one video guaranteed to wreck your mascara — <strong>delivered weekly to women who are done being talked to like they just discovered SPF.</strong>
-    </p>
-  </div>
-  <div class="hero-right">
-    <div class="form-kicker">Join the list</div>
-    <h2 class="form-headline">Get Lip Service<br>in your inbox.</h2>
-    <p class="form-sub">Free. Weekly. Exactly five minutes.</p>
-    <form class="subscribe-form" id="subForm" onsubmit="handleSubmit(event)">
-      <input class="form-input" type="text" name="firstName" placeholder="First name" autocomplete="given-name" required />
+<main>
+  <div class="card" id="formCard">
+    <div class="card-eyebrow">Unsubscribe</div>
+    <h1 class="card-headline">We'll miss you.<br><em>No guilt trip.</em></h1>
+    <p class="card-sub">Enter your email and we'll take you off the list. No questions, no "are you sure?", no passive-aggressive farewell email.</p>
+    <form class="unsub-form" id="unsubForm" onsubmit="handleUnsub(event)">
       <input class="form-input" type="email" name="email" placeholder="Email address" autocomplete="email" required />
-      <button class="form-submit" type="submit">Subscribe to Lip Service</button>
+      <button class="form-submit" type="submit">Remove me from the list</button>
     </form>
-    <div class="success-msg" id="subSuccess">
-      <div class="success-headline">You're in. Welcome to the list.</div>
-      <div class="success-sub">Check your inbox — something good is coming Thursday.</div>
-    </div>
-    <p class="form-fine">Unsubscribe anytime, no guilt trip.</p>
+    <p class="form-fine">That's it. You'll hear nothing further from us.</p>
   </div>
-</section>
+
+  <div class="success-msg" id="successCard">
+    <div class="card-eyebrow">Done</div>
+    <div class="success-headline">You're off the list.</div>
+    <p class="success-sub">Your email has been removed. No hard feelings — and the archive is always here if you ever want to look something up.</p>
+    <a href="archive.html" class="back-link">Browse the archive →</a>
+  </div>
+</main>
 
 <footer>
   <div class="footer-logo">Lip Service</div>
@@ -284,10 +235,10 @@
 </footer>
 
 <script>
-  function handleSubmit(e) {
+  function handleUnsub(e) {
     e.preventDefault();
-    document.getElementById('subForm').style.display = 'none';
-    document.getElementById('subSuccess').classList.add('visible');
+    document.getElementById('formCard').style.display = 'none';
+    document.getElementById('successCard').classList.add('visible');
   }
 </script>
 </body>
