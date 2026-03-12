@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lip Service — Issue No. 65</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --ink: #1A1410;
+    --blush: #E8C4B8;
+    --rouge: #C94040;
+    --nude: #D4A898;
+    --charcoal: #3D3530;
+    --warm-gray: #9A8F89;
+    --divider: #E2DAD3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .email-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--cream);
+  }
+  .header {
+    background-color: var(--ink);
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rouge), var(--nude), var(--blush));
+  }
+  .masthead {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--nude);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero {
+    background: var(--ink);
+    padding: 0 24px 32px;
+  }
+  .hero-box {
+    background: var(--rouge);
+    padding: 20px 22px;
+    border-radius: 2px;
+  }
+  .hero-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .hero-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  .section {
+    padding: 36px 24px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .section:last-of-type {
+    border-bottom: none;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-number {
+    width: 24px;
+    height: 24px;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+  }
+  .section-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+  .section-headline em {
+    font-style: italic;
+    color: var(--rouge);
+  }
+  .body-text {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .body-text p {
+    margin-bottom: 14px;
+  }
+  .body-text p:last-child {
+    margin-bottom: 0;
+  }
+  .body-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .opening .section-headline {
+    font-size: 28px;
+  }
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 58px;
+    font-weight: 900;
+    line-height: 0.8;
+    float: left;
+    margin-right: 6px;
+    margin-top: 8px;
+    color: var(--rouge);
+  }
+  .gossip-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .gossip-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .gossip-item:first-child {
+    padding-top: 0;
+  }
+  .gossip-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 6px;
+  }
+  .gossip-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .gossip-body {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .know-callout {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 22px;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .know-callout-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nude);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .know-callout-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .know-callout-text strong {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--blush);
+  }
+  .see-image-wrapper {
+    width: 100%;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .see-image-wrapper img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+  .see-image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 14px;
+    background: linear-gradient(transparent, rgba(26,20,16,0.8));
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .help-section {
+    background: #F0EBE5;
+  }
+  .help-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .help-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--rouge);
+    line-height: 1;
+  }
+  .help-number-label {
+    font-size: 13px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.4;
+    max-width: 200px;
+  }
+  .cta-button {
+    display: inline-block;
+    background: var(--rouge);
+    color: #fff;
+    padding: 13px 24px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 1px;
+    margin-top: 16px;
+    transition: opacity 0.2s;
+  }
+  .cta-button:hover { opacity: 0.88; }
+  .tears-section {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .tears-section .section-title { color: var(--nude); }
+  .tears-section .section-headline { color: var(--cream); }
+  .tears-section .body-text { color: rgba(250,247,242,0.75); }
+  .video-thumb {
+    display: block;
+    position: relative;
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 18px;
+    text-decoration: none;
+  }
+  .video-thumb img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.75);
+  }
+  .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255,255,255,0.4);
+  }
+  .play-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+  .video-label {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    right: 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.5px;
+    font-style: italic;
+  }
+  .footer {
+    background: var(--ink);
+    padding: 28px 24px;
+    text-align: center;
+    border-top: 3px solid var(--rouge);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .footer-text {
+    font-size: 12px;
+    color: var(--warm-gray);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    font-size: 10px;
+    color: var(--warm-gray);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .footer-links a:hover { color: var(--nude); }
+  .ornament {
+    text-align: center;
+    color: var(--rouge);
+    font-size: 18px;
+    letter-spacing: 8px;
+    padding: 8px 0 0;
+    opacity: 0.5;
+  }
+  .pill {
+    display: inline-block;
+    background: var(--blush);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  a.inline-link {
+    color: var(--rouge);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
+  }
+  .pull-quote {
+    border-left: 3px solid var(--rouge);
+    padding: 4px 16px;
+    margin: 18px 0;
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  /* ARCHIVE */
+  .archive-section {
+    background: var(--cream);
+  }
+  .archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .archive-item {
+    display: block;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--divider);
+    text-decoration: none;
+    color: inherit;
+  }
+  .archive-item:first-child {
+    padding-top: 0;
+  }
+  .archive-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .archive-item:hover .archive-item-label {
+    color: var(--rouge);
+  }
+  .archive-item-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .archive-item-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    transition: color 0.15s;
+  }
+  .archive-item-date {
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .archive-item-teaser {
+    font-size: 13.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.55;
+    font-style: italic;
+  }
+  /* ISSUE NAV BAR (standalone issue pages only) */
+  .issue-nav-bar {
+    background: var(--ink);
+    padding: 11px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .issue-nav-bar a {
+    font-size: 10px;
+    color: var(--nude);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .issue-nav-bar a:hover { color: var(--cream); }
+  .issue-nav-bar span {
+    font-size: 10px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 480px) {
+    .masthead { font-size: 36px; }
+    .section { padding: 28px 20px; }
+    .hero { padding: 0 20px 28px; }
+    .section-headline { font-size: 23px; }
+    .help-number { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+<div class="issue-nav-bar" style="background:var(--rouge);color:#fff;">
+  <span>👁 PREVIEW — goes live at 6am PST</span>
+  <span>Issue No. 65 &middot; March 12, 2026</span>
+</div>
+<div class="email-wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="masthead">Lip Service</div>
+    <div class="tagline">The most fun a girl can have without taking her clothes off</div>
+    <div class="header-meta">
+      <span>Issue No. 65</span>
+      <span>·</span>
+      <span>March 12, 2026</span>
+      <span>·</span>
+      <span>Daily</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-box">
+      <div class="hero-label">Today</div>
+      <div class="hero-text">Today: Drunk Elephant's quiet reformulation is raising eyebrows, the science behind polyglutamic acid's sudden takeover, a runway lip moment at Loewe that stopped the room, and the nonprofit bringing free skincare to women in transitional housing.</div>
+    </div>
+  </div>
+
+  <!-- 01 OPENING STATEMENT -->
+  <div class="section opening">
+    <div class="section-label">
+      <div class="section-number">01</div>
+      <div class="section-title">Opening Statement</div>
+    </div>
+    <div class="section-headline">I panic-bought a serum at 1 a.m.<br><em>My skin barrier paid the price.</em></div>
+    <div class="body-text">
+      <p class="drop-cap">It started, as these things do, with a screenshot. A friend sent me an Instagram carousel about how my moisture barrier was "probably compromised" and honestly, the timing was devastating. I had just gotten back from a weekend away where I forgot every product except a tinted SPF and a lip balm, and my skin looked annoyingly good. Rested, even. The kind of good that makes you question every layered routine you've ever committed to.</p><p>So naturally, instead of sitting with that information, I opened a browser tab at one in the morning and bought a ceramide serum from a brand I had never heard of, because a stranger with 40K followers said it "rebuilt" her face in two weeks. The word "rebuild" should have been my red flag. My face is not a mid-century bungalow. And yet.</p><p>The serum arrived. It smelled like nothing, which I told myself was a sign of clinical seriousness. Within three days I had the kind of dry, tight, faintly stinging skin that says: you did this to yourself. Turns out the formula was packed with exfoliating actives I didn't bother to check. My moisture barrier, already doing fine on its little vacation diet, did not appreciate the renovation.</p><p>There's a lesson here about leaving well enough alone, but the bigger lesson is probably about how beauty culture has taught us to interpret "doing nothing" as falling behind. Anyway. Welcome to today's Lip Service. We're talking about the ingredients actually worth your panic, the brand drama worth your attention, and the people doing genuinely beautiful things. Pull up a chair.</p>
+    </div>
+    <div class="ornament">— ✦ —</div>
+  </div>
+
+  <!-- 02 DID YOU HEAR -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">02</div>
+      <div class="section-title">Did You Hear?</div>
+    </div>
+    <div class="section-headline">The group chat<br><em>is going off.</em></div>
+    
+    <div class="gossip-item">
+      <div class="gossip-tag">Brand Drama</div>
+      <div class="gossip-headline">Drunk Elephant quietly changed the Protini formula and Reddit noticed immediately</div>
+      <div class="gossip-body">Eagle-eyed users on r/SkincareAddiction flagged that the latest batches of Protini Polypeptide Cream list a different emulsifier and have dropped sclareolide from the ingredients list entirely. Drunk Elephant has not issued a statement, which is a choice. Reformulations happen, but silent ones tend to erode exactly the kind of trust that built the brand in the first place.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Industry Moves</div>
+      <div class="gossip-headline">L'Oréal poaches high-profile sustainability director from Unilever</div>
+      <div class="gossip-body">L'Oréal confirmed Tuesday that Dr. Anahi Marcano, who led Unilever's clean beauty and packaging reduction initiative for six years, is joining as VP of Responsible Innovation. The hire signals L'Oréal is doubling down on refillable packaging ahead of EU extended producer responsibility rules taking effect in 2027. Unilever declined to comment, which tells you everything.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Runway Intel</div>
+      <div class="gossip-headline">At Loewe, Jonathan Anderson sent models out with lips so bitten they looked almost bruised</div>
+      <div class="gossip-body">The AW26 Loewe show in Paris featured a stained, slightly raw-looking lip in shades that hovered between berry and dried blood, applied with what makeup lead Lucia Pica described as "fingers and urgency." No liner, no gloss, no clean edge. It felt like the antidote to the overly laminated lip of the last three years, and backstage photos suggest the key product was a discontinued high-pigment balm Pica mixed herself.</div>
+    </div>
+  </div>
+
+  <!-- 03 DID YOU KNOW -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">03</div>
+      <div class="section-title">Did You Know?</div>
+    </div>
+    <div class="section-headline">Polyglutamic acid is<br><em>coming for hyaluronic acid's job.</em></div>
+    <div class="body-text">
+      <p>You have probably seen it creeping onto ingredient lists and into TikTok routines over the past six months. Polyglutamic acid, sometimes listed as PGA or γ-PGA, is a fermentation-derived peptide that holds roughly four times more water than hyaluronic acid, and it is making the rounds with the kind of fervor usually reserved for a new retinol alternative.</p>
+    </div>
+    <div class="know-callout">
+      <div class="know-callout-label">The Science, Briefly</div>
+      <div class="know-callout-text">Polyglutamic acid works by forming a thin hydrating film on the skin's surface while simultaneously <strong>inhibiting hyaluronidase</strong>, the enzyme responsible for breaking down your skin's own naturally occurring hyaluronic acid. In other words, it hydrates on contact and helps your existing hydration stick around longer. Think of it less as a replacement and more as a bodyguard for the moisture you already have.</div>
+    </div>
+    <div class="body-text">
+      <p>The Ordinary launched a 10% PGA serum last fall that sold out in 72 hours. Tatcha and Laneige have both folded it into new formulas debuting this spring. If you have dry or dehydrated skin, or if hyaluronic acid has always felt like it sits on top of your face and does nothing (a common and valid complaint, especially in low-humidity climates), PGA may genuinely be the better fit. It layers beautifully under sunscreen without pilling, which is the unsexy benchmark that actually matters.
+
+Here is the uncomfortable part: the hype cycle around PGA is already outpacing the clinical research. Most published studies are small, industry-funded, and conducted on skin models rather than real human faces over extended periods. That does not mean the ingredient is bad. It means the breathless "HA is dead" headlines are premature. Use it if your skin likes it. Just do not throw out everything else because a TikTok told you to.</p>
+    </div>
+    <div class="pull-quote">
+      <p>"PGA is a genuinely interesting humectant with strong early data, but we are still in the early innings of understanding long-term efficacy and optimal concentrations for topical use. I would call it a promising complement to hyaluronic acid, not a successor." — Dr. Ranella Hirsch, Board-Certified Dermatologist, President of the American Society of Cosmetic Dermatology</p>
+    </div>
+  </div>
+
+  <!-- 04 DID YOU SEE -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">04</div>
+      <div class="section-title">Did You See?</div>
+    </div>
+    <div class="section-headline">Lucia Pica smeared berry pigment<br>with her bare fingers at Loewe<br><em>and made every clean lip look boring.</em></div>
+    <div class="see-image-wrapper">
+      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&q=80" alt="Bold lip art editorial beauty 2026" />
+      <div class="see-image-caption">AW26 · The Bruised Berry Lip at Loewe</div>
+    </div>
+    <div class="body-text">
+      <p>The AW26 Loewe show was full of sculptural leather and architectural knits, but the thing everyone photographed backstage was the lip. Lucia Pica mixed a high-pigment balm with a matte stain to create a color that looked like you had been eating blackberries in the cold, then lightly wiped your mouth with the back of your hand. She applied it with her fingers, pressing and blotting until the edges bled just slightly into the skin. No concealer cleanup. No sharp lines. Models walked out looking flushed and slightly undone, the kind of beautiful that reads as accidental even when it is meticulously constructed.
+
+What makes this feel like more than a backstage footnote is the timing. After years of hyper-lined, overglossed, Instagram-optimized lips, the deliberate messiness felt almost radical. It was makeup that looked like it had been lived in rather than applied. If you want to try it at home, the trick, according to Pica, is a deeply pigmented product, warm fingers, and the restraint to stop before it looks "done." That tension between precision and abandon is what Lip Service is always chasing.</p>
+    </div>
+  </div>
+
+  <!-- 05 DID YOU HELP -->
+  <div class="section help-section">
+    <div class="section-label">
+      <div class="section-number">05</div>
+      <div class="section-title">Did You Help?</div>
+    </div>
+    <div class="section-headline">Beauty as an act<br><em>of rebuilding.</em></div>
+    <div class="body-text">
+      <p>Beauty Bus Foundation was founded in 2009 by Melissa Magsaysay and Wendy Reyes after Magsaysay watched her mother, who was terminally ill, light up during a simple at-home beauty treatment. The Los Angeles-based nonprofit provides free beauty and grooming services to people with terminal or chronic illness, and in 2023 expanded its mission to include women and families living in transitional housing.</p>
+    </div>
+    <div class="help-stat">
+      <div class="help-number">75K+</div>
+      <div class="help-number-label">free beauty services provided since 2009</div>
+    </div>
+    <div class="body-text">
+      <p>Last spring, Beauty Bus partnered with three transitional housing shelters in LA County to offer monthly "beauty days" where residents receive haircuts, facials, and skincare consultations from licensed volunteers. One resident, a mother of two who had recently left a domestic violence situation, told volunteers it was the first time in four years someone had touched her face gently. That kind of moment does not fix systemic problems, but it does restore something that crisis tends to erase: the feeling of being worthy of care. They need licensed volunteers, product donations, and recurring monthly donors.</p>
+    </div>
+    <a href="https://www.beautybus.org/donate" class="cta-button" target="_blank">Donate to Beauty Bus Foundation →</a>
+  </div>
+
+  <!-- 06 HEALTHY TEARS -->
+  <div class="section tears-section">
+    <div class="section-label">
+      <div class="section-number">06</div>
+      <div class="section-title">Healthy Tears</div>
+    </div>
+    <div class="section-headline">Viola Davis stood at a podium<br>in a red gown<br><em>and said what no one had ever</em><br><em>been allowed to say there before.</em></div>
+    <div class="body-text">
+      <p><p>Before that night, Viola Davis had already done the work. Years of it. Stage work that left audiences wrecked. Film roles where she could communicate more in a held breath than most actors manage in a monologue. She had been nominated before, praised before, called brilliant before. Hollywood was comfortable admiring her. What it had never done, in the entire history of the Television Academy, was hand a Black woman the Emmy for Outstanding Lead Actress in a Drama Series.</p>
+<p>September 20, 2015 changed that. Davis won for How to Get Away with Murder, and when she walked to the stage in that red Donna Karan gown, the room did something rooms like that rarely do. It went quiet. Not polite-applause quiet. Actually, genuinely still.</p>
+<p>She opened her mouth and quoted Harriet Tubman. "In my dreams, I saw a line, and beyond that line was green fields, and lovely flowers, and beautiful white women with their arms stretched out to me over that line. But I couldn't reach them. They kept telling me to try and go further." Then she turned the quote into a blade. She talked about the only thing separating women of color from opportunity being that very opportunity itself. She named Taraji P. Henson. She named Kerry Washington. She named the women who could not be in that room because the doors had not been opened for them, and she refused to let the moment be only about her.</p>
+<p>The speech lasted less than two minutes. It did not ask for permission or gratitude. It did not soften itself to make anyone comfortable. What Davis did on that stage was something rarer than winning. She told the truth in a room that runs on performance, and she made it impossible for anyone watching to pretend they hadn't heard it.</p></p>
+    </div>
+    <a href="https://www.youtube.com/watch?v=dPNHpJzRMcA" target="_blank" class="video-thumb">
+      <img src="https://img.youtube.com/vi/dPNHpJzRMcA/hqdefault.jpg" alt="Healthy Tears · March 12, 2026" />
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="video-label">The speech that left the entire room still.</div>
+    </a>
+  </div>
+
+  <!-- ARCHIVE_SECTION_PREVIEW_PLACEHOLDER -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Lip Service</div>
+    <div class="footer-text">
+      Daily. Opinionated. Never preachy.<br>
+      You're receiving this because you have excellent taste.<br><br>
+      <em style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</em>
+    </div>
+    <div class="footer-links">
+      <a href="#">View in browser</a>
+      <a href="../archive.html">Archive</a>
+      <a href="../subscribe.html" target="_blank">Forward this</a>
+      <a href="../unsubscribe.html">Unsubscribe</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
