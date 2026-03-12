@@ -61,11 +61,11 @@ function dayOfYear(date) {
   return Math.floor((date - start) / 86400000);
 }
 
-function issueNumber(date) {
-  // Issue 1 launched March 5, 2026
-  const launch = new Date('2026-03-05T00:00:00');
-  const diff = Math.floor((date - launch) / 86400000) + 1;
-  return Math.max(1, diff);
+function issueNumber(archive) {
+  // Derive next issue number from the existing archive (max + 1)
+  if (!archive || archive.length === 0) return 1;
+  const max = Math.max(...archive.map((e) => e.issue || 0));
+  return max + 1;
 }
 
 function formatDate(date) {
@@ -334,15 +334,16 @@ async function promotePreview() {
 
   console.log(`Promoting preview → live: ${issueLabel} — ${issueDate}`);
 
-  // Update archive
+  // Update issues.json
   const issuesDir = path.join(__dirname, 'issues');
   await fs.mkdir(issuesDir, { recursive: true });
-  const archivePath = path.join(issuesDir, 'archive.json');
+  const issuesJsonPath = path.join(__dirname, 'issues.json');
   let archive = [];
-  try { archive = JSON.parse(await fs.readFile(archivePath, 'utf-8')); } catch {}
+  try { archive = JSON.parse(await fs.readFile(issuesJsonPath, 'utf-8')); } catch {}
+  const issueNum = parseInt((issueLabel.match(/\d+/) || ['0'])[0], 10);
   archive = archive.filter((e) => e.date !== key);
-  archive.unshift({ date: key, issueLabel, issueDate, heroText });
-  await fs.writeFile(archivePath, JSON.stringify(archive, null, 2), 'utf-8');
+  archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: heroText, slug: key, url: `./issues/${key}.html` });
+  await fs.writeFile(issuesJsonPath, JSON.stringify(archive, null, 2), 'utf-8');
 
   // Strip preview nav bar, replace archive placeholder with nothing (inbox-only)
   const cleanHtml = previewHtml.replace(/<div class="issue-nav-bar"[^>]*>[\s\S]*?<\/div>\n?/, '');
@@ -356,9 +357,7 @@ async function promotePreview() {
   await fs.writeFile(path.join(issuesDir, `${key}.html`), newsletterHtml, 'utf-8');
   console.log(`  ✓ issues/${key}.html`);
 
-  // Write archive page
-  await fs.writeFile(path.join(__dirname, 'archive.html'), buildArchivePage(archive), 'utf-8');
-  console.log(`  ✓ archive.html (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
+  console.log(`  ✓ issues.json (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
 
   // Clean up preview/
   await fs.rm(previewDir, { recursive: true });
@@ -396,13 +395,19 @@ async function main() {
     : new Date();
 
   const day = dayOfYear(today);
-  const issueNum = issueNumber(today);
-  const issueLabel = `Issue No. ${issueNum}`;
   const issueDate = formatDate(today);
   const key = dateKey(today);
 
   const image = BEAUTY_IMAGES[day % BEAUTY_IMAGES.length];
   const story = TEARS_STORIES[day % TEARS_STORIES.length];
+
+  // Read existing archive early so we can derive the next issue number
+  const issuesJsonPath = path.join(__dirname, 'issues.json');
+  let archive = [];
+  try { archive = JSON.parse(await fs.readFile(issuesJsonPath, 'utf-8')); } catch {}
+
+  const issueNum = issueNumber(archive.filter((e) => e.date !== key));
+  const issueLabel = `Issue No. ${issueNum}`;
 
   console.log(`${PREVIEW_MODE ? 'Previewing' : 'Generating'} ${issueLabel} — ${issueDate}`);
 
@@ -431,16 +436,13 @@ async function main() {
     ), 'utf-8');
     console.log(`  ✓ preview/index.html (${issueLabel}) — live at /preview/`);
   } else {
-    // ── Normal publish: write newsletter.html + archive.html ───────────────
+    // ── Normal publish: write newsletter.html + issues.json ───────────────
     const issuesDir = path.join(__dirname, 'issues');
     await fs.mkdir(issuesDir, { recursive: true });
 
-    const archivePath = path.join(issuesDir, 'archive.json');
-    let archive = [];
-    try { archive = JSON.parse(await fs.readFile(archivePath, 'utf-8')); } catch {}
     archive = archive.filter((e) => e.date !== key);
-    archive.unshift({ date: key, issueLabel, issueDate, heroText: content.hero_text });
-    await fs.writeFile(archivePath, JSON.stringify(archive, null, 2), 'utf-8');
+    archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: content.hero_text, slug: key, url: `./issues/${key}.html` });
+    await fs.writeFile(issuesJsonPath, JSON.stringify(archive, null, 2), 'utf-8');
 
     const newsletterHtml = html
       .replace('{{ARCHIVE_SECTION}}', '')
@@ -452,8 +454,7 @@ async function main() {
     await fs.writeFile(path.join(issuesDir, `${key}.html`), newsletterHtml, 'utf-8');
     console.log(`  ✓ issues/${key}.html`);
 
-    await fs.writeFile(path.join(__dirname, 'archive.html'), buildArchivePage(archive), 'utf-8');
-    console.log(`  ✓ archive.html (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
+    console.log(`  ✓ issues.json (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
   }
 }
 

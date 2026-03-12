@@ -1,0 +1,868 @@
+[
+  {
+    "issue": 64,
+    "date": "2026-03-11",
+    "title": "March 11, 2026",
+    "preview": "Today: Glossier's quiet legal battle with a former chemist, the actual science behind polyglutamic acid, Dries Van Noten's final runway beauty moment, and the work Dress for Success is doing to make confidence tangible. Also, Freddie Mercury and the 21 minutes that broke every rule.",
+    "slug": "2026-03-11",
+    "url": "./issues/2026-03-11.html"
+  },
+  {
+    "issue": 63,
+    "date": "2026-03-09",
+    "title": "March 9, 2026",
+    "preview": "Today: Glossier's quiet rebrand is louder than they think, the biotech ingredient turning up in every \"clean\" moisturizer this spring, a runway lip from Marni SS26 that made me gasp audibly, and why Dress for Success deserves your attention this International Women's Week.",
+    "slug": "2026-03-09",
+    "url": "./issues/2026-03-09.html"
+  },
+  {
+    "issue": 62,
+    "date": "2026-03-08",
+    "title": "March 8, 2026",
+    "preview": "Today: Glossier's quiet war with its own subreddit, the polyglutamic acid moment nobody asked for but everybody needs, Dries Van Noten's final bow at AW26, and a charity putting lipstick in the hands of women rebuilding after incarceration. Happy International Women's Day \u2014 let's get into it.",
+    "slug": "2026-03-08",
+    "url": "./issues/2026-03-08.html"
+  },
+  {
+    "issue": 61,
+    "date": "2026-03-07",
+    "title": "March 7, 2026",
+    "preview": "Today: Drunk Elephant's messy reformulation drama, the biotech peptide that's quietly replacing retinol in clinical trials, Dries Van Noten's final collection moment that made three editors cry, and why Look Good Feel Better deserves your attention this weekend.",
+    "slug": "2026-03-07",
+    "url": "./issues/2026-03-07.html"
+  },
+  {
+    "issue": 60,
+    "date": "2026-03-06",
+    "title": "March 6, 2026",
+    "preview": "Mascara that doesn't flake is apparently still a pipe dream \u2014 but one lab in Seoul thinks they've cracked it. Also: Charlotte Tilbury's latest acquisition is either brilliant or very, very worrying. We've got the scent ingredient your nervous system actually likes, Valentino's lip moment from Milan, and a woman who makes wigs for cancer patients out of hair she collects from salon floors.",
+    "slug": "2026-03-06",
+    "url": "./issues/2026-03-06.html"
+  },
+  {
+    "issue": 59,
+    "date": "2026-03-03",
+    "title": "March 3, 2026",
+    "preview": "Peptide serums, ranked \u2014 not by price, not by brand, but by what the clinical evidence actually supports.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2026-03-03"
+  },
+  {
+    "issue": 58,
+    "date": "2026-02-24",
+    "title": "February 24, 2026",
+    "preview": "The brand that built its entire identity on one hero product and what happens when that product gets copied.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2026-02-24"
+  },
+  {
+    "issue": 57,
+    "date": "2026-02-17",
+    "title": "February 17, 2026",
+    "preview": "Lip gloss formulas have genuinely improved in the last three years. Here's what changed.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2026-02-17"
+  },
+  {
+    "issue": 56,
+    "date": "2026-02-10",
+    "title": "February 10, 2026",
+    "preview": "Valentine's beauty: the cynical read, the sincere one, and the actually good gift options between them.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2026-02-10"
+  },
+  {
+    "issue": 55,
+    "date": "2026-02-03",
+    "title": "February 3, 2026",
+    "preview": "The indie fragrance label that got acquired, then quietly discontinued its three best sellers. What happened.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2026-02-03"
+  },
+  {
+    "issue": 54,
+    "date": "2026-01-27",
+    "title": "January 27, 2026",
+    "preview": "New year, same skin \u2014 why the 'fresh start' beauty industry push is worth ignoring.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2026-01-27"
+  },
+  {
+    "issue": 53,
+    "date": "2026-01-20",
+    "title": "January 20, 2026",
+    "preview": "The ceramide cream that dermatologists have quietly recommended for 30 years finally gets its moment.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2026-01-20"
+  },
+  {
+    "issue": 52,
+    "date": "2026-01-13",
+    "title": "January 13, 2026",
+    "preview": "January reset beauty edition. The routines worth keeping, the ones worth questioning, the one habit worth starting.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2026-01-13"
+  },
+  {
+    "issue": 51,
+    "date": "2026-01-06",
+    "title": "January 6, 2026",
+    "preview": "Year in review: the products that genuinely changed how we think about beauty in 2025.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2026-01-06"
+  },
+  {
+    "issue": 50,
+    "date": "2025-12-30",
+    "title": "December 30, 2025",
+    "preview": "Micro-influencer beauty partnerships vs mega-influencer: the data finally exists and it's not what brands hoped.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-12-30"
+  },
+  {
+    "issue": 49,
+    "date": "2025-12-23",
+    "title": "December 23, 2025",
+    "preview": "The skin-barrier obsession: when protecting your barrier became more complicated than just not destroying it.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-12-23"
+  },
+  {
+    "issue": 48,
+    "date": "2025-12-16",
+    "title": "December 16, 2025",
+    "preview": "Lip liner is back in a way it hasn't been since 2003 and the looks are both better and more interesting.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-12-16"
+  },
+  {
+    "issue": 47,
+    "date": "2025-12-09",
+    "title": "December 9, 2025",
+    "preview": "The fragrance ingredient that's being phased out of every major house, and nobody wants to talk about why.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-12-09"
+  },
+  {
+    "issue": 46,
+    "date": "2025-12-02",
+    "title": "December 2, 2025",
+    "preview": "Holiday gift set season, ruthlessly edited. The ones with nothing redundant, the ones that are mostly filler.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-12-02"
+  },
+  {
+    "issue": 45,
+    "date": "2025-11-25",
+    "title": "November 25, 2025",
+    "preview": "Body skincare is the category everyone forgot about and then remembered all at once. Here's what's worth it.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-11-25"
+  },
+  {
+    "issue": 44,
+    "date": "2025-11-18",
+    "title": "November 18, 2025",
+    "preview": "The aesthetics industry's long-overdue conversation about training standards and who gets hurt without them.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-11-18"
+  },
+  {
+    "issue": 43,
+    "date": "2025-11-11",
+    "title": "November 11, 2025",
+    "preview": "The award-winning foundation that turned out to have a 12-shade range. In 2025. We had questions.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-11-11"
+  },
+  {
+    "issue": 42,
+    "date": "2025-11-04",
+    "title": "November 4, 2025",
+    "preview": "Vitamin C serums: why the most popular formats are also the least stable, and what actually works.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-11-04"
+  },
+  {
+    "issue": 41,
+    "date": "2025-10-28",
+    "title": "October 28, 2025",
+    "preview": "TikTok shop beauty is reshaping which products win and lose. The algorithm doesn't care about your skin type.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-10-28"
+  },
+  {
+    "issue": 40,
+    "date": "2025-10-21",
+    "title": "October 21, 2025",
+    "preview": "The mascara formula that's been quietly reformulated four times. Loyal customers noticed. The brand said nothing.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-10-21"
+  },
+  {
+    "issue": 39,
+    "date": "2025-10-14",
+    "title": "October 14, 2025",
+    "preview": "Exfoliation frequency: the one skincare advice topic where experts consistently disagree. We tried to settle it.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-10-14"
+  },
+  {
+    "issue": 38,
+    "date": "2025-10-07",
+    "title": "October 7, 2025",
+    "preview": "The backstory on Beauty Pie's pricing model and why it made traditional luxury brands genuinely nervous.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-10-07"
+  },
+  {
+    "issue": 37,
+    "date": "2025-09-30",
+    "title": "September 30, 2025",
+    "preview": "Squalane is in everything. Most of what you've read about it is either oversimplified or wrong.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-09-30"
+  },
+  {
+    "issue": 36,
+    "date": "2025-09-23",
+    "title": "September 23, 2025",
+    "preview": "Bakuchiol vs retinol: the debate should have been over two years ago. It wasn't. Here's why.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-09-23"
+  },
+  {
+    "issue": 35,
+    "date": "2025-09-16",
+    "title": "September 16, 2025",
+    "preview": "The indie brand that outsells Glossier in three European cities without a single paid ad.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-09-16"
+  },
+  {
+    "issue": 34,
+    "date": "2025-09-09",
+    "title": "September 9, 2025",
+    "preview": "Ozempic face and the beauty industry's complicated, capitalistic response to it.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-09-09"
+  },
+  {
+    "issue": 33,
+    "date": "2025-09-02",
+    "title": "September 2, 2025",
+    "preview": "The face oil market is glutted. Here's a ruthless breakdown of what's worth it.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-09-02"
+  },
+  {
+    "issue": 32,
+    "date": "2025-08-26",
+    "title": "August 26, 2025",
+    "preview": "Bronzer in winter: the case for year-round warmth and the one product that actually delivers it.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-08-26"
+  },
+  {
+    "issue": 31,
+    "date": "2025-08-19",
+    "title": "August 19, 2025",
+    "preview": "The aesthetician who refused a celebrity client and why her story went quietly viral in industry circles.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-08-19"
+  },
+  {
+    "issue": 30,
+    "date": "2025-08-12",
+    "title": "August 12, 2025",
+    "preview": "Niacinamide fatigue is real. Here's what science says about whether you actually need less of it.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-08-12"
+  },
+  {
+    "issue": 29,
+    "date": "2025-08-05",
+    "title": "August 5, 2025",
+    "preview": "The indie lip balm brand that went from a farmers market table to a $6M acquisition. The full story.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-08-05"
+  },
+  {
+    "issue": 28,
+    "date": "2025-07-29",
+    "title": "July 29, 2025",
+    "preview": "Peptides: the word appears on roughly 40% of new skincare launches. Most brands can't tell you why.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-07-29"
+  },
+  {
+    "issue": 27,
+    "date": "2025-07-22",
+    "title": "July 22, 2025",
+    "preview": "Brow trends move faster than any other facial feature trend. Here's where they're landing this fall.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-07-22"
+  },
+  {
+    "issue": 26,
+    "date": "2025-07-15",
+    "title": "July 15, 2025",
+    "preview": "Dupe culture reached luxury fragrance and the industry is panicking. Here's what the discourse is missing.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-07-15"
+  },
+  {
+    "issue": 25,
+    "date": "2025-07-08",
+    "title": "July 8, 2025",
+    "preview": "The ceramide comeback: why this 90s staple is suddenly in everything again, and whether it should be.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-07-08"
+  },
+  {
+    "issue": 24,
+    "date": "2025-07-01",
+    "title": "July 1, 2025",
+    "preview": "Tinted moisturizers are having a moment. But one shade-range problem persists across almost every brand.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-07-01"
+  },
+  {
+    "issue": 23,
+    "date": "2025-06-24",
+    "title": "June 24, 2025",
+    "preview": "Elta MD, CeraVe, and the dermatologist-recommended industrial complex. Who's actually paying whom.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-06-24"
+  },
+  {
+    "issue": 22,
+    "date": "2025-06-17",
+    "title": "June 17, 2025",
+    "preview": "The blurring line between skincare and makeup \u2014 and the products that have completely erased it.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-06-17"
+  },
+  {
+    "issue": 21,
+    "date": "2025-06-10",
+    "title": "June 10, 2025",
+    "preview": "Hyaluronic acid is everywhere. It's also frequently misused. A molecular biologist explains.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-06-10"
+  },
+  {
+    "issue": 20,
+    "date": "2025-06-03",
+    "title": "June 3, 2025",
+    "preview": "Summer's most copied nail trend started at a show nobody was covering. We were there.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-06-03"
+  },
+  {
+    "issue": 19,
+    "date": "2025-05-27",
+    "title": "May 27, 2025",
+    "preview": "The viral skincare routine that dermatologists keep quietly dismantling, and why nobody listens.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-05-27"
+  },
+  {
+    "issue": 18,
+    "date": "2025-05-20",
+    "title": "May 20, 2025",
+    "preview": "Fragrance transparency laws are finally changing. What brands have to disclose and what they still don't.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-05-20"
+  },
+  {
+    "issue": 17,
+    "date": "2025-05-13",
+    "title": "May 13, 2025",
+    "preview": "Waterproof mascara's dirty secret: most formulas are worse than regular mascara for your lashes. Here's why.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-05-13"
+  },
+  {
+    "issue": 16,
+    "date": "2025-05-06",
+    "title": "May 6, 2025",
+    "preview": "The story behind the perfect red. Three labs, two decades, one chemist who still won't share the formula.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-05-06"
+  },
+  {
+    "issue": 15,
+    "date": "2025-04-29",
+    "title": "April 29, 2025",
+    "preview": "Lip oil took over. Now what? The next texture format is already in labs and it's genuinely strange.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-04-29"
+  },
+  {
+    "issue": 14,
+    "date": "2025-04-22",
+    "title": "April 22, 2025",
+    "preview": "The collagen supplement industry is worth $9 billion. Here's what the science actually says.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-04-22"
+  },
+  {
+    "issue": 13,
+    "date": "2025-04-15",
+    "title": "April 15, 2025",
+    "preview": "Clean beauty, again. A new wave of brands is trying to actually define what it means.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-04-15"
+  },
+  {
+    "issue": 12,
+    "date": "2025-04-08",
+    "title": "April 8, 2025",
+    "preview": "The indie perfume house that's been quietly doing what the big houses wish they could.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-04-08"
+  },
+  {
+    "issue": 11,
+    "date": "2025-04-01",
+    "title": "April 1, 2025",
+    "preview": "A $12 drugstore blush beat a $54 luxury one in our informal test. The results were embarrassing.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-04-01"
+  },
+  {
+    "issue": 10,
+    "date": "2025-03-25",
+    "title": "March 25, 2025",
+    "preview": "Sephora's algorithm and the slow death of the discovery shopping experience.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-03-25"
+  },
+  {
+    "issue": 9,
+    "date": "2025-03-18",
+    "title": "March 18, 2025",
+    "preview": "Retinol alternatives: the ones that work, the ones that are just marketing, and one that genuinely surprised us.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-03-18"
+  },
+  {
+    "issue": 8,
+    "date": "2025-03-11",
+    "title": "March 11, 2025",
+    "preview": "Refillable packaging promised to save us. Here's what actually happened.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-03-11"
+  },
+  {
+    "issue": 7,
+    "date": "2025-03-04",
+    "title": "March 4, 2025",
+    "preview": "The moisturizer ingredient that's been in your grandmother's kitchen this whole time.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-03-04"
+  },
+  {
+    "issue": 6,
+    "date": "2025-02-25",
+    "title": "February 25, 2025",
+    "preview": "Foundation shades, still. In 2025. The coverage gap that never closed and the indie brands actually fixing it.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-02-25"
+  },
+  {
+    "issue": 5,
+    "date": "2025-02-18",
+    "title": "February 18, 2025",
+    "preview": "K-beauty's newest export isn't a serum \u2014 it's a philosophy, and your routine might already be built around it without you knowing.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-02-18"
+  },
+  {
+    "issue": 4,
+    "date": "2025-02-11",
+    "title": "February 11, 2025",
+    "preview": "The glycerin debate. Everyone swears by it, a few skin scientists are quietly skeptical. We looked into it.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-02-11"
+  },
+  {
+    "issue": 3,
+    "date": "2025-02-04",
+    "title": "February 4, 2025",
+    "preview": "Charlotte Tilbury's latest hire might tell us more about where luxury beauty is heading than any product launch.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-02-04"
+  },
+  {
+    "issue": 2,
+    "date": "2025-01-28",
+    "title": "January 28, 2025",
+    "preview": "SPF in lip balm: the one product category the beauty industry somehow keeps getting wrong.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-01-28"
+  },
+  {
+    "issue": 1,
+    "date": "2025-01-21",
+    "title": "January 21, 2025",
+    "preview": "The lipstick shade every New York editor ordered in January \u2014 and why it sold out before it hit shelves.",
+    "sections": [
+      "Did You Hear?",
+      "Did You Know?",
+      "Did You See?",
+      "Did You Help?",
+      "Healthy Tears"
+    ],
+    "slug": "2025-01-21"
+  }
+]
