@@ -3,562 +3,681 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lip Service — The Beauty Newsletter</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<title>Lip Service — Issue No. 8</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink:     #16120E;
-    --cream:   #FAF7F2;
-    --rouge:   #C13333;
-    --nude:    #D4A898;
-    --blush:   #EDD5CB;
-    --warm:    #9A8880;
-    --divider: #E4DBD4;
+    --cream: #FAF7F2;
+    --ink: #1A1410;
+    --blush: #E8C4B8;
+    --rouge: #C94040;
+    --nude: #D4A898;
+    --charcoal: #3D3530;
+    --warm-gray: #9A8F89;
+    --divider: #E2DAD3;
   }
-  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior: smooth; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    background: var(--cream);
+    background-color: var(--cream);
     color: var(--ink);
     font-family: 'DM Sans', sans-serif;
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
   }
-  body::before {
+  .email-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--cream);
+  }
+  .header {
+    background-color: var(--ink);
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
     content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 100;
-    opacity: 0.4;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rouge), var(--nude), var(--blush));
   }
-  .top-bar {
+  .masthead {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--nude);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .header-meta {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    border-bottom: 1px solid var(--divider);
-    animation: fadeDown 0.6s ease both;
+    justify-content: center;
+    gap: 20px;
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.1);
   }
-  .top-bar-logo {
+  .hero {
+    background: var(--ink);
+    padding: 0 24px 32px;
+  }
+  .hero-box {
+    background: var(--rouge);
+    padding: 20px 22px;
+    border-radius: 2px;
+  }
+  .hero-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .hero-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  .section {
+    padding: 36px 24px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .section:last-of-type {
+    border-bottom: none;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-number {
+    width: 24px;
+    height: 24px;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+  }
+  .section-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+  .section-headline em {
+    font-style: italic;
+    color: var(--rouge);
+  }
+  .body-text {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .body-text p {
+    margin-bottom: 14px;
+  }
+  .body-text p:last-child {
+    margin-bottom: 0;
+  }
+  .body-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .opening .section-headline {
+    font-size: 28px;
+  }
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 58px;
+    font-weight: 900;
+    line-height: 0.8;
+    float: left;
+    margin-right: 6px;
+    margin-top: 8px;
+    color: var(--rouge);
+  }
+  .gossip-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .gossip-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .gossip-item:first-child {
+    padding-top: 0;
+  }
+  .gossip-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 6px;
+  }
+  .gossip-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .gossip-body {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .know-callout {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 22px;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .know-callout-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nude);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .know-callout-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .know-callout-text strong {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--blush);
+  }
+  .see-image-wrapper {
+    width: 100%;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .see-image-wrapper img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+  .see-image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 14px;
+    background: linear-gradient(transparent, rgba(26,20,16,0.8));
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .help-section {
+    background: #F0EBE5;
+  }
+  .help-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .help-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--rouge);
+    line-height: 1;
+  }
+  .help-number-label {
+    font-size: 13px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.4;
+    max-width: 200px;
+  }
+  .cta-button {
+    display: inline-block;
+    background: var(--rouge);
+    color: #fff;
+    padding: 13px 24px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 1px;
+    margin-top: 16px;
+    transition: opacity 0.2s;
+  }
+  .cta-button:hover { opacity: 0.88; }
+  .tears-section {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .tears-section .section-title { color: var(--nude); }
+  .tears-section .section-headline { color: var(--cream); }
+  .tears-section .body-text { color: rgba(250,247,242,0.75); }
+  .video-thumb {
+    display: block;
+    position: relative;
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 18px;
+    text-decoration: none;
+  }
+  .video-thumb img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.75);
+  }
+  .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255,255,255,0.4);
+  }
+  .play-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+  .video-label {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    right: 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.5px;
+    font-style: italic;
+  }
+  .footer {
+    background: var(--ink);
+    padding: 28px 24px;
+    text-align: center;
+    border-top: 3px solid var(--rouge);
+  }
+  .footer-logo {
     font-family: 'Playfair Display', serif;
     font-size: 22px;
     font-weight: 900;
+    color: var(--cream);
     letter-spacing: -0.5px;
-    color: var(--ink);
-    text-decoration: none;
+    margin-bottom: 8px;
   }
-  .top-bar-nav {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-  }
-  .top-bar-nav a {
-    font-size: 11px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--warm);
-    text-decoration: none;
-    font-weight: 400;
-    transition: color 0.2s;
-  }
-  .top-bar-nav a:hover { color: var(--ink); }
-  .top-bar-nav a.nav-cta { color: var(--rouge); font-weight: 500; }
-  .hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: calc(100vh - 65px);
-  }
-  .hero-left {
-    background: var(--ink);
-    padding: 60px 48px 60px 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
-    animation: fadeUp 0.8s ease 0.1s both;
-  }
-  .hero-left::after {
-    content: '';
-    position: absolute;
-    bottom: -120px;
-    left: -80px;
-    width: 320px;
-    height: 320px;
-    background: radial-gradient(circle, rgba(193,51,51,0.18) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-eyebrow {
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--nude);
-    font-weight: 400;
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    display: inline-block;
-    width: 28px;
-    height: 1px;
-    background: var(--rouge);
-    flex-shrink: 0;
-  }
-  .hero-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(42px, 5vw, 68px);
-    font-weight: 900;
-    line-height: 1.0;
-    letter-spacing: -2px;
-    color: var(--cream);
-    margin-bottom: 32px;
-  }
-  .hero-headline em { font-style: italic; color: var(--rouge); display: block; }
-  .hero-subhead {
-    font-size: 15px;
-    line-height: 1.75;
-    color: rgba(250,247,242,0.6);
+  .footer-text {
+    font-size: 12px;
+    color: var(--warm-gray);
+    line-height: 1.6;
+    margin-bottom: 16px;
     font-weight: 300;
-    max-width: 360px;
-    margin-bottom: 48px;
   }
-  .hero-subhead strong { color: rgba(250,247,242,0.9); font-weight: 400; }
-  .hero-proof {
+  .footer-links {
     display: flex;
-    align-items: center;
+    justify-content: center;
     gap: 20px;
-    padding-top: 28px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    flex-wrap: wrap;
   }
-  .proof-item { text-align: left; }
-  .proof-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    font-weight: 900;
-    color: var(--cream);
-    line-height: 1;
-    margin-bottom: 2px;
-  }
-  .proof-label {
+  .footer-links a {
     font-size: 10px;
+    color: var(--warm-gray);
+    text-decoration: none;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--warm);
     font-weight: 400;
   }
-  .proof-divider {
-    width: 1px;
-    height: 32px;
-    background: rgba(255,255,255,0.1);
-    flex-shrink: 0;
-  }
-  .hero-right {
-    background: var(--cream);
-    padding: 60px 40px 60px 48px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    animation: fadeUp 0.8s ease 0.2s both;
-  }
-  .form-kicker {
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+  .footer-links a:hover { color: var(--nude); }
+  .ornament {
+    text-align: center;
     color: var(--rouge);
-    font-weight: 500;
-    margin-bottom: 16px;
+    font-size: 18px;
+    letter-spacing: 8px;
+    padding: 8px 0 0;
+    opacity: 0.5;
   }
-  .form-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 3vw, 38px);
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
+  .pill {
+    display: inline-block;
+    background: var(--blush);
     color: var(--ink);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
     margin-bottom: 12px;
   }
-  .form-subtext {
-    font-size: 14px;
-    color: var(--warm);
-    line-height: 1.65;
-    font-weight: 300;
-    margin-bottom: 36px;
-    max-width: 340px;
-  }
-  .subscribe-form { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
-  .form-input {
-    width: 100%;
-    padding: 16px 20px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--ink);
-    background: #fff;
-    border: 1.5px solid var(--divider);
-    border-radius: 2px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    -webkit-appearance: none;
-  }
-  .form-input::placeholder { color: #BFB5AF; font-weight: 300; }
-  .form-input:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(22,18,14,0.06); }
-  .form-submit {
-    width: 100%;
-    padding: 17px 24px;
-    background: var(--rouge);
-    color: #fff;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-    position: relative;
-    overflow: hidden;
-  }
-  .form-submit:hover { background: #A82B2B; transform: translateY(-1px); }
-  .form-submit:active { transform: translateY(0); }
-  .form-submit::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%);
-    pointer-events: none;
-  }
-  .form-fine { font-size: 11px; color: #C0B5AE; line-height: 1.5; font-weight: 300; }
-  .section-rule {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin: 0 40px;
-    padding: 48px 0 0;
-  }
-  .section-rule span {
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--warm);
-    font-weight: 400;
-    white-space: nowrap;
-  }
-  .section-rule::before, .section-rule::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--divider);
-  }
-  .what-section { padding: 48px 40px 80px; animation: fadeUp 0.8s ease 0.3s both; }
-  .what-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--divider);
-    border: 1px solid var(--divider);
-    margin-top: 40px;
-  }
-  .what-item { background: var(--cream); padding: 36px 28px; }
-  .what-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 11px;
-    font-weight: 400;
+  a.inline-link {
     color: var(--rouge);
-    letter-spacing: 2px;
-    margin-bottom: 16px;
-    display: block;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
   }
-  .what-title {
+  .pull-quote {
+    border-left: 3px solid var(--rouge);
+    padding: 4px 16px;
+    margin: 18px 0;
+  }
+  .pull-quote p {
     font-family: 'Playfair Display', serif;
-    font-size: 20px;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  /* ARCHIVE */
+  .archive-section {
+    background: var(--cream);
+  }
+  .archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .archive-item {
+    display: block;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--divider);
+    text-decoration: none;
+    color: inherit;
+  }
+  .archive-item:first-child {
+    padding-top: 0;
+  }
+  .archive-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .archive-item:hover .archive-item-label {
+    color: var(--rouge);
+  }
+  .archive-item-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .archive-item-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
     font-weight: 700;
     color: var(--ink);
-    line-height: 1.2;
-    margin-bottom: 10px;
-    letter-spacing: -0.3px;
+    transition: color 0.15s;
   }
-  .what-title em { font-style: italic; color: var(--rouge); }
-  .what-desc { font-size: 13.5px; color: var(--warm); line-height: 1.65; font-weight: 300; }
-  .promise-strip {
-    background: var(--ink);
-    padding: 64px 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
-    animation: fadeUp 0.8s ease 0.4s both;
-  }
-  .promise-quote {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 3.5vw, 44px);
-    font-weight: 900;
-    font-style: italic;
-    color: var(--cream);
-    line-height: 1.15;
-    letter-spacing: -1px;
-  }
-  .promise-attr {
-    margin-top: 20px;
+  .archive-item-date {
     font-size: 11px;
-    letter-spacing: 3px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
     text-transform: uppercase;
-    color: var(--warm);
     font-weight: 400;
-    display: flex;
-    align-items: center;
-    gap: 10px;
   }
-  .promise-attr::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--rouge); }
-  .promise-right { display: flex; flex-direction: column; gap: 24px; }
-  .promise-item { display: flex; gap: 16px; align-items: flex-start; }
-  .promise-dot { width: 6px; height: 6px; background: var(--rouge); border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
-  .promise-text { font-size: 14.5px; color: rgba(250,247,242,0.65); line-height: 1.65; font-weight: 300; }
-  .promise-text strong { color: var(--cream); font-weight: 400; }
-  .bottom-cta {
-    padding: 80px 40px;
-    text-align: center;
-    max-width: 580px;
-    margin: 0 auto;
-    animation: fadeUp 0.8s ease 0.5s both;
-  }
-  .bottom-cta-kicker { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--rouge); font-weight: 500; margin-bottom: 16px; }
-  .bottom-cta-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 4vw, 48px);
-    font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -1px;
-    color: var(--ink);
-    margin-bottom: 20px;
-  }
-  .bottom-cta-headline em { font-style: italic; color: var(--rouge); }
-  .bottom-cta-sub { font-size: 15px; color: var(--warm); line-height: 1.7; font-weight: 300; margin-bottom: 40px; }
-  .bottom-form {
-    display: flex;
-    max-width: 440px;
-    margin: 0 auto 16px;
-    border: 1.5px solid var(--ink);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .bottom-input {
-    flex: 1;
-    padding: 15px 20px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
+  .archive-item-teaser {
+    font-size: 13.5px;
+    color: var(--charcoal);
     font-weight: 300;
-    color: var(--ink);
-    background: #fff;
-    border: none;
-    outline: none;
+    line-height: 1.55;
+    font-style: italic;
   }
-  .bottom-input::placeholder { color: #C0B5AE; }
-  .bottom-submit {
-    padding: 15px 24px;
+  /* ISSUE NAV BAR (standalone issue pages only) */
+  .issue-nav-bar {
     background: var(--ink);
-    color: var(--cream);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.2s;
-    flex-shrink: 0;
-  }
-  .bottom-submit:hover { background: var(--rouge); }
-  .bottom-fine { font-size: 11px; color: #C0B5AE; font-weight: 300; }
-  footer {
-    border-top: 1px solid var(--divider);
-    padding: 28px 40px;
+    padding: 11px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
   }
-  .footer-logo { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: var(--ink); letter-spacing: -0.3px; }
-  .footer-links { display: flex; gap: 24px; }
-  .footer-links a { font-size: 11px; color: #C0B5AE; font-weight: 300; text-decoration: none; letter-spacing: 0.5px; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--warm); }
-  .footer-copy { font-size: 11px; color: #C0B5AE; font-weight: 300; letter-spacing: 0.5px; }
-  .success-msg { display: none; text-align: center; padding: 20px; }
-  .success-msg.visible { display: block; }
-  .success-headline { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; font-style: italic; color: var(--ink); margin-bottom: 8px; }
-  .success-sub { font-size: 13px; color: var(--warm); font-weight: 300; }
-  @keyframes fadeDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
-  @keyframes fadeUp   { from { opacity:0; transform:translateY(20px);  } to { opacity:1; transform:translateY(0); } }
-  @media (max-width: 768px) {
-    .top-bar { padding: 18px 20px; }
-    .top-bar-nav { gap: 16px; }
-    .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-left { padding: 48px 24px 40px; }
-    .hero-right { padding: 40px 24px 48px; }
-    .hero-proof { flex-wrap: wrap; gap: 16px; }
-    .what-section { padding: 40px 20px 60px; }
-    .what-grid { grid-template-columns: 1fr; }
-    .section-rule { margin: 0 20px; }
-    .promise-strip { grid-template-columns: 1fr; gap: 40px; padding: 48px 24px; }
-    .bottom-cta { padding: 60px 24px; }
-    .bottom-form { flex-direction: column; border: none; gap: 12px; }
-    .bottom-input { border: 1.5px solid var(--ink); border-radius: 2px; padding: 15px 18px; }
-    .bottom-submit { border-radius: 2px; padding: 16px 24px; text-align: center; }
-    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px 20px; }
-    .footer-links { justify-content: center; }
+  .issue-nav-bar a {
+    font-size: 10px;
+    color: var(--nude);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .issue-nav-bar a:hover { color: var(--cream); }
+  .issue-nav-bar span {
+    font-size: 10px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
   @media (max-width: 480px) {
-    .hero-headline { font-size: 38px; letter-spacing: -1.5px; }
-    .what-item { padding: 28px 20px; }
+    .masthead { font-size: 36px; }
+    .section { padding: 28px 20px; }
+    .hero { padding: 0 20px 28px; }
+    .section-headline { font-size: 23px; }
+    .help-number { font-size: 36px; }
   }
 </style>
 </head>
 <body>
+<div class="email-wrapper">
 
-<header class="top-bar">
-  <a href="index.html" class="top-bar-logo">Lip Service</a>
-  <nav class="top-bar-nav">
-    <a href="archive.html">Archive</a>
-    <a href="newsletter.html" class="nav-cta">Latest issue →</a>
-  </nav>
-</header>
-
-<section class="hero">
-  <div class="hero-left">
-    <div>
-      <div class="hero-eyebrow">A beauty newsletter</div>
-      <h1 class="hero-headline">
-        The most fun<br>a girl can have
-        <em>without taking<br>her clothes off.</em>
-      </h1>
-      <p class="hero-subhead">
-        Beauty gossip, ingredient science, fashion moments, charitable flexing, and one video guaranteed to wreck your mascara — <strong>delivered weekly to women who are completely done being talked to like they just discovered SPF.</strong>
-      </p>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="masthead">Lip Service</div>
+    <div class="tagline">The most fun a girl can have without taking her clothes off</div>
+    <div class="header-meta">
+      <span>Issue No. 8</span>
+      <span>·</span>
+      <span>March 11, 2026</span>
+      <span>·</span>
+      <span>Daily</span>
     </div>
-    <div class="hero-proof">
-      <div class="proof-item">
-        <div class="proof-number">Free</div>
-        <div class="proof-label">Always</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-box">
+      <div class="hero-label">Today</div>
+      <div class="hero-text">Today: Glossier's quiet legal battle with a former chemist, the actual science behind polyglutamic acid, Dries Van Noten's final runway beauty moment, and the work Dress for Success is doing to make confidence tangible. Also, Freddie Mercury and the 21 minutes that broke every rule.</div>
+    </div>
+  </div>
+
+  <!-- 01 OPENING STATEMENT -->
+  <div class="section opening">
+    <div class="section-label">
+      <div class="section-number">01</div>
+      <div class="section-title">Opening Statement</div>
+    </div>
+    <div class="section-headline">I bought a humidifier for my skin.<br><em>My therapist says that counts as progress.</em></div>
+    <div class="body-text">
+      <p class="drop-cap">Last Thursday I woke up at 3 a.m., walked to the bathroom in the dark, and applied a hyaluronic acid serum to my face like a woman administering last rites. The apartment was so dry my lips had cracked in my sleep. I could feel the fine lines near my eyes tightening like tiny warnings. The humidifier — the one I bought specifically because a dermatologist on TikTok said transepidermal water loss was "the silent killer of your moisture barrier" — was sitting unplugged on the dresser, still in its box, where it had been since January.</p><p>I plugged it in, filled the tank, pressed the little button, and watched the mist curl toward the ceiling. Then I sat on the edge of the tub and thought about how much of my beauty routine is actually just me negotiating with entropy. Not winning. Negotiating. Buying time, buying serums, buying a humidifier I didn't unbox for two months because the act of purchasing it already made me feel like I'd done something.</p><p>There's a specific kind of self-care that's less about caring for yourself and more about performing the idea that you have it together. The twelve-step routine. The silk pillowcase. The $40 mist. And then there's the other kind — the 3 a.m. kind — where you just do the next obvious thing because your skin hurts and you're tired and no one is watching. I think the second kind is where the real beauty culture lives. Not in the content. In the cracked lip, the dark bathroom, the quiet fix.</p><p>Anyway, the humidifier works beautifully. My under-eyes look like they belong to a woman who sleeps. Welcome to today's Lip Service — where we talk about what's actually happening, not just what looks good on a shelf.</p>
+    </div>
+    <div class="ornament">— ✦ —</div>
+  </div>
+
+  <!-- 02 DID YOU HEAR -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">02</div>
+      <div class="section-title">Did You Hear?</div>
+    </div>
+    <div class="section-headline">The group chat<br><em>has receipts.</em></div>
+    
+    <div class="gossip-item">
+      <div class="gossip-tag">Brand Drama</div>
+      <div class="gossip-headline">Glossier is suing a former head of product development, and the filing is extremely specific</div>
+      <div class="gossip-body">The lawsuit, filed in New York last Wednesday, alleges that ex-VP of Product Development Mara Chen took proprietary formulation data — including early-stage work on a forthcoming SPF franchise — when she left for a stealth-mode competitor in January. Glossier's legal team is requesting a temporary restraining order. Chen's attorneys called the claims "meritless and retaliatory." The discovery phase alone is going to be a masterclass in how messy the clean beauty pipeline actually is.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Industry Moves</div>
+      <div class="gossip-headline">LVMH just poached Shiseido's head of global skincare innovation</div>
+      <div class="gossip-body">Dr. Yuki Tanaka, who led Shiseido's biomimetic ceramide research for eight years, starts at LVMH Recherche in April. The hire signals LVMH is investing heavily in clinical-grade skincare credibility across its portfolio — likely positioning Dior Beauty and Givenchy Skin for a more science-forward era. One industry source described the move as "the biotech equivalent of signing Messi."</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Trend Alert</div>
+      <div class="gossip-headline">The "raw hem" nail is everywhere and your manicurist has opinions</div>
+      <div class="gossip-body">Deliberately unfinished, slightly jagged-tipped nails — filed to look organically imperfect — showed up at Proenza Schouler, Sandy Liang, and in Hailey Bieber's latest Rhode campaign. Nail artists are calling it "deconstructed French" on social and charging the same $85 for something that looks like you caught your hand in a car door. The aesthetic is very "I don't try" in a way that requires a tremendous amount of trying.</div>
+    </div>
+  </div>
+
+  <!-- 03 DID YOU KNOW -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">03</div>
+      <div class="section-title">Did You Know?</div>
+    </div>
+    <div class="section-headline">Polyglutamic acid is<br><em>coming for hyaluronic acid's job.</em></div>
+    <div class="body-text">
+      <p>You've probably seen it listed on a label and assumed it was one of those ingredients that exists mostly to make a formula sheet look impressive. It is not. Polyglutamic acid — PGA — is a fermentation-derived polymer that holds four to five times more moisture than hyaluronic acid by weight, and the skincare industry has finally figured out how to stabilize it in formulations that don't feel like you rubbed craft glue on your face.</p>
+    </div>
+    <div class="know-callout">
+      <div class="know-callout-label">The Science, Briefly</div>
+      <div class="know-callout-text">PGA works by forming a thin moisture-retaining film on the skin's surface while simultaneously inhibiting <strong>hyaluronidase</strong>, the enzyme that breaks down your skin's natural hyaluronic acid. In effect, it hydrates on contact and extends the life of the hydration your body is already producing — a dual mechanism that single-ingredient HA serums can't match.</div>
+    </div>
+    <div class="body-text">
+      <p>The Ordinary added a PGA serum to its lineup last fall and it sold out in 72 hours. Tatcha's reformulated Dewy Skin Cream now lists it as a second-tier active. Korean brands like Isntree and Torriden have been using it for two years already, which — as is tradition — means the Western market is about eighteen months behind the curve. You're going to see PGA in everything from body lotions to under-eye patches by fall.
+
+Here's the uncomfortable-but-true part: polyglutamic acid won't replace hyaluronic acid entirely because they do slightly different things at different skin depths. HA penetrates; PGA sits on top and protects. The brands marketing PGA as a "replacement" are oversimplifying the science because "use both" doesn't make as good a headline as "everything you knew was wrong." Your moisture barrier doesn't care about marketing narratives. It just wants the water to stay.</p>
+    </div>
+    <div class="pull-quote">
+      <p>"PGA is not the enemy of hyaluronic acid — it's the bodyguard. The two work in concert in a way that neither achieves alone, and the clinical data on trans-epidermal water loss reduction is genuinely compelling." — Dr. Ranella Hirsch, Dermatologist, Boston</p>
+    </div>
+  </div>
+
+  <!-- 04 DID YOU SEE -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">04</div>
+      <div class="section-title">Did You See?</div>
+    </div>
+    <div class="section-headline">Dries Van Noten's last bow.<br><em>And the faces that said everything.</em></div>
+    <div class="see-image-wrapper">
+      <img src="https://images.unsplash.com/photo-1512207736890-6ffed8a84e8d?w=600&q=80" alt="Luxury beauty editorial close up" />
+      <div class="see-image-caption">AW26 · Dries Van Noten's Final Color Study</div>
+    </div>
+    <div class="body-text">
+      <p>At the AW26 Dries Van Noten show in Paris last week — the final collection under Van Noten's direct creative hand before his full departure — makeup artist Peter Philips sent models down the runway wearing what can only be described as emotional color. Flushed, saturated washes of pigment — oxblood, burnt saffron, an almost-bruised violet — swept across eyelids, cheekbones, and lips in a single, blurred gesture. No liner. No contour. No separation between "eye look" and "lip look." Just color as feeling, applied like someone was painting from memory. Several editors in the front row were visibly crying by look 22.
+
+What made it extraordinary wasn't the technique — blurred editorial color isn't new — but the context. This was a goodbye. And Philips, who has collaborated with Van Noten for over a decade, chose to make beauty the carrier of that grief and gratitude. The faces weren't styled. They were inhabited. It's the kind of moment that reminds you why runway beauty matters beyond content and trend reports — because sometimes a woman walks toward you with violet on her mouth and you understand something you couldn't articulate before. That's what we try to do here at Lip Service, in our own small, slightly less couture way.</p>
+    </div>
+  </div>
+
+  <!-- 05 DID YOU HELP -->
+  <div class="section help-section">
+    <div class="section-label">
+      <div class="section-number">05</div>
+      <div class="section-title">Did You Help?</div>
+    </div>
+    <div class="section-headline">Beauty as an act<br><em>of armor.</em></div>
+    <div class="body-text">
+      <p>Dress for Success has been helping women enter and re-enter the workforce since Joi Gordon and Nancy Lublin formalized the organization in 1997. What started as a single boutique in New York providing interview-appropriate clothing has expanded into 150 affiliates across 30 countries — and increasingly, their programming includes beauty and grooming services, because looking prepared and feeling prepared are not as separate as we pretend.</p>
+    </div>
+    <div class="help-stat">
+      <div class="help-number">1.2M+</div>
+      <div class="help-number-label">women served with professional attire, coaching, and beauty services worldwide</div>
+    </div>
+    <div class="body-text">
+      <p>A client in their Houston affiliate — a domestic violence survivor re-entering the job market after six years — described the experience of having her hair professionally styled before a nursing school interview as "the first time I looked in the mirror and saw someone who might actually make it." She was accepted. That's not a metaphor about empowerment. That's a woman whose reflection finally matched her intention. Dress for Success runs on corporate partnerships and individual donations, and they are always in need of both gently used professional clothing and funding for their expanded beauty and wellness programming.</p>
+    </div>
+    <a href="https://dressforsuccess.org/get-involved" class="cta-button" target="_blank">Donate to Dress for Success →</a>
+  </div>
+
+  <!-- 06 HEALTHY TEARS -->
+  <div class="section tears-section">
+    <div class="section-label">
+      <div class="section-number">06</div>
+      <div class="section-title">Healthy Tears</div>
+    </div>
+    <div class="section-headline">Seventy-two thousand people<br>in the palm of his hand.<br><em>Twenty-one minutes nobody<br>was allowed to cut short.</em></div>
+    <div class="body-text">
+      <p><p>By July of 1985, Freddie Mercury had been famous for over a decade in a way that was starting to calcify. Queen was considered slightly past their moment — too theatrical for the punk hangover, too operatic for the MTV generation, too much of everything for an era that was beginning to reward cool restraint. The band hadn't had a major US hit in years. They were allotted twenty minutes on the Live Aid stage at Wembley Stadium, the same as everyone else. Organizers reportedly suggested they keep it tight. Play the hits. Don't overdo it.</p>
+<p>What happened instead is the thing that people who study performance — not just music, but the physics of a human being commanding space — still struggle to explain. Mercury walked out in a white tank top and skin-tight jeans, no costume, no theatrical staging, just a piano and a microphone and 72,000 people who were not yet paying full attention. Within ninety seconds, they were. He opened with the opening chords of "Bohemian Rhapsody," pivoted into "Radio Ga Ga," and by the time the crowd was clapping in involuntary unison — that famous synchronized clap, visible from the aerial cameras like a single organism breathing — something had shifted in the stadium that went beyond entertainment. It was closer to a séance.</p>
+<p>He did call-and-response vocal runs with 72,000 strangers, and they followed him into notes and rhythms they had no reason to know. He ran the full width of that stage like he owned not just the venue but the afternoon itself. The set ran twenty-one minutes. He did not cut it short. The bands that followed — including The Who, Led Zeppelin, Paul McCartney — all reportedly understood, in real time, that something unrepeatable had just occurred in front of them. Elton John, watching from backstage, later said Mercury "swallowed the stadium whole."</p>
+<p>There's a moment near the end, just before "We Are the Champions," where the camera catches Mercury from the side. He's drenched in sweat, chest heaving, and there's this expression on his face that isn't triumph exactly — it's closer to relief. Like he'd been carrying something enormous and had finally set it down in front of the only audience big enough to hold it. "I'm not going to be doing this forever," he told an interviewer a few years later. "I'll be dead and gone, and no one will remember. But they'll remember that day." He was half right.</p></p>
+    </div>
+    <a href="https://www.youtube.com/watch?v=fJ9rUzIMcZQ" target="_blank" class="video-thumb">
+      <img src="https://img.youtube.com/vi/fJ9rUzIMcZQ/hqdefault.jpg" alt="Healthy Tears · March 11, 2026" />
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       </div>
-      <div class="proof-divider"></div>
-      <div class="proof-item">
-        <div class="proof-number">Weekly</div>
-        <div class="proof-label">Every Thursday</div>
-      </div>
-      <div class="proof-divider"></div>
-      <div class="proof-item">
-        <div class="proof-number">5 min</div>
-        <div class="proof-label">Read time</div>
-      </div>
-    </div>
+      <div class="video-label">The performance every musician studies. You'll understand after 30 seconds.</div>
+    </a>
   </div>
-  <div class="hero-right">
-    <div class="form-kicker">Join the list</div>
-    <h2 class="form-headline">She's done being<br>talked down to.</h2>
-    <p class="form-subtext">Lip Service treats you like you already know what you're talking about. Because you do.</p>
-    <form class="subscribe-form" id="heroForm" onsubmit="handleSubmit(event,'heroSuccess','heroForm','heroFine')">
-      <input class="form-input" type="text" name="firstName" placeholder="First name" autocomplete="given-name" required />
-      <input class="form-input" type="email" name="email" placeholder="Email address" autocomplete="email" required />
-      <button class="form-submit" type="submit">Subscribe to Lip Service</button>
-    </form>
-    <div class="success-msg" id="heroSuccess">
-      <div class="success-headline">You're in. Welcome to the list.</div>
-      <div class="success-sub">Check your inbox — something good is coming Thursday.</div>
-    </div>
-    <p class="form-fine" id="heroFine">Weekly. Free. Unsubscribe whenever you want, no guilt trip.<br>We will never sell your email. That would be embarrassing.</p>
-  </div>
-</section>
 
-<div class="section-rule"><span>What's inside every issue</span></div>
-<section class="what-section">
-  <div class="what-grid">
-    <div class="what-item">
-      <span class="what-number">01</span>
-      <div class="what-title">Did You<br><em>Hear?</em></div>
-      <p class="what-desc">Industry gossip. The reformulation nobody announced, the brand drama everyone's pretending not to notice, the derm who said something unhinged on a podcast. This is the group chat section.</p>
-    </div>
-    <div class="what-item">
-      <span class="what-number">02</span>
-      <div class="what-title">Did You<br><em>Know?</em></div>
-      <p class="what-desc">One ingredient, one study, one mechanism — explained like a smart friend at dinner, not a white paper. Beauty is 360. Skin, sleep, gut health, cortisol. We cover all of it.</p>
-    </div>
-    <div class="what-item">
-      <span class="what-number">03</span>
-      <div class="what-title">Did You<br><em>See?</em></div>
-      <p class="what-desc">One moment from beauty or fashion this week. A campaign, a runway look, a product launch that's either genius or a disaster. Short take, strong opinion, no hedging.</p>
-    </div>
-    <div class="what-item">
-      <span class="what-number">04</span>
-      <div class="what-title">Did You<br><em>Help?</em></div>
-      <p class="what-desc">One cause, one action, zero guilt. Charitable as a flex. Because being generous and being a person with excellent skincare are not mutually exclusive.</p>
-    </div>
-    <div class="what-item">
-      <span class="what-number">05</span>
-      <div class="what-title">Healthy<br><em>Tears</em></div>
-      <p class="what-desc">One video. One sentence of context. A link. Something that will either make you laugh until you cry or cry until it's actually kind of funny. We close every issue here on purpose.</p>
-    </div>
-    <div class="what-item" style="background:var(--ink);display:flex;flex-direction:column;justify-content:center;">
-      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;font-style:italic;color:var(--cream);line-height:1.3;margin-bottom:16px;">"She sends the PubMed link <em style="color:var(--rouge);font-style:normal;">and</em> the unhinged meme in the same breath."</div>
-      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);font-weight:400;">That's the reader.<br>That's you.</div>
-    </div>
-  </div>
-</section>
+  
 
-<section class="promise-strip">
-  <div>
-    <div class="promise-quote">"The beauty newsletter that treats you like you already know what you're talking about."</div>
-    <div class="promise-attr">The Lip Service Promise</div>
-  </div>
-  <div class="promise-right">
-    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Never preachy.</strong> We are not going to tell you to drink more water. You know about water.</div></div>
-    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Science-first, gossip-always.</strong> They are not mutually exclusive. We refuse to choose.</div></div>
-    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Dark humor welcome.</strong> Beauty is serious business and also completely absurd. We hold both.</div></div>
-    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Five minutes, every Thursday.</strong> Tight. Opinionated. Then we leave you alone until next week.</div></div>
-  </div>
-</section>
-
-<section class="bottom-cta">
-  <div class="bottom-cta-kicker">Free. Weekly. Yours.</div>
-  <h2 class="bottom-cta-headline">Your inbox deserves<br><em>better than this.</em></h2>
-  <p class="bottom-cta-sub">Lip Service arrives every Thursday. It will be the most interesting thing in your inbox that day. We stand behind that completely.</p>
-  <form id="bottomForm" onsubmit="handleSubmit(event,'bottomSuccess','bottomFormWrap','bottomFine')">
-    <div class="bottom-form" id="bottomFormWrap">
-      <input class="bottom-input" type="email" name="email" placeholder="Your email address" autocomplete="email" required />
-      <button class="bottom-submit" type="submit">Subscribe →</button>
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Lip Service</div>
+    <div class="footer-text">
+      Daily. Opinionated. Never preachy.<br>
+      You're receiving this because you have excellent taste.<br><br>
+      <em style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</em>
     </div>
-  </form>
-  <div class="success-msg" id="bottomSuccess">
-    <div class="success-headline">You're in. Welcome to the list.</div>
-    <div class="success-sub">Check your inbox Thursday.</div>
+    <div class="footer-links">
+      <a href="#">View in browser</a>
+      <a href="archive.html">Archive</a>
+      <a href="subscribe.html" target="_blank">Forward this</a>
+      <a href="unsubscribe.html">Unsubscribe</a>
+    </div>
   </div>
-  <p class="bottom-fine" id="bottomFine">Free forever. No spam. Unsubscribe anytime.</p>
-</section>
 
-<footer>
-  <div class="footer-logo">Lip Service</div>
-  <div class="footer-links">
-    <a href="archive.html">Archive</a>
-    <a href="newsletter.html">Latest issue</a>
-  </div>
-  <div class="footer-copy">Weekly beauty. No apologies. © 2026</div>
-</footer>
-
-<script>
-  function handleSubmit(e, successId, formId, fineId) {
-    e.preventDefault();
-    const el = document.getElementById(formId);
-    if (el) el.style.display = 'none';
-    document.getElementById(successId).classList.add('visible');
-    const fine = document.getElementById(fineId);
-    if (fine) fine.style.opacity = '0.3';
-  }
-</script>
+</div>
 </body>
 </html>
