@@ -90,85 +90,97 @@
   <ul class="archive-list" id="archive-list">
     <li class="archive-empty">Loading issues…</li>
   </ul>
-  <script>
-    fetch('issues.json')
-      .then(r => r.json())
-      .then(issues => {
-        const list = document.getElementById('archive-list');
-        if (!issues.length) {
-          list.innerHTML = '<li class="archive-empty">No issues yet. Check back soon.</li>';
-          return;
-        }
-        list.innerHTML = issues.map(issue => {
-          const d = new Date(issue.date + 'T12:00:00');
-          const dateStr = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-          if (issue.url) {
-            return `
-              <li>
-                <div class="archive-item-link" role="button" tabindex="0"
-                     data-url="${issue.url}" data-label="${dateStr}">
-                  <span class="archive-meta">
-                    <span class="archive-label">${dateStr}</span>
-                  </span>
-                  <span class="archive-teaser">${issue.preview}</span>
-                </div>
-              </li>`;
-          }
-          return `
-            <li>
-              <div class="archive-item">
-                <span class="archive-meta">
-                  <span class="archive-label">${dateStr}</span>
-                </span>
-                <span class="archive-teaser">${issue.preview}</span>
-              </div>
-            </li>`;
-        }).join('');
-
-        list.addEventListener('click', e => {
-          const item = e.target.closest('[data-url]');
-          if (item) openDrawer(item.dataset.url, item.dataset.label);
-        });
-        list.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            const item = e.target.closest('[data-url]');
-            if (item) { e.preventDefault(); openDrawer(item.dataset.url, item.dataset.label); }
-          }
-        });
-      })
-      .catch(() => {
-        document.getElementById('archive-list').innerHTML = '<li class="archive-empty">Could not load issues.</li>';
-      });
-
-    function openDrawer(url, label) {
-      document.getElementById('drawer-frame').src = url;
-      document.getElementById('drawer-label').textContent = label;
-      document.getElementById('issue-drawer').setAttribute('aria-hidden', 'false');
-      document.body.classList.add('drawer-open');
-    }
-
-    function closeDrawer() {
-      document.body.classList.remove('drawer-open');
-      document.getElementById('issue-drawer').setAttribute('aria-hidden', 'true');
-      setTimeout(() => { document.getElementById('drawer-frame').src = 'about:blank'; }, 320);
-    }
-
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
-
-</script>
 </main>
 <footer>
   <div class="footer-logo">Lip Service</div>
   <div class="footer-copy">Weekly beauty. No apologies. © 2026</div>
 </footer>
 
-<div class="drawer-backdrop" id="drawer-backdrop" onclick="closeDrawer()"></div>
+<div class="drawer-backdrop" id="drawer-backdrop"></div>
 <aside class="issue-drawer" id="issue-drawer" aria-hidden="true" aria-label="Issue viewer">
   <div class="drawer-header">
     <span class="drawer-label" id="drawer-label"></span>
-    <button class="drawer-close" id="drawer-close" aria-label="Close issue" onclick="closeDrawer()">&#x2715;</button>
+    <button class="drawer-close" id="drawer-close" aria-label="Close issue">&#x2715;</button>
   </div>
   <iframe class="drawer-frame" id="drawer-frame" title="Issue content" src="about:blank"></iframe>
 </aside>
+
+<script>
+  // ── Drawer open/close ──────────────────────────────────────────────────────
+  // All elements exist in the DOM here — script is at the bottom of <body>.
+  const drawer       = document.getElementById('issue-drawer');
+  const drawerFrame  = document.getElementById('drawer-frame');
+  const drawerLabel  = document.getElementById('drawer-label');
+  const drawerClose  = document.getElementById('drawer-close');
+  const backdrop     = document.getElementById('drawer-backdrop');
+
+  function openDrawer(url, label) {
+    drawerFrame.src = url;
+    drawerLabel.textContent = label;
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('drawer-open');
+  }
+
+  function closeDrawer() {
+    document.body.classList.remove('drawer-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    setTimeout(() => { drawerFrame.src = 'about:blank'; }, 320);
+  }
+
+  drawerClose.addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+  // ── Archive list ───────────────────────────────────────────────────────────
+  const list = document.getElementById('archive-list');
+
+  fetch('issues.json')
+    .then(r => r.json())
+    .then(issues => {
+      if (!issues.length) {
+        list.innerHTML = '<li class="archive-empty">No issues yet. Check back soon.</li>';
+        return;
+      }
+      list.innerHTML = issues.map(issue => {
+        const d = new Date(issue.date + 'T12:00:00');
+        const dateStr = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        if (issue.url) {
+          return `
+            <li>
+              <div class="archive-item-link" role="button" tabindex="0"
+                   data-url="${issue.url}" data-label="${dateStr}">
+                <span class="archive-meta">
+                  <span class="archive-label">${dateStr}</span>
+                </span>
+                <span class="archive-teaser">${issue.preview}</span>
+              </div>
+            </li>`;
+        }
+        return `
+          <li>
+            <div class="archive-item">
+              <span class="archive-meta">
+                <span class="archive-label">${dateStr}</span>
+              </span>
+              <span class="archive-teaser">${issue.preview}</span>
+            </div>
+          </li>`;
+      }).join('');
+
+      list.addEventListener('click', e => {
+        const item = e.target.closest('[data-url]');
+        if (item) openDrawer(item.dataset.url, item.dataset.label);
+      });
+      list.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          const item = e.target.closest('[data-url]');
+          if (item) { e.preventDefault(); openDrawer(item.dataset.url, item.dataset.label); }
+        }
+      });
+    })
+    .catch(() => {
+      list.innerHTML = '<li class="archive-empty">Could not load issues.</li>';
+    });
+</script>
 </body>
 </html>
