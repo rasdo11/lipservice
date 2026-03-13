@@ -57,22 +57,23 @@
 
   .drawer-header {
     display:flex; align-items:center; gap:16px;
-    padding:0 24px; height:52px; flex-shrink:0;
+    padding:0 16px 0 24px; height:52px; flex-shrink:0;
     border-bottom:1px solid var(--divider);
     background:var(--cream);
+    position:relative; z-index:10;
   }
-  .drawer-close {
-    width:32px; height:32px; border:none; background:none;
-    font-size:18px; color:var(--warm); cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    border-radius:4px; transition:color 0.15s, background 0.15s;
-    flex-shrink:0;
-  }
-  .drawer-close:hover { color:var(--ink); background:var(--divider); }
   .drawer-label {
     font-family:'Playfair Display',serif; font-size:13px; font-weight:700;
-    color:var(--ink); letter-spacing:-0.2px;
+    color:var(--ink); letter-spacing:-0.2px; flex:1;
   }
+  .drawer-close {
+    width:40px; height:40px; border:none; background:none;
+    font-size:20px; color:var(--ink); cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:6px; transition:color 0.15s, background 0.15s;
+    flex-shrink:0; margin-left:auto;
+  }
+  .drawer-close:hover { background:var(--divider); }
   .drawer-frame {
     flex:1; width:100%; border:none; display:block;
   }
@@ -149,9 +150,12 @@
     function closeDrawer() {
       document.body.classList.remove('drawer-open');
       document.getElementById('issue-drawer').setAttribute('aria-hidden', 'true');
-      // reset src after transition so it doesn't flash on reopen
       setTimeout(() => { document.getElementById('drawer-frame').src = 'about:blank'; }, 320);
     }
+
+    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+    document.getElementById('drawer-backdrop').addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
 </script>
 </main>
@@ -163,15 +167,10 @@
 <div class="drawer-backdrop" id="drawer-backdrop"></div>
 <aside class="issue-drawer" id="issue-drawer" aria-hidden="true" aria-label="Issue viewer">
   <div class="drawer-header">
-    <button class="drawer-close" id="drawer-close" aria-label="Close issue">✕</button>
     <span class="drawer-label" id="drawer-label"></span>
+    <button class="drawer-close" id="drawer-close" aria-label="Close issue">&#x2715;</button>
   </div>
   <iframe class="drawer-frame" id="drawer-frame" title="Issue content" src="about:blank"></iframe>
 </aside>
-<script>
-  document.getElementById('drawer-close').addEventListener('click', closeDrawer);
-  document.getElementById('drawer-backdrop').addEventListener('click', closeDrawer);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
-</script>
 </body>
 </html>
