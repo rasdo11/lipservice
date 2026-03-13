@@ -17,7 +17,7 @@ function dayOfYear(date) {
 }
 
 function issueNumber(date) {
-  const launch = new Date('2026-03-05T00:00:00');
+  const launch = new Date('2026-04-07T00:00:00');
   const diff = Math.floor((date - launch) / 86400000) + 1;
   return Math.max(1, diff);
 }
@@ -93,20 +93,20 @@ async function main() {
   const issueDate = formatDate(today);
   const key = dateKey(today);
 
-  const BEAUTY_IMAGES = [
-    { photoId: '1596462502278-27bfdc403348', alt: 'Bold lip art editorial beauty 2026' },
-    { photoId: '1512207736890-6ffed8a84e8d', alt: 'Luxury beauty editorial close up' },
-    { photoId: '1522335789203-aabd1fc54bc9', alt: 'Fashion editorial runway beauty' },
-    { photoId: '1487412720507-265dfe4c7f77', alt: 'Portrait fashion editorial' },
-    { photoId: '1516975080664-ed2fc6a32937', alt: 'Beauty industry editorial' },
+  const TECH_IMAGES = [
+    { photoId: '1677442135703-1787eea5ce01', alt: 'Abstract AI neural network visualization' },
+    { photoId: '1620712943543-bcc4688e7485', alt: 'Human hand touching a glowing digital interface' },
+    { photoId: '1518770660439-4636190af475', alt: 'Circuit board close-up technology detail' },
+    { photoId: '1485827404703-89b55fcc595e', alt: 'Robot and human working together' },
+    { photoId: '1526374965328-7f61d4dc18c5', alt: 'Digital data flowing through abstract space' },
   ];
   const TEARS_STORIES = [
     { videoId: 'bktozJWbLQg', videoLabel: "40 million people have watched this. You'll know why in 30 seconds." },
-    { videoId: 'dPNHpJzRMcA', videoLabel: 'The speech that left the entire room still.' },
+    { videoId: 'UF8uR6Z6KLc', videoLabel: 'Fifteen minutes. No notes. Still the best advice about how to live.' },
     { videoId: 'fJ9rUzIMcZQ', videoLabel: "The performance every musician studies. You'll understand after 30 seconds." },
   ];
 
-  const image = BEAUTY_IMAGES[day % BEAUTY_IMAGES.length];
+  const image = TECH_IMAGES[day % TECH_IMAGES.length];
   const story = TEARS_STORIES[day % TEARS_STORIES.length];
 
   console.log(`Rendering ${issueLabel} — ${issueDate}`);

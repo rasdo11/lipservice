@@ -8,26 +8,26 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // ─── Curated content pools ────────────────────────────────────────────────────
 // Add more entries to each pool — the generator cycles through them by day of year.
 
-const BEAUTY_IMAGES = [
+const TECH_IMAGES = [
   {
-    photoId: '1596462502278-27bfdc403348',
-    alt: 'Bold lip art editorial beauty 2026',
+    photoId: '1677442135703-1787eea5ce01',
+    alt: 'Abstract AI neural network visualization',
   },
   {
-    photoId: '1512207736890-6ffed8a84e8d',
-    alt: 'Luxury beauty editorial close up',
+    photoId: '1620712943543-bcc4688e7485',
+    alt: 'Human hand touching a glowing digital interface',
   },
   {
-    photoId: '1522335789203-aabd1fc54bc9',
-    alt: 'Fashion editorial runway beauty',
+    photoId: '1518770660439-4636190af475',
+    alt: 'Circuit board close-up technology detail',
   },
   {
-    photoId: '1487412720507-265dfe4c7f77',
-    alt: 'Portrait fashion editorial',
+    photoId: '1485827404703-89b55fcc595e',
+    alt: 'Robot and human working together',
   },
   {
-    photoId: '1516975080664-ed2fc6a32937',
-    alt: 'Beauty industry editorial',
+    photoId: '1526374965328-7f61d4dc18c5',
+    alt: 'Digital data flowing through abstract space',
   },
 ];
 
@@ -41,10 +41,10 @@ const TEARS_STORIES = [
     videoLabel: "40 million people have watched this. You'll know why in 30 seconds.",
   },
   {
-    videoId: 'dPNHpJzRMcA',
+    videoId: 'UF8uR6Z6KLc',
     context:
-      'Viola Davis won the Emmy in 2015 — the first Black woman to win Outstanding Actress in a Drama — and gave a speech that quoted Harriet Tubman. The whole thing took less than two minutes. The room went completely silent.',
-    videoLabel: 'The speech that left the entire room still.',
+      'Steve Jobs delivered the 2005 Stanford commencement address after surviving pancreatic cancer. He told three stories from his life — connecting the dots, love and loss, and death. The third story, about death, is the one people still quote twenty years later. He had no notes. He spoke for fifteen minutes. The audience of 23,000 people barely moved.',
+    videoLabel: 'Fifteen minutes. No notes. Still the best advice about how to live.',
   },
   {
     videoId: 'fJ9rUzIMcZQ',
@@ -62,8 +62,8 @@ function dayOfYear(date) {
 }
 
 function issueNumber(date) {
-  // Issue 1 launched March 5, 2026
-  const launch = new Date('2026-03-05T00:00:00');
+  // Issue 1 launches on the configured launch date
+  const launch = new Date('2026-04-07T00:00:00');
   const diff = Math.floor((date - launch) / 86400000) + 1;
   return Math.max(1, diff);
 }
@@ -116,10 +116,10 @@ function buildArchivePage(archive) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Archive — Lip Service</title>
+<title>Archive — Robots Think</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
 <style>
-  :root { --ink:#16120E; --cream:#FAF7F2; --rouge:#C13333; --warm:#9A8880; --divider:#E4DBD4; }
+  :root { --ink:#0F1923; --cream:#F5F7FA; --rouge:#2563EB; --warm:#64748B; --divider:#E2E8F0; }
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--cream); color:var(--ink); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column; }
   body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:100; opacity:0.4; }
@@ -142,13 +142,13 @@ function buildArchivePage(archive) {
   .archive-teaser { font-size:14px; color:var(--warm); line-height:1.6; font-weight:300; max-width:600px; }
   footer { border-top:1px solid var(--divider); padding:24px 40px; display:flex; justify-content:space-between; align-items:center; }
   .footer-logo { font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:var(--ink); }
-  .footer-copy { font-size:11px; color:#C0B5AE; font-weight:300; }
+  .footer-copy { font-size:11px; color:#94A3B8; font-weight:300; }
   @media (max-width:600px) { .top-bar { padding:18px 20px; } main { padding:48px 20px 60px; } footer { flex-direction:column; gap:8px; text-align:center; padding:20px; } }
 </style>
 </head>
 <body>
 <header class="top-bar">
-  <a href="index.html" class="top-bar-logo">Lip Service</a>
+  <a href="index.html" class="top-bar-logo">Robots Think</a>
   <a href="index.html" class="top-bar-back">← Home</a>
 </header>
 <main>
@@ -159,8 +159,8 @@ function buildArchivePage(archive) {
   </ul>
 </main>
 <footer>
-  <div class="footer-logo">Lip Service</div>
-  <div class="footer-copy">Weekly beauty. No apologies. © 2026</div>
+  <div class="footer-logo">Robots Think</div>
+  <div class="footer-copy">AI news and tools for the rest of us. © 2026</div>
 </footer>
 </body>
 </html>`;
@@ -172,62 +172,62 @@ async function generateContent(date, story) {
   const client = new Anthropic();
   const dateStr = formatDate(date);
 
-  const prompt = `You are writing today's issue of LIP SERVICE — a sharp, witty, beautifully written daily newsletter about beauty, fashion, culture, and the things women actually care about.
+  const prompt = `You are writing today's issue of ROBOTS THINK — a warm, clear, genuinely useful daily newsletter about AI for everyday people. Not developers. Not tech insiders. Real people: teachers, nurses, office workers, parents, small business owners, retirees.
 
-Voice: Personal, specific, slightly wry. Think a brilliant friend who reads PubMed AND sends the unhinged meme. Never condescending, never preachy. The kind of writing that makes you feel like you were let in on something.
+Voice: A brilliant friend who works in tech but explains it like a human. Warm, clear, a little wry — never smug, never preachy. Makes complex ideas feel obvious in retrospect. The kind of writing that makes you think "wait, that's actually not that scary."
 
-IMPORTANT: Never use the words "preview", "draft", or "test" anywhere in the content. Write as if this is the final published issue.
+IMPORTANT: Never use the words "preview", "draft", or "test" anywhere in the content. Write as if this is the final published issue. Never use unexplained jargon — if you use a technical term, explain it in plain English in the same sentence.
 
 Today is ${dateStr}. Write all sections in this exact JSON format. Return ONLY valid, parseable JSON — no markdown fences, no explanation, no trailing commas.
 
 {
-  "hero_text": "2-3 sentence teaser in the voice of the newsletter. Name 3-4 specific things in today's issue — a brand drama, an ingredient, a beauty or fashion moment, and the charity. Witty and specific. Makes you want to read on.",
+  "hero_text": "2-3 sentence teaser. Name 3-4 specific things in today's issue — an AI news story, a concept explained, a tool to try, and the cause. Warm and specific. Makes a curious non-technical person want to read on.",
 
-  "opening_headline": "A 2-line headline. Line 1 is plain text, line 2 uses <em> tags. Personal and slightly dark. E.g.: 'I went to the derm.<br><em>She was not impressed.</em>'",
+  "opening_headline": "A 2-line headline. Line 1 is plain text, line 2 uses <em> tags. Grounded in something real happening in AI right now. E.g.: 'Everyone is talking about AI.<br><em>Here is what they actually mean.</em>'",
 
-  "opening_body": "3-4 paragraphs of personal essay. Wrap paragraphs in <p> tags. The FIRST paragraph must open with <p class=\\"drop-cap\\">. First-person voice, specific beauty or self-care incident, landing on a broader truth about beauty culture. End with a warm welcome to this issue.",
+  "opening_body": "3-4 paragraphs of personal essay. Wrap paragraphs in <p> tags. The FIRST paragraph must open with <p class=\\"drop-cap\\">. First-person voice, a real moment of encountering AI (confusing, surprising, or delightful), landing on a broader truth about why AI matters for ordinary people. End with a warm welcome to this issue.",
 
-  "hear_headline": "2-line headline. E.g.: 'The group chat<br><em>is going off.</em>'",
+  "hear_headline": "2-line headline about this week's AI news. E.g.: 'The machines<br><em>have been busy.</em>'",
 
   "hear_items": [
     {
-      "tag": "one of: Brand Drama | Industry Moves | Runway Intel | Trend Alert | The Business",
-      "headline": "A specific, slightly arch headline — like a WSJ beauty section",
-      "body": "2-3 sentences. Specific, opinionated, dry. Include a detail that makes it feel reported."
+      "tag": "one of: Big News | Policy Watch | Industry Moves | The Hype Report | Worth Knowing",
+      "headline": "A specific, clear headline about an AI development that affects regular people",
+      "body": "2-3 sentences. Plain English. Explain what happened, why it matters for non-technical readers, and one concrete implication. No jargon without explanation."
     },
     { "tag": "...", "headline": "...", "body": "..." },
     { "tag": "...", "headline": "...", "body": "..." }
   ],
 
-  "know_headline": "An ingredient or beauty science topic. 2 lines, second in <em> tags. E.g.: 'Salmon sperm is<br><em>in your serum now.</em>'",
+  "know_headline": "An AI concept explained simply. 2 lines, second in <em> tags. E.g.: 'When AI makes things up,<br><em>there is a word for that.</em>'",
 
-  "know_intro": "A single paragraph (no <p> tags) introducing the ingredient or trend.",
+  "know_intro": "A single paragraph (no <p> tags) introducing the AI concept in plain English — no jargon without immediate explanation.",
 
-  "know_callout": "The scientific mechanism in 2-3 sentences. Use <strong> tags around the key scientific term.",
+  "know_callout": "The key mechanism or definition in 2-3 sentences. Use <strong> tags around the core term being defined.",
 
-  "know_body": "2 paragraphs separated by a blank line (no <p> tags). Who's using it, the lifestyle context, something uncomfortable-but-true.",
+  "know_body": "2 paragraphs separated by a blank line (no <p> tags). Real-world context: where does this show up in everyday life? What should non-technical people actually know or do about it?",
 
-  "know_quote": "A real-feeling expert quote. Format: \\"Quote text.\\" — First Last, Title, Organization",
+  "know_quote": "A real-feeling expert quote that sounds human, not academic. Format: \\"Quote text.\\" — First Last, Title, Organization",
 
-  "see_headline": "2-3 lines. Someone did something with makeup or fashion. Second or third line in <em>. Specific.",
+  "see_headline": "2-3 lines about an AI tool or demo worth trying this week. Second or third line in <em>. Specific tool name.",
 
-  "see_body": "2 paragraphs (no <p> tags). A specific SS26 or AW26 runway or editorial beauty moment. End with a connection to Lip Service.",
+  "see_body": "2 paragraphs (no <p> tags). What the tool does, who it is actually for, and one specific thing to try with it today. End with why this matters for the Robots Think reader.",
 
-  "see_image_caption": "Season · Short description. E.g.: 'SS26 · Statement Lip Moment'",
+  "see_image_caption": "Tool name · Short description. E.g.: 'ChatGPT · Free AI assistant'",
 
-  "help_headline": "Beauty as an act<br><em>of [something].</em>",
+  "help_headline": "AI as a tool<br><em>for [something good].</em>",
 
-  "help_intro": "2-3 sentences introducing a real beauty charity or initiative. Include founding context.",
+  "help_intro": "2-3 sentences introducing a real organization using AI for social good, or working on digital equity and AI access. Include founding context.",
 
-  "help_stat_number": "An impactful stat. E.g.: '50K+' or '$1.2M' or '300'",
+  "help_stat_number": "An impactful stat. E.g.: '2M+' or '$500K' or '140'",
 
   "help_stat_label": "What that number represents — short, specific, lowercase.",
 
   "help_body": "2-3 sentences (no <p> tags). One specific story that shows why this organization matters. End with what they need.",
 
-  "help_cta_url": "https://[charity website]/donate or /get-involved",
+  "help_cta_url": "https://[organization website]/donate or /get-involved",
 
-  "help_cta_text": "Donate to [Charity Name]",
+  "help_cta_text": "Support [Organization Name]",
 
   "tears_headline": "A poetic multi-line headline about the story below. Use <br> between lines, <em> for italic lines. Specific to the person and what happened.",
 
@@ -400,7 +400,7 @@ async function main() {
   const issueDate = formatDate(today);
   const key = dateKey(today);
 
-  const image = BEAUTY_IMAGES[day % BEAUTY_IMAGES.length];
+  const image = TECH_IMAGES[day % TECH_IMAGES.length];
   const story = TEARS_STORIES[day % TEARS_STORIES.length];
 
   console.log(`${PREVIEW_MODE ? 'Previewing' : 'Generating'} ${issueLabel} — ${issueDate}`);

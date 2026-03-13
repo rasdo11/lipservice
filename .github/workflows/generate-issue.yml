@@ -1,4 +1,4 @@
-name: Generate Lip Service Issue
+name: Generate Robots Think Issue
 
 on:
   workflow_dispatch:
@@ -37,8 +37,8 @@ jobs:
 
       - name: Commit and push
         run: |
-          git config user.name "Lip Service Bot"
-          git config user.email "bot@lipservice.com"
+          git config user.name "Robots Think Bot"
+          git config user.email "bot@robotsthink.dev"
           git add issues/ issues.json
           git commit -m "Issue ${{ inputs.issue_number }}: generated"
           git push

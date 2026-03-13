@@ -60,8 +60,8 @@ jobs:
 
       - name: Commit and push
         run: |
-          git config user.name "Lip Service Bot"
-          git config user.email "bot@lipservice.dev"
+          git config user.name "Robots Think Bot"
+          git config user.email "bot@robotsthink.dev"
           git add -A
           git diff --staged --quiet || git commit -m "Daily newsletter: $(TZ='America/Los_Angeles' date +'%B %d, %Y')"
           git push

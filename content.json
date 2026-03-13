@@ -1,59 +1,59 @@
 {
-  "hero_text": "Mascara that doesn't flake is apparently still a pipe dream — but one lab in Seoul thinks they've cracked it. Also: Charlotte Tilbury's latest acquisition is either brilliant or very, very worrying. We've got the scent ingredient your nervous system actually likes, Valentino's lip moment from Milan, and a woman who makes wigs for cancer patients out of hair she collects from salon floors.",
+  "hero_text": "OpenAI just released a new model that might actually be useful for your job — and we'll tell you exactly what that means. Also: the word 'hallucination' finally makes sense, a free tool that summarizes any document in seconds, and an organization teaching seniors to use AI so they can live independently longer.",
 
-  "opening_headline": "I have seventeen mascaras.<br><em>None of them work.</em>",
+  "opening_headline": "Everyone is talking about AI.<br><em>Here is what they actually mean.</em>",
 
-  "opening_body": "<p class=\"drop-cap\">It started, as most beauty spirals do, at 11pm. I was standing over my bathroom sink, removing what had once been a very promising volumizing mascara and was now a situation on my cheekbones. The cotton pad came away gray-black. My face came away roughly the same color. I had been promised smudge-proof. I had been promised all-day wear. I had been, to put it plainly, lied to.</p>\n<p>This is my twentieth year of buying mascara. I have tried the drugstore ones, the luxury ones, the cult ones you have to import from Japan, the ones that require a special oil-based remover that also removes your will to live. There is a theory that the perfect mascara exists and that women keep buying new ones not because they're bad but because we can't stop hoping. I subscribe to this theory. It is the only explanation for the seventeen wands currently living in my makeup drawer.</p>\n<p>A lab in Seoul is claiming they've solved it — tubing technology so advanced that it slides off with warm water and leaves zero panda eye. I've heard this before. I'm going to believe it anyway. That's what this newsletter is: the belief that something better is coming, combined with a healthy suspicion that we've been here before.</p>\n<p>Welcome back to Issue No. 2 of Lip Service. Let's get into it.</p>",
+  "opening_body": "<p class=\"drop-cap\">My mother called me last week to ask if she needed to \"learn the AI\" before her job made her. She is a school librarian. She has been a school librarian for twenty-six years. She is very good at her job. She should not have to spend her weekends anxious about a technology that most people in tech barely understand themselves.</p>\n<p>That call is why this newsletter exists. Not for people who already know what a large language model is. For my mother. For the teacher who got an email from the principal about \"AI integration\" and has no idea what that means in practice. For the person who has heard the word ChatGPT so many times they're embarrassed to admit they've never actually tried it.</p>\n<p>AI is genuinely interesting and genuinely useful and genuinely confusing, and there is almost nothing written about it for people who aren't already deep inside it. Robots Think is the attempt to fix that. We explain what's happening, we tell you what to actually do about it, and we do both of those things without making you feel like you should already know.</p>\n<p>Welcome to Issue No. 1. Let's get into it.</p>",
 
-  "hear_headline": "The group chat<br><em>cannot stop talking.</em>",
+  "hear_headline": "What happened in AI<br><em>this week, translated.</em>",
 
   "hear_items": [
     {
-      "tag": "Brand Drama",
-      "headline": "Charlotte Tilbury Acquires Luxury Fragrance House Amid Whispers of an IPO",
-      "body": "Charlotte Tilbury Beauty has quietly acquired Parisian fragrance atelier Maison Lumière in what insiders are describing as a 'strategic pivot toward longevity.' The brand declined to disclose the purchase price. The timing — just eight months after Puig's partial stake sale — is not going unnoticed by analysts who've been watching Tilbury's trajectory toward a public offering."
+      "tag": "Big News",
+      "headline": "OpenAI Released a New Model — Here Is What That Actually Means",
+      "body": "OpenAI, the company behind ChatGPT, released an updated version of its AI model this week. A \"model\" is basically the brain inside the AI — the part that reads your question and figures out what to say. The new version is faster and better at following instructions precisely, which means it makes fewer strange mistakes. If you use ChatGPT, you may already have access to it."
     },
     {
-      "tag": "Trend Alert",
-      "headline": "Glazed Lids Are Replacing Matte Everywhere, and the Data Backs It Up",
-      "body": "Search volume for 'glass skin eye' is up 340% year-over-year, per Spate's latest beauty intelligence report. The shift is being driven by Gen Z abandoning heavy cut-crease looks in favor of skincare-forward application — less paint, more prep. Nars, Westman Atelier, and Chantecaille all have new launches angled directly at this moment."
+      "tag": "Policy Watch",
+      "headline": "The EU's AI Rules Are Now Actually in Effect for the Biggest Systems",
+      "body": "The European Union passed a law called the AI Act last year, and the first batch of rules — the ones covering the most powerful AI systems — took effect this month. The short version: companies must be more transparent about how their AI works and what data it was trained on. This mostly affects the companies building AI, not you, but it's the first major law of its kind anywhere in the world."
     },
     {
-      "tag": "Industry Moves",
-      "headline": "Former Glossier CMO Joins Danish Skincare Brand as CEO",
-      "body": "Kristin Donoghue, who helped build Glossier's direct-to-consumer playbook during its peak growth years, has taken the top role at Copenhagen-based Frama, best known for its architectural skincare and cult hand balm. The hire signals a significant push into the US market, where Frama has been slowly building a devoted following without ever really trying."
+      "tag": "Worth Knowing",
+      "headline": "Google Added AI Summaries to Search — and People Have Feelings",
+      "body": "Google now shows an AI-generated summary at the top of many search results before you see any actual links. Some people love it (faster answers), some people hate it (the AI sometimes gets things wrong, and the original websites lose traffic). You can turn it off in Google's settings if you prefer the old way. Both choices are reasonable."
     }
   ],
 
-  "know_headline": "Your nervous system has<br><em>a favorite fragrance ingredient.</em>",
+  "know_headline": "When AI makes something up,<br><em>there is a word for that.</em>",
 
-  "know_intro": "Linalool is in nearly every perfume you've ever owned, almost certainly without your knowledge. It's the compound responsible for the soft, slightly floral, slightly clean quality in lavender, bergamot, rosewood, and coriander. It's also, according to a growing stack of research, something your brain responds to in ways that go well beyond 'smells nice.'",
+  "know_intro": "You may have heard that AI chatbots sometimes \"hallucinate.\" It is a strange word for a straightforward problem: AI systems sometimes confidently state things that are completely false. A fake court case. A book that doesn't exist. A statistic that no one ever measured. The AI doesn't know it's wrong — it's not lying, exactly — it's more like a student who didn't study but writes an essay anyway and fills in the gaps with plausible-sounding nonsense.",
 
-  "know_callout": "Studies have found that linalool activates <strong>GABA-A receptors</strong> — the same receptors targeted by anti-anxiety medications — triggering a measurable reduction in stress markers without requiring inhalation deep enough to enter the bloodstream. The effect happens through olfactory signaling alone.",
+  "know_callout": "The technical reason this happens: AI models like ChatGPT are trained to predict <strong>the most likely next word</strong> in a sentence, based on patterns in enormous amounts of text. They are very good at sounding right. They are not always good at being right. These are related but different skills.",
 
-  "know_body": "This is why the beauty industry's current obsession with 'calming' fragrances isn't just marketing language — there's real neurochemistry behind why certain scents feel like exhaling. Brands like Aesop, Sisley, and the entire aromatherapy wing of Aveda have built category success on linalool-forward formulations, even if they've never called it that.\n\nThe uncomfortable-but-true part: synthetic linalool (used in most mainstream fragrances) and naturally-derived linalool behave almost identically in these studies. If you've been paying a premium for 'natural' fragrance specifically for the calming benefit, the science doesn't fully support the markup. What matters is the molecule, not where it was grown.",
+  "know_body": "This matters practically because AI is genuinely useful for drafting things, summarizing things, and brainstorming — but it should not be the last word on anything factual without you checking. Think of it like a very fast, very confident research assistant who occasionally invents sources. Useful. Not infallible.\n\nThe good news: newer AI systems are getting better at citing actual sources you can verify, and at saying \"I don't know\" when they don't. But the hallucination problem hasn't gone away, and knowing it exists makes you a much smarter user of these tools. Always double-check anything important before you act on it.",
 
-  "know_quote": "\"Linalool has one of the most consistent safety and efficacy profiles of any fragrance constituent we study. The evidence for its anxiolytic properties is genuinely compelling.\" — Dr. Anneke Suuronen, Sensory Neuroscience, Karolinska Institute",
+  "know_quote": "\"AI systems are extraordinarily good at fluency and extraordinarily unreliable as a source of ground truth. They are not search engines. They are pattern-completion engines.\" — Arvind Narayanan, Professor of Computer Science, Princeton University",
 
-  "see_headline": "Valentino put a lip<br>on the runway<br><em>and the internet lost it.</em>",
+  "see_headline": "There is a free tool<br>that summarizes any document<br><em>in about thirty seconds.</em>",
 
-  "see_body": "At Milan Fashion Week's AW26 presentations, Valentino's beauty direction chose one thing and committed completely: an almost brutally saturated lip — lacquered, architectural, somewhere between oxblood and arterial red — with the rest of the face left deliberately bare. Skin dewy and unfiltered. Brows natural. Eyes entirely untouched. The effect was less 'beauty look' and more 'manifesto.'\n\nThis is the tension Lip Service lives in: the idea that makeup can be both armor and surrender, that a single deliberate choice can say more than a full face. Pierpaolo Piccioli has been making this argument for years, and this season's lip is the clearest statement yet. The beauty edit will hit retail in September. The internet has already been recreating it for 48 hours.",
+  "see_body": "Claude.ai (the AI made by Anthropic) has a free version that is genuinely excellent at one specific thing: reading a long document and telling you what's in it. You paste in text — or upload a PDF — and ask it to summarize. It works on contracts, research papers, long articles, meeting notes, anything. The summary is usually clear and accurate, and you can ask follow-up questions like \"what does paragraph 4 mean in plain English?\" or \"are there any red flags I should know about?\"\n\nThe one thing to try: find something you've been meaning to read but haven't — a lease, a report, a long article — and paste it into claude.ai with the message \"summarize this in plain language and flag anything I should pay attention to.\" It takes less than a minute and it actually works.",
 
-  "see_image_caption": "AW26 · Valentino Milan — The Monochrome Lip",
+  "see_image_caption": "Claude.ai · Free AI assistant from Anthropic",
 
-  "help_headline": "Beauty as an act<br><em>of radical generosity.</em>",
+  "help_headline": "AI as a tool<br><em>for independence.</em>",
 
-  "help_intro": "Locks of Love is one of the most recognized hair donation organizations in the US, but Wigs for Kids has been doing quieter, arguably more specialized work since 1981 — creating custom hairpieces specifically sized for children under 18 who've lost hair due to chemotherapy, alopecia, or burns. Each wig takes 12 to 18 months to complete and is provided free of charge.",
+  "help_intro": "Older Adults Technology Services (OATS) has been teaching digital skills to seniors since 2004, long before AI became a household word. Now they've expanded their curriculum to include AI tools — specifically because they've seen how these tools can help older adults live independently longer, stay connected, and navigate systems that increasingly assume everyone is comfortable with technology.",
 
-  "help_stat_number": "4,500+",
-  "help_stat_label": "children served annually, entirely through donations",
+  "help_stat_number": "75K+",
+  "help_stat_label": "older adults trained in digital skills since founding",
 
-  "help_body": "A girl named Sofia, who was seven when she lost her hair to ALL (acute lymphoblastic leukemia), described her Wigs for Kids hairpiece as 'the thing that made me feel like myself again' during treatment. Her mother spent two years fundraising for the organization afterward. It's that kind of story — specific and quiet and enormous — that Wigs for Kids runs on. What they need most right now is human hair donations of 12 inches or longer, and financial support to cover the cost of master wigmakers.",
+  "help_body": "A 79-year-old participant named Dorothy, who lives alone in the Bronx, described learning to use an AI assistant to help her manage her medications and draft messages to her doctor as \"the first time technology felt like it was actually on my side.\" OATS runs free programs in community centers and libraries across the country. What they need most right now is funding to expand their AI-specific curriculum to more cities.",
 
-  "help_cta_url": "https://wigsforkids.org/donate",
-  "help_cta_text": "Donate to Wigs for Kids",
+  "help_cta_url": "https://oats.org/donate",
+  "help_cta_text": "Support OATS",
 
   "tears_headline": "He had 21 minutes.<br>The crowd had 72,000 people.<br><em>He ran every single one of them.</em>",
 
-  "tears_body": "<p>It was July 13, 1985, and Freddie Mercury had been told to cut it short. The Live Aid set was scheduled, staged, managed down to the minute — a global broadcast feeding 1.9 billion people across 150 countries, the largest television event in history to that point. Every artist was on the clock. Bob Geldof had begged them all to be brief.</p>\n<p>Freddie Mercury was not brief. He walked out in a white tank top and jeans and proceeded to run Wembley Stadium — all 72,000 people in it — for 21 minutes in a way that music historians still struggle to fully account for. He did the call-and-response. He did the arms. He stalked the full length of the stage like he had built it himself. At one point he simply leaned into the microphone, made a sound, and 72,000 people made it back.</p>\n<p>Queen's sound engineer, James Barton, said later that the monitor mix that day was almost unusable — they could barely hear themselves — and that Freddie performed the entire set essentially blind and deaf to everything except the crowd. He felt the 72,000 people like a current and he rode it.</p>\n<p>David Bowie was there. Paul McCartney was there. U2 was there and later admitted, publicly, that their own performance that day was a disaster. Freddie Mercury finished his set, waved once, walked off, and everyone in that field understood they had just watched something that wouldn't happen again. They were right.</p>"
+  "tears_body": "<p>It was July 13, 1985, and Freddie Mercury had been told to cut it short. The Live Aid set was scheduled, staged, managed down to the minute — a global broadcast feeding 1.9 billion people across 150 countries, the largest television event in history to that point. Every artist was on the clock. Bob Geldof had begged them all to be brief.</p>\n<p>Freddie Mercury was not brief. He walked out in a white tank top and jeans and proceeded to run Wembley Stadium — all 72,000 people in it — for 21 minutes in a way that music historians still struggle to fully account for. He did the call-and-response. He did the arms. He stalked the full length of the stage like he had built it himself. At one point he simply leaned into the microphone, made a sound, and 72,000 people made it back.</p>\n<p>Queen's sound engineer said later that the monitor mix that day was almost unusable — Freddie performed the entire set essentially blind and deaf to everything except the crowd. He felt 72,000 people like a current and he rode it.</p>\n<p>David Bowie was there. Paul McCartney was there. U2 was there and later admitted their own performance that day was a disaster. Freddie Mercury finished his set, waved once, walked off, and everyone understood they had just watched something that wouldn't happen again. They were right.</p>"
 }

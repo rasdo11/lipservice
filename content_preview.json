@@ -1,59 +1,59 @@
 {
-  "hero_text": "The retinol conversation is finally getting honest — there's a dose below which it does essentially nothing, and most of what's on shelves is below it. Also: LVMH just made a move that changes the prestige skincare market, we found the blush trend that's replacing the soap brow era, and a retired competitive swimmer who makes prosthetic ears for children born without them.",
+  "hero_text": "OpenAI just released a new model that might actually be useful for your job — and we'll tell you exactly what that means. Also: the word 'hallucination' finally makes sense, a free tool that summarizes any document in seconds, and an organization teaching seniors to use AI so they can live independently longer.",
 
-  "opening_headline": "I believed everything the skincare industry told me.<br><em>For twenty-three years.</em>",
+  "opening_headline": "Everyone is talking about AI.<br><em>Here is what they actually mean.</em>",
 
-  "opening_body": "<p class=\"drop-cap\">There's a specific kind of grief that comes with realizing you've been doing something wrong for a very long time — not dangerous wrong, just quietly, expensively pointless. I've been layering a 0.025% retinol serum over my moisturizer every night for four years. I bought it because a beauty editor I trust called it 'the gold standard.' I renewed the subscription without thinking. It cost me, over those four years, something I don't want to calculate.</p>\n<p>Last month a dermatologist I'd never met looked at my skin and then at my shelf and said, very gently, that the retinol I'd been using was 'not doing much of anything.' The concentration, she explained, was below the threshold at which retinol produces meaningful cellular change. It wasn't harmful. It wasn't doing what I thought it was doing. I'd been moisturizing, essentially, at a significant markup.</p>\n<p>The thing is: I'd read the studies. Or I thought I had. I'd read the stories about the studies. Which is not the same thing. This is the gap that Lip Service exists in — between what the beauty industry says and what the research actually shows, between what we buy and what we might actually need.</p>\n<p>Welcome to Issue No. 3. Tonight's issue is a preview — if you're reading this before 6am and want to give feedback, you know where to find me.</p>",
+  "opening_body": "<p class=\"drop-cap\">My mother called me last week to ask if she needed to \"learn the AI\" before her job made her. She is a school librarian. She has been a school librarian for twenty-six years. She is very good at her job. She should not have to spend her weekends anxious about a technology that most people in tech barely understand themselves.</p>\n<p>That call is why this newsletter exists. Not for people who already know what a large language model is. For my mother. For the teacher who got an email from the principal about \"AI integration\" and has no idea what that means in practice. For the person who has heard the word ChatGPT so many times they're embarrassed to admit they've never actually tried it.</p>\n<p>AI is genuinely interesting and genuinely useful and genuinely confusing, and there is almost nothing written about it for people who aren't already deep inside it. Robots Think is the attempt to fix that. We explain what's happening, we tell you what to actually do about it, and we do both of those things without making you feel like you should already know.</p>\n<p>Welcome to Issue No. 1. Let's get into it.</p>",
 
-  "hear_headline": "Three things<br><em>you're going to hear about.</em>",
+  "hear_headline": "What happened in AI<br><em>this week, translated.</em>",
 
   "hear_items": [
     {
-      "tag": "The Business",
-      "headline": "LVMH Acquires Minority Stake in Spanish Skincare Lab Sesderma",
-      "body": "LVMH Moët Hennessy Louis Vuitton has taken a minority stake in Barcelona-based dermocosmetic brand Sesderma, known for its liposome technology and strong prescription-channel presence. The deal, valued at a reported €180M, signals LVMH's continued push into clinical skincare — following Officine Universelle Buly and Maison Margiela Fragrances — and gives Sesderma European distribution firepower it's been building toward for a decade."
+      "tag": "Big News",
+      "headline": "OpenAI Released a New Model — Here Is What That Actually Means",
+      "body": "OpenAI, the company behind ChatGPT, released an updated version of its AI model this week. A \"model\" is basically the brain inside the AI — the part that reads your question and figures out what to say. The new version is faster and better at following instructions precisely, which means it makes fewer strange mistakes."
     },
     {
-      "tag": "Trend Alert",
-      "headline": "The 'Petal Blush' — Applied to the Nose Bridge — Is Everywhere Right Now",
-      "body": "The soap brow era isn't over exactly, but something softer is moving in alongside it. The 'petal blush' — a concentrated flush of pigment swept across the nose and inner cheeks, mimicking a genuine embarrassed flush — has taken over editorial beauty this month. It reads as effortless but requires significant precision. The Milk Makeup Cooling Water Jelly Tint in Rose is the product being credited most often."
+      "tag": "Policy Watch",
+      "headline": "The EU's AI Rules Are Now Actually in Effect for the Biggest Systems",
+      "body": "The European Union passed a law called the AI Act, and the first batch of rules took effect this month. The short version: companies must be more transparent about how their AI works. This mostly affects the companies building AI, not you, but it's the first major law of its kind anywhere in the world."
     },
     {
-      "tag": "Brand Drama",
-      "headline": "Tatcha Founder's New Brand Files Quietly, Beauty Community Notices",
-      "body": "Vicky Tsai, who founded Tatcha and sold it to Unilever in 2019 for a reported $500M, has quietly incorporated a new beauty entity in Delaware. The filing — spotted by a brand intelligence tracker — lists Tsai as the registered agent and names no products or categories. The timing, eight months after her non-compete clause is believed to have expired, is being read as significant."
+      "tag": "Worth Knowing",
+      "headline": "Google Added AI Summaries to Search — and People Have Feelings",
+      "body": "Google now shows an AI-generated summary at the top of many search results before you see any actual links. Some people love it, some people hate it (the AI sometimes gets things wrong). You can turn it off in Google's settings if you prefer the old way."
     }
   ],
 
-  "know_headline": "Retinol has a dose<br><em>below which it does nothing.</em>",
+  "know_headline": "When AI makes something up,<br><em>there is a word for that.</em>",
 
-  "know_intro": "Retinol is the most evidence-backed anti-aging ingredient in skincare. The clinical literature is unambiguous and voluminous. What the literature is equally clear about — and what the beauty industry has largely chosen not to advertise — is that efficacy is highly concentration-dependent, with the threshold for meaningful results sitting well above what most over-the-counter products actually contain.",
+  "know_intro": "You may have heard that AI chatbots sometimes \"hallucinate.\" It is a strange word for a straightforward problem: AI systems sometimes confidently state things that are completely false. A fake court case. A book that doesn't exist. The AI doesn't know it's wrong — it's not lying, exactly — it's more like a student who didn't study but writes an essay anyway and fills in the gaps with plausible-sounding nonsense.",
 
-  "know_callout": "Peer-reviewed research identifies <strong>0.1% retinol</strong> as the minimum effective concentration for measurable changes in collagen production and cell turnover. Products below this threshold show results indistinguishable from placebo in controlled trials.",
+  "know_callout": "The technical reason this happens: AI models like ChatGPT are trained to predict <strong>the most likely next word</strong> in a sentence, based on patterns in enormous amounts of text. They are very good at sounding right. They are not always good at being right. These are related but different skills.",
 
-  "know_body": "The skincare market is flooded with products containing 0.025%, 0.05%, or vaguely labeled 'retinol complex' — formulations that market the ingredient without delivering the dose required to produce the effects consumers are paying for. This isn't illegal. It isn't even unusual. It is, arguably, the entire business model of the accessible-luxury skincare tier.\n\nThe uncomfortable implication: if you want retinol to work, you need a product at or above 0.1%, properly formulated with a stabilizing system, and ideally applied to dry skin at night. Prescription tretinoin — which bypasses the conversion step retinol requires — starts at 0.025% and is more potent at that dose than any OTC retinol at 10x the concentration. The dermatologist who prescribes it costs more upfront. The math usually favors her.",
+  "know_body": "This matters practically because AI is genuinely useful for drafting things, summarizing things, and brainstorming — but it should not be the last word on anything factual without you checking. Think of it like a very fast, very confident research assistant who occasionally invents sources.\n\nThe good news: newer AI systems are getting better at citing actual sources you can verify, and at saying \"I don't know\" when they don't. Always double-check anything important before you act on it.",
 
-  "know_quote": "\"The dose makes the drug. This is true in pharmacology and it's true in cosmetics. Below the threshold, you have an elegant moisturizer. Above it, you have a treatment.\" — Dr. Rachel Westbrook, MD, Dermatology, UCSF Medical Center",
+  "know_quote": "\"AI systems are extraordinarily good at fluency and extraordinarily unreliable as a source of ground truth. They are not search engines. They are pattern-completion engines.\" — Arvind Narayanan, Professor of Computer Science, Princeton University",
 
-  "see_headline": "Prada made the makeup<br>look like nothing.<br><em>It was the most makeup they'd ever worn.</em>",
+  "see_headline": "There is a free tool<br>that summarizes any document<br><em>in about thirty seconds.</em>",
 
-  "see_body": "At Prada's SS26 show in Milan, makeup artist Linda Cantello built what she called 'a face that looks like it forgot it was wearing makeup' — a technically elaborate construction of skin-matched foundation, strategically placed shadow, and lips stained rather than painted. Shot against the collection's architectural silhouettes, the effect was of skin so perfected it could only be artificial.\n\nThis is the paradox at the center of contemporary beauty: the most labor-intensive looks are the ones that most convincingly pretend they aren't there. The Prada woman doesn't look like she got up early to do her makeup. She looks like she was born this way and also happens to have extraordinary pores. The technique — 'negative space contouring' is what some makeup artists are calling it — involves removing rather than adding, working with concealer to create absence rather than presence. Lip Service will be watching this one.",
+  "see_body": "Claude.ai (the AI made by Anthropic) has a free version that is genuinely excellent at one specific thing: reading a long document and telling you what's in it. You paste in text — or upload a PDF — and ask it to summarize. The summary is usually clear and accurate, and you can ask follow-up questions like \"what does paragraph 4 mean in plain English?\"\n\nThe one thing to try: find something you've been meaning to read but haven't — a lease, a report, a long article — and paste it into claude.ai with the message \"summarize this in plain language and flag anything I should pay attention to.\" It takes less than a minute.",
 
-  "see_image_caption": "SS26 · Prada Milan — Negative Space",
+  "see_image_caption": "Claude.ai · Free AI assistant from Anthropic",
 
-  "help_headline": "Beauty as an act<br><em>of making someone whole.</em>",
+  "help_headline": "AI as a tool<br><em>for independence.</em>",
 
-  "help_intro": "Facing the World is a UK-based charity that performs life-changing reconstructive surgery on children in developing countries with severe facial disfigurements — cleft palates, tumors, burns, and congenital conditions including microtia, the absence of a fully formed outer ear. The charity was founded in 2003 by a group of surgeons and anesthesiologists who began traveling to perform operations, and has since completed over 2,500 procedures.",
+  "help_intro": "Older Adults Technology Services (OATS) has been teaching digital skills to seniors since 2004. Now they've expanded their curriculum to include AI tools — because they've seen how these tools can help older adults live independently longer and navigate systems that increasingly assume everyone is comfortable with technology.",
 
-  "help_stat_number": "2,500+",
-  "help_stat_label": "life-changing surgeries, all provided free of charge",
+  "help_stat_number": "75K+",
+  "help_stat_label": "older adults trained in digital skills since founding",
 
-  "help_body": "A boy named Arjun was born in rural Nepal with bilateral microtia — no outer ears and significantly limited hearing. At nine years old, after being identified through a community health worker, he received reconstructive ear surgery through a Facing the World mission team. His surgeon, who volunteers annually, described the moment Arjun heard his mother's voice clearly for the first time as 'the reason I still do this work.' The charity needs funding for operating supplies, post-surgical care, and the logistics of running remote surgical missions.",
+  "help_body": "A 79-year-old participant named Dorothy described learning to use an AI assistant to draft messages to her doctor as \"the first time technology felt like it was actually on my side.\" OATS runs free programs in community centers and libraries across the country. What they need most right now is funding to expand their AI-specific curriculum to more cities.",
 
-  "help_cta_url": "https://facingtheworld.net/donate",
-  "help_cta_text": "Donate to Facing the World",
+  "help_cta_url": "https://oats.org/donate",
+  "help_cta_text": "Support OATS",
 
-  "tears_headline": "She danced at the Apollo<br>at the Cotton Club<br>for seventy years<br><em>without a single photograph.</em>",
+  "tears_headline": "He had 21 minutes.<br>The crowd had 72,000 people.<br><em>He ran every single one of them.</em>",
 
-  "tears_body": "<p>Alice Barker was born in 1913 and spent the 1930s and '40s as a chorus dancer at the most storied stages in Harlem — the Apollo Theater, the Cotton Club, the Zanzibar. She danced alongside Frank Sinatra, Gene Kelly, Ella Fitzgerald, Count Basie. She appeared on some of the first television broadcasts ever made, as one of the first Black women to perform on TV alongside a white male performer. She was, by every account of people who saw her, extraordinary.</p>\n<p>Then the records scattered. The films went into archives. Alice grew old and eventually moved into a nursing home in Brooklyn, carrying seventy years of performance in her body and nothing on paper to prove any of it happened. She would tell the staff she had been a dancer. They believed her the way you believe anyone who is ninety-two and insistent about their past.</p>\n<p>In 2015, a film preservationist named Frank Cullen spent three years tracking down archival footage from those Harlem stages. He found Alice in the nursing home and brought an iPad to her room. He played the footage. Alice watched herself at twenty-three, in full costume, doing the thing she had spent her life doing. It was the first time she had ever seen herself dance. She was 102 years old.</p>\n<p>She reached out and touched the screen. \"That's me,\" she said. \"That's really me.\" She watched for a long time without speaking. Then she said she was glad someone had found her.</p>"
+  "tears_body": "<p>It was July 13, 1985, and Freddie Mercury had been told to cut it short. The Live Aid set was scheduled, staged, managed down to the minute — a global broadcast feeding 1.9 billion people across 150 countries. Every artist was on the clock.</p>\n<p>Freddie Mercury was not brief. He walked out and proceeded to run Wembley Stadium — all 72,000 people in it — for 21 minutes in a way that music historians still struggle to fully account for. At one point he simply leaned into the microphone, made a sound, and 72,000 people made it back.</p>\n<p>David Bowie was there. Paul McCartney was there. Freddie Mercury finished his set, waved once, walked off, and everyone understood they had just watched something that wouldn't happen again. They were right.</p>"
 }

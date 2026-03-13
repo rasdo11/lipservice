@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Subscribe — Lip Service</title>
+<title>Subscribe — Robots Think</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink:     #16120E;
-    --cream:   #FAF7F2;
-    --rouge:   #C13333;
-    --nude:    #D4A898;
-    --blush:   #EDD5CB;
-    --warm:    #9A8880;
-    --divider: #E4DBD4;
+    --ink:     #0F1923;
+    --cream:   #F5F7FA;
+    --rouge:   #2563EB;
+    --nude:    #93C5FD;
+    --blush:   #DBEAFE;
+    --warm:    #64748B;
+    --divider: #E2E8F0;
   }
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -79,7 +79,7 @@
     left: -80px;
     width: 320px;
     height: 320px;
-    background: radial-gradient(circle, rgba(193,51,51,0.18) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero-eyebrow {
@@ -118,12 +118,12 @@
   .hero-sub {
     font-size: 15px;
     line-height: 1.75;
-    color: rgba(250,247,242,0.55);
+    color: rgba(245,247,250,0.55);
     font-weight: 300;
     max-width: 340px;
   }
   .hero-sub strong {
-    color: rgba(250,247,242,0.85);
+    color: rgba(245,247,250,0.85);
     font-weight: 400;
   }
   .hero-right {
@@ -178,10 +178,10 @@
     transition: border-color 0.2s, box-shadow 0.2s;
     -webkit-appearance: none;
   }
-  .form-input::placeholder { color: #BFB5AF; font-weight: 300; }
+  .form-input::placeholder { color: #94A3B8; font-weight: 300; }
   .form-input:focus {
-    border-color: var(--ink);
-    box-shadow: 0 0 0 3px rgba(22,18,14,0.06);
+    border-color: var(--rouge);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.08);
   }
   .form-submit {
     width: 100%;
@@ -198,11 +198,11 @@
     cursor: pointer;
     transition: background 0.2s, transform 0.15s;
   }
-  .form-submit:hover { background: #A82B2B; transform: translateY(-1px); }
+  .form-submit:hover { background: #1D4ED8; transform: translateY(-1px); }
   .form-submit:active { transform: translateY(0); }
   .form-fine {
     font-size: 11px;
-    color: #C0B5AE;
+    color: #94A3B8;
     line-height: 1.5;
     font-weight: 300;
   }
@@ -233,7 +233,7 @@
     font-weight: 900;
     color: var(--ink);
   }
-  .footer-copy { font-size: 11px; color: #C0B5AE; font-weight: 300; }
+  .footer-copy { font-size: 11px; color: #94A3B8; font-weight: 300; }
   @media (max-width: 768px) {
     .top-bar { padding: 18px 20px; }
     .hero { grid-template-columns: 1fr; }
@@ -246,41 +246,41 @@
 <body>
 
 <header class="top-bar">
-  <a href="index.html" class="top-bar-logo">Lip Service</a>
-  <span class="top-bar-label">Weekly · Free · Unapologetic</span>
+  <a href="index.html" class="top-bar-logo">Robots Think</a>
+  <span class="top-bar-label">Daily · Free · No jargon</span>
 </header>
 
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">A beauty newsletter</div>
+    <div class="hero-eyebrow">A daily AI newsletter</div>
     <h1 class="hero-headline">
-      Someone sent you this.
-      <em>That means they like you.</em>
+      Someone shared this.
+      <em>That means they get you.</em>
     </h1>
     <p class="hero-sub">
-      Beauty gossip, ingredient science, fashion moments, and one video guaranteed to wreck your mascara — <strong>delivered weekly to women who are done being talked to like they just discovered SPF.</strong>
+      AI news, one concept explained clearly, one tool worth trying, and one cause using AI for good — <strong>delivered weekday mornings to curious people who are done feeling left out of the conversation.</strong>
     </p>
   </div>
   <div class="hero-right">
     <div class="form-kicker">Join the list</div>
-    <h2 class="form-headline">Get Lip Service<br>in your inbox.</h2>
-    <p class="form-sub">Free. Weekly. Exactly five minutes. We will never sell your email — that would be embarrassing.</p>
+    <h2 class="form-headline">Get Robots Think<br>in your inbox.</h2>
+    <p class="form-sub">Free. Daily. Five minutes. No technical background required. We will never sell your email — that would defeat the whole point.</p>
     <form class="subscribe-form" id="subForm" onsubmit="handleSubmit(event)">
       <input class="form-input" type="text" name="firstName" placeholder="First name" autocomplete="given-name" required />
       <input class="form-input" type="email" name="email" placeholder="Email address" autocomplete="email" required />
-      <button class="form-submit" type="submit">Subscribe to Lip Service</button>
+      <button class="form-submit" type="submit">Subscribe to Robots Think</button>
     </form>
     <div class="success-msg" id="subSuccess">
-      <div class="success-headline">You're in. Welcome to the list.</div>
-      <div class="success-sub">Check your inbox — something good is coming Thursday.</div>
+      <div class="success-headline">You're in. Welcome aboard.</div>
+      <div class="success-sub">Your first issue arrives tomorrow morning.</div>
     </div>
     <p class="form-fine">Unsubscribe anytime, no guilt trip.</p>
   </div>
 </section>
 
 <footer>
-  <div class="footer-logo">Lip Service</div>
-  <div class="footer-copy">Weekly beauty. No apologies. © 2026</div>
+  <div class="footer-logo">Robots Think</div>
+  <div class="footer-copy">AI news for everyone. © 2026</div>
 </footer>
 
 <script>

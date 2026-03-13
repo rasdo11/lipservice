@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lip Service — The Beauty Newsletter</title>
+<title>Robots Think — AI News for Everyday People</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink:     #16120E;
-    --cream:   #FAF7F2;
-    --rouge:   #C13333;
-    --nude:    #D4A898;
-    --blush:   #EDD5CB;
-    --warm:    #9A8880;
-    --divider: #E4DBD4;
+    --ink:     #0F1923;
+    --cream:   #F5F7FA;
+    --rouge:   #2563EB;
+    --nude:    #93C5FD;
+    --blush:   #DBEAFE;
+    --warm:    #64748B;
+    --divider: #E2E8F0;
   }
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior: smooth; }
@@ -89,7 +89,7 @@
     left: -80px;
     width: 320px;
     height: 320px;
-    background: radial-gradient(circle, rgba(193,51,51,0.18) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero-eyebrow {
@@ -124,12 +124,12 @@
   .hero-subhead {
     font-size: 15px;
     line-height: 1.75;
-    color: rgba(250,247,242,0.6);
+    color: rgba(245,247,250,0.6);
     font-weight: 300;
     max-width: 360px;
     margin-bottom: 48px;
   }
-  .hero-subhead strong { color: rgba(250,247,242,0.9); font-weight: 400; }
+  .hero-subhead strong { color: rgba(245,247,250,0.9); font-weight: 400; }
   .hero-proof {
     display: flex;
     align-items: center;
@@ -207,8 +207,8 @@
     transition: border-color 0.2s, box-shadow 0.2s;
     -webkit-appearance: none;
   }
-  .form-input::placeholder { color: #BFB5AF; font-weight: 300; }
-  .form-input:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(22,18,14,0.06); }
+  .form-input::placeholder { color: #94A3B8; font-weight: 300; }
+  .form-input:focus { border-color: var(--rouge); box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
   .form-submit {
     width: 100%;
     padding: 17px 24px;
@@ -226,7 +226,7 @@
     position: relative;
     overflow: hidden;
   }
-  .form-submit:hover { background: #A82B2B; transform: translateY(-1px); }
+  .form-submit:hover { background: #1D4ED8; transform: translateY(-1px); }
   .form-submit:active { transform: translateY(0); }
   .form-submit::after {
     content: '';
@@ -235,7 +235,7 @@
     background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%);
     pointer-events: none;
   }
-  .form-fine { font-size: 11px; color: #C0B5AE; line-height: 1.5; font-weight: 300; }
+  .form-fine { font-size: 11px; color: #94A3B8; line-height: 1.5; font-weight: 300; }
   .section-rule {
     display: flex;
     align-items: center;
@@ -320,7 +320,7 @@
   .promise-right { display: flex; flex-direction: column; gap: 24px; }
   .promise-item { display: flex; gap: 16px; align-items: flex-start; }
   .promise-dot { width: 6px; height: 6px; background: var(--rouge); border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
-  .promise-text { font-size: 14.5px; color: rgba(250,247,242,0.65); line-height: 1.65; font-weight: 300; }
+  .promise-text { font-size: 14.5px; color: rgba(245,247,250,0.65); line-height: 1.65; font-weight: 300; }
   .promise-text strong { color: var(--cream); font-weight: 400; }
   .bottom-cta {
     padding: 80px 40px;
@@ -360,7 +360,7 @@
     border: none;
     outline: none;
   }
-  .bottom-input::placeholder { color: #C0B5AE; }
+  .bottom-input::placeholder { color: #94A3B8; }
   .bottom-submit {
     padding: 15px 24px;
     background: var(--ink);
@@ -377,7 +377,7 @@
     flex-shrink: 0;
   }
   .bottom-submit:hover { background: var(--rouge); }
-  .bottom-fine { font-size: 11px; color: #C0B5AE; font-weight: 300; }
+  .bottom-fine { font-size: 11px; color: #94A3B8; font-weight: 300; }
   footer {
     border-top: 1px solid var(--divider);
     padding: 28px 40px;
@@ -387,9 +387,9 @@
   }
   .footer-logo { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: var(--ink); letter-spacing: -0.3px; }
   .footer-links { display: flex; gap: 24px; }
-  .footer-links a { font-size: 11px; color: #C0B5AE; font-weight: 300; text-decoration: none; letter-spacing: 0.5px; transition: color 0.2s; }
+  .footer-links a { font-size: 11px; color: #94A3B8; font-weight: 300; text-decoration: none; letter-spacing: 0.5px; transition: color 0.2s; }
   .footer-links a:hover { color: var(--warm); }
-  .footer-copy { font-size: 11px; color: #C0B5AE; font-weight: 300; letter-spacing: 0.5px; }
+  .footer-copy { font-size: 11px; color: #94A3B8; font-weight: 300; letter-spacing: 0.5px; }
   .success-msg { display: none; text-align: center; padding: 20px; }
   .success-msg.visible { display: block; }
   .success-headline { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; font-style: italic; color: var(--ink); margin-bottom: 8px; }
@@ -423,7 +423,7 @@
 <body>
 
 <header class="top-bar">
-  <a href="index.html" class="top-bar-logo">Lip Service</a>
+  <a href="index.html" class="top-bar-logo">Robots Think</a>
   <nav class="top-bar-nav">
     <a href="archive.html">Archive</a>
     <a href="newsletter.html" class="nav-cta">Latest issue →</a>
@@ -433,13 +433,13 @@
 <section class="hero">
   <div class="hero-left">
     <div>
-      <div class="hero-eyebrow">A beauty newsletter</div>
+      <div class="hero-eyebrow">A daily AI newsletter</div>
       <h1 class="hero-headline">
-        The most fun<br>a girl can have
-        <em>without taking<br>her clothes off.</em>
+        AI news for
+        <em>the rest of us.</em>
       </h1>
       <p class="hero-subhead">
-        Beauty gossip, ingredient science, fashion moments, charitable flexing, and one video guaranteed to wreck your mascara — <strong>delivered weekly to women who are completely done being talked to like they just discovered SPF.</strong>
+        Every weekday, Robots Think explains what's happening in AI and how to actually use it — <strong>no technical background required. No hype. No doom. Just the stuff that matters.</strong>
       </p>
     </div>
     <div class="hero-proof">
@@ -449,8 +449,8 @@
       </div>
       <div class="proof-divider"></div>
       <div class="proof-item">
-        <div class="proof-number">Weekly</div>
-        <div class="proof-label">Every Thursday</div>
+        <div class="proof-number">Daily</div>
+        <div class="proof-label">Weekdays</div>
       </div>
       <div class="proof-divider"></div>
       <div class="proof-item">
@@ -461,18 +461,18 @@
   </div>
   <div class="hero-right">
     <div class="form-kicker">Join the list</div>
-    <h2 class="form-headline">She's done being<br>talked down to.</h2>
-    <p class="form-subtext">Lip Service treats you like you already know what you're talking about. Because you do.</p>
+    <h2 class="form-headline">AI doesn't have to be<br>confusing.</h2>
+    <p class="form-subtext">Robots Think gives you the context, clarity, and tools to actually understand what's happening — without having to be a tech person.</p>
     <form class="subscribe-form" id="heroForm" onsubmit="handleSubmit(event,'heroSuccess','heroForm','heroFine')">
       <input class="form-input" type="text" name="firstName" placeholder="First name" autocomplete="given-name" required />
       <input class="form-input" type="email" name="email" placeholder="Email address" autocomplete="email" required />
-      <button class="form-submit" type="submit">Subscribe to Lip Service</button>
+      <button class="form-submit" type="submit">Subscribe to Robots Think</button>
     </form>
     <div class="success-msg" id="heroSuccess">
-      <div class="success-headline">You're in. Welcome to the list.</div>
-      <div class="success-sub">Check your inbox — something good is coming Thursday.</div>
+      <div class="success-headline">You're in. Welcome aboard.</div>
+      <div class="success-sub">Check your inbox — your first issue arrives tomorrow morning.</div>
     </div>
-    <p class="form-fine" id="heroFine">Weekly. Free. Unsubscribe whenever you want, no guilt trip.<br>We will never sell your email. That would be embarrassing.</p>
+    <p class="form-fine" id="heroFine">Daily. Free. Unsubscribe anytime, no guilt trip.<br>We will never sell your email.</p>
   </div>
 </section>
 
@@ -482,52 +482,52 @@
     <div class="what-item">
       <span class="what-number">01</span>
       <div class="what-title">Did You<br><em>Hear?</em></div>
-      <p class="what-desc">Industry gossip. The reformulation nobody announced, the brand drama everyone's pretending not to notice, the derm who said something unhinged on a podcast. This is the group chat section.</p>
+      <p class="what-desc">The AI news that actually matters this week — explained in plain English. What happened, why you should care, and what it means for your life. No insider jargon required.</p>
     </div>
     <div class="what-item">
       <span class="what-number">02</span>
       <div class="what-title">Did You<br><em>Know?</em></div>
-      <p class="what-desc">One ingredient, one study, one mechanism — explained like a smart friend at dinner, not a white paper. Beauty is 360. Skin, sleep, gut health, cortisol. We cover all of it.</p>
+      <p class="what-desc">One AI concept explained simply. What is a "hallucination"? What does "open source" mean for AI? Why do chatbots sometimes make things up? Explained like a smart friend at dinner, not a textbook.</p>
     </div>
     <div class="what-item">
       <span class="what-number">03</span>
-      <div class="what-title">Did You<br><em>See?</em></div>
-      <p class="what-desc">One moment from beauty or fashion this week. A campaign, a runway look, a product launch that's either genius or a disaster. Short take, strong opinion, no hedging.</p>
+      <div class="what-title">Did You<br><em>Try?</em></div>
+      <p class="what-desc">One AI tool or demo worth trying this week — with one specific thing to do with it today. For teachers, parents, office workers, anyone. No coding required.</p>
     </div>
     <div class="what-item">
       <span class="what-number">04</span>
       <div class="what-title">Did You<br><em>Help?</em></div>
-      <p class="what-desc">One cause, one action, zero guilt. Charitable as a flex. Because being generous and being a person with excellent skincare are not mutually exclusive.</p>
+      <p class="what-desc">One organization using AI for social good, or working to make sure AI works for everyone — not just people who can afford it. One action. Zero guilt.</p>
     </div>
     <div class="what-item">
       <span class="what-number">05</span>
       <div class="what-title">Healthy<br><em>Tears</em></div>
-      <p class="what-desc">One video. One sentence of context. A link. Something that will either make you laugh until you cry or cry until it's actually kind of funny. We close every issue here on purpose.</p>
+      <p class="what-desc">One video. One sentence of context. A link. Something that reminds you what's worth protecting — the human stuff — in a world that's changing fast. We close every issue here on purpose.</p>
     </div>
     <div class="what-item" style="background:var(--ink);display:flex;flex-direction:column;justify-content:center;">
-      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;font-style:italic;color:var(--cream);line-height:1.3;margin-bottom:16px;">"She sends the PubMed link <em style="color:var(--rouge);font-style:normal;">and</em> the unhinged meme in the same breath."</div>
-      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);font-weight:400;">That's the reader.<br>That's you.</div>
+      <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;font-style:italic;color:var(--cream);line-height:1.3;margin-bottom:16px;">"Finally an AI newsletter that doesn't assume I know what <em style="color:var(--rouge);font-style:normal;">LLM</em> means."</div>
+      <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);font-weight:400;">That's you.<br>That's us.</div>
     </div>
   </div>
 </section>
 
 <section class="promise-strip">
   <div>
-    <div class="promise-quote">"The beauty newsletter that treats you like you already know what you're talking about."</div>
-    <div class="promise-attr">The Lip Service Promise</div>
+    <div class="promise-quote">"The AI newsletter that treats you like a curious human, not a developer."</div>
+    <div class="promise-attr">The Robots Think Promise</div>
   </div>
   <div class="promise-right">
-    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Never preachy.</strong> We are not going to tell you to drink more water. You know about water.</div></div>
-    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Science-first, gossip-always.</strong> They are not mutually exclusive. We refuse to choose.</div></div>
-    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Dark humor welcome.</strong> Beauty is serious business and also completely absurd. We hold both.</div></div>
-    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Five minutes, every Thursday.</strong> Tight. Opinionated. Then we leave you alone until next week.</div></div>
+    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>No jargon without explanation.</strong> If we use a technical term, we explain it in the same sentence. Always.</div></div>
+    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>No hype, no doom.</strong> AI is genuinely interesting. We don't need to exaggerate in either direction.</div></div>
+    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Practical first.</strong> We ask "what does this actually mean for you?" before we say anything else.</div></div>
+    <div class="promise-item"><div class="promise-dot"></div><div class="promise-text"><strong>Five minutes, every weekday.</strong> Tight, clear, useful. Then we leave you alone until tomorrow.</div></div>
   </div>
 </section>
 
 <section class="bottom-cta">
-  <div class="bottom-cta-kicker">Free. Weekly. Yours.</div>
-  <h2 class="bottom-cta-headline">Your inbox deserves<br><em>better than this.</em></h2>
-  <p class="bottom-cta-sub">Lip Service arrives every Thursday. It will be the most interesting thing in your inbox that day. We stand behind that completely.</p>
+  <div class="bottom-cta-kicker">Free. Daily. Yours.</div>
+  <h2 class="bottom-cta-headline">AI is changing fast.<br><em>Stay curious.</em></h2>
+  <p class="bottom-cta-sub">Robots Think arrives every weekday morning. It will be the clearest, most useful thing in your inbox about AI that day. We stand behind that completely.</p>
   <form id="bottomForm" onsubmit="handleSubmit(event,'bottomSuccess','bottomFormWrap','bottomFine')">
     <div class="bottom-form" id="bottomFormWrap">
       <input class="bottom-input" type="email" name="email" placeholder="Your email address" autocomplete="email" required />
@@ -535,19 +535,19 @@
     </div>
   </form>
   <div class="success-msg" id="bottomSuccess">
-    <div class="success-headline">You're in. Welcome to the list.</div>
-    <div class="success-sub">Check your inbox Thursday.</div>
+    <div class="success-headline">You're in. Welcome aboard.</div>
+    <div class="success-sub">Your first issue arrives tomorrow morning.</div>
   </div>
   <p class="bottom-fine" id="bottomFine">Free forever. No spam. Unsubscribe anytime.</p>
 </section>
 
 <footer>
-  <div class="footer-logo">Lip Service</div>
+  <div class="footer-logo">Robots Think</div>
   <div class="footer-links">
     <a href="archive.html">Archive</a>
     <a href="newsletter.html">Latest issue</a>
   </div>
-  <div class="footer-copy">Weekly beauty. No apologies. © 2026</div>
+  <div class="footer-copy">AI news for everyone. © 2026</div>
 </footer>
 
 <script>

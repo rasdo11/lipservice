@@ -1,7 +1,7 @@
 {
-  "name": "lip-service",
+  "name": "robots-think",
   "version": "1.0.0",
-  "description": "Lip Service — Daily Beauty Newsletter",
+  "description": "Robots Think — Daily AI Newsletter for Everyday People",
   "type": "module",
   "scripts": {
     "generate": "node generate.js",
