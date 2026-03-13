@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { execSync } from 'child_process';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -33,8 +34,7 @@ const BEAUTY_IMAGES = [
 
 // Each story has a YouTube video ID + context for Claude to write from.
 // Verify video IDs are still live before adding new entries.
-// ADD MORE ENTRIES here to reduce repeat frequency — aim for 10+ videos.
-// Stories cycle by issue number (not day of year), so the pool should be large.
+// Selection avoids videos used in recent issues — expand the pool to reduce repeats.
 const TEARS_STORIES = [
   {
     videoId: 'bktozJWbLQg',
@@ -60,14 +60,80 @@ const TEARS_STORIES = [
       "Susan Boyle walked onto the Britain's Got Talent stage in 2009. She was 47, from a small Scottish village, wore a frumpy beige dress, and announced she wanted to be a professional singer. The audience laughed. Simon Cowell raised an eyebrow. Then she opened her mouth and sang \"I Dreamed a Dream,\" and within thirty seconds you could see the exact moment every person in that room realized they had made a catastrophic error in judgment. The clip was watched 47 million times in the first week. She became the best-selling debut artist in UK chart history that year.",
     videoLabel: "The 30 seconds that humbled an entire room.",
   },
+  {
+    videoId: 'Xe1Qyskxd5E',
+    context:
+      "Aretha Franklin performed \"(You Make Me Feel Like) A Natural Woman\" at the Kennedy Center Honors in 2015, honoring Carole King. She took off her fur coat mid-song, threw it to the floor, and kept going. President Obama wiped tears from his eyes. Carole King put her hand over her mouth and wept. The performance is often described as the greatest live vocal performance ever captured on video.",
+    videoLabel: "The performance that made a president cry.",
+  },
+  {
+    videoId: 'inXC_lab-34',
+    context:
+      "Malala Yousafzai addressed the United Nations in 2013, one year after being shot in the head by the Taliban for advocating girls' education. She was 16. She stood at the podium in a pink headscarf and spoke for 18 minutes without notes. \"One child, one teacher, one book, one pen can change the world.\" She did not seem afraid of anything.",
+    videoLabel: "Sixteen years old. Shot in the head. Still not afraid.",
+  },
+  {
+    videoId: '3nEnBJJMKQs',
+    context:
+      "Simone Biles at the 2016 Rio Olympics, performing the floor exercise that no other gymnast on earth could execute. She invented moves that the governing body named after her — because no one else could do them. Commentators ran out of words. Sports journalists called it the greatest athletic performance they had ever witnessed in person.",
+    videoLabel: "The routine that redefined what a human body can do.",
+  },
+  {
+    videoId: 'IurigVoZRHY',
+    context:
+      "Toni Morrison accepted the Nobel Prize in Literature in 1993 and delivered a lecture that began with a parable about an old blind woman and a bird. For thirty minutes she spoke about the power of language — how it can oppress, how it can liberate, how the word is always in our hands. At the end the room was silent for a long moment before the applause started.",
+    videoLabel: "The greatest writer alive, on what language is actually for.",
+  },
+  {
+    videoId: 'vuEQixrBKCc',
+    context:
+      "Nina Simone performing \"Feeling Good\" live. She recorded the definitive version in 1965. But live, with a full band, she played it like she invented the concept of freedom. There is a moment mid-song where she stops and looks at the audience and the silence says more than the words. Music critics still argue about which live performance is the definitive one. They are all correct.",
+    videoLabel: "The song that sounds different every time, because she meant it differently every time.",
+  },
+  {
+    videoId: 'OHRuRSCFo04',
+    context:
+      "Celine Dion performed \"My Heart Will Go On\" at the 2017 Billboard Music Awards, her first major performance since the death of her husband René Angélil — the man who discovered her when she was 12 and managed her career for 35 years. She hadn't performed in two years. She walked onstage in a black and white gown and sang the song that had defined both their lives, and she did not look away from the camera once.",
+    videoLabel: "She hadn't performed in two years. She didn't look away once.",
+  },
+  {
+    videoId: 'ygqCQbpHpxs',
+    context:
+      "Misty Copeland became the first Black principal dancer at American Ballet Theatre in 2015, after being told at 13 that her body was wrong for ballet — too muscular, too short, turned down by the most prestigious training programs in the country. She kept training anyway. When ABT announced her promotion, she was in the middle of a sold-out run of Swan Lake. The curtain call lasted eleven minutes.",
+    videoLabel: "They told her she had the wrong body. She became the standard.",
+  },
+  {
+    videoId: 'Q0Wd8BQMRVE',
+    context:
+      "Ruth Bader Ginsburg, at age 60, asked to join the U.S. Supreme Court. The American Bar Association rated her well-qualified. President Clinton nominated her. And at her confirmation hearing she sat for two days and answered questions from the Senate Judiciary Committee with a precision and composure that made the committee look small. She was confirmed 96-3. She served until she was 87.",
+    videoLabel: "What it looks like when someone has done the work.",
+  },
+  {
+    videoId: 'zQucWXWXp3k',
+    context:
+      "Adele's live version of \"Someone Like You\" at the 2011 BRIT Awards. No backing track. No dancers. No production. Just a piano and a voice. Within thirty seconds the arena was completely still. She had written the song two days after a breakup, sitting on a kitchen floor. By the time she finished, the camera had cut to every person in the front row. They were all crying.",
+    videoLabel: "A piano, a voice, and 20,000 people holding their breath.",
+  },
+  {
+    videoId: 'Svj8JPxBMSc',
+    context:
+      "Diana Nyad swam from Cuba to Florida in 2013 — 110 miles through open ocean, no shark cage, through jellyfish that left burns across her face. She was 64 years old. It was her fifth attempt. When she walked out of the water in Key West after 53 hours, she could barely stand. She gave a speech anyway. \"You are never too old to chase your dream,\" she said. \"It looks like a solitary sport, but it's a team.\"",
+    videoLabel: "64 years old. 110 miles. No cage. Fifth attempt.",
+  },
 ];
 
-// ─── Date helpers ─────────────────────────────────────────────────────────────
-
-function dayOfYear(date) {
-  const start = new Date(date.getFullYear(), 0, 0);
-  return Math.floor((date - start) / 86400000);
+// Pick the video story least recently used — avoids showing the same clip
+// back-to-back. Falls back to modulo rotation if the archive has no videoId data.
+function pickStory(archive, issueNum) {
+  const recentVideoIds = new Set(
+    archive.slice(0, TEARS_STORIES.length).map((e) => e.videoId).filter(Boolean)
+  );
+  const available = TEARS_STORIES.filter((s) => !recentVideoIds.has(s.videoId));
+  if (available.length > 0) return available[0];
+  return TEARS_STORIES[issueNum % TEARS_STORIES.length];
 }
+
+// ─── Date helpers ─────────────────────────────────────────────────────────────
 
 function issueNumber(archive) {
   // Derive next issue number from the existing archive (max + 1)
@@ -105,80 +171,12 @@ function buildHearItemsHtml(items) {
     .join('\n');
 }
 
-// Standalone archive page: clean list of all issues, newest to oldest
-function buildArchivePage(archive) {
-  const items = archive.length === 0
-    ? '<li class="archive-empty">No issues published yet.</li>'
-    : archive.map((entry) => `
-      <li class="archive-item">
-        <span class="archive-meta">
-          <span class="archive-label">${entry.issueLabel}</span>
-          <span class="archive-dot">·</span>
-          <span class="archive-date">${entry.issueDate}</span>
-        </span>
-        <span class="archive-teaser">${entry.heroText}</span>
-      </li>`).join('\n');
-
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Archive — Lip Service</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
-<style>
-  :root { --ink:#16120E; --cream:#FAF7F2; --rouge:#C13333; --warm:#9A8880; --divider:#E4DBD4; }
-  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--cream); color:var(--ink); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column; }
-  body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:100; opacity:0.4; }
-  .top-bar { display:flex; justify-content:space-between; align-items:center; padding:20px 40px; border-bottom:1px solid var(--divider); }
-  .top-bar-logo { font-family:'Playfair Display',serif; font-size:22px; font-weight:900; letter-spacing:-0.5px; color:var(--ink); text-decoration:none; }
-  .top-bar-back { font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--warm); text-decoration:none; font-weight:400; transition:color 0.2s; }
-  .top-bar-back:hover { color:var(--ink); }
-  main { flex:1; max-width:720px; width:100%; margin:0 auto; padding:64px 40px 80px; }
-  .page-eyebrow { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--rouge); font-weight:500; margin-bottom:16px; display:flex; align-items:center; gap:12px; }
-  .page-eyebrow::before { content:''; display:inline-block; width:24px; height:1px; background:var(--rouge); }
-  .page-headline { font-family:'Playfair Display',serif; font-size:clamp(36px,5vw,56px); font-weight:900; line-height:1.05; letter-spacing:-2px; color:var(--ink); margin-bottom:48px; }
-  .page-headline em { font-style:italic; color:var(--rouge); }
-  .archive-list { list-style:none; border-top:1px solid var(--divider); }
-  .archive-item { padding:24px 0; border-bottom:1px solid var(--divider); display:flex; flex-direction:column; gap:8px; }
-  .archive-empty { padding:24px 0; color:var(--warm); font-size:14px; font-weight:300; }
-  .archive-meta { display:flex; align-items:center; gap:10px; }
-  .archive-label { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:var(--ink); letter-spacing:-0.2px; }
-  .archive-dot { color:var(--rouge); font-size:12px; }
-  .archive-date { font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--warm); font-weight:400; }
-  .archive-teaser { font-size:14px; color:var(--warm); line-height:1.6; font-weight:300; max-width:600px; }
-  footer { border-top:1px solid var(--divider); padding:24px 40px; display:flex; justify-content:space-between; align-items:center; }
-  .footer-logo { font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:var(--ink); }
-  .footer-copy { font-size:11px; color:#C0B5AE; font-weight:300; }
-  @media (max-width:600px) { .top-bar { padding:18px 20px; } main { padding:48px 20px 60px; } footer { flex-direction:column; gap:8px; text-align:center; padding:20px; } }
-</style>
-</head>
-<body>
-<header class="top-bar">
-  <a href="index.html" class="top-bar-logo">Lip Service</a>
-  <a href="index.html" class="top-bar-back">← Home</a>
-</header>
-<main>
-  <div class="page-eyebrow">Every issue</div>
-  <h1 class="page-headline">The <em>archive.</em></h1>
-  <ul class="archive-list">
-    ${items}
-  </ul>
-</main>
-<footer>
-  <div class="footer-logo">Lip Service</div>
-  <div class="footer-copy">Weekly beauty. No apologies. © 2026</div>
-</footer>
-</body>
-</html>`;
-}
-
 // ─── Content generation ───────────────────────────────────────────────────────
 
 async function generateContent(date, story, recentIssues) {
   const client = new Anthropic();
   const dateStr = formatDate(date);
+  const fourDaysAgo = formatDate(new Date(date.getTime() - 4 * 24 * 60 * 60 * 1000));
 
   // Build a "do not repeat" block from the last 10 issues
   const doNotRepeat = recentIssues && recentIssues.length > 0
@@ -198,6 +196,9 @@ JOURNALISTIC RULES — these are non-negotiable:
 4. The charity must be a DIFFERENT organization every issue. Do not return to the same charity within 30 days.
 5. If you find yourself writing about a brand, ingredient, or designer that feels familiar, STOP and choose something else.
 6. Specific beats vague. A real brand name, a real product launch, a real controversy — not "a major beauty brand" or "a popular ingredient."
+
+FRESHNESS RULE — this is the most important rule:
+Every brand story, product launch, ingredient trend, runway moment, and charity spotlight you reference must have been publicly reported or occurred on or after ${fourDaysAgo}. Do not reference events, launches, controversies, or campaigns older than 4 days. If you are not certain something happened within that window, do not use it. Find something that did.
 ${doNotRepeat}
 IMPORTANT: Never use the words "preview", "draft", or "test" anywhere in the content. Write as if this is the final published issue.
 
@@ -367,7 +368,7 @@ async function promotePreview() {
   try { archive = JSON.parse(await fs.readFile(issuesJsonPath, 'utf-8')); } catch {}
   const issueNum = parseInt((issueLabel.match(/\d+/) || ['0'])[0], 10);
   archive = archive.filter((e) => e.date !== key);
-  archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: heroText, slug: key, url: `./issues/${key}.html` });
+  archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: heroText, slug: key, url: `./issues/${key}.html`, videoId: meta.videoId });
   await fs.writeFile(issuesJsonPath, JSON.stringify(archive, null, 2), 'utf-8');
 
   // Strip preview nav bar, replace archive placeholder with nothing (inbox-only)
@@ -385,8 +386,12 @@ async function promotePreview() {
 
   console.log(`  ✓ issues.json (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
 
-  // Clean up preview/
+  // Clean up preview/ and stage the deletion in git so manual runs don't leave dirty state.
+  // In CI the workflow's `git add -A` would catch it anyway; this makes local runs clean too.
   await fs.rm(previewDir, { recursive: true });
+  try {
+    execSync('git rm -rf --cached --ignore-unmatch preview/', { cwd: __dirname, stdio: 'pipe' });
+  } catch { /* not a git repo or nothing tracked — CI's git add -A will handle it */ }
   console.log('  ✓ preview/ cleaned up');
 }
 
@@ -432,7 +437,7 @@ async function main() {
   const issueNum = issueNumber(archive.filter((e) => e.date !== key));
 
   const image = BEAUTY_IMAGES[issueNum % BEAUTY_IMAGES.length];
-  const story = TEARS_STORIES[issueNum % TEARS_STORIES.length];
+  const story = pickStory(archive.filter((e) => e.date !== key), issueNum);
   const issueLabel = `Issue No. ${issueNum}`;
 
   // Pass the last 10 issues so Claude knows what NOT to repeat
@@ -453,6 +458,16 @@ async function main() {
   if (PREVIEW_MODE) {
     // ── Write preview/ (no changes to live site) ───────────────────────────
     const previewDir = path.join(__dirname, 'preview');
+
+    // Idempotency: skip if a preview already exists for the same target date.
+    // Prevents the duplicate preview crons (5 UTC and 6 UTC) from both calling the API.
+    try {
+      const existingMeta = JSON.parse(await fs.readFile(path.join(previewDir, 'meta.json'), 'utf-8'));
+      if (existingMeta.date === key) {
+        console.log(`Preview already exists for ${key} (${issueLabel}), skipping.`);
+        return;
+      }
+    } catch { /* no existing preview — proceed */ }
     await fs.mkdir(previewDir, { recursive: true });
 
     // Replace archive section with a visible placeholder for the preview viewer
@@ -467,7 +482,7 @@ async function main() {
 
     await fs.writeFile(path.join(previewDir, 'index.html'), previewHtml, 'utf-8');
     await fs.writeFile(path.join(previewDir, 'meta.json'), JSON.stringify(
-      { date: key, issueLabel, issueDate, heroText: content.hero_text }, null, 2
+      { date: key, issueLabel, issueDate, heroText: content.hero_text, videoId: story.videoId }, null, 2
     ), 'utf-8');
     console.log(`  ✓ preview/index.html (${issueLabel}) — live at /preview/`);
   } else {
@@ -476,7 +491,7 @@ async function main() {
     await fs.mkdir(issuesDir, { recursive: true });
 
     archive = archive.filter((e) => e.date !== key);
-    archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: content.hero_text, slug: key, url: `./issues/${key}.html` });
+    archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: content.hero_text, slug: key, url: `./issues/${key}.html`, videoId: story.videoId });
     await fs.writeFile(issuesJsonPath, JSON.stringify(archive, null, 2), 'utf-8');
 
     const newsletterHtml = html
