@@ -21,7 +21,25 @@
       ]
     },
     {
-      "source": "/(index|newsletter|issues)\\.(?:html|json)",
+      "source": "/index.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/newsletter.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/issues.json",
       "headers": [
         {
           "key": "Cache-Control",
