@@ -153,8 +153,6 @@
       setTimeout(() => { document.getElementById('drawer-frame').src = 'about:blank'; }, 320);
     }
 
-    document.getElementById('drawer-close').addEventListener('click', closeDrawer);
-    document.getElementById('drawer-backdrop').addEventListener('click', closeDrawer);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
 </script>
@@ -164,11 +162,11 @@
   <div class="footer-copy">Weekly beauty. No apologies. © 2026</div>
 </footer>
 
-<div class="drawer-backdrop" id="drawer-backdrop"></div>
+<div class="drawer-backdrop" id="drawer-backdrop" onclick="closeDrawer()"></div>
 <aside class="issue-drawer" id="issue-drawer" aria-hidden="true" aria-label="Issue viewer">
   <div class="drawer-header">
     <span class="drawer-label" id="drawer-label"></span>
-    <button class="drawer-close" id="drawer-close" aria-label="Close issue">&#x2715;</button>
+    <button class="drawer-close" id="drawer-close" aria-label="Close issue" onclick="closeDrawer()">&#x2715;</button>
   </div>
   <iframe class="drawer-frame" id="drawer-frame" title="Issue content" src="about:blank"></iframe>
 </aside>
