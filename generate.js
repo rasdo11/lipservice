@@ -176,14 +176,29 @@ function buildArchivePage(archive) {
 
 // ─── Content generation ───────────────────────────────────────────────────────
 
-async function generateContent(date, story) {
+async function generateContent(date, story, recentIssues) {
   const client = new Anthropic();
   const dateStr = formatDate(date);
 
-  const prompt = `You are writing today's issue of LIP SERVICE — a sharp, witty, beautifully written daily newsletter about beauty, fashion, culture, and the things women actually care about.
+  // Build a "do not repeat" block from the last 10 issues
+  const doNotRepeat = recentIssues && recentIssues.length > 0
+    ? `\nRECENTLY COVERED — DO NOT USE ANY OF THESE:\nThe following brands, ingredients, designers, charities, and stories have already appeared in the last ${recentIssues.length} issues. You are BANNED from mentioning them again. A repeat is a firing offense.\n\n${recentIssues.map((iss, i) => `Issue ${i + 1} (${iss.date}): ${iss.preview}`).join('\n')}\n\nBefore writing anything, ask yourself: "Did any recent issue cover this brand, ingredient, designer, or charity?" If yes, choose something completely different. The reader sees every issue. They will notice.\n`
+    : '';
+
+  const prompt = `You are the editor of LIP SERVICE — a sharp, witty, beautifully written daily newsletter about beauty, fashion, culture, and the things women actually care about.
+
+You are a working journalist with exacting standards. Your job is to find what is NEW and SPECIFIC today. You do not recycle stories. You do not reach for the same brands. You do not cover the same ingredient twice in a month. Every issue must feel like it was reported fresh that morning.
 
 Voice: Personal, specific, slightly wry. Think a brilliant friend who reads PubMed AND sends the unhinged meme. Never condescending, never preachy. The kind of writing that makes you feel like you were let in on something.
 
+JOURNALISTIC RULES — these are non-negotiable:
+1. The brand drama must be a DIFFERENT brand every single issue. There are thousands of beauty brands. Use them.
+2. The ingredient science must cover a DIFFERENT ingredient every issue. There are hundreds of actives. Pick one that hasn't been covered recently.
+3. The runway moment must reference a DIFFERENT designer and collection every issue.
+4. The charity must be a DIFFERENT organization every issue. Do not return to the same charity within 30 days.
+5. If you find yourself writing about a brand, ingredient, or designer that feels familiar, STOP and choose something else.
+6. Specific beats vague. A real brand name, a real product launch, a real controversy — not "a major beauty brand" or "a popular ingredient."
+${doNotRepeat}
 IMPORTANT: Never use the words "preview", "draft", or "test" anywhere in the content. Write as if this is the final published issue.
 
 IMPORTANT: Never use an em dash (—) anywhere in the writing. Rewrite any sentence that would require one. Use a comma, a period, or restructure the sentence instead.
@@ -420,9 +435,18 @@ async function main() {
   const story = TEARS_STORIES[issueNum % TEARS_STORIES.length];
   const issueLabel = `Issue No. ${issueNum}`;
 
-  console.log(`${PREVIEW_MODE ? 'Previewing' : 'Generating'} ${issueLabel} — ${issueDate}`);
+  // Pass the last 10 issues so Claude knows what NOT to repeat
+  const recentIssues = archive
+    .filter((e) => e.date !== key)
+    .slice(0, 10)
+    .map((e) => ({ date: e.date, preview: e.preview }));
 
-  const content = await generateContent(today, story);
+  console.log(`${PREVIEW_MODE ? 'Previewing' : 'Generating'} ${issueLabel} — ${issueDate}`);
+  if (recentIssues.length > 0) {
+    console.log(`  Passing ${recentIssues.length} recent issues to avoid repeats`);
+  }
+
+  const content = await generateContent(today, story, recentIssues);
   const template = await fs.readFile(path.join(__dirname, 'template.html'), 'utf-8');
   const html = renderHtml(template, content, image, story, issueLabel, issueDate);
 
