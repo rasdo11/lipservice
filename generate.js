@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { execSync } from 'child_process';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -134,11 +135,6 @@ function pickStory(archive, issueNum) {
 
 // ─── Date helpers ─────────────────────────────────────────────────────────────
 
-function dayOfYear(date) {
-  const start = new Date(date.getFullYear(), 0, 0);
-  return Math.floor((date - start) / 86400000);
-}
-
 function issueNumber(archive) {
   // Derive next issue number from the existing archive (max + 1)
   if (!archive || archive.length === 0) return 1;
@@ -173,75 +169,6 @@ function buildHearItemsHtml(items) {
     </div>`
     )
     .join('\n');
-}
-
-// Standalone archive page: clean list of all issues, newest to oldest
-function buildArchivePage(archive) {
-  const items = archive.length === 0
-    ? '<li class="archive-empty">No issues published yet.</li>'
-    : archive.map((entry) => `
-      <li class="archive-item">
-        <span class="archive-meta">
-          <span class="archive-label">${entry.issueLabel}</span>
-          <span class="archive-dot">·</span>
-          <span class="archive-date">${entry.issueDate}</span>
-        </span>
-        <span class="archive-teaser">${entry.heroText}</span>
-      </li>`).join('\n');
-
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Archive — Lip Service</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&display=swap" rel="stylesheet">
-<style>
-  :root { --ink:#16120E; --cream:#FAF7F2; --rouge:#C13333; --warm:#9A8880; --divider:#E4DBD4; }
-  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--cream); color:var(--ink); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; flex-direction:column; }
-  body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:100; opacity:0.4; }
-  .top-bar { display:flex; justify-content:space-between; align-items:center; padding:20px 40px; border-bottom:1px solid var(--divider); }
-  .top-bar-logo { font-family:'Playfair Display',serif; font-size:22px; font-weight:900; letter-spacing:-0.5px; color:var(--ink); text-decoration:none; }
-  .top-bar-back { font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--warm); text-decoration:none; font-weight:400; transition:color 0.2s; }
-  .top-bar-back:hover { color:var(--ink); }
-  main { flex:1; max-width:720px; width:100%; margin:0 auto; padding:64px 40px 80px; }
-  .page-eyebrow { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--rouge); font-weight:500; margin-bottom:16px; display:flex; align-items:center; gap:12px; }
-  .page-eyebrow::before { content:''; display:inline-block; width:24px; height:1px; background:var(--rouge); }
-  .page-headline { font-family:'Playfair Display',serif; font-size:clamp(36px,5vw,56px); font-weight:900; line-height:1.05; letter-spacing:-2px; color:var(--ink); margin-bottom:48px; }
-  .page-headline em { font-style:italic; color:var(--rouge); }
-  .archive-list { list-style:none; border-top:1px solid var(--divider); }
-  .archive-item { padding:24px 0; border-bottom:1px solid var(--divider); display:flex; flex-direction:column; gap:8px; }
-  .archive-empty { padding:24px 0; color:var(--warm); font-size:14px; font-weight:300; }
-  .archive-meta { display:flex; align-items:center; gap:10px; }
-  .archive-label { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:var(--ink); letter-spacing:-0.2px; }
-  .archive-dot { color:var(--rouge); font-size:12px; }
-  .archive-date { font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:var(--warm); font-weight:400; }
-  .archive-teaser { font-size:14px; color:var(--warm); line-height:1.6; font-weight:300; max-width:600px; }
-  footer { border-top:1px solid var(--divider); padding:24px 40px; display:flex; justify-content:space-between; align-items:center; }
-  .footer-logo { font-family:'Playfair Display',serif; font-size:16px; font-weight:900; color:var(--ink); }
-  .footer-copy { font-size:11px; color:#C0B5AE; font-weight:300; }
-  @media (max-width:600px) { .top-bar { padding:18px 20px; } main { padding:48px 20px 60px; } footer { flex-direction:column; gap:8px; text-align:center; padding:20px; } }
-</style>
-</head>
-<body>
-<header class="top-bar">
-  <a href="index.html" class="top-bar-logo">Lip Service</a>
-  <a href="index.html" class="top-bar-back">← Home</a>
-</header>
-<main>
-  <div class="page-eyebrow">Every issue</div>
-  <h1 class="page-headline">The <em>archive.</em></h1>
-  <ul class="archive-list">
-    ${items}
-  </ul>
-</main>
-<footer>
-  <div class="footer-logo">Lip Service</div>
-  <div class="footer-copy">Weekly beauty. No apologies. © 2026</div>
-</footer>
-</body>
-</html>`;
 }
 
 // ─── Content generation ───────────────────────────────────────────────────────
@@ -459,8 +386,12 @@ async function promotePreview() {
 
   console.log(`  ✓ issues.json (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
 
-  // Clean up preview/
+  // Clean up preview/ and stage the deletion in git so manual runs don't leave dirty state.
+  // In CI the workflow's `git add -A` would catch it anyway; this makes local runs clean too.
   await fs.rm(previewDir, { recursive: true });
+  try {
+    execSync('git rm -rf --cached --ignore-unmatch preview/', { cwd: __dirname, stdio: 'pipe' });
+  } catch { /* not a git repo or nothing tracked — CI's git add -A will handle it */ }
   console.log('  ✓ preview/ cleaned up');
 }
 
@@ -527,6 +458,16 @@ async function main() {
   if (PREVIEW_MODE) {
     // ── Write preview/ (no changes to live site) ───────────────────────────
     const previewDir = path.join(__dirname, 'preview');
+
+    // Idempotency: skip if a preview already exists for the same target date.
+    // Prevents the duplicate preview crons (5 UTC and 6 UTC) from both calling the API.
+    try {
+      const existingMeta = JSON.parse(await fs.readFile(path.join(previewDir, 'meta.json'), 'utf-8'));
+      if (existingMeta.date === key) {
+        console.log(`Preview already exists for ${key} (${issueLabel}), skipping.`);
+        return;
+      }
+    } catch { /* no existing preview — proceed */ }
     await fs.mkdir(previewDir, { recursive: true });
 
     // Replace archive section with a visible placeholder for the preview viewer
