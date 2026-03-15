@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lip Service — Issue No. 68</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --ink: #1A1410;
+    --blush: #E8C4B8;
+    --rouge: #C94040;
+    --nude: #D4A898;
+    --charcoal: #3D3530;
+    --warm-gray: #9A8F89;
+    --divider: #E2DAD3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .email-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--cream);
+  }
+  .header {
+    background-color: var(--ink);
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rouge), var(--nude), var(--blush));
+  }
+  .masthead {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--nude);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero {
+    background: var(--ink);
+    padding: 0 24px 32px;
+  }
+  .hero-box {
+    background: var(--rouge);
+    padding: 20px 22px;
+    border-radius: 2px;
+  }
+  .hero-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .hero-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  .section {
+    padding: 36px 24px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .section:last-of-type {
+    border-bottom: none;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-number {
+    width: 24px;
+    height: 24px;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+  }
+  .section-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+  .section-headline em {
+    font-style: italic;
+    color: var(--rouge);
+  }
+  .body-text {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .body-text p {
+    margin-bottom: 14px;
+  }
+  .body-text p:last-child {
+    margin-bottom: 0;
+  }
+  .body-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .opening .section-headline {
+    font-size: 28px;
+  }
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 58px;
+    font-weight: 900;
+    line-height: 0.8;
+    float: left;
+    margin-right: 6px;
+    margin-top: 8px;
+    color: var(--rouge);
+  }
+  .gossip-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .gossip-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .gossip-item:first-child {
+    padding-top: 0;
+  }
+  .gossip-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 6px;
+  }
+  .gossip-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .gossip-body {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .know-callout {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 22px;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .know-callout-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nude);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .know-callout-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .know-callout-text strong {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--blush);
+  }
+  .see-image-wrapper {
+    width: 100%;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .see-image-wrapper img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+  .see-image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 14px;
+    background: linear-gradient(transparent, rgba(26,20,16,0.8));
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .help-section {
+    background: #F0EBE5;
+  }
+  .help-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .help-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--rouge);
+    line-height: 1;
+  }
+  .help-number-label {
+    font-size: 13px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.4;
+    max-width: 200px;
+  }
+  .cta-button {
+    display: inline-block;
+    background: var(--rouge);
+    color: #fff;
+    padding: 13px 24px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 1px;
+    margin-top: 16px;
+    transition: opacity 0.2s;
+  }
+  .cta-button:hover { opacity: 0.88; }
+  .tears-section {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .tears-section .section-title { color: var(--nude); }
+  .tears-section .section-headline { color: var(--cream); }
+  .tears-section .body-text { color: rgba(250,247,242,0.75); }
+  .video-thumb {
+    display: block;
+    position: relative;
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 18px;
+    text-decoration: none;
+  }
+  .video-thumb img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.75);
+  }
+  .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255,255,255,0.4);
+  }
+  .play-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+  .video-label {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    right: 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.5px;
+    font-style: italic;
+  }
+  .footer {
+    background: var(--ink);
+    padding: 28px 24px;
+    text-align: center;
+    border-top: 3px solid var(--rouge);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .footer-text {
+    font-size: 12px;
+    color: var(--warm-gray);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    font-size: 10px;
+    color: var(--warm-gray);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .footer-links a:hover { color: var(--nude); }
+  .ornament {
+    text-align: center;
+    color: var(--rouge);
+    font-size: 18px;
+    letter-spacing: 8px;
+    padding: 8px 0 0;
+    opacity: 0.5;
+  }
+  .pill {
+    display: inline-block;
+    background: var(--blush);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  a.inline-link {
+    color: var(--rouge);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
+  }
+  .pull-quote {
+    border-left: 3px solid var(--rouge);
+    padding: 4px 16px;
+    margin: 18px 0;
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  /* ARCHIVE */
+  .archive-section {
+    background: var(--cream);
+  }
+  .archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .archive-item {
+    display: block;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--divider);
+    text-decoration: none;
+    color: inherit;
+  }
+  .archive-item:first-child {
+    padding-top: 0;
+  }
+  .archive-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .archive-item:hover .archive-item-label {
+    color: var(--rouge);
+  }
+  .archive-item-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .archive-item-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    transition: color 0.15s;
+  }
+  .archive-item-date {
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .archive-item-teaser {
+    font-size: 13.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.55;
+    font-style: italic;
+  }
+  /* ISSUE NAV BAR (standalone issue pages only) */
+  .issue-nav-bar {
+    background: var(--ink);
+    padding: 11px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .issue-nav-bar a {
+    font-size: 10px;
+    color: var(--nude);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .issue-nav-bar a:hover { color: var(--cream); }
+  .issue-nav-bar span {
+    font-size: 10px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 480px) {
+    .masthead { font-size: 36px; }
+    .section { padding: 28px 20px; }
+    .hero { padding: 0 20px 28px; }
+    .section-headline { font-size: 23px; }
+    .help-number { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+<div class="issue-nav-bar" style="background:var(--rouge);color:#fff;">
+  <span>👁 PREVIEW — goes live at 6am PST</span>
+  <span>Issue No. 68 &middot; March 15, 2026</span>
+</div>
+<div class="email-wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="masthead">Lip Service</div>
+    <div class="tagline">The most fun a girl can have without taking her clothes off</div>
+    <div class="header-meta">
+      <span>Issue No. 68</span>
+      <span>·</span>
+      <span>March 15, 2026</span>
+      <span>·</span>
+      <span>Daily</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-box">
+      <div class="hero-label">Today</div>
+      <div class="hero-text">Today: Rare Beauty's quiet pricing shakeup has Sephora employees whispering, the snail mucin alternative that actual dermatologists are switching to, Acne Studios AW26 and the unsettling beauty of a completely bare face in a snowstorm, and the charity teaching trans women how to do their own makeup for the first time. Let's get into it.</div>
+    </div>
+  </div>
+
+  <!-- 01 OPENING STATEMENT -->
+  <div class="section opening">
+    <div class="section-label">
+      <div class="section-number">01</div>
+      <div class="section-title">Opening Statement</div>
+    </div>
+    <div class="section-headline">I threw out my entire skincare shelf.<br><em>It took eleven minutes and cost me $400.</em></div>
+    <div class="body-text">
+      <p class="drop-cap">It started because I found a moisturizer from 2019 in the back of my bathroom cabinet. Not expired, technically. Just sitting there, half-used, behind three serums I bought because someone on TikTok had good lighting. I unscrewed the cap, smelled it, and felt a wave of something I can only describe as skincare shame. Not guilt. Shame. The deep, specific kind that comes from realizing you've been performing self-care instead of actually doing it.</p><p>So I pulled everything out. Lined it all up on the bathroom floor like evidence. Two vitamin C serums, both oxidized. A retinol I never introduced slowly enough, so it just burned and went back on the shelf. A $68 eye cream that did absolutely nothing, but I kept it because throwing it away felt like admitting I'd been conned. A toner I couldn't even remember buying. I counted seventeen products. Seventeen. For one face.</p><p>I threw out nine of them. Kept the sunscreen, the cleanser, one serum that actually does something, and a moisturizer I trust. The rest went in the trash, and I felt lighter in a way that surprised me. It turns out my skincare routine wasn't a routine. It was a guilt collection with a pump dispenser.</p><p>All of which is to say: welcome to Sunday's Lip Service, where we believe in fewer products, better information, and the radical act of admitting when something isn't working. Pull up a chair.</p>
+    </div>
+    <div class="ornament">— ✦ —</div>
+  </div>
+
+  <!-- 02 DID YOU HEAR -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">02</div>
+      <div class="section-title">Did You Hear?</div>
+    </div>
+    <div class="section-headline">The group chat<br><em>has opinions.</em></div>
+    
+    <div class="gossip-item">
+      <div class="gossip-tag">Brand Drama</div>
+      <div class="gossip-headline">Rare Beauty Quietly Raised Prices on Five Hero Products This Week</div>
+      <div class="gossip-body">Multiple Sephora employees flagged it on Reddit before the brand confirmed: the Soft Pinch Liquid Blush, among others, went up $2 to $4 across the board as of March 12. The official line is 'supply chain adjustments.' The unofficial line, from a former Rare Beauty staffer who spoke to us on background, is that margins were always razor-thin and the brand's growth has made that unsustainable. Selena's team has not commented beyond a single Instagram story about 'continuing to deliver quality.'</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Industry Moves</div>
+      <div class="gossip-headline">Shiseido Just Poached Estée Lauder's Entire Southeast Asia Digital Team</div>
+      <div class="gossip-body">At least six senior digital marketing leads from Estée Lauder's Singapore office have moved to Shiseido's new APAC innovation hub in the last two weeks, according to LinkedIn updates and two sources familiar with the moves. The hires signal Shiseido's aggressive push into social commerce across Indonesia and Vietnam. Lauder, already navigating a rocky restructuring, has yet to name replacements.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Trend Alert</div>
+      <div class="gossip-headline">The 'Undone Brow' Is Officially Over, According to Every Makeup Artist at Paris Fashion Week</div>
+      <div class="gossip-body">After three seasons of brushed-up, soap-brow chaos, multiple lead artists at AW26 shows this past week told us they've been specifically asked to bring brows back to 'structured and groomed.' Tom Pecheux used the phrase 'architectural brow' three times in one backstage interview. The feathery brow industrial complex had a good run.</div>
+    </div>
+  </div>
+
+  <!-- 03 DID YOU KNOW -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">03</div>
+      <div class="section-title">Did You Know?</div>
+    </div>
+    <div class="section-headline">Centella's little sister<br><em>just entered the chat.</em></div>
+    <div class="body-text">
+      <p>You know centella asiatica. You've seen it in every calming serum and barrier repair cream for the last five years. But the compound getting quiet attention in Korean derm clinics right now isn't centella itself. It's madecassoside, one of centella's triterpenoid saponins, isolated and concentrated at levels most centella extracts never reach. Think of it as the difference between drinking orange juice and taking a vitamin C tablet.</p>
+    </div>
+    <div class="know-callout">
+      <div class="know-callout-label">The Science, Briefly</div>
+      <div class="know-callout-text"><strong>Madecassoside</strong> works by stimulating type I collagen synthesis in fibroblasts while simultaneously inhibiting the inflammatory NF-kB signaling pathway. In a 2025 double-blind trial published in the Journal of Cosmetic Dermatology, isolated madecassoside at 0.1% concentration outperformed full centella extract at 2% for barrier recovery after controlled tape-stripping. The specificity matters: it's doing the repair work without the filler compounds that can sometimes sensitize reactive skin.</div>
+    </div>
+    <div class="body-text">
+      <p>A handful of Korean brands are already formulating with isolated madecassoside at clinical concentrations. Amorepacific's research division presented data on it at the IFSCC conference last fall, and at least two new launches from smaller K-beauty labels this month list it as the primary active. Expect to see it marketed as 'next-gen cica' by summer, which will annoy purists but probably isn't wrong.
+
+Here's the uncomfortable part: most products that say 'madecassoside' on the label are still using it at trace levels inside a broader centella extract, which means you're paying a premium for a marketing claim, not a therapeutic dose. If the ingredient isn't listed in the top five on the INCI list, you're likely getting the vibes of madecassoside without the biology. Ask your derm, not the brand's Instagram.</p>
+    </div>
+    <div class="pull-quote">
+      <p>"Isolated madecassoside is genuinely interesting for post-procedure recovery. We're recommending it to patients who can't tolerate even low-strength retinoids. But concentration is everything. Most consumer products are underdosed." — Dr. Yoon-Jung Kim, Clinical Dermatologist, SNU Bundang Hospital</p>
+    </div>
+  </div>
+
+  <!-- 04 DID YOU SEE -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">04</div>
+      <div class="section-title">Did You See?</div>
+    </div>
+    <div class="section-headline">Acne Studios sent models<br>into a fake blizzard.<br><em>Nobody was wearing foundation.</em></div>
+    <div class="see-image-wrapper">
+      <img src="https://images.unsplash.com/photo-1487412720507-265dfe4c7f77?w=600&q=80" alt="Portrait fashion editorial" />
+      <div class="see-image-caption">AW26 · Real flush, no filter, actual snow</div>
+    </div>
+    <div class="body-text">
+      <p>At Acne Studios AW26, shown in Paris on March 12, creative director Johnny Johansson staged the entire runway inside a climate-controlled space that simulated a Scandinavian snowstorm, complete with actual falling snow and temperatures cold enough to turn cheeks legitimately pink. The beauty directive, led by makeup artist Lucia Pica, was to do almost nothing. No base, no contour, no lip color. Just SPF, a thin layer of Weleda Skin Food on exposed skin, and whatever the cold did to each model's face. The result was startlingly varied: some models went ruddy and blotchy, others barely flushed at all. It was the most honest skin has looked on a runway in years.
+
+What made it genuinely radical, rather than just minimalist, was the refusal to curate which faces looked 'good' in the cold. Pica told press backstage that the point was to 'let weather be the makeup artist.' In a season where most shows are still layering three shades of bronzer to simulate health, Acne Studios asked what skin actually looks like when it's alive and slightly stressed. The answer, it turns out, is more beautiful than most beauty brands would be comfortable admitting. This is the kind of moment Lip Service exists for.</p>
+    </div>
+  </div>
+
+  <!-- 05 DID YOU HELP -->
+  <div class="section help-section">
+    <div class="section-label">
+      <div class="section-number">05</div>
+      <div class="section-title">Did You Help?</div>
+    </div>
+    <div class="section-headline">Beauty as an act<br><em>of becoming.</em></div>
+    <div class="body-text">
+      <p>SPARKLE (Supporting Positive Affirming Resources for Kids and Loved Environments) is a grassroots nonprofit based in Atlanta that runs free makeup workshops for trans women, many of whom never had access to the kind of casual beauty education most cis women absorb by osmosis. Founded in 2018 by Aria Sa'id, a trans rights advocate, it started with one folding table in a community center basement.</p>
+    </div>
+    <div class="help-stat">
+      <div class="help-number">4,200+</div>
+      <div class="help-number-label">trans women served through free beauty workshops since 2018</div>
+    </div>
+    <div class="body-text">
+      <p>One participant, a 54-year-old woman named Denise who transitioned in her late forties, described her first SPARKLE workshop as 'the first time anyone showed me how to do my own eyeliner without making me feel like I was late to something.' The workshops cover everything from skincare basics to color matching to corrective techniques for gender-affirming contouring. Volunteers include licensed cosmetologists and trans beauty creators who donate their time. They need product donations, funding for regional expansion, and more volunteer makeup artists.</p>
+    </div>
+    <a href="https://www.sparklesf.org/donate" class="cta-button" target="_blank">Donate to SPARKLE →</a>
+  </div>
+
+  <!-- 06 HEALTHY TEARS -->
+  <div class="section tears-section">
+    <div class="section-label">
+      <div class="section-number">06</div>
+      <div class="section-title">Healthy Tears</div>
+    </div>
+    <div class="section-headline">Viola Davis stood<br>at a podium in 2015<br><em>and said the only thing</em><br><em>left to say.</em></div>
+    <div class="body-text">
+      <p><p>Before that night, Viola Davis had already been the kind of actress who made you forget you were watching acting. She'd been nominated twice before for Emmys. She'd done the prestige films, the Broadway runs, the kind of career that earns the word 'respected' in every profile and 'overdue' in every headline. She was 50 years old. She had been working for decades. And no Black woman had ever won Outstanding Lead Actress in a Drama Series. Not once, in the 67 years the award had existed.</p>
+<p>When her name was called for How to Get Away with Murder, she stood up and walked to the stage and did something that award speeches almost never do. She made the room uncomfortable. Not with anger. With clarity. She opened her mouth and quoted Harriet Tubman: 'In my mind, I see a line. And over that line, I see green fields and lovely flowers and beautiful white women with their arms stretched out to me, over that line. But I can't seem to get there no-how. I can't seem to get over that line.'</p>
+<p>The room went completely still. She named Taraji P. Henson and Kerry Washington and the other Black women who had been in that room before her, brilliant and overlooked, season after season. She said the problem was not talent. The problem was opportunity. The problem was that you cannot win an award for a role that does not exist.</p>
+<p>The speech lasted less than two minutes. It contained no platitudes, no thank-you lists, no humility for humility's sake. It was the sound of a woman who had waited long enough and decided, in front of 11 million people, to stop being grateful and start being precise. 'The only thing that separates women of color from anyone else,' she said, 'is opportunity.' That sentence will outlive every trophy in that building.</p></p>
+    </div>
+    <a href="https://www.youtube.com/watch?v=dPNHpJzRMcA" target="_blank" class="video-thumb">
+      <img src="https://img.youtube.com/vi/dPNHpJzRMcA/hqdefault.jpg" alt="Healthy Tears · March 15, 2026" />
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="video-label">The speech that left the entire room still.</div>
+    </a>
+  </div>
+
+  <!-- ARCHIVE_SECTION_PREVIEW_PLACEHOLDER -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Lip Service</div>
+    <div class="footer-text">
+      Daily. Opinionated. Never preachy.<br>
+      You're receiving this because you have excellent taste.<br><br>
+      <em style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</em>
+    </div>
+    <div class="footer-links">
+      <a href="#">View in browser</a>
+      <a href="../archive.html">Archive</a>
+      <a href="../subscribe.html" target="_blank">Forward this</a>
+      <a href="../unsubscribe.html">Unsubscribe</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
