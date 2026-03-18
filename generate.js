@@ -369,6 +369,7 @@ async function promotePreview() {
   const issueNum = parseInt((issueLabel.match(/\d+/) || ['0'])[0], 10);
   archive = archive.filter((e) => e.date !== key);
   archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: heroText, slug: key, url: `./issues/${key}.html`, videoId: meta.videoId });
+  archive.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
   await fs.writeFile(issuesJsonPath, JSON.stringify(archive, null, 2), 'utf-8');
 
   // Strip preview nav bar, replace archive placeholder with nothing (inbox-only)
@@ -492,6 +493,7 @@ async function main() {
 
     archive = archive.filter((e) => e.date !== key);
     archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: content.hero_text, slug: key, url: `./issues/${key}.html`, videoId: story.videoId });
+    archive.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
     await fs.writeFile(issuesJsonPath, JSON.stringify(archive, null, 2), 'utf-8');
 
     const newsletterHtml = html
