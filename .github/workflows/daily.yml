@@ -66,4 +66,5 @@ jobs:
           git config user.email "bot@lipservice.dev"
           git add -A
           git diff --staged --quiet || git commit -m "Daily newsletter: $(TZ='America/Los_Angeles' date +'%B %d, %Y')"
+          git pull --rebase origin HEAD
           git push origin HEAD
