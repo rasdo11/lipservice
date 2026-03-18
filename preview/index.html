@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lip Service — Issue No. 72</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --ink: #1A1410;
+    --blush: #E8C4B8;
+    --rouge: #C94040;
+    --nude: #D4A898;
+    --charcoal: #3D3530;
+    --warm-gray: #9A8F89;
+    --divider: #E2DAD3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .email-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--cream);
+  }
+  .header {
+    background-color: var(--ink);
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rouge), var(--nude), var(--blush));
+  }
+  .masthead {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--nude);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero {
+    background: var(--ink);
+    padding: 0 24px 32px;
+  }
+  .hero-box {
+    background: var(--rouge);
+    padding: 20px 22px;
+    border-radius: 2px;
+  }
+  .hero-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .hero-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  .section {
+    padding: 36px 24px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .section:last-of-type {
+    border-bottom: none;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-number {
+    width: 24px;
+    height: 24px;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+  }
+  .section-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+  .section-headline em {
+    font-style: italic;
+    color: var(--rouge);
+  }
+  .body-text {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .body-text p {
+    margin-bottom: 14px;
+  }
+  .body-text p:last-child {
+    margin-bottom: 0;
+  }
+  .body-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .opening .section-headline {
+    font-size: 28px;
+  }
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 58px;
+    font-weight: 900;
+    line-height: 0.8;
+    float: left;
+    margin-right: 6px;
+    margin-top: 8px;
+    color: var(--rouge);
+  }
+  .gossip-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .gossip-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .gossip-item:first-child {
+    padding-top: 0;
+  }
+  .gossip-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 6px;
+  }
+  .gossip-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .gossip-body {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .know-callout {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 22px;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .know-callout-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nude);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .know-callout-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .know-callout-text strong {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--blush);
+  }
+  .see-image-wrapper {
+    width: 100%;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .see-image-wrapper img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+  .see-image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 14px;
+    background: linear-gradient(transparent, rgba(26,20,16,0.8));
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .help-section {
+    background: #F0EBE5;
+  }
+  .help-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .help-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--rouge);
+    line-height: 1;
+  }
+  .help-number-label {
+    font-size: 13px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.4;
+    max-width: 200px;
+  }
+  .cta-button {
+    display: inline-block;
+    background: var(--rouge);
+    color: #fff;
+    padding: 13px 24px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 1px;
+    margin-top: 16px;
+    transition: opacity 0.2s;
+  }
+  .cta-button:hover { opacity: 0.88; }
+  .tears-section {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .tears-section .section-title { color: var(--nude); }
+  .tears-section .section-headline { color: var(--cream); }
+  .tears-section .body-text { color: rgba(250,247,242,0.75); }
+  .video-thumb {
+    display: block;
+    position: relative;
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 18px;
+    text-decoration: none;
+  }
+  .video-thumb img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.75);
+  }
+  .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255,255,255,0.4);
+  }
+  .play-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+  .video-label {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    right: 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.5px;
+    font-style: italic;
+  }
+  .footer {
+    background: var(--ink);
+    padding: 28px 24px;
+    text-align: center;
+    border-top: 3px solid var(--rouge);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .footer-text {
+    font-size: 12px;
+    color: var(--warm-gray);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    font-size: 10px;
+    color: var(--warm-gray);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .footer-links a:hover { color: var(--nude); }
+  .ornament {
+    text-align: center;
+    color: var(--rouge);
+    font-size: 18px;
+    letter-spacing: 8px;
+    padding: 8px 0 0;
+    opacity: 0.5;
+  }
+  .pill {
+    display: inline-block;
+    background: var(--blush);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  a.inline-link {
+    color: var(--rouge);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
+  }
+  .pull-quote {
+    border-left: 3px solid var(--rouge);
+    padding: 4px 16px;
+    margin: 18px 0;
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  /* ARCHIVE */
+  .archive-section {
+    background: var(--cream);
+  }
+  .archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .archive-item {
+    display: block;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--divider);
+    text-decoration: none;
+    color: inherit;
+  }
+  .archive-item:first-child {
+    padding-top: 0;
+  }
+  .archive-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .archive-item:hover .archive-item-label {
+    color: var(--rouge);
+  }
+  .archive-item-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .archive-item-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    transition: color 0.15s;
+  }
+  .archive-item-date {
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .archive-item-teaser {
+    font-size: 13.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.55;
+    font-style: italic;
+  }
+  /* ISSUE NAV BAR (standalone issue pages only) */
+  .issue-nav-bar {
+    background: var(--ink);
+    padding: 11px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .issue-nav-bar a {
+    font-size: 10px;
+    color: var(--nude);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .issue-nav-bar a:hover { color: var(--cream); }
+  .issue-nav-bar span {
+    font-size: 10px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 480px) {
+    .masthead { font-size: 36px; }
+    .section { padding: 28px 20px; }
+    .hero { padding: 0 20px 28px; }
+    .section-headline { font-size: 23px; }
+    .help-number { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+<div class="issue-nav-bar" style="background:var(--rouge);color:#fff;">
+  <span>👁 PREVIEW — goes live at 6am PST</span>
+  <span>Issue No. 72 &middot; March 18, 2026</span>
+</div>
+<div class="email-wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="masthead">Lip Service</div>
+    <div class="tagline">The most fun a girl can have without taking her clothes off</div>
+    <div class="header-meta">
+      <span>Issue No. 72</span>
+      <span>·</span>
+      <span>March 18, 2026</span>
+      <span>·</span>
+      <span>Daily</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-box">
+      <div class="hero-label">Today</div>
+      <div class="hero-text">Today: Merit Beauty is quietly shrinking its complexion range while calling it a "simplification," the bakuchiol derivative that just upstaged retinol in a head-to-head clinical trial, Valentino's AW26 show where every model looked like they'd been kissed by a ghost, and the nonprofit teaching women in domestic violence shelters how to reclaim their own reflection. Let's get into it.</div>
+    </div>
+  </div>
+
+  <!-- 01 OPENING STATEMENT -->
+  <div class="section opening">
+    <div class="section-label">
+      <div class="section-number">01</div>
+      <div class="section-title">Opening Statement</div>
+    </div>
+    <div class="section-headline">I reorganized my entire vanity at 1 a.m.<br><em>It did not fix what I thought it would fix.</em></div>
+    <div class="body-text">
+      <p class="drop-cap">There is a specific kind of delusion that only strikes after midnight, and mine arrived on Sunday in the form of a conviction that if I could just line up every serum in height order and throw away every lip product I haven't touched since October, something inside me would click into place. So I pulled everything off the shelf. I sorted. I swatched. I discovered a sample of some high-end eye cream that had gone rancid in a way I can only describe as hostile.</p><p>Three hours later, my vanity looked pristine and my brain felt exactly the same. Because of course it did. The promise of beauty organization is the promise of beauty itself: that if you curate the outside carefully enough, the inside will follow. It is a lie we agree to tell ourselves every time we spiral into a Sephora basket at 11:47 p.m. on a Tuesday.</p><p>But here is the thing I keep coming back to. The ritual still matters, even when it doesn't fix anything. The fifteen minutes I spend in the morning with a cold washcloth and a vitamin C serum are not going to restructure my psyche, but they are mine. They are a promise I make to my own face every day: I see you, I will take care of you, and I will not let you leave this bathroom looking haunted.</p><p>Welcome to Wednesday's Lip Service. We have brand drama, ingredient science, a runway moment that made me forget to breathe, and a charity that is doing the kind of work that actually restructures something. Pull up a chair.</p>
+    </div>
+    <div class="ornament">— ✦ —</div>
+  </div>
+
+  <!-- 02 DID YOU HEAR -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">02</div>
+      <div class="section-title">Did You Hear?</div>
+    </div>
+    <div class="section-headline">The group chat<br><em>has opinions.</em></div>
+    
+    <div class="gossip-item">
+      <div class="gossip-tag">Brand Drama</div>
+      <div class="gossip-headline">Merit Beauty's "Simplified" Shade Range Just Lost Eight Shades and Gained a PR Problem</div>
+      <div class="gossip-body">Merit quietly pulled eight shades from its Flush Balm and The Minimalist foundation stick lines this week, framing the move as a streamlining effort to focus on "universal-leaning tones." Multiple Ulta employees have confirmed the missing shades skew deep. When your brand identity is minimalism, you don't get to minimize the people who can actually wear your products.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Industry Moves</div>
+      <div class="gossip-headline">Shiseido Is Reportedly Shopping Its Drunk Elephant Stake to Private Equity</div>
+      <div class="gossip-body">Bloomberg reported Monday that Shiseido has been in early conversations with at least two PE firms about offloading a significant stake in Drunk Elephant, the brand it acquired for $845 million in 2019. Insiders say the brand's clinical repositioning has underperformed in Asia-Pacific markets. The irony of a brand built on "clean" vibes potentially ending up in the hands of people whose entire job is financial extraction is almost too perfect.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Trend Alert</div>
+      <div class="gossip-headline">The "Cold Plunge Face" Is Coming for Your Blush Placement</div>
+      <div class="gossip-body">A TikTok trend encouraging people to dunk their faces in ice water before applying makeup, then blush only where the flush naturally appears, has racked up 40 million views since Friday. Dermatologists are wearily pointing out that repeated cold exposure can exacerbate rosacea. But the resulting blush placement, high on the nose bridge and just below the inner eye, is genuinely more flattering than anything a beauty editor has prescribed in years.</div>
+    </div>
+  </div>
+
+  <!-- 03 DID YOU KNOW -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">03</div>
+      <div class="section-title">Did You Know?</div>
+    </div>
+    <div class="section-headline">Bakuchiol got<br><em>an upgrade you missed.</em></div>
+    <div class="body-text">
+      <p>You have heard of bakuchiol. Your dermatologist has a complicated relationship with it. But a new derivative called bakuchiol oleate just quietly outperformed retinol in a 12-week split-face trial published in the Journal of Cosmetic Dermatology this month, and the results are specific enough to pay attention to.</p>
+    </div>
+    <div class="know-callout">
+      <div class="know-callout-label">The Science, Briefly</div>
+      <div class="know-callout-text"><strong>Bakuchiol oleate</strong> is an esterified form of bakuchiol bonded to oleic acid, which dramatically improves its penetration into the stratum corneum. In the March 2026 trial, it reduced fine line depth by 23% versus retinol's 19% over 12 weeks, with zero reports of the irritant contact dermatitis that plagued the retinol cohort.</div>
+    </div>
+    <div class="body-text">
+      <p>The original bakuchiol moment, circa 2019, was always a little oversold. It worked, but gently, and mostly for people who couldn't tolerate retinoids at all. The oleate derivative changes the calculus. By hitching bakuchiol to a fatty acid the skin already recognizes, formulators solved the penetration problem without creating the irritation one. Biossance has reportedly been quietly reformulating its Squalane + Phyto-Retinol Serum around this exact molecule, with an updated version expected to hit Sephora shelves before May.
+
+What makes this interesting beyond the chemistry is the shift it represents. For a decade, the retinol-or-nothing crowd has treated every botanical alternative as a consolation prize. This is the first time a plant-derived active has beaten retinol on its own terms, in a controlled trial, on the specific endpoint retinol was supposed to own. It does not mean retinol is finished. It means the argument just got a lot more interesting.</p>
+    </div>
+    <div class="pull-quote">
+      <p>"We are not saying bakuchiol oleate replaces retinol. We are saying it outperformed it in this specific context, with a dramatically better tolerability profile. That matters for the 30 to 40 percent of patients who simply cannot use retinoids consistently." — Dr. Ava Shamban, Dermatologist, SKIN FIVE Clinics</p>
+    </div>
+  </div>
+
+  <!-- 04 DID YOU SEE -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">04</div>
+      <div class="section-title">Did You See?</div>
+    </div>
+    <div class="section-headline">Valentino AW26 and<br><em>the haunted blush<br>that wrecked me.</em></div>
+    <div class="see-image-wrapper">
+      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80" alt="Fashion editorial runway beauty" />
+      <div class="see-image-caption">AW26 · Valentino's haunted single-streak blush by Pat McGrath</div>
+    </div>
+    <div class="body-text">
+      <p>Valentino's AW26 show in Paris on Saturday night was ostensibly about the clothes, which were sharply tailored and drenched in a shade of ivory that Pierpaolo Piccioli's successor, Alessandro Michele, is clearly claiming as his own. But what stopped me cold was the beauty direction. Pat McGrath applied blush in a single diffused streak from the outer eye down to the jawline, as though each model had been slapped once, lovingly, by a ghost. The color was somewhere between a bruised petal and a wine stain, and it made every face look like it had just processed a very large emotion.
+
+The effect was destabilizing in the best way. In a season where most houses are pushing luminous, healthy, "your skin but better" beauty, Michele and McGrath went for "your skin after a revelation." It is the kind of look that photographs like a Renaissance oil painting and probably requires seven products and a physics degree to replicate. We will absolutely be trying. That is the Lip Service promise.</p>
+    </div>
+  </div>
+
+  <!-- 05 DID YOU HELP -->
+  <div class="section help-section">
+    <div class="section-label">
+      <div class="section-number">05</div>
+      <div class="section-title">Did You Help?</div>
+    </div>
+    <div class="section-headline">Beauty as an act<br><em>of coming home to yourself.</em></div>
+    <div class="body-text">
+      <p>Restored Dignity is a nonprofit founded in 2021 in Phoenix, Arizona, that brings full beauty kits and one-on-one tutorials to women living in domestic violence shelters. The premise is disarmingly simple: when someone has systematically dismantled your sense of self, the act of choosing your own lipstick color can feel like the first decision that is entirely yours.</p>
+    </div>
+    <div class="help-stat">
+      <div class="help-number">4,200+</div>
+      <div class="help-number-label">women served with personalized beauty kits since 2021</div>
+    </div>
+    <div class="body-text">
+      <p>One of Restored Dignity's volunteers told me about a woman who had not looked in a mirror in over a year because her partner had removed all the mirrors from their home. Her first session at the shelter involved a handheld mirror, a tinted moisturizer, and twenty minutes of silence before she said anything at all. She eventually asked for red lipstick. She wore it to her court hearing the following week. The organization runs entirely on donations of product and funding for its trained volunteer cosmetologists.</p>
+    </div>
+    <a href="https://restoreddignity.org/donate" class="cta-button" target="_blank">Donate to Restored Dignity →</a>
+  </div>
+
+  <!-- 06 HEALTHY TEARS -->
+  <div class="section tears-section">
+    <div class="section-label">
+      <div class="section-number">06</div>
+      <div class="section-title">Healthy Tears</div>
+    </div>
+    <div class="section-headline">Aretha sat down<br>at someone else's piano.<br><em>Then she stood up<br>and ended the argument forever.</em></div>
+    <div class="body-text">
+      <p><p>By December 2015, Aretha Franklin had spent half a century proving things to people who should not have needed proof. She had eighteen Grammys, a voice that could peel paint off a cathedral ceiling, and absolutely nothing left to demonstrate to anyone. She was 73 years old. She had been unwell. The fur coat she wore to the Kennedy Center Honors that night was enormous, floor-length, the kind of garment that announces a woman who has decided that comfort and spectacle are the same thing.</p>
+<p>The occasion was a tribute to Carole King, who sat in the balcony beside President Obama looking like a person bracing for something lovely but manageable. What she got was unmanageable. Aretha sat at the piano and began "(You Make Me Feel Like) A Natural Woman" with a restraint that almost felt polite, her fingers finding the keys like she was reintroducing herself to the song. And then, somewhere around the second verse, she simply decided to stop being careful.</p>
+<p>She stood up from the piano bench. She let the fur coat fall to the floor in a gesture so perfectly timed it looked choreographed but was clearly just a woman getting something out of her way. What followed was not a performance in any conventional sense. It was a vocal argument with gravity. She bent notes that should not have bent. She held the final run so long that the orchestra had to wait for her, and you could see the conductor smiling because what else do you do when Aretha Franklin decides the song is not over yet.</p>
+<p>In the balcony, Carole King pressed both hands to her face and wept openly. Obama, who had managed to maintain presidential composure through countless state dinners and foreign crises, wiped his eyes with his finger and did not bother pretending he wasn't crying. Aretha finished, looked up at the balcony, and gave a small nod. Not a bow. A nod. As if to say: that is what your song always was. You just needed someone to show you.</p></p>
+    </div>
+    <a href="https://www.youtube.com/watch?v=Xe1Qyskxd5E" target="_blank" class="video-thumb">
+      <img src="https://img.youtube.com/vi/Xe1Qyskxd5E/hqdefault.jpg" alt="Healthy Tears · March 18, 2026" />
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="video-label">The performance that made a president cry.</div>
+    </a>
+  </div>
+
+  <!-- ARCHIVE_SECTION_PREVIEW_PLACEHOLDER -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Lip Service</div>
+    <div class="footer-text">
+      Daily. Opinionated. Never preachy.<br>
+      You're receiving this because you have excellent taste.<br><br>
+      <em style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</em>
+    </div>
+    <div class="footer-links">
+      <a href="#">View in browser</a>
+      <a href="../archive.html">Archive</a>
+      <a href="../subscribe.html" target="_blank">Forward this</a>
+      <a href="../unsubscribe.html">Unsubscribe</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
