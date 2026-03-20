@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lip Service — Issue No. 74</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --ink: #1A1410;
+    --blush: #E8C4B8;
+    --rouge: #C94040;
+    --nude: #D4A898;
+    --charcoal: #3D3530;
+    --warm-gray: #9A8F89;
+    --divider: #E2DAD3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .email-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--cream);
+  }
+  .header {
+    background-color: var(--ink);
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rouge), var(--nude), var(--blush));
+  }
+  .masthead {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--nude);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero {
+    background: var(--ink);
+    padding: 0 24px 32px;
+  }
+  .hero-box {
+    background: var(--rouge);
+    padding: 20px 22px;
+    border-radius: 2px;
+  }
+  .hero-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .hero-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  .section {
+    padding: 36px 24px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .section:last-of-type {
+    border-bottom: none;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-number {
+    width: 24px;
+    height: 24px;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+  }
+  .section-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+  .section-headline em {
+    font-style: italic;
+    color: var(--rouge);
+  }
+  .body-text {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .body-text p {
+    margin-bottom: 14px;
+  }
+  .body-text p:last-child {
+    margin-bottom: 0;
+  }
+  .body-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .opening .section-headline {
+    font-size: 28px;
+  }
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 58px;
+    font-weight: 900;
+    line-height: 0.8;
+    float: left;
+    margin-right: 6px;
+    margin-top: 8px;
+    color: var(--rouge);
+  }
+  .gossip-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .gossip-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .gossip-item:first-child {
+    padding-top: 0;
+  }
+  .gossip-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 6px;
+  }
+  .gossip-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .gossip-body {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .know-callout {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 22px;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .know-callout-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nude);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .know-callout-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .know-callout-text strong {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--blush);
+  }
+  .see-image-wrapper {
+    width: 100%;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .see-image-wrapper img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+  .see-image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 14px;
+    background: linear-gradient(transparent, rgba(26,20,16,0.8));
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .help-section {
+    background: #F0EBE5;
+  }
+  .help-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .help-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--rouge);
+    line-height: 1;
+  }
+  .help-number-label {
+    font-size: 13px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.4;
+    max-width: 200px;
+  }
+  .cta-button {
+    display: inline-block;
+    background: var(--rouge);
+    color: #fff;
+    padding: 13px 24px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 1px;
+    margin-top: 16px;
+    transition: opacity 0.2s;
+  }
+  .cta-button:hover { opacity: 0.88; }
+  .tears-section {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .tears-section .section-title { color: var(--nude); }
+  .tears-section .section-headline { color: var(--cream); }
+  .tears-section .body-text { color: rgba(250,247,242,0.75); }
+  .video-thumb {
+    display: block;
+    position: relative;
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 18px;
+    text-decoration: none;
+  }
+  .video-thumb img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.75);
+  }
+  .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255,255,255,0.4);
+  }
+  .play-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+  .video-label {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    right: 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.5px;
+    font-style: italic;
+  }
+  .footer {
+    background: var(--ink);
+    padding: 28px 24px;
+    text-align: center;
+    border-top: 3px solid var(--rouge);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .footer-text {
+    font-size: 12px;
+    color: var(--warm-gray);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    font-size: 10px;
+    color: var(--warm-gray);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .footer-links a:hover { color: var(--nude); }
+  .ornament {
+    text-align: center;
+    color: var(--rouge);
+    font-size: 18px;
+    letter-spacing: 8px;
+    padding: 8px 0 0;
+    opacity: 0.5;
+  }
+  .pill {
+    display: inline-block;
+    background: var(--blush);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  a.inline-link {
+    color: var(--rouge);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
+  }
+  .pull-quote {
+    border-left: 3px solid var(--rouge);
+    padding: 4px 16px;
+    margin: 18px 0;
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  /* ARCHIVE */
+  .archive-section {
+    background: var(--cream);
+  }
+  .archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .archive-item {
+    display: block;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--divider);
+    text-decoration: none;
+    color: inherit;
+  }
+  .archive-item:first-child {
+    padding-top: 0;
+  }
+  .archive-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .archive-item:hover .archive-item-label {
+    color: var(--rouge);
+  }
+  .archive-item-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .archive-item-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    transition: color 0.15s;
+  }
+  .archive-item-date {
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .archive-item-teaser {
+    font-size: 13.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.55;
+    font-style: italic;
+  }
+  /* ISSUE NAV BAR (standalone issue pages only) */
+  .issue-nav-bar {
+    background: var(--ink);
+    padding: 11px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .issue-nav-bar a {
+    font-size: 10px;
+    color: var(--nude);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .issue-nav-bar a:hover { color: var(--cream); }
+  .issue-nav-bar span {
+    font-size: 10px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 480px) {
+    .masthead { font-size: 36px; }
+    .section { padding: 28px 20px; }
+    .hero { padding: 0 20px 28px; }
+    .section-headline { font-size: 23px; }
+    .help-number { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+<div class="issue-nav-bar" style="background:var(--rouge);color:#fff;">
+  <span>👁 PREVIEW — goes live at 6am PST</span>
+  <span>Issue No. 74 &middot; March 20, 2026</span>
+</div>
+<div class="email-wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="masthead">Lip Service</div>
+    <div class="tagline">The most fun a girl can have without taking her clothes off</div>
+    <div class="header-meta">
+      <span>Issue No. 74</span>
+      <span>·</span>
+      <span>March 20, 2026</span>
+      <span>·</span>
+      <span>Daily</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-box">
+      <div class="hero-label">Today</div>
+      <div class="hero-text">Today: Saie Beauty is quietly axing half its blush shade range while calling it a "seasonal refresh," the adenosine molecule your Japanese sunscreen has been hiding in plain sight, Schiaparelli's AW26 show where every model looked like a gilded wound, and the nonprofit putting dermatology care in the hands of incarcerated women who haven't seen a doctor in years. Let's get into it.</div>
+    </div>
+  </div>
+
+  <!-- 01 OPENING STATEMENT -->
+  <div class="section opening">
+    <div class="section-label">
+      <div class="section-number">01</div>
+      <div class="section-title">Opening Statement</div>
+    </div>
+    <div class="section-headline">I counted my empties.<br><em>It felt like a crime scene.</em></div>
+    <div class="body-text">
+      <p class="drop-cap">I spent last night pulling every finished product out from under my bathroom sink, which is something I do quarterly and always regret. There were fourteen empties, three of which I repurchased without thinking, two of which I actively disliked but finished anyway out of guilt, and one tube of SPF I know I replaced with a worse formula because the packaging was prettier. The sink looked like a tiny graveyard of poor decisions, and I stood over it feeling like a forensic analyst at my own vanity.</p><p>The thing nobody talks about in the beauty conversation is the inertia. How we keep buying the same product because we bought it last time, and the time before that, and eventually the act of choosing it feels like identity rather than preference. I think about this when brands quietly sunset a shade or tweak a formula. They are counting on that inertia. They know most of us will reach for the new version without reading the back of the box.</p><p>But some of us do read the back of the box. Some of us keep a spreadsheet. Some of us are perhaps too invested, but at least we are honest about it. This newsletter is for us.</p><p>Welcome to Friday's Lip Service. Grab your coffee, and maybe go check your empties drawer. You might learn something about yourself.</p>
+    </div>
+    <div class="ornament">— ✦ —</div>
+  </div>
+
+  <!-- 02 DID YOU HEAR -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">02</div>
+      <div class="section-title">Did You Hear?</div>
+    </div>
+    <div class="section-headline">The group chat<br><em>has receipts.</em></div>
+    
+    <div class="gossip-item">
+      <div class="gossip-tag">Brand Drama</div>
+      <div class="gossip-headline">Saie Beauty's Blush Range Just Lost Six Shades and Nobody Got a Memo</div>
+      <div class="gossip-body">If you tried to reorder Saie's Dew Blush in "Chilly" or "Rosy" this week, you were met with a dead link and a generic "exploring new shades" placeholder. Six of the original twelve shades have quietly vanished from the site, and a Sephora employee confirmed they were pulled from in-store displays on March 17. The brand is calling it a "seasonal color refresh," which is a phrase that means nothing and explains less.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Industry Moves</div>
+      <div class="gossip-headline">Shiseido's New CEO Has a Quietly Radical Plan for Prestige Pricing</div>
+      <div class="gossip-body">Kentaro Fujiwara, who officially took the reins this quarter, told investors in a March 18 briefing that Shiseido will begin "decoupling prestige from price" in Western markets by Q3. Translation: expect smaller sizes at lower entry points, a move that directly challenges the $90-serum ceiling brands like La Mer have spent decades building. Ulta buyers are reportedly already in conversation.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Trend Alert</div>
+      <div class="gossip-headline">The "Unwashed Silk" Hair Trend Is About to Make Your Blowout Irrelevant</div>
+      <div class="gossip-body">Three separate editorial shoots this week, including one for Vogue Japan published March 19, styled hair to look like it had been slept on against raw silk and never corrected. The texture sits somewhere between second-day and slightly tangled, intentionally flat at the crown. Expect every dry texture spray brand to claim credit within two weeks.</div>
+    </div>
+  </div>
+
+  <!-- 03 DID YOU KNOW -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">03</div>
+      <div class="section-title">Did You Know?</div>
+    </div>
+    <div class="section-headline">Adenosine is already<br><em>in your sunscreen.</em></div>
+    <div class="body-text">
+      <p>You have probably been applying adenosine to your face every single morning without knowing it. This nucleoside, one of the building blocks of ATP (the energy currency of your cells), has been a staple of Japanese and Korean sunscreen formulations for over a decade. In the West, it is just now showing up on ingredient decks as a headline active rather than a background player.</p>
+    </div>
+    <div class="know-callout">
+      <div class="know-callout-label">The Science, Briefly</div>
+      <div class="know-callout-text"><strong>Adenosine</strong> works by stimulating fibroblast proliferation and boosting collagen synthesis at the dermal level, while simultaneously reducing the expression of pro-inflammatory cytokines. In short, it tells your skin to repair and calm down at the same time, which is a combination most actives cannot manage without irritation.</div>
+    </div>
+    <div class="body-text">
+      <p>Korean regulatory bodies recognized adenosine as a functional anti-wrinkle ingredient years ago, which is why you will find it in nearly every cushion compact and SPF from brands like Sulwhasoo, Laneige, and Missha. In the U.S., it has mostly been hiding behind flashier label claims, buried at the tail end of ingredient lists in concentrations just high enough to work but never high enough to headline.
+
+That is starting to change. A handful of indie brands are now building serums around adenosine as the primary active, marketed specifically to people who cannot tolerate retinoids. The uncomfortable truth is that adenosine has had solid clinical data for years, including a 2019 study in the Journal of Cosmetic Dermatology showing measurable wrinkle depth reduction in four weeks. We just ignored it because it did not have a dramatic origin story or a TikTok villain arc.</p>
+    </div>
+    <div class="pull-quote">
+      <p>"Adenosine is the workhorse nobody talks about because it doesn't cause a purge, and in skincare marketing, if it doesn't hurt a little, people assume it isn't working." — Dr. Yoon-Soo Cindy Bae, Dermatologist, Laser & Skin Surgery Center of New York</p>
+    </div>
+  </div>
+
+  <!-- 04 DID YOU SEE -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">04</div>
+      <div class="section-title">Did You See?</div>
+    </div>
+    <div class="section-headline">Schiaparelli AW26 and<br><em>the face as a gilded wound.</em></div>
+    <div class="see-image-wrapper">
+      <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&q=80" alt="Beauty industry editorial" />
+      <div class="see-image-caption">AW26 · Schiaparelli's gilded kintsugi skin</div>
+    </div>
+    <div class="body-text">
+      <p>Daniel Roseberry's AW26 collection for Schiaparelli, which showed in Paris on March 17, sent models down the runway with skin that looked almost feverishly luminous, interrupted by deliberate streaks of gold leaf applied over the cheekbones and temples like cracked lacquer on a repaired vase. The reference was unmistakably kintsugi, the Japanese art of mending broken ceramics with gold, but applied to the face it read less like philosophy and more like provocation. Lead makeup artist Pat McGrath used a custom mix of gold pigment and skin adhesive applied in jagged, asymmetric lines, so each face looked like it had been broken and put back together more beautifully.
+
+What made it land was the restraint everywhere else. No lip color. No visible mascara. Just bare, slightly flushed skin interrupted by those deliberate seams of gold. It was one of the few beauty moments this season that genuinely made a room go quiet. Roseberry told backstage press that the idea was "damage as decoration," which might be the most Lip Service sentence a designer has ever said out loud.</p>
+    </div>
+  </div>
+
+  <!-- 05 DID YOU HELP -->
+  <div class="section help-section">
+    <div class="section-label">
+      <div class="section-number">05</div>
+      <div class="section-title">Did You Help?</div>
+    </div>
+    <div class="section-headline">Beauty as an act<br><em>of dignity behind walls.</em></div>
+    <div class="body-text">
+      <p>The Essie Justice Group, founded in 2014 by Gina Clayton-Johnson, works with women who have incarcerated loved ones and, through its broader coalition, advocates for the basic human needs of incarcerated women themselves. In 2023, the organization expanded its programming to include partnerships that provide dermatological care and basic skincare to women in California state prisons, many of whom have not seen a dermatologist in the entire duration of their sentence.</p>
+    </div>
+    <div class="help-stat">
+      <div class="help-number">25,000+</div>
+      <div class="help-number-label">incarcerated women in California with no access to dermatological care</div>
+    </div>
+    <div class="body-text">
+      <p>One woman in the program, serving a twelve-year sentence at the Central California Women's Facility, told organizers she had not been given moisturizer in five years. She had a skin condition that had gone undiagnosed for three of those years. When a volunteer dermatologist finally saw her, it took ten minutes to identify and begin treating. The organization needs funding for its direct-care partnerships, which cover dermatologist visits, basic skincare supplies, and post-release wellness kits.</p>
+    </div>
+    <a href="https://essiejusticegroup.org/donate" class="cta-button" target="_blank">Donate to Essie Justice Group →</a>
+  </div>
+
+  <!-- 06 HEALTHY TEARS -->
+  <div class="section tears-section">
+    <div class="section-label">
+      <div class="section-number">06</div>
+      <div class="section-title">Healthy Tears</div>
+    </div>
+    <div class="section-headline">A girl from Spring, Texas<br>walked onto the floor in Rio<br><em>and made gravity look optional.</em></div>
+    <div class="body-text">
+      <p><p>Simone Biles grew up in a gym that smelled like chalk dust and ambition, the kind of place where you learn early that your body is both the instrument and the argument. By the time she was nineteen, she had already redefined what the sport of gymnastics considered possible. She had invented skills so difficult that the international governing body had no existing framework for them. They simply named the moves after her, which is what happens when you do something no one else on the planet can replicate.</p>
+<p>At the 2016 Rio Olympics, Biles stepped onto the floor exercise mat for her final routine, and what followed was ninety seconds that broke the brains of people who had watched gymnastics their entire lives. The tumbling passes were so high, so fast, and so precisely landed that commentators stopped trying to narrate and just watched. One BBC analyst later said he forgot he was supposed to be speaking. The camera operators visibly struggled to keep her in frame because the height of her tumbles exceeded what the lens was set up to capture.</p>
+<p>What the numbers cannot convey is the look on her face between passes. There was no visible strain. No grimace of effort. She looked like someone doing something she had done ten thousand times, which she had, except no one else had ever done it once. The judges gave her a score that, at the time, was the highest in Olympic floor exercise history. Sports journalists in the arena, people who had covered five or six Games, said it was the single greatest athletic performance they had witnessed in person.</p>
+<p>Biles said something afterward that has stayed with me ever since. A reporter asked her what it felt like in the air, during the tumbling pass that carried her name. She paused, smiled slightly, and said, "I'm not really thinking up there. I'm just flying. And then the ground comes back, and I have to decide to trust it."</p></p>
+    </div>
+    <a href="https://www.youtube.com/watch?v=3nEnBJJMKQs" target="_blank" class="video-thumb">
+      <img src="https://img.youtube.com/vi/3nEnBJJMKQs/hqdefault.jpg" alt="Healthy Tears · March 20, 2026" />
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="video-label">The routine that redefined what a human body can do.</div>
+    </a>
+  </div>
+
+  <!-- ARCHIVE_SECTION_PREVIEW_PLACEHOLDER -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Lip Service</div>
+    <div class="footer-text">
+      Daily. Opinionated. Never preachy.<br>
+      You're receiving this because you have excellent taste.<br><br>
+      <em style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</em>
+    </div>
+    <div class="footer-links">
+      <a href="#">View in browser</a>
+      <a href="../archive.html">Archive</a>
+      <a href="../subscribe.html" target="_blank">Forward this</a>
+      <a href="../unsubscribe.html">Unsubscribe</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
