@@ -286,7 +286,16 @@
 <script>
   function handleSubmit(e) {
     e.preventDefault();
-    document.getElementById('subForm').style.display = 'none';
+    const form = document.getElementById('subForm');
+    const data = {};
+    new FormData(form).forEach((v, k) => { data[k] = v; });
+    data.source = 'subscribe';
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }).catch(() => {});
+    form.style.display = 'none';
     document.getElementById('subSuccess').classList.add('visible');
   }
 </script>
