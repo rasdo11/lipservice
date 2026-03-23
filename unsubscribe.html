@@ -237,6 +237,12 @@
 <script>
   function handleUnsub(e) {
     e.preventDefault();
+    const email = document.querySelector('#unsubForm [name="email"]').value;
+    fetch('/api/unsubscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    }).catch(() => {});
     document.getElementById('formCard').style.display = 'none';
     document.getElementById('successCard').classList.add('visible');
   }

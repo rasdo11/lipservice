@@ -296,7 +296,21 @@ const PREVIEW_MODE = process.env.PREVIEW === '1';
 
 // ─── Shared render helper ─────────────────────────────────────────────────────
 
-function renderHtml(template, content, image, story, issueLabel, issueDate) {
+function buildOgMeta(issueLabel, heroText, issueUrl) {
+  const desc = heroText.replace(/"/g, '&quot;').replace(/\n/g, ' ').slice(0, 300);
+  const title = `Lip Service — ${issueLabel}`;
+  return [
+    `<meta property="og:type" content="article">`,
+    `<meta property="og:title" content="${title}">`,
+    `<meta property="og:description" content="${desc}">`,
+    issueUrl ? `<meta property="og:url" content="${issueUrl}">` : '',
+    `<meta name="twitter:card" content="summary">`,
+    `<meta name="twitter:title" content="${title}">`,
+    `<meta name="twitter:description" content="${desc}">`,
+  ].filter(Boolean).join('\n');
+}
+
+function renderHtml(template, content, image, story, issueLabel, issueDate, issueUrl) {
   const hearItemsHtml = buildHearItemsHtml(content.hear_items);
 
   const openingBody = content.opening_body.includes('<p')
@@ -318,6 +332,8 @@ function renderHtml(template, content, image, story, issueLabel, issueDate) {
   return template
     .replace(/\{\{ISSUE_LABEL\}\}/g, issueLabel)
     .replace(/\{\{ISSUE_DATE\}\}/g, issueDate)
+    .replace('{{OG_META}}', buildOgMeta(issueLabel, content.hero_text, issueUrl))
+    .replace('{{ISSUE_URL}}', issueUrl || '#')
     .replace('{{HERO_TEXT}}', content.hero_text)
     .replace('{{OPENING_HEADLINE}}', content.opening_headline)
     .replace('{{OPENING_BODY}}', openingBody)
@@ -452,9 +468,12 @@ async function main() {
     console.log(`  Passing ${recentIssues.length} recent issues to avoid repeats`);
   }
 
+  const siteUrl = (process.env.SITE_URL || '').replace(/\/$/, '');
+  const issueUrl = siteUrl ? `${siteUrl}/issues/${key}.html` : `./issues/${key}.html`;
+
   const content = await generateContent(today, story, recentIssues);
   const template = await fs.readFile(path.join(__dirname, 'template.html'), 'utf-8');
-  const html = renderHtml(template, content, image, story, issueLabel, issueDate);
+  const html = renderHtml(template, content, image, story, issueLabel, issueDate, issueUrl);
 
   if (PREVIEW_MODE) {
     // ── Write preview/ (no changes to live site) ───────────────────────────
