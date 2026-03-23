@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lip Service — Issue No. 77</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --ink: #1A1410;
+    --blush: #E8C4B8;
+    --rouge: #C94040;
+    --nude: #D4A898;
+    --charcoal: #3D3530;
+    --warm-gray: #9A8F89;
+    --divider: #E2DAD3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .email-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--cream);
+  }
+  .header {
+    background-color: var(--ink);
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rouge), var(--nude), var(--blush));
+  }
+  .masthead {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--nude);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero {
+    background: var(--ink);
+    padding: 0 24px 32px;
+  }
+  .hero-box {
+    background: var(--rouge);
+    padding: 20px 22px;
+    border-radius: 2px;
+  }
+  .hero-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .hero-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  .section {
+    padding: 36px 24px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .section:last-of-type {
+    border-bottom: none;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-number {
+    width: 24px;
+    height: 24px;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+  }
+  .section-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+  .section-headline em {
+    font-style: italic;
+    color: var(--rouge);
+  }
+  .body-text {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .body-text p {
+    margin-bottom: 14px;
+  }
+  .body-text p:last-child {
+    margin-bottom: 0;
+  }
+  .body-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .opening .section-headline {
+    font-size: 28px;
+  }
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 58px;
+    font-weight: 900;
+    line-height: 0.8;
+    float: left;
+    margin-right: 6px;
+    margin-top: 8px;
+    color: var(--rouge);
+  }
+  .gossip-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .gossip-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .gossip-item:first-child {
+    padding-top: 0;
+  }
+  .gossip-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 6px;
+  }
+  .gossip-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .gossip-body {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .know-callout {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 22px;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .know-callout-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nude);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .know-callout-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .know-callout-text strong {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--blush);
+  }
+  .see-image-wrapper {
+    width: 100%;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .see-image-wrapper img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+  .see-image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 14px;
+    background: linear-gradient(transparent, rgba(26,20,16,0.8));
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .help-section {
+    background: #F0EBE5;
+  }
+  .help-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .help-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--rouge);
+    line-height: 1;
+  }
+  .help-number-label {
+    font-size: 13px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.4;
+    max-width: 200px;
+  }
+  .cta-button {
+    display: inline-block;
+    background: var(--rouge);
+    color: #fff;
+    padding: 13px 24px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 1px;
+    margin-top: 16px;
+    transition: opacity 0.2s;
+  }
+  .cta-button:hover { opacity: 0.88; }
+  .tears-section {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .tears-section .section-title { color: var(--nude); }
+  .tears-section .section-headline { color: var(--cream); }
+  .tears-section .body-text { color: rgba(250,247,242,0.75); }
+  .video-thumb {
+    display: block;
+    position: relative;
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 18px;
+    text-decoration: none;
+  }
+  .video-thumb img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.75);
+  }
+  .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255,255,255,0.4);
+  }
+  .play-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+  .video-label {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    right: 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.5px;
+    font-style: italic;
+  }
+  .footer {
+    background: var(--ink);
+    padding: 28px 24px;
+    text-align: center;
+    border-top: 3px solid var(--rouge);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .footer-text {
+    font-size: 12px;
+    color: var(--warm-gray);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    font-size: 10px;
+    color: var(--warm-gray);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .footer-links a:hover { color: var(--nude); }
+  .ornament {
+    text-align: center;
+    color: var(--rouge);
+    font-size: 18px;
+    letter-spacing: 8px;
+    padding: 8px 0 0;
+    opacity: 0.5;
+  }
+  .pill {
+    display: inline-block;
+    background: var(--blush);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  a.inline-link {
+    color: var(--rouge);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
+  }
+  .pull-quote {
+    border-left: 3px solid var(--rouge);
+    padding: 4px 16px;
+    margin: 18px 0;
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  /* ARCHIVE */
+  .archive-section {
+    background: var(--cream);
+  }
+  .archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .archive-item {
+    display: block;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--divider);
+    text-decoration: none;
+    color: inherit;
+  }
+  .archive-item:first-child {
+    padding-top: 0;
+  }
+  .archive-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .archive-item:hover .archive-item-label {
+    color: var(--rouge);
+  }
+  .archive-item-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .archive-item-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    transition: color 0.15s;
+  }
+  .archive-item-date {
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .archive-item-teaser {
+    font-size: 13.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.55;
+    font-style: italic;
+  }
+  /* ISSUE NAV BAR (standalone issue pages only) */
+  .issue-nav-bar {
+    background: var(--ink);
+    padding: 11px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .issue-nav-bar a {
+    font-size: 10px;
+    color: var(--nude);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .issue-nav-bar a:hover { color: var(--cream); }
+  .issue-nav-bar span {
+    font-size: 10px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 480px) {
+    .masthead { font-size: 36px; }
+    .section { padding: 28px 20px; }
+    .hero { padding: 0 20px 28px; }
+    .section-headline { font-size: 23px; }
+    .help-number { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+<div class="issue-nav-bar" style="background:var(--rouge);color:#fff;">
+  <span>👁 PREVIEW — goes live at 6am PST</span>
+  <span>Issue No. 77 &middot; March 23, 2026</span>
+</div>
+<div class="email-wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="masthead">Lip Service</div>
+    <div class="tagline">The most fun a girl can have without taking her clothes off</div>
+    <div class="header-meta">
+      <span>Issue No. 77</span>
+      <span>·</span>
+      <span>March 23, 2026</span>
+      <span>·</span>
+      <span>Daily</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-box">
+      <div class="hero-label">Today</div>
+      <div class="hero-text">Today: Glossier is quietly killing off its Body Hero line and hoping the wellness girlies are too distracted to mourn, the copper tripeptide complex that wound-healing researchers have been gatekeeping from the skincare mainstream, Dries Van Noten's AW26 show where every model looked like they'd just walked through a pollen storm, and the nonprofit putting free prescription skincare into the hands of refugee women for the first time. Let's get into it.</div>
+    </div>
+  </div>
+
+  <!-- 01 OPENING STATEMENT -->
+  <div class="section opening">
+    <div class="section-label">
+      <div class="section-number">01</div>
+      <div class="section-title">Opening Statement</div>
+    </div>
+    <div class="section-headline">I found a gray hair in my eyebrow.<br><em>It was the most honest thing I'd seen all week.</em></div>
+    <div class="body-text">
+      <p class="drop-cap">I was tweezing under the terrible fluorescent light in my bathroom, the kind that reveals every pore like a crime scene, when I spotted it. A single silver strand arching through my left brow like it had somewhere important to be. I held the tweezers above it for a full five seconds. Then I put them down.</p><p>There is something almost radical about letting a visible sign of aging just exist. Not because it's brave, not because I'm some kind of warrior, but because the instinct to erase it was so immediate and so physical that stopping felt like catching my own hand mid-reach. That reflex lives in me, and I am suspicious of it.</p><p>I've been thinking a lot this week about the difference between maintenance and erasure. The beauty industry profits from blurring the line between those two things, making it very hard to tell when you're caring for yourself versus slowly, methodically editing yourself out. The gray hair stays. For now. Ask me again in a week.</p><p>Welcome to Monday's Lip Service. Today we're covering a quiet product death, a peptide complex that deserves more of your attention, a runway that looked like an allergic reaction as art, and a charity doing deeply practical, deeply moving work. Pull up a chair.</p>
+    </div>
+    <div class="ornament">— ✦ —</div>
+  </div>
+
+  <!-- 02 DID YOU HEAR -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">02</div>
+      <div class="section-title">Did You Hear?</div>
+    </div>
+    <div class="section-headline">The group chat<br><em>is losing it.</em></div>
+    
+    <div class="gossip-item">
+      <div class="gossip-tag">Brand Drama</div>
+      <div class="gossip-headline">Glossier Is Sunsetting Body Hero, and the Explanation Doesn't Add Up</div>
+      <div class="gossip-body">Glossier has begun quietly delisting its entire Body Hero range, including the cult Daily Oil Wash and the Dry-Touch Oil Mist, across its DTC site and Sephora. The brand is calling it a "portfolio streamlining" ahead of new launches, but three former employees say Body Hero's margins were razor thin and its refill packaging was a logistics headache the company never solved. The products are still technically available in Canada, which is the kind of detail that tells you this was a spreadsheet decision, not a creative one.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Industry Moves</div>
+      <div class="gossip-headline">Shiseido Just Poached Estée Lauder's Entire Southeast Asia Digital Team</div>
+      <div class="gossip-body">At least five senior digital marketing and e-commerce staffers from Estée Lauder's Singapore hub have surfaced at Shiseido in the last two weeks, per LinkedIn updates that went conspicuously live on the same Friday. Shiseido's APAC president told Nikkei Asia the company is "investing in next-generation consumer engagement," which is corporate for we are coming for your DTC playbook. Lauder declined to comment, which is corporate for we noticed.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Trend Alert</div>
+      <div class="gossip-headline">The "Skin Flooding" Backlash Is Here, and Derms Are Relieved</div>
+      <div class="gossip-body">After two solid years of layering six hydrating products in one sitting, the pendulum is swinging. A TikTok from board-certified derm Dr. Whitney Bowe calling skin flooding "a masterclass in disrupting your barrier" has racked up 4.3 million views since Thursday. Expect to see "skin fasting" rebranded as something gentler and more marketable by the end of April.</div>
+    </div>
+  </div>
+
+  <!-- 03 DID YOU KNOW -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">03</div>
+      <div class="section-title">Did You Know?</div>
+    </div>
+    <div class="section-headline">Copper peptides are not new.<br><em>You've just been using them wrong.</em></div>
+    <div class="body-text">
+      <p>Copper tripeptide-1, also called GHK-Cu, has been a wound-healing workhorse in clinical medicine for decades. It is now showing up in serums and eye creams pitched at anti-aging, but the gap between what the research actually supports and what brands are promising is wide enough to park a truck in.</p>
+    </div>
+    <div class="know-callout">
+      <div class="know-callout-label">The Science, Briefly</div>
+      <div class="know-callout-text"><strong>GHK-Cu</strong> works by signaling fibroblasts to ramp up collagen and glycosaminoglycan synthesis while simultaneously suppressing pro-inflammatory cytokines. In plain terms: it tells your skin to rebuild and calm down at the same time, which is why it was originally studied in post-surgical recovery, not in luxury skincare.</div>
+    </div>
+    <div class="body-text">
+      <p>The concentration matters enormously, and most consumer products won't disclose theirs. Clinical studies showing real results use GHK-Cu at concentrations between 0.01% and 1%, delivered in formulations specifically designed for peptide stability. The $90 serum in your Sephora cart may contain copper tripeptide-1 at a level that is, functionally, decorative. It is also worth noting that copper peptides can oxidize rapidly in the presence of vitamin C. If you are layering your copper peptide serum under your L-ascorbic acid, you are likely neutralizing both. This is not a pairing. It is a cancellation.
+
+The brands doing it most transparently right now are NIOD, whose CAIS2 serum actually publishes its concentration, and the Korean brand Benton, whose Fermentation Eye Cream uses GHK-Cu alongside fermented filtrates in a way that suggests someone in the lab actually read the literature. If a product lists copper tripeptide-1 near the bottom of a 40-ingredient list, you are paying for marketing copy, not for the peptide.</p>
+    </div>
+    <div class="pull-quote">
+      <p>"GHK-Cu is one of the most promising peptides in dermatology, but the dose-response curve is steep. Below a certain threshold, you are essentially applying an expensive placebo." — Dr. Loren Pickart, Biochemist, University of Washington</p>
+    </div>
+  </div>
+
+  <!-- 04 DID YOU SEE -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">04</div>
+      <div class="section-title">Did You See?</div>
+    </div>
+    <div class="section-headline">At Dries Van Noten AW26,<br><em>every model looked like she'd walked<br>through a field and the field fought back.</em></div>
+    <div class="see-image-wrapper">
+      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80" alt="Fashion editorial runway beauty" />
+      <div class="see-image-caption">AW26 · Pollen-Disrupted Skin at Dries Van Noten</div>
+    </div>
+    <div class="body-text">
+      <p>The final Dries Van Noten collection under the house's new creative direction sent models down a raw concrete runway with skin dusted in visible yellow and ochre pigment, concentrated across cheekbones and temples, fading into bare, unmoisturized skin everywhere else. The makeup team, led by Peter Philips, described the look as "pollen disruption," and it read less like beauty and more like evidence. Like the models had passed through something organic and volatile and it had simply settled on them.
+
+What stayed with me was the refusal to blend. The pigment sat on the surface of the skin rather than being worked in. It looked temporary and almost accidental, which made it more arresting than any sculpted contour or glossy lid could. There was an implicit argument in that choice: that beauty doesn't have to be absorbed to be felt. It can just land on you. That's the kind of thinking Lip Service exists to notice.</p>
+    </div>
+  </div>
+
+  <!-- 05 DID YOU HELP -->
+  <div class="section help-section">
+    <div class="section-label">
+      <div class="section-number">05</div>
+      <div class="section-title">Did You Help?</div>
+    </div>
+    <div class="section-headline">Beauty as an act<br><em>of beginning again.</em></div>
+    <div class="body-text">
+      <p>Project Beauty Share, based in Boise, Idaho, collects new and gently used beauty and hygiene products and distributes them to women and families navigating poverty, homelessness, and resettlement. Founded in 2013 by Kimberly Sowerby after she saw how often personal care was left out of traditional aid models, the organization has grown into one of the largest beauty-specific product banks in the country.</p>
+    </div>
+    <div class="help-stat">
+      <div class="help-number">800K+</div>
+      <div class="help-number-label">individual beauty and hygiene products distributed since founding</div>
+    </div>
+    <div class="body-text">
+      <p>In the last year, Project Beauty Share has partnered with refugee resettlement agencies across Idaho and eastern Oregon to provide prescription-grade skincare, SPF, and culturally specific hair care to newly arrived women, many of whom have spent years in camps with no access to personal care beyond bar soap. One Afghan mother told a volunteer that receiving a bottle of moisturizer with SPF was the first time she had been given something that existed solely for her comfort. They need product donations, warehouse volunteers, and recurring monthly donors to keep their supply chain moving.</p>
+    </div>
+    <a href="https://www.projectbeautyshare.org/donate" class="cta-button" target="_blank">Donate to Project Beauty Share →</a>
+  </div>
+
+  <!-- 06 HEALTHY TEARS -->
+  <div class="section tears-section">
+    <div class="section-label">
+      <div class="section-number">06</div>
+      <div class="section-title">Healthy Tears</div>
+    </div>
+    <div class="section-headline">She hadn't sung in two years.<br><em>She chose the one song<br>that would make it impossible<br>to pretend she was fine.</em></div>
+    <div class="body-text">
+      <p><p>Celine Dion met René Angélil when she was twelve years old. He was a music manager in his late thirties, and she was a kid from Charlemagne, Quebec, singing into a pencil in her mother's kitchen. He mortgaged his house to fund her first record. He shaped her career, her public persona, her entire adult life. They married in 1994 in a ceremony at Montreal's Notre-Dame Basilica that was broadcast on Canadian television like a national event. By the time he was diagnosed with throat cancer in 1999, they were inseparable in a way that had long since outgrown the language of manager and artist.</p>
+<p>He died in January 2016, at home, with Celine beside him. She canceled her residency. She disappeared from public life. For two years, the woman whose voice could fill a stadium chose silence.</p>
+<p>Then came the 2017 Billboard Music Awards. She walked out in a black and white Stéphane Rolland gown, stood at the microphone, and sang "My Heart Will Go On," the song that had become so synonymous with her career that it was easy to forget it was, at its core, a song about losing someone and surviving the loss. She did not look away from the camera. Not once. Her voice broke exactly one time, and she let it break. She did not recover gracefully. She recovered honestly, which is a different thing entirely.</p>
+<p>Afterward, backstage, she was asked how it felt. She said, simply, "René always told me that the show has to go on. He told me to keep going. And I will keep going." The line was not poetic. It was not crafted. It was the kind of sentence you say when you have practiced it in the mirror every morning for two years just to get out of bed.</p></p>
+    </div>
+    <a href="https://www.youtube.com/watch?v=OHRuRSCFo04" target="_blank" class="video-thumb">
+      <img src="https://img.youtube.com/vi/OHRuRSCFo04/hqdefault.jpg" alt="Healthy Tears · March 23, 2026" />
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="video-label">She hadn't performed in two years. She didn't look away once.</div>
+    </a>
+  </div>
+
+  <!-- ARCHIVE_SECTION_PREVIEW_PLACEHOLDER -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Lip Service</div>
+    <div class="footer-text">
+      Daily. Opinionated. Never preachy.<br>
+      You're receiving this because you have excellent taste.<br><br>
+      <em style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</em>
+    </div>
+    <div class="footer-links">
+      <a href="#">View in browser</a>
+      <a href="../archive.html">Archive</a>
+      <a href="../subscribe.html" target="_blank">Forward this</a>
+      <a href="../unsubscribe.html">Unsubscribe</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
