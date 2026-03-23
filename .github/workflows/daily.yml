@@ -2,10 +2,10 @@ name: Daily Newsletter
 
 on:
   schedule:
-    # Preview: 10pm PST (Nov–Mar) = 06:00 UTC
-    - cron: '0 6 * * *'
-    # Preview: 10pm PDT (Mar–Nov) = 05:00 UTC
+    # Preview: 9pm PST (Nov–Mar) = 05:00 UTC
     - cron: '0 5 * * *'
+    # Preview: 9pm PDT (Mar–Nov) = 04:00 UTC
+    - cron: '0 4 * * *'
     # Publish: 6am PST (Nov–Mar) = 14:00 UTC  +retries at 15, 16, 17
     - cron: '0 14 * * *'
     - cron: '0 15 * * *'
