@@ -134,19 +134,6 @@
     text-transform: uppercase;
     color: var(--rouge);
   }
-  .section-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--ink);
-    margin-bottom: 16px;
-    letter-spacing: -0.3px;
-  }
-  .section-headline em {
-    font-style: italic;
-    color: var(--rouge);
-  }
   .body-text {
     font-size: 15.5px;
     line-height: 1.75;
@@ -163,9 +150,6 @@
     font-weight: 500;
     color: var(--ink);
   }
-  .opening .section-headline {
-    font-size: 28px;
-  }
   .drop-cap::first-letter {
     font-family: 'Playfair Display', serif;
     font-size: 58px;
@@ -176,6 +160,7 @@
     margin-top: 8px;
     color: var(--rouge);
   }
+  /* QUICK HITS */
   .gossip-item {
     padding: 18px 0;
     border-bottom: 1px solid var(--divider);
@@ -186,14 +171,6 @@
   }
   .gossip-item:first-child {
     padding-top: 0;
-  }
-  .gossip-tag {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--rouge);
-    margin-bottom: 6px;
   }
   .gossip-headline {
     font-family: 'Playfair Display', serif;
@@ -209,182 +186,73 @@
     color: var(--charcoal);
     font-weight: 300;
   }
-  .know-callout {
-    background: var(--ink);
-    color: var(--cream);
-    padding: 22px;
-    margin: 20px 0;
-    border-radius: 2px;
-  }
-  .know-callout-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--nude);
-    margin-bottom: 10px;
-    font-weight: 500;
-  }
-  .know-callout-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-style: italic;
-    line-height: 1.5;
-    font-weight: 400;
-  }
-  .know-callout-text strong {
-    font-style: normal;
-    font-weight: 700;
-    color: var(--blush);
-  }
-  .see-image-wrapper {
-    width: 100%;
-    margin-bottom: 18px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 2px;
-  }
-  .see-image-wrapper img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-  }
-  .see-image-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px 14px;
-    background: linear-gradient(transparent, rgba(26,20,16,0.8));
-    font-size: 11px;
-    color: rgba(255,255,255,0.8);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 400;
-  }
-  .help-section {
-    background: #F0EBE5;
-  }
-  .help-stat {
+  /* LIPS IN 6 */
+  .lips6-list {
     display: flex;
-    align-items: baseline;
-    gap: 8px;
-    margin: 16px 0;
+    flex-direction: column;
+    gap: 14px;
   }
-  .help-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 42px;
-    font-weight: 900;
-    color: var(--rouge);
-    line-height: 1;
-  }
-  .help-number-label {
-    font-size: 13px;
-    color: var(--charcoal);
-    font-weight: 300;
-    line-height: 1.4;
-    max-width: 200px;
-  }
-  .cta-button {
-    display: inline-block;
-    background: var(--rouge);
-    color: #fff;
-    padding: 13px 24px;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 1px;
-    margin-top: 16px;
-    transition: opacity 0.2s;
-  }
-  .cta-button:hover { opacity: 0.88; }
-  .tears-section {
-    background: var(--ink);
-    color: var(--cream);
-  }
-  .tears-section .section-title { color: var(--nude); }
-  .tears-section .section-headline { color: var(--cream); }
-  .tears-section .body-text { color: rgba(250,247,242,0.75); }
-  .video-thumb {
-    display: block;
-    position: relative;
-    width: 100%;
-    border-radius: 2px;
-    overflow: hidden;
-    margin-top: 18px;
-    text-decoration: none;
-  }
-  .video-thumb img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-    filter: brightness(0.75);
-  }
-  .play-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 54px;
-    height: 54px;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(4px);
-    border-radius: 50%;
+  .lips6-item {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1.5px solid rgba(255,255,255,0.4);
+    gap: 14px;
+    align-items: flex-start;
   }
-  .play-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
-  .video-label {
-    position: absolute;
-    bottom: 12px;
-    left: 14px;
-    right: 14px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.8);
-    letter-spacing: 0.5px;
-    font-style: italic;
-  }
-  .footer {
-    background: var(--ink);
-    padding: 28px 24px;
-    text-align: center;
-    border-top: 3px solid var(--rouge);
-  }
-  .footer-logo {
+  .lips6-number {
     font-family: 'Playfair Display', serif;
     font-size: 22px;
     font-weight: 900;
-    color: var(--cream);
-    letter-spacing: -0.5px;
-    margin-bottom: 8px;
+    color: var(--rouge);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 24px;
   }
-  .footer-text {
-    font-size: 12px;
-    color: var(--warm-gray);
-    line-height: 1.6;
-    margin-bottom: 16px;
+  .lips6-text {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--charcoal);
     font-weight: 300;
+    padding-top: 2px;
   }
-  .footer-links {
+  /* ON OUR CALENDAR */
+  .cal-list {
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0;
   }
-  .footer-links a {
+  .cal-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .cal-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .cal-item:first-child {
+    padding-top: 0;
+  }
+  .cal-date {
     font-size: 10px;
-    color: var(--warm-gray);
-    text-decoration: none;
+    font-weight: 500;
     letter-spacing: 2px;
     text-transform: uppercase;
-    font-weight: 400;
+    color: var(--rouge);
+    white-space: nowrap;
+    padding-top: 3px;
+    min-width: 64px;
   }
-  .footer-links a:hover { color: var(--nude); }
+  .cal-event {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  /* LAST WORD */
+  .last-word-section {
+    background: #F0EBE5;
+  }
   .ornament {
     text-align: center;
     color: var(--rouge);
@@ -392,37 +260,6 @@
     letter-spacing: 8px;
     padding: 8px 0 0;
     opacity: 0.5;
-  }
-  .pill {
-    display: inline-block;
-    background: var(--blush);
-    color: var(--ink);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 20px;
-    margin-bottom: 12px;
-  }
-  a.inline-link {
-    color: var(--rouge);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    font-weight: 400;
-  }
-  .pull-quote {
-    border-left: 3px solid var(--rouge);
-    padding: 4px 16px;
-    margin: 18px 0;
-  }
-  .pull-quote p {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-style: italic;
-    color: var(--ink);
-    line-height: 1.5;
-    font-weight: 400;
   }
   /* ARCHIVE */
   .archive-section {
@@ -503,12 +340,46 @@
     letter-spacing: 1px;
     text-transform: uppercase;
   }
+  .footer {
+    background: var(--ink);
+    padding: 28px 24px;
+    text-align: center;
+    border-top: 3px solid var(--rouge);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .footer-text {
+    font-size: 12px;
+    color: var(--warm-gray);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    font-size: 10px;
+    color: var(--warm-gray);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .footer-links a:hover { color: var(--nude); }
   @media (max-width: 480px) {
     .masthead { font-size: 36px; }
     .section { padding: 28px 20px; }
     .hero { padding: 0 20px 28px; }
-    .section-headline { font-size: 23px; }
-    .help-number { font-size: 36px; }
   }
 </style>
 </head>
@@ -532,108 +403,84 @@
   <div class="hero">
     <div class="hero-box">
       <div class="hero-label">Today</div>
-      <div class="hero-text">{{HERO_TEXT}}</div>
+      <div class="hero-text">{{PREVIEW}}</div>
     </div>
   </div>
 
-  <!-- 01 OPENING STATEMENT -->
-  <div class="section opening">
+  <!-- 01 INJECTION REPORT -->
+  <div class="section">
     <div class="section-label">
       <div class="section-number">01</div>
-      <div class="section-title">Opening Statement</div>
+      <div class="section-title">Injection Report</div>
     </div>
-    <div class="section-headline">{{OPENING_HEADLINE}}</div>
     <div class="body-text">
-      {{OPENING_BODY}}
+      <p class="drop-cap">{{INJECTION_REPORT}}</p>
     </div>
     <div class="ornament">— ✦ —</div>
   </div>
 
-  <!-- 02 DID YOU HEAR -->
+  <!-- 02 PUT IT IN YOUR MOUTH -->
   <div class="section">
     <div class="section-label">
       <div class="section-number">02</div>
-      <div class="section-title">Did You Hear?</div>
+      <div class="section-title">Put It In Your Mouth</div>
     </div>
-    <div class="section-headline">{{HEAR_HEADLINE}}</div>
-    {{HEAR_ITEMS}}
+    <div class="body-text">
+      <p>{{PUT_IT_IN_YOUR_MOUTH}}</p>
+    </div>
   </div>
 
-  <!-- 03 DID YOU KNOW -->
+  <!-- 03 LIP LAB -->
   <div class="section">
     <div class="section-label">
       <div class="section-number">03</div>
-      <div class="section-title">Did You Know?</div>
-    </div>
-    <div class="section-headline">{{KNOW_HEADLINE}}</div>
-    <div class="body-text">
-      <p>{{KNOW_INTRO}}</p>
-    </div>
-    <div class="know-callout">
-      <div class="know-callout-label">The Science, Briefly</div>
-      <div class="know-callout-text">{{KNOW_CALLOUT}}</div>
+      <div class="section-title">Lip Lab</div>
     </div>
     <div class="body-text">
-      <p>{{KNOW_BODY}}</p>
-    </div>
-    <div class="pull-quote">
-      <p>{{KNOW_QUOTE}}</p>
+      <p>{{LIP_LAB}}</p>
     </div>
   </div>
 
-  <!-- 04 DID YOU SEE -->
+  <!-- 04 LIPS IN 6 -->
   <div class="section">
     <div class="section-label">
       <div class="section-number">04</div>
-      <div class="section-title">Did You See?</div>
+      <div class="section-title">Lips in 6</div>
     </div>
-    <div class="section-headline">{{SEE_HEADLINE}}</div>
-    <div class="see-image-wrapper">
-      <img src="{{SEE_IMAGE_URL}}" alt="{{SEE_IMAGE_ALT}}" />
-      <div class="see-image-caption">{{SEE_IMAGE_CAPTION}}</div>
-    </div>
-    <div class="body-text">
-      <p>{{SEE_BODY}}</p>
+    <div class="lips6-list">
+      {{LIPS_IN_6}}
     </div>
   </div>
 
-  <!-- 05 DID YOU HELP -->
-  <div class="section help-section">
+  <!-- 05 QUICK HITS -->
+  <div class="section">
     <div class="section-label">
       <div class="section-number">05</div>
-      <div class="section-title">Did You Help?</div>
+      <div class="section-title">Quick Hits</div>
     </div>
-    <div class="section-headline">{{HELP_HEADLINE}}</div>
-    <div class="body-text">
-      <p>{{HELP_INTRO}}</p>
-    </div>
-    <div class="help-stat">
-      <div class="help-number">{{HELP_STAT_NUMBER}}</div>
-      <div class="help-number-label">{{HELP_STAT_LABEL}}</div>
-    </div>
-    <div class="body-text">
-      <p>{{HELP_BODY}}</p>
-    </div>
-    <a href="{{HELP_CTA_URL}}" class="cta-button" target="_blank">{{HELP_CTA_TEXT}} →</a>
+    {{QUICK_HITS}}
   </div>
 
-  <!-- 06 HEALTHY TEARS -->
-  <div class="section tears-section">
+  <!-- 06 ON OUR CALENDAR -->
+  <div class="section">
     <div class="section-label">
       <div class="section-number">06</div>
-      <div class="section-title">Healthy Tears</div>
+      <div class="section-title">On Our Calendar</div>
     </div>
-    <div class="section-headline">{{TEARS_HEADLINE}}</div>
+    <div class="cal-list">
+      {{ON_OUR_CALENDAR}}
+    </div>
+  </div>
+
+  <!-- 07 LAST WORD -->
+  <div class="section last-word-section">
+    <div class="section-label">
+      <div class="section-number">07</div>
+      <div class="section-title">Last Word</div>
+    </div>
     <div class="body-text">
-      <p>{{TEARS_BODY}}</p>
+      <p>{{LAST_WORD}}</p>
     </div>
-    <a href="{{TEARS_VIDEO_URL}}" target="_blank" class="video-thumb">
-      <img src="{{TEARS_THUMB_URL}}" alt="{{TEARS_VIDEO_ALT}}" />
-      <div class="play-btn">
-        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      </div>
-      <div class="video-label">{{TEARS_VIDEO_LABEL}}</div>
-    </a>
   </div>
 
   {{ARCHIVE_SECTION}}

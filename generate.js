@@ -5,54 +5,6 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// ─── Curated content pools ────────────────────────────────────────────────────
-// Add more entries to each pool — the generator cycles through them by day of year.
-
-const BEAUTY_IMAGES = [
-  {
-    photoId: '1596462502278-27bfdc403348',
-    alt: 'Bold lip art editorial beauty 2026',
-  },
-  {
-    photoId: '1512207736890-6ffed8a84e8d',
-    alt: 'Luxury beauty editorial close up',
-  },
-  {
-    photoId: '1522335789203-aabd1fc54bc9',
-    alt: 'Fashion editorial runway beauty',
-  },
-  {
-    photoId: '1487412720507-265dfe4c7f77',
-    alt: 'Portrait fashion editorial',
-  },
-  {
-    photoId: '1516975080664-ed2fc6a32937',
-    alt: 'Beauty industry editorial',
-  },
-];
-
-// Each story has a YouTube video ID + context for Claude to write from.
-// Verify video IDs are still live before adding new entries.
-const TEARS_STORIES = [
-  {
-    videoId: 'bktozJWbLQg',
-    context:
-      'Alice Barker was a Harlem Renaissance chorus dancer — the Apollo, the Cotton Club, the Zanzibar — performing alongside Frank Sinatra, Gene Kelly, and Ella Fitzgerald. She made television history as one of the first Black dancers to perform on TV with a white man. She ended up in a Brooklyn nursing home with no proof that any of it happened. In 2015, a man spent three years tracking down her films and brought an iPad to her room. She was 102. It was the first time she had ever seen herself dance.',
-    videoLabel: "40 million people have watched this. You'll know why in 30 seconds.",
-  },
-  {
-    videoId: 'dPNHpJzRMcA',
-    context:
-      'Viola Davis won the Emmy in 2015 — the first Black woman to win Outstanding Actress in a Drama — and gave a speech that quoted Harriet Tubman. The whole thing took less than two minutes. The room went completely silent.',
-    videoLabel: 'The speech that left the entire room still.',
-  },
-  {
-    videoId: 'fJ9rUzIMcZQ',
-    context:
-      "Freddie Mercury performing at Live Aid in 1985. 72,000 people in the stadium. He ran the crowd for 21 minutes with a level of command that music historians still describe as unrepeatable. He'd been told to cut the set short. He did not.",
-    videoLabel: "The performance every musician studies. You'll understand after 30 seconds.",
-  },
-];
 
 // ─── Date helpers ─────────────────────────────────────────────────────────────
 
@@ -84,14 +36,37 @@ function dateKey(date) {
 
 // ─── HTML builders ────────────────────────────────────────────────────────────
 
-function buildHearItemsHtml(items) {
+function buildQuickHitsHtml(items) {
   return items
     .map(
       (item) => `
     <div class="gossip-item">
-      <div class="gossip-tag">${item.tag}</div>
       <div class="gossip-headline">${item.headline}</div>
       <div class="gossip-body">${item.body}</div>
+    </div>`
+    )
+    .join('\n');
+}
+
+function buildLips6Html(items) {
+  return items
+    .map(
+      (item, i) => `
+    <div class="lips6-item">
+      <div class="lips6-number">${i + 1}</div>
+      <div class="lips6-text">${item}</div>
+    </div>`
+    )
+    .join('\n');
+}
+
+function buildCalendarHtml(items) {
+  return items
+    .map(
+      (item) => `
+    <div class="cal-item">
+      <div class="cal-date">${item.date}</div>
+      <div class="cal-event">${item.event}</div>
     </div>`
     )
     .join('\n');
@@ -168,77 +143,59 @@ function buildArchivePage(archive) {
 
 // ─── Content generation ───────────────────────────────────────────────────────
 
-async function generateContent(date, story) {
+async function generateContent(date) {
   const client = new Anthropic();
   const dateStr = formatDate(date);
 
-  const prompt = `You are writing today's issue of LIP SERVICE — a sharp, witty, beautifully written daily newsletter about beauty, fashion, culture, and the things women actually care about.
+  const prompt = `You are writing today's issue of LIP SERVICE — a sharp, witty, beautifully written daily newsletter for financially comfortable, scientifically literate women in their mid-30s to late-40s.
 
-Voice: Personal, specific, slightly wry. Think a brilliant friend who reads PubMed AND sends the unhinged meme. Never condescending, never preachy. The kind of writing that makes you feel like you were let in on something.
+Voice: Her brilliant, slightly chaotic best friend who just got back from a derm appointment and has receipts. Gossip Girl with a biochem minor and a complicated relationship with filler. Dark humor. Self-aware. Fierce. Fun. Never preachy. The conversation is already in progress — she knows what she's talking about.
 
 IMPORTANT: Never use the words "preview", "draft", or "test" anywhere in the content. Write as if this is the final published issue.
 
-Today is ${dateStr}. Write all sections in this exact JSON format. Return ONLY valid, parseable JSON — no markdown fences, no explanation, no trailing commas.
+Today is ${dateStr}. Write all seven sections in this exact JSON format. Return ONLY valid, parseable JSON — no markdown fences, no explanation, no trailing commas.
 
 {
-  "hero_text": "2-3 sentence teaser in the voice of the newsletter. Name 3-4 specific things in today's issue — a brand drama, an ingredient, a beauty or fashion moment, and the charity. Witty and specific. Makes you want to read on.",
+  "preview": "2-3 sentence teaser. Written like a subject line you'd actually open. Name the specific things in today's issue. Max 280 chars.",
 
-  "opening_headline": "A 2-line headline. Line 1 is plain text, line 2 uses <em> tags. Personal and slightly dark. E.g.: 'I went to the derm.<br><em>She was not impressed.</em>'",
+  "injection_report": "150-200 words. First-person confessional opener. Voice-note energy. A specific beauty or derm incident that opens into a broader truth. Plain text, no HTML tags.",
 
-  "opening_body": "3-4 paragraphs of personal essay. Wrap paragraphs in <p> tags. The FIRST paragraph must open with <p class=\\"drop-cap\\">. First-person voice, specific beauty or self-care incident, landing on a broader truth about beauty culture. End with a warm welcome to this issue.",
+  "put_it_in_your_mouth": "100-140 words. One ingestible — food, drink, supplement — and what it actually does for skin, hair, or the nervous system. Not a lecture. End with a concrete takeaway. Plain text.",
 
-  "hear_headline": "2-line headline. E.g.: 'The group chat<br><em>is going off.</em>'",
+  "lip_lab": "150-180 words. One ingredient, one study, one mechanism — explained like a smart friend at dinner, not a white paper. End with one sentence connecting it back to real life. Plain text.",
 
-  "hear_items": [
-    {
-      "tag": "one of: Brand Drama | Industry Moves | Runway Intel | Trend Alert | The Business",
-      "headline": "A specific, slightly arch headline — like a WSJ beauty section",
-      "body": "2-3 sentences. Specific, opinionated, dry. Include a detail that makes it feel reported."
-    },
-    { "tag": "...", "headline": "...", "body": "..." },
-    { "tag": "...", "headline": "...", "body": "..." }
+  "lips_in_6": [
+    "Item 1 — 20-30 words. Product, observation, industry note, or thing she tried.",
+    "Item 2.",
+    "Item 3.",
+    "Item 4.",
+    "Item 5.",
+    "Item 6."
   ],
 
-  "know_headline": "An ingredient or beauty science topic. 2 lines, second in <em> tags. E.g.: 'Salmon sperm is<br><em>in your serum now.</em>'",
+  "quick_hits": [
+    {
+      "headline": "Specific, slightly arch headline — like a WSJ beauty section",
+      "body": "2-3 sentences. Specific, opinionated, dry. Include a detail that makes it feel reported."
+    },
+    { "headline": "...", "body": "..." },
+    { "headline": "...", "body": "..." }
+  ],
 
-  "know_intro": "A single paragraph (no <p> tags) introducing the ingredient or trend.",
+  "on_our_calendar": [
+    { "date": "Month DD", "event": "1-2 sentences. A launch, event, or date worth marking. Specific, not vague." },
+    { "date": "Month DD", "event": "..." },
+    { "date": "Month DD", "event": "..." }
+  ],
 
-  "know_callout": "The scientific mechanism in 2-3 sentences. Use <strong> tags around the key scientific term.",
-
-  "know_body": "2 paragraphs separated by a blank line (no <p> tags). Who's using it, the lifestyle context, something uncomfortable-but-true.",
-
-  "know_quote": "A real-feeling expert quote. Format: \\"Quote text.\\" — First Last, Title, Organization",
-
-  "see_headline": "2-3 lines. Someone did something with makeup or fashion. Second or third line in <em>. Specific.",
-
-  "see_body": "2 paragraphs (no <p> tags). A specific SS26 or AW26 runway or editorial beauty moment. End with a connection to Lip Service.",
-
-  "see_image_caption": "Season · Short description. E.g.: 'SS26 · Statement Lip Moment'",
-
-  "help_headline": "Beauty as an act<br><em>of [something].</em>",
-
-  "help_intro": "2-3 sentences introducing a real beauty charity or initiative. Include founding context.",
-
-  "help_stat_number": "An impactful stat. E.g.: '50K+' or '$1.2M' or '300'",
-
-  "help_stat_label": "What that number represents — short, specific, lowercase.",
-
-  "help_body": "2-3 sentences (no <p> tags). One specific story that shows why this organization matters. End with what they need.",
-
-  "help_cta_url": "https://[charity website]/donate or /get-involved",
-
-  "help_cta_text": "Donate to [Charity Name]",
-
-  "tears_headline": "A poetic multi-line headline about the story below. Use <br> between lines, <em> for italic lines. Specific to the person and what happened.",
-
-  "tears_body": "3-4 paragraphs about this story: ${story.context}\\n\\nWrite it fresh — do not copy the context verbatim. Start with the person and their world. Build to the moment. End with either a direct quote from the person or a line that lands the emotional truth."
+  "last_word": "60-80 words. The thing that earns its place at the end. A cause, a person, a moment — something that lands without sentimentality. Plain text."
 }`;
 
   console.log('Calling Claude API...');
 
   const stream = client.messages.stream({
     model: 'claude-opus-4-6',
-    max_tokens: 8000,
+    max_tokens: 4096,
     messages: [{ role: 'user', content: prompt }],
   });
 
@@ -270,56 +227,18 @@ const PREVIEW_MODE = process.env.PREVIEW === '1';
 
 // ─── Shared render helper ─────────────────────────────────────────────────────
 
-function renderHtml(template, content, image, story, issueLabel, issueDate) {
-  const hearItemsHtml = buildHearItemsHtml(content.hear_items);
-
-  const openingBody = content.opening_body.includes('<p')
-    ? content.opening_body
-    : content.opening_body
-        .split(/\n\n+/)
-        .map((p, i) =>
-          i === 0 ? `<p class="drop-cap">${p.trim()}</p>` : `<p>${p.trim()}</p>`
-        )
-        .join('\n');
-
-  const tearsBody = content.tears_body.includes('<p')
-    ? content.tears_body
-    : content.tears_body
-        .split(/\n\n+/)
-        .map((p) => `<p>${p.trim()}</p>`)
-        .join('\n');
-
+function renderHtml(template, content, issueLabel, issueDate) {
   return template
     .replace(/\{\{ISSUE_LABEL\}\}/g, issueLabel)
     .replace(/\{\{ISSUE_DATE\}\}/g, issueDate)
-    .replace('{{HERO_TEXT}}', content.hero_text)
-    .replace('{{OPENING_HEADLINE}}', content.opening_headline)
-    .replace('{{OPENING_BODY}}', openingBody)
-    .replace('{{HEAR_HEADLINE}}', content.hear_headline)
-    .replace('{{HEAR_ITEMS}}', hearItemsHtml)
-    .replace('{{KNOW_HEADLINE}}', content.know_headline)
-    .replace('{{KNOW_INTRO}}', content.know_intro)
-    .replace('{{KNOW_CALLOUT}}', content.know_callout)
-    .replace('{{KNOW_BODY}}', content.know_body)
-    .replace('{{KNOW_QUOTE}}', content.know_quote)
-    .replace('{{SEE_HEADLINE}}', content.see_headline)
-    .replace('{{SEE_IMAGE_URL}}', `https://images.unsplash.com/photo-${image.photoId}?w=600&q=80`)
-    .replace('{{SEE_IMAGE_ALT}}', image.alt)
-    .replace('{{SEE_IMAGE_CAPTION}}', content.see_image_caption)
-    .replace('{{SEE_BODY}}', content.see_body)
-    .replace('{{HELP_HEADLINE}}', content.help_headline)
-    .replace('{{HELP_INTRO}}', content.help_intro)
-    .replace('{{HELP_STAT_NUMBER}}', content.help_stat_number)
-    .replace('{{HELP_STAT_LABEL}}', content.help_stat_label)
-    .replace('{{HELP_BODY}}', content.help_body)
-    .replace('{{HELP_CTA_URL}}', content.help_cta_url)
-    .replace('{{HELP_CTA_TEXT}}', content.help_cta_text)
-    .replace('{{TEARS_HEADLINE}}', content.tears_headline)
-    .replace('{{TEARS_BODY}}', tearsBody)
-    .replace('{{TEARS_VIDEO_URL}}', `https://www.youtube.com/watch?v=${story.videoId}`)
-    .replace('{{TEARS_THUMB_URL}}', `https://img.youtube.com/vi/${story.videoId}/hqdefault.jpg`)
-    .replace('{{TEARS_VIDEO_ALT}}', `Healthy Tears · ${issueDate}`)
-    .replace('{{TEARS_VIDEO_LABEL}}', story.videoLabel);
+    .replace('{{PREVIEW}}', content.preview)
+    .replace('{{INJECTION_REPORT}}', content.injection_report)
+    .replace('{{PUT_IT_IN_YOUR_MOUTH}}', content.put_it_in_your_mouth)
+    .replace('{{LIP_LAB}}', content.lip_lab)
+    .replace('{{LIPS_IN_6}}', buildLips6Html(content.lips_in_6))
+    .replace('{{QUICK_HITS}}', buildQuickHitsHtml(content.quick_hits))
+    .replace('{{ON_OUR_CALENDAR}}', buildCalendarHtml(content.on_our_calendar))
+    .replace('{{LAST_WORD}}', content.last_word);
 }
 
 // ─── Promote preview → live ───────────────────────────────────────────────────
@@ -394,20 +313,16 @@ async function main() {
     ? new Date(Date.now() + 24 * 60 * 60 * 1000)
     : new Date();
 
-  const day = dayOfYear(today);
   const issueNum = issueNumber(today);
   const issueLabel = `Issue No. ${issueNum}`;
   const issueDate = formatDate(today);
   const key = dateKey(today);
 
-  const image = BEAUTY_IMAGES[day % BEAUTY_IMAGES.length];
-  const story = TEARS_STORIES[day % TEARS_STORIES.length];
-
   console.log(`${PREVIEW_MODE ? 'Previewing' : 'Generating'} ${issueLabel} — ${issueDate}`);
 
-  const content = await generateContent(today, story);
+  const content = await generateContent(today);
   const template = await fs.readFile(path.join(__dirname, 'template.html'), 'utf-8');
-  const html = renderHtml(template, content, image, story, issueLabel, issueDate);
+  const html = renderHtml(template, content, issueLabel, issueDate);
 
   if (PREVIEW_MODE) {
     // ── Write preview/ (no changes to live site) ───────────────────────────
@@ -426,7 +341,7 @@ async function main() {
 
     await fs.writeFile(path.join(previewDir, 'index.html'), previewHtml, 'utf-8');
     await fs.writeFile(path.join(previewDir, 'meta.json'), JSON.stringify(
-      { date: key, issueLabel, issueDate, heroText: content.hero_text }, null, 2
+      { date: key, issueLabel, issueDate, heroText: content.preview }, null, 2
     ), 'utf-8');
     console.log(`  ✓ preview/index.html (${issueLabel}) — live at /preview/`);
   } else {
@@ -438,7 +353,7 @@ async function main() {
     let archive = [];
     try { archive = JSON.parse(await fs.readFile(issuesJsonPath, 'utf-8')); } catch {}
     archive = archive.filter((e) => e.date !== key);
-    archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: content.hero_text, slug: key, url: `./issues/${key}.html` });
+    archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: content.preview, slug: key, url: `./issues/${key}.html` });
     await fs.writeFile(issuesJsonPath, JSON.stringify(archive, null, 2), 'utf-8');
 
     const newsletterHtml = html
