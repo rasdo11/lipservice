@@ -227,10 +227,27 @@ const PREVIEW_MODE = process.env.PREVIEW === '1';
 
 // ─── Shared render helper ─────────────────────────────────────────────────────
 
-function renderHtml(template, content, issueLabel, issueDate) {
+function buildOgMeta(issueLabel, preview, issueUrl) {
+  const desc = preview.replace(/"/g, '&quot;').replace(/\n/g, ' ').slice(0, 300);
+  const title = `Lip Service — ${issueLabel}`;
+  return [
+    `<meta property="og:type" content="article">`,
+    `<meta property="og:title" content="${title}">`,
+    `<meta property="og:description" content="${desc}">`,
+    issueUrl ? `<meta property="og:url" content="${issueUrl}">` : '',
+    `<meta name="twitter:card" content="summary">`,
+    `<meta name="twitter:title" content="${title}">`,
+    `<meta name="twitter:description" content="${desc}">`,
+  ].filter(Boolean).join('\n');
+}
+
+function renderHtml(template, content, issueLabel, issueDate, issueUrl) {
+  const ogMeta = buildOgMeta(issueLabel, content.preview, issueUrl);
   return template
     .replace(/\{\{ISSUE_LABEL\}\}/g, issueLabel)
     .replace(/\{\{ISSUE_DATE\}\}/g, issueDate)
+    .replace('{{OG_META}}', ogMeta)
+    .replace('{{ISSUE_URL}}', issueUrl || '#')
     .replace('{{PREVIEW}}', content.preview)
     .replace('{{INJECTION_REPORT}}', content.injection_report)
     .replace('{{PUT_IT_IN_YOUR_MOUTH}}', content.put_it_in_your_mouth)
@@ -281,6 +298,16 @@ async function promotePreview() {
   // Clean up preview/
   await fs.rm(previewDir, { recursive: true });
   console.log('  ✓ preview/ cleaned up');
+
+  // Update homepage "Latest issue →" link
+  const indexPath = path.join(__dirname, 'index.html');
+  const indexHtml = await fs.readFile(indexPath, 'utf-8');
+  const updatedIndex = indexHtml.replace(
+    /(<a href=")[^"]*("[^>]*class="nav-cta")/,
+    `$1issues/${key}.html$2`
+  );
+  await fs.writeFile(indexPath, updatedIndex, 'utf-8');
+  console.log(`  ✓ index.html nav link → issues/${key}.html`);
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
@@ -317,12 +344,14 @@ async function main() {
   const issueLabel = `Issue No. ${issueNum}`;
   const issueDate = formatDate(today);
   const key = dateKey(today);
+  const siteUrl = (process.env.SITE_URL || '').replace(/\/$/, '');
+  const issueUrl = siteUrl ? `${siteUrl}/issues/${key}.html` : `./issues/${key}.html`;
 
   console.log(`${PREVIEW_MODE ? 'Previewing' : 'Generating'} ${issueLabel} — ${issueDate}`);
 
   const content = await generateContent(today);
   const template = await fs.readFile(path.join(__dirname, 'template.html'), 'utf-8');
-  const html = renderHtml(template, content, issueLabel, issueDate);
+  const html = renderHtml(template, content, issueLabel, issueDate, issueUrl);
 
   if (PREVIEW_MODE) {
     // ── Write preview/ (no changes to live site) ───────────────────────────
@@ -367,6 +396,16 @@ async function main() {
     console.log(`  ✓ issues/${key}.html`);
 
     console.log(`  ✓ issues.json (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
+
+    // Update homepage "Latest issue →" link
+    const indexPath = path.join(__dirname, 'index.html');
+    const indexHtml = await fs.readFile(indexPath, 'utf-8');
+    const updatedIndex = indexHtml.replace(
+      /(<a href=")[^"]*("[^>]*class="nav-cta")/,
+      `$1issues/${key}.html$2`
+    );
+    await fs.writeFile(indexPath, updatedIndex, 'utf-8');
+    console.log(`  ✓ index.html nav link → issues/${key}.html`);
   }
 }
 

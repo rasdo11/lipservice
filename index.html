@@ -553,8 +553,16 @@
 <script>
   function handleSubmit(e, successId, formId, fineId) {
     e.preventDefault();
-    const el = document.getElementById(formId);
-    if (el) el.style.display = 'none';
+    const form = document.getElementById(formId);
+    const data = {};
+    new FormData(form).forEach((v, k) => { data[k] = v; });
+    data.source = formId;
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }).catch(() => {});
+    if (form) form.style.display = 'none';
     document.getElementById(successId).classList.add('visible');
     const fine = document.getElementById(fineId);
     if (fine) fine.style.opacity = '0.3';
