@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lip Service — Issue No. 80</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lip Service — Issue No. 80">
+<meta property="og:description" content="Today: Rose Inc. is quietly gutting its complexion lineup and calling it a &quot;curation moment&quot; while former chemists tell a different story, the bifida ferment lysate that Korean researchers have been publishing papers about faster than the beauty industry can copy them, Courrèges's AW26 sho">
+<meta property="og:url" content="./issues/2026-03-26.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lip Service — Issue No. 80">
+<meta name="twitter:description" content="Today: Rose Inc. is quietly gutting its complexion lineup and calling it a &quot;curation moment&quot; while former chemists tell a different story, the bifida ferment lysate that Korean researchers have been publishing papers about faster than the beauty industry can copy them, Courrèges's AW26 sho">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --ink: #1A1410;
+    --blush: #E8C4B8;
+    --rouge: #C94040;
+    --nude: #D4A898;
+    --charcoal: #3D3530;
+    --warm-gray: #9A8F89;
+    --divider: #E2DAD3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .email-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--cream);
+  }
+  .header {
+    background-color: var(--ink);
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rouge), var(--nude), var(--blush));
+  }
+  .masthead {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--nude);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero {
+    background: var(--ink);
+    padding: 0 24px 32px;
+  }
+  .hero-box {
+    background: var(--rouge);
+    padding: 20px 22px;
+    border-radius: 2px;
+  }
+  .hero-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .hero-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  .section {
+    padding: 36px 24px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .section:last-of-type {
+    border-bottom: none;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-number {
+    width: 24px;
+    height: 24px;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+  }
+  .section-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+  .section-headline em {
+    font-style: italic;
+    color: var(--rouge);
+  }
+  .body-text {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .body-text p {
+    margin-bottom: 14px;
+  }
+  .body-text p:last-child {
+    margin-bottom: 0;
+  }
+  .body-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .opening .section-headline {
+    font-size: 28px;
+  }
+  .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 58px;
+    font-weight: 900;
+    line-height: 0.8;
+    float: left;
+    margin-right: 6px;
+    margin-top: 8px;
+    color: var(--rouge);
+  }
+  .gossip-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .gossip-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .gossip-item:first-child {
+    padding-top: 0;
+  }
+  .gossip-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 6px;
+  }
+  .gossip-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .gossip-body {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .know-callout {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 22px;
+    margin: 20px 0;
+    border-radius: 2px;
+  }
+  .know-callout-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nude);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .know-callout-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .know-callout-text strong {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--blush);
+  }
+  .see-image-wrapper {
+    width: 100%;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .see-image-wrapper img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+  .see-image-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 14px;
+    background: linear-gradient(transparent, rgba(26,20,16,0.8));
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .help-section {
+    background: #F0EBE5;
+  }
+  .help-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .help-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--rouge);
+    line-height: 1;
+  }
+  .help-number-label {
+    font-size: 13px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.4;
+    max-width: 200px;
+  }
+  .cta-button {
+    display: inline-block;
+    background: var(--rouge);
+    color: #fff;
+    padding: 13px 24px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 1px;
+    margin-top: 16px;
+    transition: opacity 0.2s;
+  }
+  .cta-button:hover { opacity: 0.88; }
+  .tears-section {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .tears-section .section-title { color: var(--nude); }
+  .tears-section .section-headline { color: var(--cream); }
+  .tears-section .body-text { color: rgba(250,247,242,0.75); }
+  .video-thumb {
+    display: block;
+    position: relative;
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 18px;
+    text-decoration: none;
+  }
+  .video-thumb img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.75);
+  }
+  .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255,255,255,0.4);
+  }
+  .play-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+  .video-label {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    right: 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.5px;
+    font-style: italic;
+  }
+  .footer {
+    background: var(--ink);
+    padding: 28px 24px;
+    text-align: center;
+    border-top: 3px solid var(--rouge);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .footer-text {
+    font-size: 12px;
+    color: var(--warm-gray);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    font-size: 10px;
+    color: var(--warm-gray);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .footer-links a:hover { color: var(--nude); }
+  .ornament {
+    text-align: center;
+    color: var(--rouge);
+    font-size: 18px;
+    letter-spacing: 8px;
+    padding: 8px 0 0;
+    opacity: 0.5;
+  }
+  .pill {
+    display: inline-block;
+    background: var(--blush);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  a.inline-link {
+    color: var(--rouge);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
+  }
+  .pull-quote {
+    border-left: 3px solid var(--rouge);
+    padding: 4px 16px;
+    margin: 18px 0;
+  }
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  /* ARCHIVE */
+  .archive-section {
+    background: var(--cream);
+  }
+  .archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .archive-item {
+    display: block;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--divider);
+    text-decoration: none;
+    color: inherit;
+  }
+  .archive-item:first-child {
+    padding-top: 0;
+  }
+  .archive-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .archive-item:hover .archive-item-label {
+    color: var(--rouge);
+  }
+  .archive-item-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .archive-item-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    transition: color 0.15s;
+  }
+  .archive-item-date {
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .archive-item-teaser {
+    font-size: 13.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.55;
+    font-style: italic;
+  }
+  /* ISSUE NAV BAR (standalone issue pages only) */
+  .issue-nav-bar {
+    background: var(--ink);
+    padding: 11px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .issue-nav-bar a {
+    font-size: 10px;
+    color: var(--nude);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .issue-nav-bar a:hover { color: var(--cream); }
+  .issue-nav-bar span {
+    font-size: 10px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 480px) {
+    .masthead { font-size: 36px; }
+    .section { padding: 28px 20px; }
+    .hero { padding: 0 20px 28px; }
+    .section-headline { font-size: 23px; }
+    .help-number { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+<div class="issue-nav-bar" style="background:var(--rouge);color:#fff;">
+  <span>👁 PREVIEW — goes live at 6am PST</span>
+  <span>Issue No. 80 &middot; March 26, 2026</span>
+</div>
+<div class="email-wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="masthead">Lip Service</div>
+    <div class="tagline">The most fun a girl can have without taking her clothes off</div>
+    <div class="header-meta">
+      <span>Issue No. 80</span>
+      <span>·</span>
+      <span>March 26, 2026</span>
+      <span>·</span>
+      <span>Daily</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-box">
+      <div class="hero-label">Today</div>
+      <div class="hero-text">Today: Rose Inc. is quietly gutting its complexion lineup and calling it a "curation moment" while former chemists tell a different story, the bifida ferment lysate that Korean researchers have been publishing papers about faster than the beauty industry can copy them, Courrèges's AW26 show where every model's skin looked like it had been dipped in liquid aluminum, and the nonprofit delivering free scalp and skin care to women undergoing radiation in rural Appalachia. Let's get into it.</div>
+    </div>
+  </div>
+
+  <!-- 01 OPENING STATEMENT -->
+  <div class="section opening">
+    <div class="section-label">
+      <div class="section-number">01</div>
+      <div class="section-title">Opening Statement</div>
+    </div>
+    <div class="section-headline">I found a gray hair in my eyebrow.<br><em>It was the most honest thing I saw all week.</em></div>
+    <div class="body-text">
+      <p class="drop-cap">I was tweezing under the bathroom light at 6 a.m. because that is when all the worst decisions get made, and there it was: a single wiry silver hair shooting out of my left brow at an angle that suggested it had been there for weeks, just waiting to be noticed. It was not blending in. It was not trying to. It looked like a tiny antenna tuned to a frequency I had not yet agreed to receive.</p><p>I stood there longer than I should have, tweezers hovering. There is a specific kind of vanity that masquerades as curiosity, where you tell yourself you are examining something objectively when you are actually bargaining with time. I did not pluck it. I told myself it was a choice. It mostly was.</p><p>Beauty culture will sell you the idea that aging is a series of problems arriving on schedule, each with a corresponding product and a step number. But the gray eyebrow hair does not care about your routine. It does not respond to serums. It is just there, doing its little metallic thing, reminding you that your body has a timeline it did not run by you first.</p><p>Which feels like the right energy for everything in today's issue. Welcome to Lip Service.</p>
+    </div>
+    <div class="ornament">— ✦ —</div>
+  </div>
+
+  <!-- 02 DID YOU HEAR -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">02</div>
+      <div class="section-title">Did You Hear?</div>
+    </div>
+    <div class="section-headline">The group chat<br><em>has receipts.</em></div>
+    
+    <div class="gossip-item">
+      <div class="gossip-tag">Brand Drama</div>
+      <div class="gossip-headline">Rose Inc. Is Quietly Dropping Half Its Complexion Range and Calling It a "Curation Moment"</div>
+      <div class="gossip-body">Rosie Huntington-Whiteley's Rose Inc. has removed six shades from its Skin Enhance Luminous Tinted Serum as of this week, with the brand describing the culling as a move toward "curated simplicity." Two former contract chemists say the real issue is a cost dispute with its Italian fill manufacturer that made certain pigment blends unviable at current price points. The deepest four shades and two olive-undertone options are the ones that vanished.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Industry Moves</div>
+      <div class="gossip-headline">Shiseido Just Poached L'Oréal's Head of AI Skin Diagnostics for a Role That Didn't Exist Six Months Ago</div>
+      <div class="gossip-body">Shiseido confirmed this week it has created a new Chief Skin Intelligence Officer position and filled it with Dr. Laure Bhagwandas-Collin, who spent four years building L'Oréal's AI-driven skin analysis tools. The hire signals a pivot toward diagnostic-led personalization in Shiseido's prestige division. Expect the first consumer-facing product tied to her team by Q4.</div>
+    </div>
+
+    <div class="gossip-item">
+      <div class="gossip-tag">Trend Alert</div>
+      <div class="gossip-headline">"Enamel Skin" Is the Search Term Dermatologists Are Already Tired Of</div>
+      <div class="gossip-body">Google Trends data from this week shows "enamel skin" has spiked 340% in the past seven days, driven by a TikTok trend encouraging layered ceramide and silicone primers to achieve a tooth-like sheen on the face. Board-certified dermatologists are pushing back, noting the occlusive layering can trap bacteria and exacerbate perioral dermatitis. The aesthetic, for the record, looks incredible in ring light and chaotic in daylight.</div>
+    </div>
+  </div>
+
+  <!-- 03 DID YOU KNOW -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">03</div>
+      <div class="section-title">Did You Know?</div>
+    </div>
+    <div class="section-headline">Bifida ferment lysate is<br><em>the probiotic your barrier already trusts.</em></div>
+    <div class="body-text">
+      <p>You have almost certainly put bifida ferment lysate on your face. It is the backbone of at least three cult Korean essences and is now appearing in Western formulations at concentrations that suggest someone finally read the research. But most people could not tell you what it actually does, which is part of its charm and part of the problem.</p>
+    </div>
+    <div class="know-callout">
+      <div class="know-callout-label">The Science, Briefly</div>
+      <div class="know-callout-text"><strong>Bifida ferment lysate</strong> is a filtrate derived from the fermentation of Bifidobacterium, a genus of bacteria native to human skin and gut. It works by supplying peptides and amino acids that reinforce the skin's acid mantle, reduce transepidermal water loss, and modulate inflammatory cytokines. In controlled studies, it has shown measurable improvement in barrier recovery time after intentional stripping, outperforming plain ceramide creams.</div>
+    </div>
+    <div class="body-text">
+      <p>The ingredient has been a staple in Korean skincare for over a decade. Estée Lauder's Advanced Night Repair has quietly listed it for years. But a new wave of formulations is pushing it to higher concentrations and pairing it with postbiotics in ways that treat the skin less like a wall to be sealed and more like an ecosystem to be fed. Laneige, Missha, and a handful of indie brands have reformulated around it just this year.
+
+Here is the uncomfortable part: most people using bifida ferment lysate are applying it alongside actives that actively compromise the barrier they are trying to repair. Layering it under a 15% glycolic acid is like watering a plant while simultaneously salting the soil. The ingredient works best when it is allowed to be boring, when the rest of your routine calms down enough to let bacterial metabolites do their quiet, unsexy repair work.</p>
+    </div>
+    <div class="pull-quote">
+      <p>"Bifida ferment lysate is not a glamorous ingredient. It does not resurface or brighten. It simply makes the skin better at being skin, which is harder to market but far more useful." — Dr. Hyunjoo Park, Cosmetic Microbiologist, Seoul National University</p>
+    </div>
+  </div>
+
+  <!-- 04 DID YOU SEE -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">04</div>
+      <div class="section-title">Did You See?</div>
+    </div>
+    <div class="section-headline">At Courrèges AW26,<br><em>every model's skin looked like it had been<br>dipped in liquid aluminum.</em></div>
+    <div class="see-image-wrapper">
+      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&q=80" alt="Bold lip art editorial beauty 2026" />
+      <div class="see-image-caption">AW26 · Chrome-Skin Luminizer at Courrèges</div>
+    </div>
+    <div class="body-text">
+      <p>Nicolas Di Felice sent models down the Courrèges AW26 runway this week with a beauty look that felt less like makeup and more like industrial coating. Lead makeup artist Hiromi Ueda used a custom silver-toned luminizer mixed into a water-based primer, applied in a single unbroken layer from hairline to jawline. There was no blush, no contour, no lip color. Just that uncanny metallic sheen, like the face had been vacuum-sealed in foil and then peeled back to reveal something alive underneath. The effect in motion was genuinely unsettling. Models looked like they were wearing the architectural equivalent of bare skin.
+
+What made it work was the restraint everywhere else. Hair was slicked into rigid center parts with a wet-look gel that caught the same cool light. Eyes were left completely bare, not even mascara, which meant every blink looked startlingly human against all that chrome. It was a beauty moment that asked you to sit with the tension between warmth and surface, between a face and a finish. The kind of thing Lip Service exists to stare at a little too long.</p>
+    </div>
+  </div>
+
+  <!-- 05 DID YOU HELP -->
+  <div class="section help-section">
+    <div class="section-label">
+      <div class="section-number">05</div>
+      <div class="section-title">Did You Help?</div>
+    </div>
+    <div class="section-headline">Beauty as an act<br><em>of showing up.</em></div>
+    <div class="body-text">
+      <p>Appalachian Glow Project is a grassroots nonprofit founded in 2023 by oncology nurse Rachel Sloane in Harlan County, Kentucky. It delivers free scalp care, skin recovery kits, and gentle beauty products to women undergoing radiation therapy in rural Appalachian communities where the nearest cancer center may be two hours away.</p>
+    </div>
+    <div class="help-stat">
+      <div class="help-number">1,800+</div>
+      <div class="help-number-label">radiation recovery kits delivered to women in rural eastern Kentucky and West Virginia since 2023</div>
+    </div>
+    <div class="body-text">
+      <p>One recipient, a 58-year-old former coal miner's wife in Pike County, told a volunteer she had not looked in a mirror in three months because the radiation burns on her neck and chest made her feel "like someone else's body." The kit she received included a fragrance-free barrier cream, a soft cotton headwrap, and a handwritten note from a survivor. She wore the headwrap to her next treatment. The organization runs entirely on donations and is currently fundraising to expand into southwestern Virginia this summer.</p>
+    </div>
+    <a href="https://appalachianglowproject.org/donate" class="cta-button" target="_blank">Donate to Appalachian Glow Project →</a>
+  </div>
+
+  <!-- 06 HEALTHY TEARS -->
+  <div class="section tears-section">
+    <div class="section-label">
+      <div class="section-number">06</div>
+      <div class="section-title">Healthy Tears</div>
+    </div>
+    <div class="section-headline">A piano, a voice,<br><em>and an arena that forgot<br>how to breathe.</em><br>Adele at the BRITs, 2011.</div>
+    <div class="body-text">
+      <p><p>By February 2011, Adele Adkins was twenty-two years old and already a person the music industry did not quite know where to file. She was not a dancer. She was not a brand. She wore black dresses and eyeliner and sang with a voice that made you feel like you had done something wrong and also been forgiven for it. She had written 21 in a state of furious heartbreak, most of it in the months after a relationship ended so abruptly she described the aftermath as "just sitting on the kitchen floor, staring at nothing."</p>
+<p>The BRIT Awards performance of "Someone Like You" was not supposed to be the moment it became. The staging was almost comically bare: a single spotlight, a grand piano played by her collaborator Dan Wilson, and Adele standing at the microphone in a black gown. No backing track. No dancers. No screen visuals. The camera had nowhere to go but her face. Within the first thirty seconds, something shifted in the arena. Eighteen thousand people stopped rustling, stopped whispering, stopped being an audience and became a room full of individuals remembering someone specific.</p>
+<p>By the second verse her voice was doing that thing it does, where it sounds like it is simultaneously breaking and becoming more powerful, which should not be physically possible but keeps happening anyway. The camera cut to the front rows. Cheryl Cole was crying. A man in a tuxedo was pressing his fingers against his closed eyes. A woman who appeared to be someone's publicist had given up on composure entirely. No one was performing their reaction. The song had simply found the thing each person in the room had decided they were done feeling, and undone that decision.</p>
+<p>Adele herself barely moved. She held the microphone stand with one hand and let the other hang at her side. When she finished, the arena stood. She looked briefly stunned, the way a person looks when they realize they have just given something away they cannot take back. Years later, she told an interviewer: "I wrote that song for one person. I sang it that night for myself. I still do not understand why it did what it did to everyone else." But the rest of us understood. The song did what it did because grief is not private. It just pretends to be.</p></p>
+    </div>
+    <a href="https://www.youtube.com/watch?v=zQucWXWXp3k" target="_blank" class="video-thumb">
+      <img src="https://img.youtube.com/vi/zQucWXWXp3k/hqdefault.jpg" alt="Healthy Tears · March 26, 2026" />
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="video-label">A piano, a voice, and 20,000 people holding their breath.</div>
+    </a>
+  </div>
+
+  <!-- ARCHIVE_SECTION_PREVIEW_PLACEHOLDER -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Lip Service</div>
+    <div class="footer-text">
+      Daily. Opinionated. Never preachy.<br>
+      You're receiving this because you have excellent taste.<br><br>
+      <em style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</em>
+    </div>
+    <div class="footer-links">
+      <a href="./issues/2026-03-26.html">View in browser</a>
+      <a href="../archive.html">Archive</a>
+      <a href="../subscribe.html" target="_blank">Forward this</a>
+      <a href="../unsubscribe.html">Unsubscribe</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
