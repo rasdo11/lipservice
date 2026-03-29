@@ -58,15 +58,55 @@ function dateKey(date) {
 
 // ─── HTML builders ────────────────────────────────────────────────────────────
 
-function buildHearItemsHtml(items) {
+function markdownBoldToHtml(text) {
+  if (!text) return '';
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+}
+
+function buildBodyHtml(text) {
+  if (!text) return '';
+  const converted = markdownBoldToHtml(text);
+  if (converted.includes('<p')) return converted;
+  return converted
+    .split(/\n\n+/)
+    .map((p) => `<p>${p.trim()}</p>`)
+    .join('\n');
+}
+
+function buildLipsIn6Html(items) {
   return items
     .map(
-      (item) => `
-    <div class="gossip-item">
-      <div class="gossip-tag">${item.tag}</div>
-      <div class="gossip-headline">${item.headline}</div>
-      <div class="gossip-body">${item.body}</div>
-    </div>`
+      (item) =>
+        `<div class="lips-item"><span class="lips-emoji">${item.emoji}</span><span class="lips-text">${markdownBoldToHtml(item.text)}</span></div>`
+    )
+    .join('\n');
+}
+
+function buildQuickHitsHtml(items) {
+  return items
+    .map((item) => {
+      const labelHtml = item.label
+        ? `<span class="qh-label">${item.label}:</span> `
+        : '';
+      return `<div class="quick-hit-item"><span class="qh-emoji">${item.emoji}</span><span class="qh-body">${labelHtml}${markdownBoldToHtml(item.text)}</span></div>`;
+    })
+    .join('\n');
+}
+
+function buildRotationHtml(items) {
+  return items
+    .map(
+      (item) =>
+        `<div class="rotation-item">${markdownBoldToHtml(item.text)}</div>`
+    )
+    .join('\n');
+}
+
+function buildCalendarHtml(items) {
+  return items
+    .map(
+      (item) =>
+        `<div class="calendar-item"><span class="cal-emoji">${item.emoji}</span><span class="cal-text">${markdownBoldToHtml(item.text)}</span></div>`
     )
     .join('\n');
 }
@@ -78,91 +118,33 @@ async function generateContent(date, recentIssues) {
   const dateStr = formatDate(date);
   const fourDaysAgo = formatDate(new Date(date.getTime() - 4 * 24 * 60 * 60 * 1000));
 
+  // Load the editorial style guide as the system prompt
+  const systemPrompt = await fs.readFile(
+    path.join(__dirname, '.github', 'prompts', 'system.md'),
+    'utf-8'
+  );
+
   // Build a "do not repeat" block from the last 10 issues
-  const doNotRepeat = recentIssues && recentIssues.length > 0
-    ? `\nRECENTLY COVERED — DO NOT USE ANY OF THESE:\nThe following brands, ingredients, designers, charities, and stories have already appeared in the last ${recentIssues.length} issues. You are BANNED from mentioning them again. A repeat is a firing offense.\n\n${recentIssues.map((iss, i) => `Issue ${i + 1} (${iss.date}): ${iss.preview}`).join('\n')}\n\nBefore writing anything, ask yourself: "Did any recent issue cover this brand, ingredient, designer, or charity?" If yes, choose something completely different. The reader sees every issue. They will notice.\n`
-    : '';
+  const doNotRepeat =
+    recentIssues && recentIssues.length > 0
+      ? `RECENTLY COVERED — DO NOT USE ANY OF THESE:\nThe following brands, ingredients, designers, charities, and stories have already appeared in the last ${recentIssues.length} issues. You are BANNED from mentioning them again. A repeat is a firing offense.\n\n${recentIssues.map((iss, i) => `Issue ${i + 1} (${iss.date}): ${iss.preview}`).join('\n')}\n\nBefore writing anything, ask yourself: "Did any recent issue cover this brand, ingredient, designer, or charity?" If yes, choose something completely different. The reader sees every issue. They will notice.\n`
+      : '';
 
-  const prompt = `You are the editor of LIP SERVICE — a sharp, witty, beautifully written daily newsletter about beauty, fashion, culture, and the things women actually care about.
+  const userPrompt = `Today is ${dateStr}. The freshness window is ${fourDaysAgo} through today — every news peg must fall within that window.
 
-You are a working journalist with exacting standards. Your job is to find what is NEW and SPECIFIC today. You do not recycle stories. You do not reach for the same brands. You do not cover the same ingredient twice in a month. Every issue must feel like it was reported fresh that morning.
+${doNotRepeat}IMPORTANT: Never use an em dash (—) anywhere in the writing. Rewrite any sentence that would require one. Use a comma, a period, or restructure the sentence instead.
 
-Voice: Personal, specific, slightly wry. Think a brilliant friend who reads PubMed AND sends the unhinged meme. Never condescending, never preachy. The kind of writing that makes you feel like you were let in on something.
-
-JOURNALISTIC RULES — these are non-negotiable:
-1. The brand drama must be a DIFFERENT brand every single issue. There are thousands of beauty brands. Use them.
-2. The ingredient science must cover a DIFFERENT ingredient every issue. There are hundreds of actives. Pick one that hasn't been covered recently.
-3. The runway moment must reference a DIFFERENT designer and collection every issue.
-4. The charity must be a DIFFERENT organization every issue. Do not return to the same charity within 30 days.
-5. If you find yourself writing about a brand, ingredient, or designer that feels familiar, STOP and choose something else.
-6. Specific beats vague. A real brand name, a real product launch, a real controversy — not "a major beauty brand" or "a popular ingredient."
-
-FRESHNESS RULE — this is the most important rule:
-Every brand story, product launch, ingredient trend, runway moment, and charity spotlight you reference must have been publicly reported or occurred on or after ${fourDaysAgo}. Do not reference events, launches, controversies, or campaigns older than 4 days. If you are not certain something happened within that window, do not use it. Find something that did.
-${doNotRepeat}
 IMPORTANT: Never use the words "preview", "draft", or "test" anywhere in the content. Write as if this is the final published issue.
 
-IMPORTANT: Never use an em dash (—) anywhere in the writing. Rewrite any sentence that would require one. Use a comma, a period, or restructure the sentence instead.
-
-Today is ${dateStr}. Write all sections in this exact JSON format. Return ONLY valid, parseable JSON — no markdown fences, no explanation, no trailing commas.
-
-{
-  "hero_text": "2-3 sentence teaser in the voice of the newsletter. Name 3-4 specific things in today's issue — a brand drama, an ingredient, a beauty or fashion moment, and the charity. Witty and specific. Makes you want to read on.",
-
-  "opening_headline": "A 2-line headline. Line 1 is plain text, line 2 uses <em> tags. Personal and slightly dark. E.g.: 'I went to the derm.<br><em>She was not impressed.</em>'",
-
-  "opening_body": "3-4 paragraphs of personal essay. Wrap paragraphs in <p> tags. The FIRST paragraph must open with <p class=\\"drop-cap\\">. First-person voice, specific beauty or self-care incident, landing on a broader truth about beauty culture. End with a warm welcome to this issue.",
-
-  "hear_headline": "2-line headline. E.g.: 'The group chat<br><em>is going off.</em>'",
-
-  "hear_items": [
-    {
-      "tag": "one of: Brand Drama | Industry Moves | Runway Intel | Trend Alert | The Business",
-      "headline": "A specific, slightly arch headline — like a WSJ beauty section",
-      "body": "2-3 sentences. Specific, opinionated, dry. Include a detail that makes it feel reported."
-    },
-    { "tag": "...", "headline": "...", "body": "..." },
-    { "tag": "...", "headline": "...", "body": "..." }
-  ],
-
-  "know_headline": "An ingredient or beauty science topic. 2 lines, second in <em> tags. E.g.: 'Salmon sperm is<br><em>in your serum now.</em>'",
-
-  "know_intro": "A single paragraph (no <p> tags) introducing the ingredient or trend.",
-
-  "know_callout": "The scientific mechanism in 2-3 sentences. Use <strong> tags around the key scientific term.",
-
-  "know_body": "2 paragraphs separated by a blank line (no <p> tags). Who's using it, the lifestyle context, something uncomfortable-but-true.",
-
-  "know_quote": "A real-feeling expert quote. Format: \\"Quote text.\\" — First Last, Title, Organization",
-
-  "see_headline": "2-3 lines. Someone did something with makeup or fashion. Second or third line in <em>. Specific.",
-
-  "see_body": "2 paragraphs (no <p> tags). A specific SS26 or AW26 runway or editorial beauty moment. End with a connection to Lip Service.",
-
-  "see_image_caption": "Season · Short description. E.g.: 'SS26 · Statement Lip Moment'",
-
-  "help_headline": "Beauty as an act<br><em>of [something].</em>",
-
-  "help_intro": "2-3 sentences introducing a real beauty charity or initiative. Include founding context.",
-
-  "help_stat_number": "An impactful stat. E.g.: '50K+' or '$1.2M' or '300'",
-
-  "help_stat_label": "What that number represents — short, specific, lowercase.",
-
-  "help_body": "2-3 sentences (no <p> tags). One specific story that shows why this organization matters. End with what they need.",
-
-  "help_cta_url": "https://[charity website]/donate or /get-involved",
-
-  "help_cta_text": "Donate to [Charity Name]",
-
-}`;
+Return only valid, parseable JSON matching the schema in your instructions. No markdown fences, no explanation, no trailing commas.`;
 
   console.log('Calling Claude API...');
 
   const stream = client.messages.stream({
     model: 'claude-opus-4-6',
     max_tokens: 8000,
-    messages: [{ role: 'user', content: prompt }],
+    system: systemPrompt,
+    messages: [{ role: 'user', content: userPrompt }],
   });
 
   const message = await stream.finalMessage();
@@ -193,8 +175,8 @@ const PREVIEW_MODE = process.env.PREVIEW === '1';
 
 // ─── Shared render helper ─────────────────────────────────────────────────────
 
-function buildOgMeta(issueLabel, heroText, issueUrl) {
-  const desc = heroText.replace(/"/g, '&quot;').replace(/\n/g, ' ').slice(0, 300);
+function buildOgMeta(issueLabel, previewText, issueUrl) {
+  const desc = previewText.replace(/"/g, '&quot;').replace(/\n/g, ' ').slice(0, 300);
   const title = `Lip Service — ${issueLabel}`;
   return [
     `<meta property="og:type" content="article">`,
@@ -204,48 +186,42 @@ function buildOgMeta(issueLabel, heroText, issueUrl) {
     `<meta name="twitter:card" content="summary">`,
     `<meta name="twitter:title" content="${title}">`,
     `<meta name="twitter:description" content="${desc}">`,
-  ].filter(Boolean).join('\n');
+  ]
+    .filter(Boolean)
+    .join('\n');
 }
 
 function renderHtml(template, content, image, issueLabel, issueDate, issueUrl) {
-  const hearItemsHtml = buildHearItemsHtml(content.hear_items);
-
-  const openingBody = content.opening_body.includes('<p')
-    ? content.opening_body
-    : content.opening_body
-        .split(/\n\n+/)
-        .map((p, i) =>
-          i === 0 ? `<p class="drop-cap">${p.trim()}</p>` : `<p>${p.trim()}</p>`
-        )
-        .join('\n');
-
   return template
     .replace(/\{\{ISSUE_LABEL\}\}/g, issueLabel)
     .replace(/\{\{ISSUE_DATE\}\}/g, issueDate)
-    .replace('{{OG_META}}', buildOgMeta(issueLabel, content.hero_text, issueUrl))
+    .replace('{{OG_META}}', buildOgMeta(issueLabel, content.preview || content.but_first, issueUrl))
     .replace('{{ISSUE_URL}}', issueUrl || '#')
-    .replace('{{HERO_TEXT}}', content.hero_text)
-    .replace('{{OPENING_HEADLINE}}', content.opening_headline)
-    .replace('{{OPENING_BODY}}', openingBody)
-    .replace('{{HEAR_HEADLINE}}', content.hear_headline)
-    .replace('{{HEAR_ITEMS}}', hearItemsHtml)
-    .replace('{{KNOW_HEADLINE}}', content.know_headline)
-    .replace('{{KNOW_INTRO}}', content.know_intro)
-    .replace('{{KNOW_CALLOUT}}', content.know_callout)
-    .replace('{{KNOW_BODY}}', content.know_body)
-    .replace('{{KNOW_QUOTE}}', content.know_quote)
-    .replace('{{SEE_HEADLINE}}', content.see_headline)
+    .replace('{{BUT_FIRST}}', content.but_first)
+    .replace('{{QUOTE_TEXT}}', content.quote_of_day.text)
+    .replace('{{QUOTE_ATTRIBUTION}}', content.quote_of_day.attribution)
+    .replace('{{INJECTION_HEADLINE}}', content.injection_report.headline)
+    .replace('{{INJECTION_BODY}}', buildBodyHtml(content.injection_report.body))
+    .replace('{{INJECTION_HIGHLIGHT}}', content.injection_report.highlight)
+    .replace('{{INJECTION_RELATED}}', content.injection_report.related)
+    .replace('{{ROTATION_1_ITEMS}}', buildRotationHtml(content.rotation_1))
+    .replace('{{PIYM_HEADLINE}}', content.put_it_in_your_mouth.headline)
+    .replace('{{PIYM_BODY}}', buildBodyHtml(content.put_it_in_your_mouth.body))
+    .replace('{{PIYM_HIGHLIGHT}}', content.put_it_in_your_mouth.highlight)
+    .replace('{{PIYM_CHEAT_MEAL}}', content.put_it_in_your_mouth.cheat_meal)
+    .replace('{{PIYM_RELATED}}', content.put_it_in_your_mouth.related)
+    .replace('{{LIP_LAB_HEADLINE}}', content.lip_lab.headline)
+    .replace('{{LIP_LAB_BODY}}', buildBodyHtml(content.lip_lab.body))
+    .replace('{{LIP_LAB_HIGHLIGHT}}', content.lip_lab.highlight)
+    .replace('{{LIP_LAB_RELATED}}', content.lip_lab.related)
     .replace('{{SEE_IMAGE_URL}}', `https://images.unsplash.com/photo-${image.photoId}?w=600&q=80`)
     .replace('{{SEE_IMAGE_ALT}}', image.alt)
-    .replace('{{SEE_IMAGE_CAPTION}}', content.see_image_caption)
-    .replace('{{SEE_BODY}}', content.see_body)
-    .replace('{{HELP_HEADLINE}}', content.help_headline)
-    .replace('{{HELP_INTRO}}', content.help_intro)
-    .replace('{{HELP_STAT_NUMBER}}', content.help_stat_number)
-    .replace('{{HELP_STAT_LABEL}}', content.help_stat_label)
-    .replace('{{HELP_BODY}}', content.help_body)
-    .replace('{{HELP_CTA_URL}}', content.help_cta_url)
-    .replace('{{HELP_CTA_TEXT}}', content.help_cta_text);
+    .replace('{{LIPS_IN_6_ITEMS}}', buildLipsIn6Html(content.lips_in_6))
+    .replace('{{QUICK_HITS_ITEMS}}', buildQuickHitsHtml(content.quick_hits))
+    .replace('{{CALENDAR_ITEMS}}', buildCalendarHtml(content.on_our_calendar))
+    .replace('{{ROTATION_2_ITEMS}}', buildRotationHtml(content.rotation_2))
+    .replace('{{LAST_WORD_QUOTE}}', content.last_word.quote)
+    .replace('{{LAST_WORD_ATTRIBUTION}}', content.last_word.attribution);
 }
 
 // ─── Promote preview → live ───────────────────────────────────────────────────
@@ -265,15 +241,27 @@ async function promotePreview() {
   await fs.mkdir(issuesDir, { recursive: true });
   const issuesJsonPath = path.join(__dirname, 'issues.json');
   let archive = [];
-  try { archive = JSON.parse(await fs.readFile(issuesJsonPath, 'utf-8')); } catch {}
+  try {
+    archive = JSON.parse(await fs.readFile(issuesJsonPath, 'utf-8'));
+  } catch {}
   const issueNum = parseInt((issueLabel.match(/\d+/) || ['0'])[0], 10);
   archive = archive.filter((e) => e.date !== key);
-  archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: heroText, slug: key, url: `./issues/${key}.html` });
+  archive.unshift({
+    issue: issueNum,
+    date: key,
+    title: issueLabel,
+    preview: heroText,
+    slug: key,
+    url: `./issues/${key}.html`,
+  });
   archive.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
   await fs.writeFile(issuesJsonPath, JSON.stringify(archive, null, 2), 'utf-8');
 
   // Strip preview nav bar, replace archive placeholder with nothing (inbox-only)
-  const cleanHtml = previewHtml.replace(/<div class="issue-nav-bar"[^>]*>[\s\S]*?<\/div>\n?/, '');
+  const cleanHtml = previewHtml.replace(
+    /<div class="issue-nav-bar"[^>]*>[\s\S]*?<\/div>\n?/,
+    ''
+  );
   const newsletterHtml = cleanHtml
     .replace(PREVIEW_PLACEHOLDER, '')
     .replace(/\{\{ROOT\}\}/g, '');
@@ -288,11 +276,15 @@ async function promotePreview() {
   console.log(`  ✓ issues.json (${archive.length} issue${archive.length !== 1 ? 's' : ''})`);
 
   // Clean up preview/ and stage the deletion in git so manual runs don't leave dirty state.
-  // In CI the workflow's `git add -A` would catch it anyway; this makes local runs clean too.
   await fs.rm(previewDir, { recursive: true });
   try {
-    execSync('git rm -rf --cached --ignore-unmatch preview/', { cwd: __dirname, stdio: 'pipe' });
-  } catch { /* not a git repo or nothing tracked — CI's git add -A will handle it */ }
+    execSync('git rm -rf --cached --ignore-unmatch preview/', {
+      cwd: __dirname,
+      stdio: 'pipe',
+    });
+  } catch {
+    /* not a git repo or nothing tracked — CI's git add -A will handle it */
+  }
   console.log('  ✓ preview/ cleaned up');
 }
 
@@ -319,7 +311,10 @@ async function main() {
     } catch {}
 
     let previewExists = false;
-    try { await fs.access(path.join(__dirname, 'preview', 'index.html')); previewExists = true; } catch {}
+    try {
+      await fs.access(path.join(__dirname, 'preview', 'index.html'));
+      previewExists = true;
+    } catch {}
     if (previewExists) {
       await promotePreview();
       return;
@@ -346,7 +341,9 @@ async function main() {
   // then use issueNum to select the image/story (avoids day-based repeats).
   const issuesJsonPath = path.join(__dirname, 'issues.json');
   let archive = [];
-  try { archive = JSON.parse(await fs.readFile(issuesJsonPath, 'utf-8')); } catch {}
+  try {
+    archive = JSON.parse(await fs.readFile(issuesJsonPath, 'utf-8'));
+  } catch {}
 
   const issueNum = issueNumber(archive.filter((e) => e.date !== key));
 
@@ -378,12 +375,16 @@ async function main() {
     // Idempotency: skip if a preview already exists for the same target date.
     // Prevents the duplicate preview crons (5 UTC and 6 UTC) from both calling the API.
     try {
-      const existingMeta = JSON.parse(await fs.readFile(path.join(previewDir, 'meta.json'), 'utf-8'));
+      const existingMeta = JSON.parse(
+        await fs.readFile(path.join(previewDir, 'meta.json'), 'utf-8')
+      );
       if (existingMeta.date === key) {
         console.log(`Preview already exists for ${key} (${issueLabel}), skipping.`);
         return;
       }
-    } catch { /* no existing preview — proceed */ }
+    } catch {
+      /* no existing preview — proceed */
+    }
     await fs.mkdir(previewDir, { recursive: true });
 
     // Replace archive section with a visible placeholder for the preview viewer
@@ -397,9 +398,15 @@ async function main() {
       .replace(/\{\{ROOT\}\}/g, '../');
 
     await fs.writeFile(path.join(previewDir, 'index.html'), previewHtml, 'utf-8');
-    await fs.writeFile(path.join(previewDir, 'meta.json'), JSON.stringify(
-      { date: key, issueLabel, issueDate, heroText: content.hero_text }, null, 2
-    ), 'utf-8');
+    await fs.writeFile(
+      path.join(previewDir, 'meta.json'),
+      JSON.stringify(
+        { date: key, issueLabel, issueDate, heroText: content.preview || content.but_first },
+        null,
+        2
+      ),
+      'utf-8'
+    );
     console.log(`  ✓ preview/index.html (${issueLabel}) — live at /preview/`);
   } else {
     // ── Normal publish: write newsletter.html + issues.json ───────────────
@@ -407,7 +414,14 @@ async function main() {
     await fs.mkdir(issuesDir, { recursive: true });
 
     archive = archive.filter((e) => e.date !== key);
-    archive.unshift({ issue: issueNum, date: key, title: issueLabel, preview: content.hero_text, slug: key, url: `./issues/${key}.html` });
+    archive.unshift({
+      issue: issueNum,
+      date: key,
+      title: issueLabel,
+      preview: content.preview || content.but_first,
+      slug: key,
+      url: `./issues/${key}.html`,
+    });
     archive.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
     await fs.writeFile(issuesJsonPath, JSON.stringify(archive, null, 2), 'utf-8');
 
