@@ -28,11 +28,6 @@ const REQUIRED_PLACEHOLDERS = [
   '{{HELP_BODY}}',
   '{{HELP_CTA_URL}}',
   '{{HELP_CTA_TEXT}}',
-  '{{TEARS_HEADLINE}}',
-  '{{TEARS_BODY}}',
-  '{{TEARS_VIDEO_URL}}',
-  '{{TEARS_THUMB_URL}}',
-  '{{TEARS_VIDEO_LABEL}}',
 ];
 
 export async function runHealthCheck() {
