@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lip Service — Editor Review</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --ink: #1A1410;
+    --blush: #E8C4B8;
+    --rouge: #C94040;
+    --nude: #D4A898;
+    --charcoal: #3D3530;
+    --warm-gray: #9A8F89;
+    --divider: #E2DAD3;
+    --panel: #F4EFE9;
+    --green: #2D6A4F;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Top bar ── */
+  .topbar {
+    background: var(--rouge);
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    gap: 16px;
+    z-index: 10;
+  }
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .topbar-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+  }
+  .topbar-badge {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.2);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .topbar-meta {
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.5px;
+  }
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  #countdown {
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Main layout ── */
+  .layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    gap: 0;
+  }
+
+  /* ── Preview iframe ── */
+  .preview-wrap {
+    flex: 1;
+    overflow: hidden;
+    background: #eee;
+    position: relative;
+  }
+  .preview-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  .preview-empty {
+    display: none;
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    color: var(--warm-gray);
+    background: var(--cream);
+    text-align: center;
+    padding: 40px;
+  }
+  .preview-empty h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .preview-empty p {
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 360px;
+  }
+  .preview-empty code {
+    background: var(--panel);
+    border: 1px solid var(--divider);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    font-family: monospace;
+  }
+
+  /* ── Notes sidebar ── */
+  .sidebar {
+    width: 320px;
+    flex-shrink: 0;
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--divider);
+    overflow-y: auto;
+  }
+  .sidebar-section {
+    padding: 20px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 10px;
+  }
+
+  /* Status indicator */
+  .status-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .status-dot.green { background: #3cb371; }
+  .status-dot.yellow { background: #e6a817; }
+  .status-dot.red { background: var(--rouge); }
+  .status-text {
+    font-size: 13px;
+    color: var(--charcoal);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  /* Notes */
+  .notes-textarea {
+    width: 100%;
+    min-height: 160px;
+    resize: vertical;
+    border: 1px solid var(--divider);
+    border-radius: 3px;
+    padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--charcoal);
+    background: #fff;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .notes-textarea:focus {
+    border-color: var(--rouge);
+  }
+  .notes-saved {
+    font-size: 11px;
+    color: var(--warm-gray);
+    margin-top: 6px;
+    letter-spacing: 0.3px;
+    min-height: 16px;
+  }
+
+  /* Checklist */
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13.5px;
+    color: var(--charcoal);
+    line-height: 1.45;
+    cursor: pointer;
+    user-select: none;
+  }
+  .checklist li input[type="checkbox"] {
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: var(--rouge);
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+  }
+  .checklist li.checked span {
+    text-decoration: line-through;
+    color: var(--warm-gray);
+  }
+
+  /* Action buttons */
+  .actions {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+  }
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-align: center;
+    transition: opacity 0.15s;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn-approve {
+    background: var(--green);
+    color: #fff;
+  }
+  .btn-hold {
+    background: transparent;
+    color: var(--rouge);
+    border: 1.5px solid var(--rouge);
+  }
+
+  /* Hold instructions modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,20,16,0.7);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--cream);
+    border-radius: 4px;
+    max-width: 480px;
+    width: 100%;
+    padding: 28px;
+  }
+  .modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .modal p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--charcoal);
+    margin-bottom: 14px;
+  }
+  .modal-cmd {
+    background: var(--ink);
+    color: var(--nude);
+    font-family: monospace;
+    font-size: 14px;
+    padding: 12px 16px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .copy-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.7);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.15s;
+  }
+  .copy-btn:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+  .modal-close {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .modal-close:hover { opacity: 0.85; }
+
+  /* Approved banner */
+  .approved-banner {
+    display: none;
+    background: var(--green);
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .approved-banner.show { display: block; }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo">Lip Service</div>
+    <div class="topbar-badge">Editor Review</div>
+    <div class="topbar-meta" id="issue-meta">Loading preview...</div>
+  </div>
+  <div class="topbar-right">
+    <div id="countdown"></div>
+  </div>
+</div>
+
+<!-- Approved banner -->
+<div class="approved-banner" id="approved-banner">
+  Approved. This issue will publish automatically at 6am PST. No action needed.
+</div>
+
+<!-- Layout -->
+<div class="layout">
+
+  <!-- Preview iframe -->
+  <div class="preview-wrap">
+    <iframe id="preview-frame" src="/preview/" title="Newsletter preview"></iframe>
+    <div class="preview-empty" id="preview-empty">
+      <h2>No preview yet.</h2>
+      <p>The preview generates nightly at 10pm PST. Once it runs, the issue will appear here automatically.</p>
+      <p>To generate one manually, run:<br><br><code>PREVIEW=1 npm run generate</code></p>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+
+    <!-- Status -->
+    <div class="status-row" id="status-row">
+      <div class="status-dot yellow" id="status-dot"></div>
+      <div class="status-text" id="status-text">Checking preview...</div>
+    </div>
+
+    <!-- Checklist -->
+    <div class="sidebar-section">
+      <div class="sidebar-label">Review checklist</div>
+      <ul class="checklist" id="checklist">
+        <li data-key="voice"><input type="checkbox"><span>Voice sounds right — personal, specific, not preachy</span></li>
+        <li data-key="norepeat"><input type="checkbox"><span>No repeated brands or ingredients from recent issues</span></li>
+        <li data-key="charity"><input type="checkbox"><span>Charity section feels genuine and has a real link</span></li>
+        <li data-key="tears"><input type="checkbox"><span>Healthy Tears video plays and is still live</span></li>
+        <li data-key="links"><input type="checkbox"><span>CTA links look correct</span></li>
+        <li data-key="mobile"><input type="checkbox"><span>Resize the window — looks good at 375px width</span></li>
+      </ul>
+    </div>
+
+    <!-- Notes -->
+    <div class="sidebar-section">
+      <div class="sidebar-label">Editor notes</div>
+      <textarea
+        class="notes-textarea"
+        id="notes"
+        placeholder="Type any notes about this issue...&#10;&#10;e.g. &quot;centella section feels thin — check if dosing claim is accurate&quot;"
+      ></textarea>
+      <div class="notes-saved" id="notes-saved"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button class="btn btn-approve" id="btn-approve">Approve — publish as scheduled</button>
+      <button class="btn btn-hold" id="btn-hold">Hold this issue</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Hold modal -->
+<div class="modal-overlay" id="hold-modal">
+  <div class="modal">
+    <h3>Hold this issue</h3>
+    <p>This will pause the auto-publish. The issue will sit in preview until you release the hold or the preview is regenerated.</p>
+    <p>Run this command in your terminal:</p>
+    <div class="modal-cmd">
+      <span id="hold-cmd-text">npm run hold</span>
+      <button class="copy-btn" id="copy-hold-cmd">Copy</button>
+    </div>
+    <p style="font-size:12px;color:var(--warm-gray);margin-bottom:20px;">To release the hold later, run <code style="background:var(--panel);padding:1px 5px;border-radius:2px;">npm run unhold</code> from the project directory.</p>
+    <button class="modal-close" id="hold-modal-close">Got it</button>
+  </div>
+</div>
+
+<script>
+  const STORAGE_PREFIX = 'lipservice_review_';
+
+  // ── Helpers ──────────────────────────────────────────────────────────────────
+
+  function save(key, value) {
+    try { localStorage.setItem(STORAGE_PREFIX + key, JSON.stringify(value)); } catch {}
+  }
+
+  function load(key, fallback) {
+    try {
+      const v = localStorage.getItem(STORAGE_PREFIX + key);
+      return v !== null ? JSON.parse(v) : fallback;
+    } catch { return fallback; }
+  }
+
+  // ── Countdown to 6am PST ─────────────────────────────────────────────────────
+
+  function updateCountdown() {
+    const now = new Date();
+    // 6am PST = UTC-8, so 14:00 UTC (standard) or 13:00 UTC (daylight)
+    const pstOffset = -8 * 60; // minutes, conservative (PST)
+    const pstNow = new Date(now.getTime() + (pstOffset + now.getTimezoneOffset()) * 60000);
+
+    const target = new Date(pstNow);
+    target.setHours(6, 0, 0, 0);
+    if (pstNow >= target) target.setDate(target.getDate() + 1);
+
+    const diff = target - pstNow;
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    document.getElementById('countdown').textContent =
+      `Publishes in ${h}h ${m}m`;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 30000);
+
+  // ── Preview health check ─────────────────────────────────────────────────────
+
+  const frame = document.getElementById('preview-frame');
+  const empty = document.getElementById('preview-empty');
+  const statusDot = document.getElementById('status-dot');
+  const statusText = document.getElementById('status-text');
+  const issueMeta = document.getElementById('issue-meta');
+
+  frame.addEventListener('load', () => {
+    // If the iframe loaded a 404/error page, src will still be /preview/ — we
+    // detect this by trying to read the meta.json instead.
+  });
+
+  fetch('/preview/meta.json')
+    .then((r) => {
+      if (!r.ok) throw new Error('no preview');
+      return r.json();
+    })
+    .then((meta) => {
+      issueMeta.textContent = `${meta.issueLabel} · ${meta.issueDate}`;
+      frame.style.display = 'block';
+      empty.style.display = 'none';
+      statusDot.className = 'status-dot green';
+      statusText.textContent = 'Preview ready. Review and approve or hold before 6am PST.';
+    })
+    .catch(() => {
+      frame.style.display = 'none';
+      empty.style.display = 'flex';
+      issueMeta.textContent = 'No preview';
+      statusDot.className = 'status-dot yellow';
+      statusText.textContent = 'No preview generated yet. Check back after 10pm PST.';
+    });
+
+  // ── Checklist ────────────────────────────────────────────────────────────────
+
+  const checks = load('checks', {});
+
+  document.querySelectorAll('#checklist li').forEach((li) => {
+    const key = li.dataset.key;
+    const box = li.querySelector('input');
+    box.checked = !!checks[key];
+    if (box.checked) li.classList.add('checked');
+
+    li.addEventListener('click', (e) => {
+      if (e.target !== box) box.checked = !box.checked;
+      li.classList.toggle('checked', box.checked);
+      checks[key] = box.checked;
+      save('checks', checks);
+    });
+  });
+
+  // ── Notes ────────────────────────────────────────────────────────────────────
+
+  const notesEl = document.getElementById('notes');
+  const notesSaved = document.getElementById('notes-saved');
+  let saveTimer;
+
+  notesEl.value = load('notes', '');
+
+  notesEl.addEventListener('input', () => {
+    clearTimeout(saveTimer);
+    notesSaved.textContent = 'Saving...';
+    saveTimer = setTimeout(() => {
+      save('notes', notesEl.value);
+      notesSaved.textContent = 'Saved · ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }, 600);
+  });
+
+  // ── Approve ──────────────────────────────────────────────────────────────────
+
+  const approvedBanner = document.getElementById('approved-banner');
+  const btnApprove = document.getElementById('btn-approve');
+
+  if (load('approved', false)) {
+    approvedBanner.classList.add('show');
+    btnApprove.textContent = 'Approved';
+    btnApprove.style.opacity = '0.6';
+    btnApprove.style.cursor = 'default';
+  }
+
+  btnApprove.addEventListener('click', () => {
+    save('approved', true);
+    approvedBanner.classList.add('show');
+    btnApprove.textContent = 'Approved';
+    btnApprove.style.opacity = '0.6';
+    btnApprove.style.cursor = 'default';
+    statusDot.className = 'status-dot green';
+    statusText.textContent = 'Approved. Will publish at 6am PST.';
+    // Scroll banner into view
+    approvedBanner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // ── Hold ─────────────────────────────────────────────────────────────────────
+
+  const holdModal = document.getElementById('hold-modal');
+  const holdModalClose = document.getElementById('hold-modal-close');
+  const copyBtn = document.getElementById('copy-hold-cmd');
+
+  document.getElementById('btn-hold').addEventListener('click', () => {
+    holdModal.classList.add('open');
+  });
+
+  holdModalClose.addEventListener('click', () => {
+    holdModal.classList.remove('open');
+    statusDot.className = 'status-dot red';
+    statusText.textContent = 'Hold placed. Run npm run unhold when ready to publish.';
+  });
+
+  holdModal.addEventListener('click', (e) => {
+    if (e.target === holdModal) holdModal.classList.remove('open');
+  });
+
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText('npm run hold').then(() => {
+      copyBtn.textContent = 'Copied';
+      setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
+    });
+  });
+</script>
+</body>
+</html>

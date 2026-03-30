@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "generate": "node generate.js",
-    "start": "node generate.js"
+    "start": "node generate.js",
+    "hold": "node hold.js",
+    "unhold": "node hold.js --release"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0"

@@ -48,6 +48,15 @@
       ]
     },
     {
+      "source": "/review.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
       "source": "/(subscribe|unsubscribe|archive)\\.html",
       "headers": [
         {

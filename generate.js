@@ -3,6 +3,7 @@ import { execSync } from 'child_process';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { runHealthCheck } from './healthcheck.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -309,6 +310,14 @@ async function main() {
       return;
     } catch {}
 
+    // Hold check: if preview/hold exists, editor has flagged this issue — skip publish
+    const holdFile = path.join(__dirname, 'preview', 'hold');
+    try {
+      await fs.access(holdFile);
+      console.log('Issue is on hold (preview/hold exists). Skipping publish. Remove the hold file to release.');
+      return;
+    } catch {}
+
     let previewExists = false;
     try { await fs.access(path.join(__dirname, 'preview', 'index.html')); previewExists = true; } catch {}
     if (previewExists) {
@@ -316,6 +325,11 @@ async function main() {
       return;
     }
     console.log('No preview found — generating fresh...');
+  }
+
+  // ── Health check (preview mode only — catches config issues before API call) ─
+  if (PREVIEW_MODE) {
+    await runHealthCheck();
   }
 
   // ── Determine target date ──────────────────────────────────────────────────
