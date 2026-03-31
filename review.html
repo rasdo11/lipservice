@@ -131,7 +131,7 @@
     font-family: monospace;
   }
 
-  /* ── Notes sidebar ── */
+  /* ── Sidebar ── */
   .sidebar {
     width: 320px;
     flex-shrink: 0;
@@ -139,19 +139,7 @@
     display: flex;
     flex-direction: column;
     border-left: 1px solid var(--divider);
-    overflow-y: auto;
-  }
-  .sidebar-section {
-    padding: 20px;
-    border-bottom: 1px solid var(--divider);
-  }
-  .sidebar-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--rouge);
-    margin-bottom: 10px;
+    overflow: hidden;
   }
 
   /* Status indicator */
@@ -161,6 +149,7 @@
     gap: 10px;
     padding: 14px 20px;
     border-bottom: 1px solid var(--divider);
+    flex-shrink: 0;
   }
   .status-dot {
     width: 10px;
@@ -176,6 +165,49 @@
     color: var(--charcoal);
     font-weight: 400;
     line-height: 1.4;
+  }
+
+  /* ── Tabs ── */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--divider);
+    flex-shrink: 0;
+    background: var(--panel);
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 11px 0;
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab-btn:hover { color: var(--ink); }
+  .tab-btn.active { color: var(--rouge); border-bottom-color: var(--rouge); }
+
+  .tab-panel { display: none; flex-direction: column; flex: 1; overflow-y: auto; min-height: 0; }
+  .tab-panel.active { display: flex; }
+
+  /* ── Review tab ── */
+  .sidebar-section {
+    padding: 20px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 10px;
   }
 
   /* Notes */
@@ -194,9 +226,7 @@
     outline: none;
     transition: border-color 0.15s;
   }
-  .notes-textarea:focus {
-    border-color: var(--rouge);
-  }
+  .notes-textarea:focus { border-color: var(--rouge); }
   .notes-saved {
     font-size: 11px;
     color: var(--warm-gray);
@@ -268,6 +298,76 @@
     color: var(--rouge);
     border: 1.5px solid var(--rouge);
   }
+
+  /* ── Edit tab ── */
+  .edit-panel-inner {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+  }
+  .edit-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    margin-bottom: 8px;
+  }
+  .edit-hint {
+    font-size: 12px;
+    color: var(--warm-gray);
+    line-height: 1.55;
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+  .edit-textarea {
+    width: 100%;
+    flex: 1;
+    min-height: 260px;
+    resize: vertical;
+    border: 1px solid var(--divider);
+    border-radius: 3px;
+    padding: 10px 12px;
+    font-family: monospace;
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--charcoal);
+    background: #fff;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .edit-textarea:focus { border-color: var(--rouge); }
+  .edit-token-input {
+    width: 100%;
+    border: 1px solid var(--divider);
+    border-radius: 3px;
+    padding: 9px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--charcoal);
+    background: #fff;
+    outline: none;
+    margin-top: 10px;
+    transition: border-color 0.15s;
+  }
+  .edit-token-input:focus { border-color: var(--rouge); }
+  .edit-token-input::placeholder { color: var(--warm-gray); }
+  .btn-save {
+    margin-top: 10px;
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .edit-status {
+    font-size: 12px;
+    min-height: 18px;
+    margin-top: 8px;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+  }
+  .edit-status.ok { color: var(--green); }
+  .edit-status.err { color: var(--rouge); }
 
   /* Hold instructions modal */
   .modal-overlay {
@@ -402,34 +502,68 @@
       <div class="status-text" id="status-text">Checking preview...</div>
     </div>
 
-    <!-- Checklist -->
-    <div class="sidebar-section">
-      <div class="sidebar-label">Review checklist</div>
-      <ul class="checklist" id="checklist">
-        <li data-key="voice"><input type="checkbox"><span>Voice sounds right — personal, specific, not preachy</span></li>
-        <li data-key="norepeat"><input type="checkbox"><span>No repeated brands or ingredients from recent issues</span></li>
-        <li data-key="charity"><input type="checkbox"><span>Charity section feels genuine and has a real link</span></li>
-        <li data-key="tears"><input type="checkbox"><span>Healthy Tears video plays and is still live</span></li>
-        <li data-key="links"><input type="checkbox"><span>CTA links look correct</span></li>
-        <li data-key="mobile"><input type="checkbox"><span>Resize the window — looks good at 375px width</span></li>
-      </ul>
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-review-btn">Review</button>
+      <button class="tab-btn" id="tab-edit-btn">Edit</button>
     </div>
 
-    <!-- Notes -->
-    <div class="sidebar-section">
-      <div class="sidebar-label">Editor notes</div>
-      <textarea
-        class="notes-textarea"
-        id="notes"
-        placeholder="Type any notes about this issue...&#10;&#10;e.g. &quot;centella section feels thin — check if dosing claim is accurate&quot;"
-      ></textarea>
-      <div class="notes-saved" id="notes-saved"></div>
+    <!-- Review tab panel -->
+    <div class="tab-panel active" id="tab-review">
+
+      <!-- Checklist -->
+      <div class="sidebar-section">
+        <div class="sidebar-label">Review checklist</div>
+        <ul class="checklist" id="checklist">
+          <li data-key="voice"><input type="checkbox"><span>Voice sounds right — personal, specific, not preachy</span></li>
+          <li data-key="norepeat"><input type="checkbox"><span>No repeated brands or ingredients from recent issues</span></li>
+          <li data-key="newspeg"><input type="checkbox"><span>All 3 long sections have a real news peg from this week</span></li>
+          <li data-key="lips6"><input type="checkbox"><span>Lips in 6 covers the range: injectables, nutrition, products, science</span></li>
+          <li data-key="quickhits"><input type="checkbox"><span>Quick Hits has a Best Kiss and a Keep It Out</span></li>
+          <li data-key="mobile"><input type="checkbox"><span>Resize the window — looks good at 375px width</span></li>
+        </ul>
+      </div>
+
+      <!-- Notes -->
+      <div class="sidebar-section">
+        <div class="sidebar-label">Editor notes</div>
+        <textarea
+          class="notes-textarea"
+          id="notes"
+          placeholder="Type any notes about this issue...&#10;&#10;e.g. &quot;injection report feels thin — dosing claim needs a source&quot;"
+        ></textarea>
+        <div class="notes-saved" id="notes-saved"></div>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button class="btn btn-approve" id="btn-approve">Approve — publish as scheduled</button>
+        <button class="btn btn-hold" id="btn-hold">Hold this issue</button>
+      </div>
+
     </div>
 
-    <!-- Actions -->
-    <div class="actions">
-      <button class="btn btn-approve" id="btn-approve">Approve — publish as scheduled</button>
-      <button class="btn btn-hold" id="btn-hold">Hold this issue</button>
+    <!-- Edit tab panel -->
+    <div class="tab-panel" id="tab-edit">
+      <div class="edit-panel-inner">
+        <div class="edit-label">Edit content</div>
+        <div class="edit-hint" id="edit-hint">Loading content JSON...</div>
+        <textarea
+          class="edit-textarea"
+          id="edit-json"
+          spellcheck="false"
+          placeholder="No preview content available yet."
+        ></textarea>
+        <input
+          class="edit-token-input"
+          id="edit-token"
+          type="password"
+          placeholder="Edit token"
+          autocomplete="current-password"
+        />
+        <button class="btn btn-save" id="btn-save">Save edits</button>
+        <div class="edit-status" id="edit-status"></div>
+      </div>
     </div>
 
   </div>
@@ -495,11 +629,7 @@
   const statusDot = document.getElementById('status-dot');
   const statusText = document.getElementById('status-text');
   const issueMeta = document.getElementById('issue-meta');
-
-  frame.addEventListener('load', () => {
-    // If the iframe loaded a 404/error page, src will still be /preview/ — we
-    // detect this by trying to read the meta.json instead.
-  });
+  let previewReady = false;
 
   fetch('/preview/meta.json')
     .then((r) => {
@@ -512,6 +642,8 @@
       empty.style.display = 'none';
       statusDot.className = 'status-dot green';
       statusText.textContent = 'Preview ready. Review and approve or hold before 6am PST.';
+      previewReady = true;
+      loadEditContent();
     })
     .catch(() => {
       frame.style.display = 'none';
@@ -519,7 +651,101 @@
       issueMeta.textContent = 'No preview';
       statusDot.className = 'status-dot yellow';
       statusText.textContent = 'No preview generated yet. Check back after 10pm PST.';
+      document.getElementById('edit-hint').textContent = 'No preview yet — nothing to edit.';
+      document.getElementById('edit-json').disabled = true;
+      document.getElementById('btn-save').disabled = true;
     });
+
+  // ── Tabs ─────────────────────────────────────────────────────────────────────
+
+  document.getElementById('tab-review-btn').addEventListener('click', () => {
+    document.getElementById('tab-review-btn').classList.add('active');
+    document.getElementById('tab-edit-btn').classList.remove('active');
+    document.getElementById('tab-review').classList.add('active');
+    document.getElementById('tab-edit').classList.remove('active');
+  });
+
+  document.getElementById('tab-edit-btn').addEventListener('click', () => {
+    document.getElementById('tab-edit-btn').classList.add('active');
+    document.getElementById('tab-review-btn').classList.remove('active');
+    document.getElementById('tab-edit').classList.add('active');
+    document.getElementById('tab-review').classList.remove('active');
+  });
+
+  // ── Edit panel ───────────────────────────────────────────────────────────────
+
+  const editHint = document.getElementById('edit-hint');
+  const editJson = document.getElementById('edit-json');
+  const editStatus = document.getElementById('edit-status');
+
+  function loadEditContent() {
+    fetch('/preview/content.json')
+      .then((r) => {
+        if (!r.ok) throw new Error('not found');
+        return r.json();
+      })
+      .then((data) => {
+        editJson.value = JSON.stringify(data.content, null, 2);
+        editHint.textContent = 'Edit the JSON below, then save. The preview updates in ~30s.';
+      })
+      .catch(() => {
+        editHint.textContent = 'Content file not found. Regenerate the preview to enable editing.';
+        editJson.disabled = true;
+        document.getElementById('btn-save').disabled = true;
+      });
+  }
+
+  document.getElementById('btn-save').addEventListener('click', async () => {
+    const tokenVal = document.getElementById('edit-token').value.trim();
+    const rawJson = editJson.value.trim();
+    const saveBtn = document.getElementById('btn-save');
+
+    editStatus.className = 'edit-status';
+    editStatus.textContent = '';
+
+    let parsed;
+    try {
+      parsed = JSON.parse(rawJson);
+    } catch (e) {
+      editStatus.className = 'edit-status err';
+      editStatus.textContent = 'Invalid JSON — fix the syntax before saving.';
+      return;
+    }
+
+    if (!tokenVal) {
+      editStatus.className = 'edit-status err';
+      editStatus.textContent = 'Enter your edit token.';
+      return;
+    }
+
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving...';
+
+    try {
+      const res = await fetch('/api/preview-save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: tokenVal, content: parsed }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+
+      editStatus.className = 'edit-status ok';
+      editStatus.textContent = 'Saved. Preview updating — reloading in 30s...';
+
+      // Reload iframe after Vercel redeploy
+      setTimeout(() => {
+        frame.src = '/preview/?' + Date.now();
+        editStatus.textContent = 'Done. Check the preview.';
+      }, 30000);
+    } catch (err) {
+      editStatus.className = 'edit-status err';
+      editStatus.textContent = `Error: ${err.message}`;
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save edits';
+    }
+  });
 
   // ── Checklist ────────────────────────────────────────────────────────────────
 
@@ -576,7 +802,6 @@
     btnApprove.style.cursor = 'default';
     statusDot.className = 'status-dot green';
     statusText.textContent = 'Approved. Will publish at 6am PST.';
-    // Scroll banner into view
     approvedBanner.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
