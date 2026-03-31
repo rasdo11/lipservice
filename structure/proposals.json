@@ -5,7 +5,7 @@
     "title": "Remove italics everywhere",
     "inspiration": "the skimm",
     "notes": "The Skimm uses almost no italics — everything is upright and direct. This strips italic from headlines, the hero box, the last word quote, and the quote-of-day block. Makes the whole newsletter feel less 'magazine editorial' and more 'smart friend texting you'.",
-    "status": "draft",
+    "status": "approved",
     "createdAt": "2026-03-31T00:00:00Z",
     "css": ".section-headline em { font-style: normal; font-weight: 700; color: var(--rouge); }\n.hero-text { font-style: normal; }\n.last-word-quote { font-style: normal; }\n.quote-block-text { font-style: normal; }",
     "html": null
