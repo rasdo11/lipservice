@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lip Service — Issue No. 84</title>
+<title>Lip Service — Issue No. 85</title>
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lip Service — Issue No. 84">
-<meta property="og:description" content="Today: Merit Beauty is quietly sunsetting its Flush Balm in four shades and calling it a 'simplification' while retailers describe something closer to a shelf-space showdown. Plus the ectoin molecule that extremophile bacteria discovered before any of us, Rick Owens's AW26 show where every model loo">
-<meta property="og:url" content="./issues/2026-03-30.html">
+<meta property="og:title" content="Lip Service — Issue No. 85">
+<meta property="og:description" content="New MRI data shows exactly where hyaluronic acid migrates post-injection. Plus: the high-dose olive oil study that has gastroenterologists fighting, and Pat McGrath's reformulated lip balm is not what you think.">
+<meta property="og:url" content="./issues/2026-03-31.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lip Service — Issue No. 84">
-<meta name="twitter:description" content="Today: Merit Beauty is quietly sunsetting its Flush Balm in four shades and calling it a 'simplification' while retailers describe something closer to a shelf-space showdown. Plus the ectoin molecule that extremophile bacteria discovered before any of us, Rick Owens's AW26 show where every model loo">
+<meta name="twitter:title" content="Lip Service — Issue No. 85">
+<meta name="twitter:description" content="New MRI data shows exactly where hyaluronic acid migrates post-injection. Plus: the high-dose olive oil study that has gastroenterologists fighting, and Pat McGrath's reformulated lip balm is not what you think.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -106,6 +106,36 @@
     line-height: 1.4;
     font-weight: 400;
   }
+  /* QUOTE OF DAY */
+  .quote-block {
+    background: var(--ink);
+    padding: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .quote-block-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nude);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .quote-block-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.55;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .quote-block-attribution {
+    font-size: 12px;
+    color: var(--warm-gray);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+  /* SECTIONS */
   .section {
     padding: 36px 24px;
     border-bottom: 1px solid var(--divider);
@@ -170,266 +200,227 @@
     font-weight: 500;
     color: var(--ink);
   }
-  .opening .section-headline {
-    font-size: 28px;
-  }
-  .drop-cap::first-letter {
-    font-family: 'Playfair Display', serif;
-    font-size: 58px;
-    font-weight: 900;
-    line-height: 0.8;
-    float: left;
-    margin-right: 6px;
-    margin-top: 8px;
-    color: var(--rouge);
-  }
-  .gossip-item {
-    padding: 18px 0;
-    border-bottom: 1px solid var(--divider);
-  }
-  .gossip-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-  .gossip-item:first-child {
-    padding-top: 0;
-  }
-  .gossip-tag {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--rouge);
-    margin-bottom: 6px;
-  }
-  .gossip-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 8px;
-    line-height: 1.3;
-  }
-  .gossip-body {
-    font-size: 14.5px;
-    line-height: 1.7;
-    color: var(--charcoal);
-    font-weight: 300;
-  }
-  .know-callout {
+  /* HIGHLIGHT CALLOUT (replaces know-callout) */
+  .highlight-box {
     background: var(--ink);
     color: var(--cream);
-    padding: 22px;
-    margin: 20px 0;
+    padding: 18px 20px;
+    margin: 20px 0 14px;
     border-radius: 2px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    font-weight: 300;
   }
-  .know-callout-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--nude);
-    margin-bottom: 10px;
+  .highlight-box strong {
     font-weight: 500;
-  }
-  .know-callout-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-style: italic;
-    line-height: 1.5;
-    font-weight: 400;
-  }
-  .know-callout-text strong {
-    font-style: normal;
-    font-weight: 700;
     color: var(--blush);
   }
-  .see-image-wrapper {
-    width: 100%;
-    margin-bottom: 18px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 2px;
-  }
-  .see-image-wrapper img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-  }
-  .see-image-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px 14px;
-    background: linear-gradient(transparent, rgba(26,20,16,0.8));
-    font-size: 11px;
-    color: rgba(255,255,255,0.8);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 400;
-  }
-  .help-section {
-    background: #F0EBE5;
-  }
-  .help-stat {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    margin: 16px 0;
-  }
-  .help-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 42px;
-    font-weight: 900;
-    color: var(--rouge);
-    line-height: 1;
-  }
-  .help-number-label {
-    font-size: 13px;
-    color: var(--charcoal);
-    font-weight: 300;
-    line-height: 1.4;
-    max-width: 200px;
-  }
-  .cta-button {
-    display: inline-block;
-    background: var(--rouge);
-    color: #fff;
-    padding: 13px 24px;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 1px;
-    margin-top: 16px;
-    transition: opacity 0.2s;
-  }
-  .cta-button:hover { opacity: 0.88; }
-  .tears-section {
-    background: var(--ink);
-    color: var(--cream);
-  }
-  .tears-section .section-title { color: var(--nude); }
-  .tears-section .section-headline { color: var(--cream); }
-  .tears-section .body-text { color: rgba(250,247,242,0.75); }
-  .video-thumb {
-    display: block;
-    position: relative;
-    width: 100%;
-    border-radius: 2px;
-    overflow: hidden;
-    margin-top: 18px;
-    text-decoration: none;
-  }
-  .video-thumb img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-    filter: brightness(0.75);
-  }
-  .play-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 54px;
-    height: 54px;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(4px);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1.5px solid rgba(255,255,255,0.4);
-  }
-  .play-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
-  .video-label {
-    position: absolute;
-    bottom: 12px;
-    left: 14px;
-    right: 14px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.8);
-    letter-spacing: 0.5px;
-    font-style: italic;
-  }
-  .footer {
-    background: var(--ink);
-    padding: 28px 24px;
-    text-align: center;
-    border-top: 3px solid var(--rouge);
-  }
-  .footer-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 900;
-    color: var(--cream);
-    letter-spacing: -0.5px;
-    margin-bottom: 8px;
-  }
-  .footer-text {
-    font-size: 12px;
+  /* RELATED LINK */
+  .related-link-row {
+    font-size: 13.5px;
     color: var(--warm-gray);
-    line-height: 1.6;
-    margin-bottom: 16px;
     font-weight: 300;
+    margin-top: 14px;
   }
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .footer-links a {
-    font-size: 10px;
-    color: var(--warm-gray);
-    text-decoration: none;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 400;
-  }
-  .footer-links a:hover { color: var(--nude); }
-  .ornament {
-    text-align: center;
-    color: var(--rouge);
-    font-size: 18px;
-    letter-spacing: 8px;
-    padding: 8px 0 0;
-    opacity: 0.5;
-  }
-  .pill {
-    display: inline-block;
-    background: var(--blush);
-    color: var(--ink);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 20px;
-    margin-bottom: 12px;
-  }
-  a.inline-link {
+  .related-link-row a {
     color: var(--rouge);
     text-decoration: underline;
     text-underline-offset: 3px;
     font-weight: 400;
   }
-  .pull-quote {
-    border-left: 3px solid var(--rouge);
-    padding: 4px 16px;
-    margin: 18px 0;
+  /* CHEAT MEAL BOX */
+  .cheat-meal-box {
+    border-left: 3px solid var(--nude);
+    padding: 10px 16px;
+    margin: 16px 0;
+    background: rgba(212,168,152,0.12);
   }
-  .pull-quote p {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-style: italic;
+  .cheat-meal-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .cheat-meal-text {
+    font-size: 14.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  /* IN OUR ROTATION (sponsored) */
+  .rotation-section {
+    background: #F0EBE5;
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .rotation-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .rotation-sponsor-tag {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    border: 1px solid var(--divider);
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .rotation-item {
+    font-size: 14.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.7;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .rotation-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .rotation-item:first-child {
+    padding-top: 0;
+  }
+  .rotation-item strong {
+    font-weight: 500;
     color: var(--ink);
+  }
+  .rotation-footer {
+    font-size: 12px;
+    color: var(--warm-gray);
+    font-style: italic;
+    margin-top: 14px;
+    font-weight: 300;
+  }
+  /* LIPS IN 6 */
+  .lips-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .lips-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--divider);
+    font-size: 14.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+  .lips-item:first-child { padding-top: 0; }
+  .lips-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .lips-emoji {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .lips-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  /* QUICK HITS */
+  .quick-hits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .quick-hit-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--divider);
+    font-size: 15px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .quick-hit-item:first-child { padding-top: 0; }
+  .quick-hit-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .qh-emoji {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .qh-label {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .qh-body strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  /* ON OUR CALENDAR */
+  .calendar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .calendar-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--divider);
+    font-size: 14.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+  .calendar-item:first-child { padding-top: 0; }
+  .calendar-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .cal-emoji {
+    font-size: 15px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .cal-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  /* LAST WORD */
+  .last-word-section {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .last-word-section .section-title { color: var(--nude); }
+  .last-word-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--cream);
     line-height: 1.5;
     font-weight: 400;
+    margin-bottom: 14px;
+  }
+  .last-word-attribution {
+    font-size: 13px;
+    color: var(--warm-gray);
+    font-weight: 300;
+    letter-spacing: 0.3px;
+  }
+  /* IMAGE BREAK */
+  .image-break {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .image-break img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85);
   }
   /* ARCHIVE */
   .archive-section {
@@ -447,16 +438,9 @@
     text-decoration: none;
     color: inherit;
   }
-  .archive-item:first-child {
-    padding-top: 0;
-  }
-  .archive-item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-  .archive-item:hover .archive-item-label {
-    color: var(--rouge);
-  }
+  .archive-item:first-child { padding-top: 0; }
+  .archive-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .archive-item:hover .archive-item-label { color: var(--rouge); }
   .archive-item-meta {
     display: flex;
     align-items: baseline;
@@ -510,12 +494,63 @@
     letter-spacing: 1px;
     text-transform: uppercase;
   }
+  .footer {
+    background: var(--ink);
+    padding: 28px 24px;
+    text-align: center;
+    border-top: 3px solid var(--rouge);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .footer-text {
+    font-size: 12px;
+    color: var(--warm-gray);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    font-size: 10px;
+    color: var(--warm-gray);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .footer-links a:hover { color: var(--nude); }
+  .ornament {
+    text-align: center;
+    color: var(--rouge);
+    font-size: 18px;
+    letter-spacing: 8px;
+    padding: 8px 0 0;
+    opacity: 0.5;
+  }
+  a.inline-link {
+    color: var(--rouge);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
+  }
   @media (max-width: 480px) {
     .masthead { font-size: 36px; }
     .section { padding: 28px 20px; }
     .hero { padding: 0 20px 28px; }
+    .rotation-section { padding: 24px 20px; }
     .section-headline { font-size: 23px; }
-    .help-number { font-size: 36px; }
+    .last-word-quote { font-size: 19px; }
   }
 </style>
 </head>
@@ -527,122 +562,156 @@
     <div class="masthead">Lip Service</div>
     <div class="tagline">The most fun a girl can have without taking her clothes off</div>
     <div class="header-meta">
-      <span>Issue No. 84</span>
+      <span>Issue No. 85</span>
       <span>·</span>
-      <span>March 30, 2026</span>
+      <span>March 31, 2026</span>
       <span>·</span>
       <span>Daily</span>
     </div>
   </div>
 
-  <!-- HERO -->
+  <!-- BUT FIRST / HERO -->
   <div class="hero">
     <div class="hero-box">
-      <div class="hero-label">Today</div>
-      <div class="hero-text">Today: Merit Beauty is quietly sunsetting its Flush Balm in four shades and calling it a 'simplification' while retailers describe something closer to a shelf-space showdown. Plus the ectoin molecule that extremophile bacteria discovered before any of us, Rick Owens's AW26 show where every model looked like she'd been exhumed from a beautiful glacier, and the nonprofit delivering free wound-care skincare to unhoused women in Chicago shelters. Let's get into it.</div>
+      <div class="hero-label">But First</div>
+      <div class="hero-text">Radiologists just published the first large-scale MRI study tracking filler migration in real time, and the images are both vindicating and deeply unsettling.</div>
     </div>
   </div>
 
-  <!-- 01 OPENING STATEMENT -->
-  <div class="section opening">
+  <!-- QUOTE OF DAY -->
+  <div class="quote-block">
+    <div class="quote-block-label">Quote of the Day</div>
+    <div class="quote-block-text">"The mouth is where vanity and vulnerability share a wall."</div>
+    <div class="quote-block-attribution">— Dr. Sabrina Shah-Desai, oculoplastic surgeon, in a March 2026 interview with The Face</div>
+  </div>
+
+  <!-- 01 THE INJECTION REPORT -->
+  <div class="section">
     <div class="section-label">
       <div class="section-number">01</div>
-      <div class="section-title">Opening Statement</div>
+      <div class="section-title">The Injection Report</div>
     </div>
-    <div class="section-headline">I found a gray hair in my eyebrow.<br><em>It was the most honest thing that happened to me all week.</em></div>
+    <div class="section-headline">The Filler Migration Study That Changes the Conversation</div>
     <div class="body-text">
-      <p class="drop-cap">I was tweezing under the kind of bathroom light that should be classified as psychological warfare when I spotted it: one single, wiry, completely silver eyebrow hair growing at an angle that suggested it had given up on conformity entirely. I did not pluck it. I stared at it. I considered naming it.</p><p>There is a specific kind of vanity spiral that hits when the change is small enough to ignore but too real to unsee. It is not the same as finding a wrinkle, which at least comes with cultural scripts about wisdom and expensive retinoids. A gray eyebrow hair is just your face quietly renegotiating terms without consulting you.</p><p>I ended up tinting my brows later that afternoon, not because I was ashamed but because the ritual itself felt like a small conversation with the person I am becoming. Beauty is sometimes about looking better. But more often it is about noticing yourself closely enough to stay in relationship with your own face.</p><p>Welcome to Monday's Lip Service. We have drama, we have science, we have a runway that looked like an ancient burial rite in the best possible way, and we have a charity doing unglamorous, essential work. Pull up a chair.</p>
+      <p><strong>What's going on:</strong> A team at Utrecht University Medical Centre published MRI findings on March 28 showing hyaluronic acid filler migration in 67% of patients scanned more than 12 months post-injection, with the highest displacement found in nasolabial and lip augmentation sites. The paper, in the Journal of Cosmetic Dermatology, used gadolinium-enhanced imaging to distinguish filler from native tissue for the first time at scale.</p>
+<p><strong>What it means:</strong> This is the first study with imaging rigorous enough to quiet the "migration is a myth" crowd. The data suggests that lower-viscosity HA fillers migrate more readily, and that injection depth matters as much as product choice. Your injector's technique is now a quantifiable variable, not a vibe.</p>
+<p><strong>What's next:</strong> Ask your provider whether they use a cannula or needle for lip work, and which viscosity they prefer. The Utrecht team is publishing a follow-up on enzyme-based reversal efficacy this summer.</p>
     </div>
-    <div class="ornament">— ✦ —</div>
+    <div class="highlight-box">The study found that filler placed superficially in the lip vermilion migrated at nearly twice the rate of filler placed in the wet-dry border. Depth of placement is the variable to discuss at your next appointment.</div>
+    <div class="related-link-row">Related: <a href="#" class="inline-link">The full Utrecht MRI migration study with before-and-after imaging comparisons(URL_PLACEHOLDER)</a></div>
   </div>
 
-  <!-- 02 DID YOU HEAR -->
+  <!-- IN OUR ROTATION (first) -->
+  <div class="rotation-section">
+    <div class="rotation-label">In Our Rotation</div>
+    <div class="rotation-sponsor-tag">Sponsored</div>
+    <div class="rotation-item">Tower 28's SOS Lip Treatment is the only thing that fixed the Accutane-adjacent peeling situation on our beauty editor's mouth this winter. Colloidal oat and hypochlorous acid in a lip product sounds weird until it works in two days.</div>
+<div class="rotation-item">If you are buying EVOO after today's issue, Brightland's Awake is consistently above 300 mg/kg polyphenols and actually lists the number on the bottle. California-grown, harvest-dated, and it tastes like someone crushed green tomatoes and grass in the best way.</div>
+    <div class="rotation-footer">Keep scrolling&hellip;more recs below</div>
+  </div>
+
+  <!-- 02 PUT IT IN YOUR MOUTH -->
   <div class="section">
     <div class="section-label">
       <div class="section-number">02</div>
-      <div class="section-title">Did You Hear?</div>
+      <div class="section-title">Put It In Your Mouth</div>
     </div>
-    <div class="section-headline">The group chat<br><em>has receipts.</em></div>
-    
-    <div class="gossip-item">
-      <div class="gossip-tag">Brand Drama</div>
-      <div class="gossip-headline">Merit Beauty is killing shades and calling it minimalism</div>
-      <div class="gossip-body">Merit is discontinuing four of its ten Flush Balm shades, including the deeper tones that took two years to develop. The brand is calling it a 'simplification of the edit,' but two Sephora buyers told me the real issue is velocity thresholds: the shades were not turning fast enough to justify their shelf footprint under new merchandising rules rolling out this spring. Convenient that 'simplification' always seems to simplify in the same direction.</div>
+    <div class="section-headline">The Olive Oil Dose That Gastroenterologists Are Fighting About</div>
+    <div class="body-text">
+      <p><strong>What's going on:</strong> A randomized controlled trial out of the University of Jaén, published March 29 in Nutrients, found that 50mL of high-polyphenol extra virgin olive oil daily for eight weeks significantly reduced markers of intestinal permeability in adults with metabolic syndrome. That is roughly 3.5 tablespoons, which is more than most people put on a salad in a week.</p>
+<p><strong>What that means:</strong> The dose is the story. Most "Mediterranean diet" studies use 20–25mL. At 50mL you are getting a pharmacological load of oleocanthal and hydroxytyrosol, both of which are anti-inflammatory at the gut lining level. Your skin barrier starts in your intestinal wall, and this study makes that connection measurable.</p>
+<p><strong>This week's cheat meal:</strong> A thick slice of sourdough, good butter, flaky salt, and a shallow pour of the greenest, most peppery EVOO you can find. Functional and indecent.</p>
+<p><strong>What to cut:</strong> Seed-oil salad dressings masquerading as "light" options. If the first ingredient is soybean oil, it is not doing what olive oil does at any dose.</p>
     </div>
-
-    <div class="gossip-item">
-      <div class="gossip-tag">Industry Moves</div>
-      <div class="gossip-headline">Puig is reportedly in late-stage talks to acquire Byredo's skincare IP separately from fragrance</div>
-      <div class="gossip-body">According to two sources familiar with the negotiations, Puig wants to carve out Byredo's nascent skincare line and license it under a different operational umbrella from the fragrance house, which Puig already majority-owns. The move would let them scale skincare manufacturing without the margin constraints of Byredo's artisanal fragrance supply chain. If it closes, expect a flood of Byredo serums at a price point your wallet will feel.</div>
+    <div class="cheat-meal-box">
+      <div class="cheat-meal-label">This Week's Cheat Meal</div>
+      <div class="cheat-meal-text">Sourdough toast with salted butter and a generous pour of high-polyphenol EVOO. Three food groups, zero regret.</div>
     </div>
-
-    <div class="gossip-item">
-      <div class="gossip-tag">Trend Alert</div>
-      <div class="gossip-headline">The 'raw hem' nail is coming for your clean manicure</div>
-      <div class="gossip-body">Nail artists in Seoul and East London are intentionally leaving the free edge of gel extensions slightly uneven and matte-finished, creating what they are calling a 'raw hem' effect. Think of it as the nail equivalent of an unhemmed Margiela edge. Two of the artists behind the trend say the point is to reject the tyranny of the perfectly filed tip, which, fine, but my cuticles are already chaotic enough.</div>
-    </div>
+    <div class="highlight-box">Look for olive oil with a polyphenol count above 250 mg/kg listed on the label. If the bottle does not list polyphenol content, the producer probably is not testing for it.</div>
+    <div class="related-link-row">Related: <a href="#" class="inline-link">The full Jaén trial on olive oil dosing and intestinal permeability markers(URL_PLACEHOLDER)</a></div>
   </div>
 
-  <!-- 03 DID YOU KNOW -->
+  <!-- 03 LIP LAB -->
   <div class="section">
     <div class="section-label">
       <div class="section-number">03</div>
-      <div class="section-title">Did You Know?</div>
+      <div class="section-title">Lip Lab</div>
     </div>
-    <div class="section-headline">Ectoin is the molecule<br><em>that survived a volcano.</em></div>
+    <div class="section-headline">Pat McGrath Reformulated Her Lip Fetish Balm and Nobody Announced It</div>
     <div class="body-text">
-      <p>Before it showed up in your barrier-repair cream, ectoin was busy keeping extremophilic bacteria alive in salt lakes, hot springs, and volcanic soil. It is a cyclic amino acid derivative that functions as a compatible solute, meaning it protects cellular structures from environmental stress without interfering with normal metabolism. Dermatologists have been paying attention for about five years. The rest of the industry just caught up.</p>
+      <p><strong>What's going on:</strong> Eagle-eyed members of the r/MakeupAddiction subreddit flagged on March 28 that Pat McGrath Labs quietly updated the ingredient list on Lip Fetish Divinyl Lip Shine, swapping out the old petroleum-and-lanolin base for a blend of squalane, meadowfoam seed oil, and a ceramide complex. No press release. No relaunch campaign.</p>
+<p><strong>Why it matters:</strong> The old formula was a glossy masterpiece that tanked in the EU market because of lanolin sensitization concerns and updated cosmetic regulations. The new version reads like a treatment product wearing a party dress. Ceramides in a gloss is a real formulation flex.</p>
+<p><strong>The verdict:</strong> Slightly less sticky, more emollient, same mirror-like finish. If you ditched the original because it dried you out by hour three, the reformulation fixes that.</p>
     </div>
-    <div class="know-callout">
-      <div class="know-callout-label">The Science, Briefly</div>
-      <div class="know-callout-text"><strong>Ectoin</strong> forms a structured water shell around proteins and cell membranes, stabilizing them against UV radiation, thermal stress, and pollution-driven oxidative damage. Unlike traditional humectants that simply attract water, ectoin physically shields lipid bilayers from disruption. Recent in-vivo studies show it reduces UVA-induced mitochondrial DNA mutations by up to 80 percent at concentrations as low as 0.5 percent.</div>
-    </div>
-    <div class="body-text">
-      <p>The German biotech company Bitop has held the primary commercial patent on ectoin production for decades, which is why you have mostly seen it in European pharmacy brands like Dado Sens and Dr. Spiller rather than on the shelves at Sephora. That is changing fast. At least three major K-beauty brands have filed formulations with ectoin as a headline active in the past six months, and Merck's personal care division is now supplying a fermentation-derived version at scale.
-
-Here is the uncomfortable part: ectoin works best in products you leave on, at concentrations most brands are not disclosing. Many formulations list it near the bottom of the INCI, which means you are getting a dusting of extremophile poetry rather than a functional dose. If the brand will not tell you the percentage, assume it is there for the story, not the science.</p>
-    </div>
-    <div class="pull-quote">
-      <p>"Ectoin is one of the few molecules where the mechanism of action is genuinely elegant. It does not force the skin to do anything. It simply makes the environment around the cell more survivable." — Dr. Heinrich Büning, Biochemist, University of Münster</p>
-    </div>
+    <div class="highlight-box">The new ceramide-squalane base means this is now genuinely occlusive enough to use as an overnight lip treatment. Two jobs, one tube.</div>
+    <div class="related-link-row">Related: <a href="#" class="inline-link">The Reddit thread that broke down the old vs. new Lip Fetish ingredient lists side by side(URL_PLACEHOLDER)</a></div>
   </div>
 
-  <!-- 04 DID YOU SEE -->
+  <!-- IMAGE BREAK -->
+  <div class="image-break">
+    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&q=80" alt="Bold lip art editorial beauty 2026" />
+  </div>
+
+  <!-- 04 THE LIPS IN 6 -->
   <div class="section">
     <div class="section-label">
       <div class="section-number">04</div>
-      <div class="section-title">Did You See?</div>
+      <div class="section-title">The Lips in 6</div>
     </div>
-    <div class="section-headline">Rick Owens AW26<br><em>looked like a thaw.</em><br>A beautiful, unsettling thaw.</div>
-    <div class="see-image-wrapper">
-      <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&q=80" alt="Beauty industry editorial" />
-      <div class="see-image-caption">AW26 · Rick Owens glacial translucence</div>
-    </div>
-    <div class="body-text">
-      <p>Every model at Rick Owens's AW26 show in Paris walked out looking like she had been frozen in a glacier for a thousand years and had just begun to defrost under studio lights. Lead makeup artist Lucia Pieroni used a translucent lavender-gray base over bare skin to create a bloodless, almost cryogenic pallor, then layered a barely-there iridescent film across the cheekbones and temples so that under the overhead lighting each face appeared to be releasing moisture, as if life were slowly returning to stone. There was no lip color. There was no brow definition. Just skin that looked ancient, alien, and somehow newborn all at once.
-
-The effect was the opposite of the dewy-skin trend that has dominated runways for three years. This was not glow. This was translucence as vulnerability, skin so pared back it felt almost medical. Owens has always treated the body as architecture, but this season the face was treated as weather: something that shifts and reveals and cannot be controlled. It is the kind of beauty moment that makes you want to throw away your highlighter, and we mean that as the highest compliment Lip Service can offer.</p>
+    <div class="lips-list">
+      <div class="lips-item"><span class="lips-emoji">💉</span><span class="lips-text">Galderma filed a new patent on March 27 for a longer-lasting Restylane lip formulation using cross-linked HA with a novel stabilizer. Timeline to market is unclear, but the IP race in lip filler longevity just escalated.</span></div>
+<div class="lips-item"><span class="lips-emoji">🍽️</span><span class="lips-text">A March 30 preprint in Cell Metabolism found that oral collagen peptides measurably increased dermal collagen density only when taken with vitamin C at the same meal. Timing matters more than brand.</span></div>
+<div class="lips-item"><span class="lips-emoji">💄</span><span class="lips-text">Rare Beauty quietly expanded its Soft Pinch Liquid Blush line on March 29 with two new shades designed specifically for deeper skin tones, after months of community petitions.</span></div>
+<div class="lips-item"><span class="lips-emoji">🧪</span><span class="lips-text">Researchers at Seoul National University published March 28 data showing that blue-light exposure from screens reduces lip mucosa hydration by up to 14% over four hours. Your WFH setup is drying your lips.</span></div>
+<div class="lips-item"><span class="lips-emoji">🚫</span><span class="lips-text">The EU's SCCS issued a preliminary opinion on March 27 flagging titanium dioxide nanoparticles in lip products as requiring further inhalation-risk assessment. Powder lip products may face new restrictions.</span></div>
+<div class="lips-item"><span class="lips-emoji">🦷</span><span class="lips-text">A new Cochrane review published March 30 confirmed that hydroxyapatite toothpaste is non-inferior to fluoride for remineralization in adults, giving the fluoride-free crowd their first robust systematic backing.</span></div>
     </div>
   </div>
 
-  <!-- 05 DID YOU HELP -->
-  <div class="section help-section">
+  <!-- 05 QUICK HITS -->
+  <div class="section">
     <div class="section-label">
       <div class="section-number">05</div>
-      <div class="section-title">Did You Help?</div>
+      <div class="section-title">Quick Hits</div>
     </div>
-    <div class="section-headline">Beauty as an act<br><em>of shelter.</em></div>
-    <div class="body-text">
-      <p>Chicago-based nonprofit Brave Space Alliance runs the only Black-led, trans-led health center on the South Side, and since 2022 its hygiene and wellness program has been providing free wound-care skincare, SPF, and barrier-repair products to unhoused women and trans femmes staying in shelters across the city. It was founded in 2017 by LaSaia Wade.</p>
+    <div class="quick-hits-list">
+      <div class="quick-hit-item"><span class="qh-emoji">💋</span><span class="qh-body"><span class="qh-label">Best Kiss:</span> Zendaya at the Tokyo premiere of her new film on March 29, wearing what appeared to be zero lip product and still making every beauty editor screenshot her mouth. The secret is probably just having lips that good, but the casual flex of a bare lip on a red carpet in 2026 felt genuinely subversive.</span></div>
+<div class="quick-hit-item"><span class="qh-emoji">🚫</span><span class="qh-body"><span class="qh-label">Keep It Out:</span> Cinnamon-flavored lip plumping glosses. A March 28 report from the Contact Dermatitis journal documented a cluster of allergic cheilitis cases linked to cinnamal in over-the-counter lip plumpers sold via TikTok Shop. If it burns, that is not "plumping."</span></div>
+<div class="quick-hit-item"><span class="qh-emoji">🧪</span><span class="qh-body">Stanford's dermatology department announced March 30 it is launching a free public database of filler complication case studies with imaging, searchable by product and injection site. It goes live in April and should be bookmarked by anyone who has ever been told "complications are extremely rare."</span></div>
+<div class="quick-hit-item"><span class="qh-emoji">💊</span><span class="qh-body">Seed Health published data on March 27 showing its oral synbiotic reduced self-reported perioral dermatitis symptoms by 31% over 12 weeks in a small pilot. Promising but not proof. Worth watching, not worth switching your whole routine over.</span></div>
     </div>
-    <div class="help-stat">
-      <div class="help-number">8,200+</div>
-      <div class="help-number-label">individual skincare and wound-care kits distributed since 2022</div>
+  </div>
+
+  <!-- ON OUR CALENDAR -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number" style="background:var(--rouge);">&#x1F5D3;</div>
+      <div class="section-title">On Our Calendar</div>
     </div>
-    <div class="body-text">
-      <p>Last winter, a woman recovering from frostbite on her hands and face came into the Brave Space Alliance drop-in center and received a barrier-repair kit with ceramide balm, petrolatum gauze, and broad-spectrum SPF. Staff helped her apply it. She returned every week for eight weeks, and the program connected her with a dermatologist who treated her scarring pro bono. It is not glamorous work. It is the kind of care that disappears from public attention precisely because the people receiving it have already been disappeared by every other system. They need donated product, funding for their clinical partnerships, and volunteers who can do intake.</p>
+    <div class="calendar-list">
+      <div class="calendar-item"><span class="cal-emoji">🗓️</span><span class="cal-text">April 1: Sephora's Spring Savings Event early access opens for Rouge members. The Pat McGrath reformulated Lip Fetish is in the sale for the first time.</span></div>
+<div class="calendar-item"><span class="cal-emoji">🗓️</span><span class="cal-text">April 2: The American Academy of Dermatology's annual meeting kicks off in San Francisco, with a dedicated session on injectable longevity and migration data. Expect a wave of new findings by midweek.</span></div>
+<div class="calendar-item"><span class="cal-emoji">🗓️</span><span class="cal-text">April 3: World Oral Health Day. The FDI is hosting a free virtual panel on the connection between oral microbiome health and systemic inflammation. Registration is open now.</span></div>
     </div>
-    <a href="https://www.bravespacealliance.org/donate" class="cta-button" target="_blank">Donate to Brave Space Alliance →</a>
+  </div>
+
+  <!-- IN OUR ROTATION (second) -->
+  <div class="rotation-section">
+    <div class="rotation-label">In Our Rotation</div>
+    <div class="rotation-sponsor-tag">Sponsored</div>
+    <div class="rotation-item">Dr. Shereene Idriss's new book Skincare Decoded just landed on March 27 and it is the first derm-authored book we have read that treats the reader like an adult with a PubMed login. The chapter on when to dissolve filler alone is worth the cover price.</div>
+<div class="rotation-item">Supergoop's Lipscreen SPF 40 remains the only lip sunscreen that does not make us look like we just ate a powdered donut. Sheer, non-gritty, reapplies over color without incident. We keep one in every bag.</div>
+    <div class="rotation-footer">We only feature things we'd actually use on our own face.</div>
+  </div>
+
+  <!-- 06 LAST WORD -->
+  <div class="section last-word-section">
+    <div class="section-label">
+      <div class="section-number" style="background:var(--rouge);">06</div>
+      <div class="section-title">Last Word</div>
+    </div>
+    <div class="last-word-quote">"I think the best beauty secret is just being obsessed with something. Passion keeps the blood in your face."</div>
+    <div class="last-word-attribution">— Isabella Rossellini, in a March 2026 interview with Vogue Italia</div>
   </div>
 
   
@@ -656,7 +725,7 @@ The effect was the opposite of the dewy-skin trend that has dominated runways fo
       <em style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</em>
     </div>
     <div class="footer-links">
-      <a href="./issues/2026-03-30.html">View in browser</a>
+      <a href="./issues/2026-03-31.html">View in browser</a>
       <a href="../archive.html">Archive</a>
       <a href="../subscribe.html" target="_blank">Subscribe</a>
       <a href="../unsubscribe.html">Unsubscribe</a>
