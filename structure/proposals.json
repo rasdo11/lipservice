@@ -1,0 +1,46 @@
+[
+  {
+    "id": "skimm-no-italics",
+    "section": "all",
+    "title": "Remove italics everywhere",
+    "inspiration": "the skimm",
+    "notes": "The Skimm uses almost no italics — everything is upright and direct. This strips italic from headlines, the hero box, the last word quote, and the quote-of-day block. Makes the whole newsletter feel less 'magazine editorial' and more 'smart friend texting you'.",
+    "status": "draft",
+    "createdAt": "2026-03-31T00:00:00Z",
+    "css": ".section-headline em { font-style: normal; font-weight: 700; color: var(--rouge); }\n.hero-text { font-style: normal; }\n.last-word-quote { font-style: normal; }\n.quote-block-text { font-style: normal; }",
+    "html": null
+  },
+  {
+    "id": "skimm-section-headers",
+    "section": "all",
+    "title": "Clean section headers — hide number badges",
+    "inspiration": "the skimm",
+    "notes": "The Skimm uses plain bold category labels with a simple colored bar, no numbered circles. This hides the circle badges and replaces them with a cleaner rouge left-border style, giving sections a more editorial-paper feel.",
+    "status": "draft",
+    "createdAt": "2026-03-31T00:00:00Z",
+    "css": ".section-number { display: none; }\n.section-label { margin-bottom: 12px; }\n.section-title { font-size: 11px; letter-spacing: 2.5px; padding-left: 10px; border-left: 3px solid var(--rouge); line-height: 1; }",
+    "html": null
+  },
+  {
+    "id": "skimm-injection-beats",
+    "section": "injection_report",
+    "title": "Injection Report: Skimm-style beat labels",
+    "inspiration": "the skimm",
+    "notes": "Replace the large Playfair Display serif headline with a compact sans-serif title. The beat labels (What's going on / What it means / What's next) become inline ALL-CAPS pill tags — same pattern The Skimm uses for THE BREAKDOWN / WHY WE CARE / WHAT'S NEXT.",
+    "status": "draft",
+    "createdAt": "2026-03-31T00:00:00Z",
+    "css": "[data-section='injection_report'] .section-headline { font-family: 'DM Sans', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.2px; }\n[data-section='injection_report'] .body-text strong { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; background: var(--rouge); color: #fff; padding: 2px 7px; border-radius: 2px; font-weight: 500; margin-right: 6px; vertical-align: middle; font-style: normal; }\n[data-section='injection_report'] .highlight-box { border-left: 3px solid var(--rouge); background: transparent; color: var(--charcoal); border-radius: 0; padding: 10px 14px; font-size: 14px; }",
+    "html": null
+  },
+  {
+    "id": "skimm-quick-hits-cards",
+    "section": "quick_hits",
+    "title": "Quick Hits: card layout with label tags",
+    "inspiration": "the skimm",
+    "notes": "Instead of an emoji + inline label, each Quick Hit becomes a small card with a colored category tag sitting above the body text. Cleaner visual separation, easier to scan. Removes the emoji column entirely — the tag does that work.",
+    "status": "draft",
+    "createdAt": "2026-03-31T00:00:00Z",
+    "css": "[data-section='quick_hits'] .quick-hits-list { gap: 10px; }\n[data-section='quick_hits'] .quick-hit-item { flex-direction: column; gap: 4px; padding: 14px; border: 1px solid var(--divider); border-bottom: 1px solid var(--divider); border-radius: 3px; background: var(--cream); }\n[data-section='quick_hits'] .quick-hit-item:last-child { border-bottom: 1px solid var(--divider); }\n[data-section='quick_hits'] .qh-emoji { display: none; }\n[data-section='quick_hits'] .qh-label { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; background: var(--ink); color: var(--cream); padding: 2px 7px; border-radius: 2px; font-weight: 500; margin-bottom: 4px; }",
+    "html": null
+  }
+]

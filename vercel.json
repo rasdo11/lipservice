@@ -57,6 +57,24 @@
       ]
     },
     {
+      "source": "/structure-lab.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/structure/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
       "source": "/(subscribe|unsubscribe|archive)\\.html",
       "headers": [
         {

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lip Service — Structure Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2; --ink: #1A1410; --rouge: #C94040; --nude: #D4A898;
+    --charcoal: #3D3530; --warm-gray: #9A8F89; --divider: #E2DAD3;
+    --panel: #F4EFE9; --green: #2A6B4A; --amber: #B07020;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--ink); font-family: 'DM Sans', sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; color: var(--cream); }
+
+  /* ── Top bar ── */
+  .topbar {
+    background: var(--rouge); padding: 10px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0; gap: 16px; z-index: 10;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 12px; }
+  .topbar-logo { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; letter-spacing: -0.5px; }
+  .topbar-badge { font-size: 10px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 2px; }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+  .topbar-link { font-size: 11px; color: rgba(255,255,255,0.8); text-decoration: none; letter-spacing: 1px; }
+  .topbar-link:hover { color: #fff; }
+
+  /* ── Layout ── */
+  .layout { display: flex; flex: 1; overflow: hidden; }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: 360px; flex-shrink: 0; background: #1E1A17;
+    display: flex; flex-direction: column; overflow: hidden;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+  .sidebar-header {
+    padding: 16px 20px 12px; border-bottom: 1px solid rgba(255,255,255,0.06);
+    flex-shrink: 0;
+  }
+  .sidebar-title { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--nude); margin-bottom: 4px; }
+  .sidebar-sub { font-size: 12px; color: var(--warm-gray); font-weight: 300; }
+  .sidebar-scroll { flex: 1; overflow-y: auto; padding: 12px 0; }
+
+  /* ── Proposal card ── */
+  .proposal-card {
+    margin: 0 12px 8px; padding: 14px;
+    background: rgba(255,255,255,0.04); border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: border-color 0.15s;
+  }
+  .proposal-card.applied { border-color: rgba(224,85,85,0.4); }
+  .proposal-card.approved-card { border-color: rgba(42,107,74,0.5); }
+  .proposal-card.rejected-card { opacity: 0.45; }
+
+  .card-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+  .card-toggle { flex-shrink: 0; margin-top: 1px; }
+  .card-toggle input[type=checkbox] { width: 15px; height: 15px; accent-color: var(--rouge); cursor: pointer; }
+  .card-meta { flex: 1; min-width: 0; }
+  .card-title { font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 4px; line-height: 1.3; }
+  .card-badges { display: flex; gap: 5px; flex-wrap: wrap; }
+  .badge {
+    font-size: 9px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 2px;
+  }
+  .badge-skimm { background: #1B4B8A; color: #fff; }
+  .badge-brew { background: #B07020; color: #fff; }
+  .badge-section { background: rgba(255,255,255,0.1); color: var(--warm-gray); }
+  .badge-status-draft { background: rgba(255,255,255,0.08); color: var(--warm-gray); }
+  .badge-status-approved { background: rgba(42,107,74,0.35); color: #6FCF97; }
+  .badge-status-rejected { background: rgba(180,50,50,0.25); color: #EB5757; }
+
+  .card-notes-toggle {
+    font-size: 11px; color: var(--warm-gray); cursor: pointer; margin-bottom: 6px;
+    user-select: none; display: inline-flex; align-items: center; gap: 4px;
+  }
+  .card-notes-toggle:hover { color: var(--nude); }
+  .card-notes { font-size: 12px; color: var(--warm-gray); font-weight: 300; line-height: 1.6; margin-bottom: 10px; display: none; }
+  .card-notes.open { display: block; }
+
+  .card-actions { display: flex; gap: 6px; }
+  .btn { font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 11px; border-radius: 2px; border: none; cursor: pointer; transition: opacity 0.15s; }
+  .btn:hover { opacity: 0.82; }
+  .btn:disabled { opacity: 0.35; cursor: default; }
+  .btn-approve { background: var(--green); color: #fff; }
+  .btn-reject { background: rgba(255,255,255,0.1); color: var(--warm-gray); }
+  .btn-unapprove { background: rgba(255,255,255,0.1); color: #6FCF97; }
+
+  .card-msg { font-size: 11px; margin-top: 6px; font-weight: 300; display: none; }
+  .card-msg.ok { color: #6FCF97; display: block; }
+  .card-msg.err { color: #EB5757; display: block; }
+
+  /* ── Sidebar footer ── */
+  .sidebar-footer {
+    padding: 12px 20px; border-top: 1px solid rgba(255,255,255,0.06);
+    flex-shrink: 0;
+  }
+  .btn-refresh { background: rgba(255,255,255,0.08); color: var(--cream); width: 100%; justify-content: center; display: flex; }
+
+  /* ── Preview panel ── */
+  .preview-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #111; }
+  .preview-bar {
+    background: rgba(255,255,255,0.04); padding: 8px 16px;
+    display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .preview-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--warm-gray); }
+  .preview-info { font-size: 11px; color: rgba(255,255,255,0.4); font-weight: 300; }
+  #preview-frame { flex: 1; border: none; background: var(--cream); }
+
+  /* ── Token modal ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+    align-items: center; justify-content: center; z-index: 100;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal { background: #1E1A17; border-radius: 4px; padding: 24px; width: 320px; border: 1px solid rgba(255,255,255,0.1); }
+  .modal-title { font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 6px; }
+  .modal-sub { font-size: 12px; color: var(--warm-gray); font-weight: 300; margin-bottom: 16px; line-height: 1.5; }
+  .modal input {
+    width: 100%; padding: 9px 12px; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 2px;
+    color: var(--cream); font-size: 13px; font-family: monospace;
+    margin-bottom: 12px; outline: none;
+  }
+  .modal input:focus { border-color: var(--rouge); }
+  .modal-actions { display: flex; gap: 8px; }
+  .btn-confirm { background: var(--rouge); color: #fff; flex: 1; justify-content: center; display: flex; }
+  .btn-cancel { background: rgba(255,255,255,0.08); color: var(--warm-gray); }
+  .modal-err { font-size: 11px; color: #EB5757; margin-top: 8px; display: none; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo">Lip Service</div>
+    <div class="topbar-badge">Structure Lab</div>
+  </div>
+  <div class="topbar-right">
+    <a href="/review" class="topbar-link">Review →</a>
+    <a href="/" class="topbar-link">Live site →</a>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">Proposals</div>
+      <div class="sidebar-sub">Toggle to preview. Approve to commit to template.</div>
+    </div>
+    <div class="sidebar-scroll" id="proposal-list">
+      <div style="padding:20px;font-size:12px;color:var(--warm-gray);font-weight:300;">Loading proposals...</div>
+    </div>
+    <div class="sidebar-footer">
+      <button class="btn btn-refresh" id="btn-refresh">↻ Refresh preview</button>
+    </div>
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="preview-panel">
+    <div class="preview-bar">
+      <span class="preview-label">Preview</span>
+      <span class="preview-info" id="preview-info">Loading latest issue...</span>
+    </div>
+    <iframe id="preview-frame" title="Newsletter preview"></iframe>
+  </div>
+</div>
+
+<!-- TOKEN MODAL -->
+<div class="modal-overlay" id="token-modal">
+  <div class="modal">
+    <div class="modal-title">Enter edit token</div>
+    <div class="modal-sub">Your PREVIEW_EDIT_TOKEN from Vercel. Cached for this session.</div>
+    <input type="password" id="token-input" placeholder="paste token here" autocomplete="off" />
+    <div class="modal-actions">
+      <button class="btn btn-confirm" id="token-confirm">Confirm</button>
+      <button class="btn btn-cancel" id="token-cancel">Cancel</button>
+    </div>
+    <div class="modal-err" id="token-err">Incorrect token. Try again.</div>
+  </div>
+</div>
+
+<script>
+const TOKEN_KEY = 'ls-edit-token';
+let proposals = [];
+let baseHtml = '';
+let appliedIds = new Set();
+let pendingAction = null; // { id, action }
+
+// ── Load proposals ──────────────────────────────────────────────────────────
+async function loadProposals() {
+  try {
+    const r = await fetch('/structure/proposals.json?_=' + Date.now());
+    proposals = await r.json();
+    renderSidebar();
+  } catch (e) {
+    document.getElementById('proposal-list').innerHTML =
+      '<div style="padding:20px;font-size:12px;color:#EB5757;">Failed to load proposals.json</div>';
+  }
+}
+
+// ── Render sidebar ──────────────────────────────────────────────────────────
+function renderSidebar() {
+  const list = document.getElementById('proposal-list');
+  if (!proposals.length) {
+    list.innerHTML = '<div style="padding:20px;font-size:12px;color:var(--warm-gray);">No proposals yet.</div>';
+    return;
+  }
+  list.innerHTML = proposals.map(p => {
+    const applied = appliedIds.has(p.id);
+    const statusClass = p.status === 'approved' ? 'approved-card' : p.status === 'rejected' ? 'rejected-card' : '';
+    const appliedClass = applied ? 'applied' : '';
+    const sectionLabel = p.section === 'all' ? 'all sections' : p.section.replace(/_/g, ' ');
+    return `
+<div class="proposal-card ${statusClass} ${appliedClass}" id="card-${p.id}">
+  <div class="card-top">
+    <div class="card-toggle">
+      <input type="checkbox" id="toggle-${p.id}" ${applied ? 'checked' : ''} ${p.status !== 'draft' ? 'disabled' : ''}
+        onchange="toggleProposal('${p.id}', this.checked)" />
+    </div>
+    <div class="card-meta">
+      <div class="card-title">${p.title}</div>
+      <div class="card-badges">
+        <span class="badge badge-skimm">The Skimm</span>
+        <span class="badge badge-section">${sectionLabel}</span>
+        <span class="badge badge-status-${p.status}">${p.status}</span>
+      </div>
+    </div>
+  </div>
+  <div class="card-notes-toggle" onclick="toggleNotes('${p.id}')">▸ Notes</div>
+  <div class="card-notes" id="notes-${p.id}">${p.notes}</div>
+  <div class="card-actions">
+    ${p.status === 'draft' ? `
+      <button class="btn btn-approve" onclick="doAction('${p.id}','approve')">Approve</button>
+      <button class="btn btn-reject" onclick="doAction('${p.id}','reject')">Reject</button>
+    ` : p.status === 'approved' ? `
+      <span style="font-size:11px;color:#6FCF97;font-weight:300;">Committed to template ✓</span>
+    ` : `
+      <span style="font-size:11px;color:var(--warm-gray);font-weight:300;">Rejected</span>
+    `}
+  </div>
+  <div class="card-msg" id="msg-${p.id}"></div>
+</div>`;
+  }).join('');
+}
+
+function toggleNotes(id) {
+  const el = document.getElementById('notes-' + id);
+  const toggle = el.previousElementSibling;
+  el.classList.toggle('open');
+  toggle.textContent = el.classList.contains('open') ? '▾ Notes' : '▸ Notes';
+}
+
+// ── Toggle proposal in preview ──────────────────────────────────────────────
+function toggleProposal(id, checked) {
+  if (checked) appliedIds.add(id); else appliedIds.delete(id);
+  const card = document.getElementById('card-' + id);
+  if (card) card.classList.toggle('applied', checked);
+  applyToPreview();
+}
+
+// ── Load latest issue into iframe ───────────────────────────────────────────
+async function loadBase() {
+  try {
+    const meta = await fetch('/issues.json').then(r => r.json());
+    const latest = meta[0];
+    if (!latest) { document.getElementById('preview-info').textContent = 'No issues found.'; return; }
+    document.getElementById('preview-info').textContent = latest.title + ' · ' + latest.date;
+    const html = await fetch(latest.url).then(r => r.text());
+    baseHtml = html;
+    applyToPreview();
+  } catch (e) {
+    document.getElementById('preview-info').textContent = 'Failed to load issue.';
+  }
+}
+
+// ── Apply toggled proposals to iframe ───────────────────────────────────────
+function applyToPreview() {
+  if (!baseHtml) return;
+  const frame = document.getElementById('preview-frame');
+
+  // Collect CSS from all applied proposals
+  const cssChunks = proposals
+    .filter(p => appliedIds.has(p.id) && p.css)
+    .map(p => `/* ${p.id} */\n${p.css}`)
+    .join('\n');
+
+  // Inject css into a copy of the base HTML
+  let html = baseHtml;
+  if (cssChunks) {
+    html = html.replace('</style>', `\n/* === Structure Lab proposals === */\n${cssChunks}\n</style>`);
+  }
+
+  // Suppress the theme toggle button in the preview (it's inside an iframe — no localStorage context)
+  html = html.replace('<button id="theme-toggle"', '<button id="theme-toggle" style="display:none"');
+
+  // Write to iframe via srcdoc
+  frame.srcdoc = html;
+}
+
+// ── Approve / Reject ─────────────────────────────────────────────────────────
+function doAction(id, action) {
+  const token = sessionStorage.getItem(TOKEN_KEY);
+  if (token) {
+    executeAction(id, action, token);
+  } else {
+    pendingAction = { id, action };
+    document.getElementById('token-input').value = '';
+    document.getElementById('token-err').style.display = 'none';
+    document.getElementById('token-modal').classList.add('open');
+    setTimeout(() => document.getElementById('token-input').focus(), 50);
+  }
+}
+
+async function executeAction(id, action, token) {
+  const msgEl = document.getElementById('msg-' + id);
+  msgEl.className = 'card-msg';
+  msgEl.textContent = action === 'approve' ? 'Approving...' : 'Rejecting...';
+  msgEl.style.display = 'block';
+
+  try {
+    const r = await fetch('/api/structure-approve', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token, id, action }),
+    });
+    const data = await r.json();
+    if (!r.ok) {
+      if (r.status === 401) {
+        sessionStorage.removeItem(TOKEN_KEY);
+        msgEl.style.display = 'none';
+        pendingAction = { id, action };
+        document.getElementById('token-err').style.display = 'block';
+        document.getElementById('token-modal').classList.add('open');
+        return;
+      }
+      throw new Error(data.error || 'Failed');
+    }
+    msgEl.className = 'card-msg ok';
+    msgEl.textContent = action === 'approve' ? 'Approved — template updated.' : 'Rejected.';
+    // Update local state
+    const p = proposals.find(x => x.id === id);
+    if (p) p.status = action === 'approve' ? 'approved' : 'rejected';
+    if (action === 'approve') appliedIds.delete(id); // approved changes are in template now
+    renderSidebar();
+    if (action === 'approve') setTimeout(loadBase, 1500); // reload with new template
+  } catch (err) {
+    msgEl.className = 'card-msg err';
+    msgEl.textContent = err.message || 'Error. Try again.';
+  }
+}
+
+// ── Token modal ──────────────────────────────────────────────────────────────
+document.getElementById('token-confirm').addEventListener('click', () => {
+  const val = document.getElementById('token-input').value.trim();
+  if (!val) return;
+  sessionStorage.setItem(TOKEN_KEY, val);
+  document.getElementById('token-modal').classList.remove('open');
+  if (pendingAction) {
+    executeAction(pendingAction.id, pendingAction.action, val);
+    pendingAction = null;
+  }
+});
+
+document.getElementById('token-cancel').addEventListener('click', () => {
+  document.getElementById('token-modal').classList.remove('open');
+  pendingAction = null;
+});
+
+document.getElementById('token-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('token-confirm').click();
+});
+
+// ── Refresh button ───────────────────────────────────────────────────────────
+document.getElementById('btn-refresh').addEventListener('click', () => {
+  baseHtml = '';
+  document.getElementById('preview-info').textContent = 'Reloading...';
+  loadBase();
+});
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+loadProposals();
+loadBase();
+</script>
+</body>
+</html>
