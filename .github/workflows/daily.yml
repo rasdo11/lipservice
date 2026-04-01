@@ -6,13 +6,14 @@ on:
     - cron: '0 5 * * *'
     # Preview: 9pm PDT (Mar–Nov) = 04:00 UTC
     - cron: '0 4 * * *'
-    # Publish: 6am PST (Nov–Mar) = 14:00 UTC  +retries at 15, 16, 17
-    - cron: '0 14 * * *'
-    - cron: '0 15 * * *'
-    - cron: '0 16 * * *'
-    - cron: '0 17 * * *'
-    # Publish: 6am PDT (Mar–Nov) = 13:00 UTC  +retries at 14, 15, 16
-    - cron: '0 13 * * *'
+    # Publish: 5:25am PDT (Mar–Nov) = 12:25 UTC
+    - cron: '25 12 * * *'
+    # Publish: 5:25am PST (Nov–Mar) = 13:25 UTC  /  PDT retry
+    - cron: '25 13 * * *'
+    # Publish: PST retry
+    - cron: '25 14 * * *'
+    # Publish: PST fallback
+    - cron: '25 15 * * *'
   workflow_dispatch:
     inputs:
       mode:
@@ -48,7 +49,7 @@ jobs:
         run: |
           INPUT_MODE="${{ inputs.mode }}"
           HOUR_UTC=$(date -u +%-H)
-          # Preview runs at 5am or 6am UTC (10pm PDT/PST); publish at 13pm or 14pm UTC (6am PDT/PST).
+          # Preview runs at 4-5 UTC (9pm PDT/PST); publish at 12-15 UTC (5:25am PDT/PST + retries).
           # Use hour < 12 to detect preview when triggered by schedule; manual runs use INPUT_MODE.
           if [ "$INPUT_MODE" = "preview" ] || { [ -z "$INPUT_MODE" ] && [ "$HOUR_UTC" -lt 12 ]; }; then
             echo "Running in PREVIEW mode (tomorrow's issue → preview/) — UTC hour: $HOUR_UTC"

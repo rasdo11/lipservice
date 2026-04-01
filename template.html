@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
 {{OG_META}}
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  :root, [data-theme="light"] {
+  :root {
     --cream: #FAF7F2;
     --ink: #1A1410;
     --blush: #E8C4B8;
@@ -17,18 +17,7 @@
     --warm-gray: #9A8F89;
     --divider: #E2DAD3;
   }
-  [data-theme="dark"] {
-    --cream: #141210;
-    --ink: #EDE8E2;
-    --blush: #5C3A3A;
-    --rouge: #E05555;
-    --nude: #7A5A50;
-    --charcoal: #C4BBB3;
-    --warm-gray: #7A7370;
-    --divider: #2E2A27;
-  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { background-color: var(--cream); }
   body {
     background-color: var(--cream);
     color: var(--ink);
@@ -106,7 +95,6 @@
   .hero-text {
     font-family: 'Playfair Display', serif;
     font-size: 20px;
-    font-style: italic;
     color: #fff;
     line-height: 1.4;
     font-weight: 400;
@@ -126,9 +114,8 @@
     font-weight: 500;
   }
   .quote-block-text {
-    font-family: 'Playfair Display', serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 17px;
-    font-style: italic;
     color: var(--cream);
     line-height: 1.55;
     font-weight: 400;
@@ -155,18 +142,7 @@
     margin-bottom: 20px;
   }
   .section-number {
-    width: 24px;
-    height: 24px;
-    background: var(--ink);
-    color: var(--cream);
-    font-size: 10px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 0.5px;
-    flex-shrink: 0;
-    border-radius: 50%;
+    display: none;
   }
   .section-title {
     font-family: 'DM Sans', sans-serif;
@@ -175,19 +151,35 @@
     letter-spacing: 3.5px;
     text-transform: uppercase;
     color: var(--rouge);
+    border-left: 3px solid var(--rouge);
+    padding-left: 10px;
   }
   .section-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1.25;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
     color: var(--ink);
     margin-bottom: 16px;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.2px;
   }
   .section-headline em {
-    font-style: italic;
+    font-style: normal;
     color: var(--rouge);
+  }
+  [data-section="injection_report"] .body-text strong {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--rouge);
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-right: 6px;
+    vertical-align: middle;
   }
   .body-text {
     font-size: 15.5px;
@@ -301,7 +293,6 @@
   .rotation-footer {
     font-size: 12px;
     color: var(--warm-gray);
-    font-style: italic;
     margin-top: 14px;
     font-weight: 300;
   }
@@ -400,9 +391,8 @@
   }
   .last-word-section .section-title { color: var(--nude); }
   .last-word-quote {
-    font-family: 'Playfair Display', serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 22px;
-    font-style: italic;
     color: var(--cream);
     line-height: 1.5;
     font-weight: 400;
@@ -471,7 +461,6 @@
     color: var(--charcoal);
     font-weight: 300;
     line-height: 1.55;
-    font-style: italic;
   }
   /* ISSUE NAV BAR (standalone issue pages only) */
   .issue-nav-bar {
@@ -554,41 +543,9 @@
     .section { padding: 28px 20px; }
     .hero { padding: 0 20px 28px; }
     .rotation-section { padding: 24px 20px; }
-    .section-headline { font-size: 23px; }
+    .section-headline { font-size: 18px; }
     .last-word-quote { font-size: 19px; }
   }
-  /* THEME TOGGLE — web only, email clients ignore this */
-  #theme-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 999;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: 1.5px solid var(--divider);
-    background: var(--cream);
-    color: var(--ink);
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    transition: background 0.2s, border-color 0.2s;
-  }
-  #theme-toggle:hover { border-color: var(--rouge); }
-
-  /* === skimm-no-italics === */
-  .section-headline em { font-style: normal; font-weight: 700; color: var(--rouge); }
-  .hero-text { font-style: normal; }
-  .last-word-quote { font-style: normal; }
-  .quote-block-text { font-style: normal; }
-
-  /* === skimm-section-headers === */
-  .section-number { display: none; }
-  .section-label { margin-bottom: 12px; }
-  .section-title { font-size: 11px; letter-spacing: 2.5px; padding-left: 10px; border-left: 3px solid var(--rouge); line-height: 1; }
 </style>
 </head>
 <body>
@@ -637,7 +594,7 @@
   </div>
 
   <!-- IN OUR ROTATION (first) -->
-  <div class="rotation-section" data-section="rotation_1">
+  <div class="rotation-section">
     <div class="rotation-label">In Our Rotation</div>
     <div class="rotation-sponsor-tag">Sponsored</div>
     {{ROTATION_1_ITEMS}}
@@ -645,7 +602,7 @@
   </div>
 
   <!-- 02 PUT IT IN YOUR MOUTH -->
-  <div class="section" data-section="put_it_in_your_mouth">
+  <div class="section">
     <div class="section-label">
       <div class="section-number">02</div>
       <div class="section-title">Put It In Your Mouth</div>
@@ -663,7 +620,7 @@
   </div>
 
   <!-- 03 LIP LAB -->
-  <div class="section" data-section="lip_lab">
+  <div class="section">
     <div class="section-label">
       <div class="section-number">03</div>
       <div class="section-title">Lip Lab</div>
@@ -677,12 +634,12 @@
   </div>
 
   <!-- IMAGE BREAK -->
-  <div class="image-break" data-section="image_break">
+  <div class="image-break">
     <img src="{{SEE_IMAGE_URL}}" alt="{{SEE_IMAGE_ALT}}" />
   </div>
 
   <!-- 04 THE LIPS IN 6 -->
-  <div class="section" data-section="lips_in_6">
+  <div class="section">
     <div class="section-label">
       <div class="section-number">04</div>
       <div class="section-title">The Lips in 6</div>
@@ -693,7 +650,7 @@
   </div>
 
   <!-- 05 QUICK HITS -->
-  <div class="section" data-section="quick_hits">
+  <div class="section">
     <div class="section-label">
       <div class="section-number">05</div>
       <div class="section-title">Quick Hits</div>
@@ -704,7 +661,7 @@
   </div>
 
   <!-- ON OUR CALENDAR -->
-  <div class="section" data-section="on_our_calendar">
+  <div class="section">
     <div class="section-label">
       <div class="section-number" style="background:var(--rouge);">&#x1F5D3;</div>
       <div class="section-title">On Our Calendar</div>
@@ -715,7 +672,7 @@
   </div>
 
   <!-- IN OUR ROTATION (second) -->
-  <div class="rotation-section" data-section="rotation_2">
+  <div class="rotation-section">
     <div class="rotation-label">In Our Rotation</div>
     <div class="rotation-sponsor-tag">Sponsored</div>
     {{ROTATION_2_ITEMS}}
@@ -723,7 +680,7 @@
   </div>
 
   <!-- 06 LAST WORD -->
-  <div class="section last-word-section" data-section="last_word">
+  <div class="section last-word-section">
     <div class="section-label">
       <div class="section-number" style="background:var(--rouge);">06</div>
       <div class="section-title">Last Word</div>
@@ -740,7 +697,7 @@
     <div class="footer-text">
       Daily. Opinionated. Never preachy.<br>
       You're receiving this because you have excellent taste.<br><br>
-      <em style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</em>
+      <span style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</span>
     </div>
     <div class="footer-links">
       <a href="{{ISSUE_URL}}">View in browser</a>
@@ -751,32 +708,5 @@
   </div>
 
 </div>
-
-<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">☀</button>
-<script>
-(function() {
-  var root = document.documentElement;
-  var btn = document.getElementById('theme-toggle');
-  var KEY = 'ls-theme';
-  function apply(theme) {
-    root.dataset.theme = theme;
-    btn.textContent = theme === 'dark' ? '☀' : '🌙';
-    btn.title = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
-  }
-  var saved = localStorage.getItem(KEY);
-  var osDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  apply(saved || (osDark ? 'dark' : 'light'));
-  btn.addEventListener('click', function() {
-    var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem(KEY, next);
-    apply(next);
-  });
-  if (!saved && window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-      if (!localStorage.getItem(KEY)) apply(e.matches ? 'dark' : 'light');
-    });
-  }
-})();
-</script>
 </body>
 </html>
