@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lip Service — Issue No. 86</title>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lip Service — Issue No. 86">
+<meta property="og:description" content="New research links polycaprolactone fillers to a sustained immune response nobody warned you about. Plus: the selenium study GI docs are texting each other, and Rare Beauty's lip oil reformulation changes everything.">
+<meta property="og:url" content="./issues/2026-04-01.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lip Service — Issue No. 86">
+<meta name="twitter:description" content="New research links polycaprolactone fillers to a sustained immune response nobody warned you about. Plus: the selenium study GI docs are texting each other, and Rare Beauty's lip oil reformulation changes everything.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --ink: #1A1410;
+    --blush: #E8C4B8;
+    --rouge: #C94040;
+    --nude: #D4A898;
+    --charcoal: #3D3530;
+    --warm-gray: #9A8F89;
+    --divider: #E2DAD3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .email-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--cream);
+  }
+  .header {
+    background-color: var(--ink);
+    padding: 28px 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rouge), var(--nude), var(--blush));
+  }
+  .masthead {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--nude);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero {
+    background: var(--ink);
+    padding: 0 24px 32px;
+  }
+  .hero-box {
+    background: var(--rouge);
+    padding: 20px 22px;
+    border-radius: 2px;
+  }
+  .hero-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .hero-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #fff;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  /* QUOTE OF DAY */
+  .quote-block {
+    background: var(--ink);
+    padding: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .quote-block-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nude);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .quote-block-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px;
+    color: var(--cream);
+    line-height: 1.55;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .quote-block-attribution {
+    font-size: 12px;
+    color: var(--warm-gray);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+  /* SECTIONS */
+  .section {
+    padding: 36px 24px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .section:last-of-type {
+    border-bottom: none;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .section-number {
+    display: none;
+  }
+  .section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--rouge);
+    border-left: 3px solid var(--rouge);
+    padding-left: 10px;
+  }
+  .section-headline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.2px;
+  }
+  .section-headline em {
+    font-style: normal;
+    color: var(--rouge);
+  }
+  [data-section="injection_report"] .body-text strong {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--rouge);
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .body-text {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--charcoal);
+    font-weight: 300;
+  }
+  .body-text p {
+    margin-bottom: 14px;
+  }
+  .body-text p:last-child {
+    margin-bottom: 0;
+  }
+  .body-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  /* HIGHLIGHT CALLOUT (replaces know-callout) */
+  .highlight-box {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 18px 20px;
+    margin: 20px 0 14px;
+    border-radius: 2px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .highlight-box strong {
+    font-weight: 500;
+    color: var(--blush);
+  }
+  /* RELATED LINK */
+  .related-link-row {
+    font-size: 13.5px;
+    color: var(--warm-gray);
+    font-weight: 300;
+    margin-top: 14px;
+  }
+  .related-link-row a {
+    color: var(--rouge);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
+  }
+  /* CHEAT MEAL BOX */
+  .cheat-meal-box {
+    border-left: 3px solid var(--nude);
+    padding: 10px 16px;
+    margin: 16px 0;
+    background: rgba(212,168,152,0.12);
+  }
+  .cheat-meal-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .cheat-meal-text {
+    font-size: 14.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  /* IN OUR ROTATION (sponsored) */
+  .rotation-section {
+    background: #F0EBE5;
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .rotation-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .rotation-sponsor-tag {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    border: 1px solid var(--divider);
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .rotation-item {
+    font-size: 14.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.7;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .rotation-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .rotation-item:first-child {
+    padding-top: 0;
+  }
+  .rotation-item strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .rotation-footer {
+    font-size: 12px;
+    color: var(--warm-gray);
+    margin-top: 14px;
+    font-weight: 300;
+  }
+  /* LIPS IN 6 */
+  .lips-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .lips-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--divider);
+    font-size: 14.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+  .lips-item:first-child { padding-top: 0; }
+  .lips-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .lips-emoji {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .lips-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  /* QUICK HITS */
+  .quick-hits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .quick-hit-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--divider);
+    font-size: 15px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .quick-hit-item:first-child { padding-top: 0; }
+  .quick-hit-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .qh-emoji {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .qh-label {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .qh-body strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  /* ON OUR CALENDAR */
+  .calendar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .calendar-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--divider);
+    font-size: 14.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+  .calendar-item:first-child { padding-top: 0; }
+  .calendar-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .cal-emoji {
+    font-size: 15px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .cal-text strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  /* LAST WORD */
+  .last-word-section {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .last-word-section .section-title { color: var(--nude); }
+  .last-word-quote {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 22px;
+    color: var(--cream);
+    line-height: 1.5;
+    font-weight: 400;
+    margin-bottom: 14px;
+  }
+  .last-word-attribution {
+    font-size: 13px;
+    color: var(--warm-gray);
+    font-weight: 300;
+    letter-spacing: 0.3px;
+  }
+  /* IMAGE BREAK */
+  .image-break {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .image-break img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85);
+  }
+  /* ARCHIVE */
+  .archive-section {
+    background: var(--cream);
+  }
+  .archive-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .archive-item {
+    display: block;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--divider);
+    text-decoration: none;
+    color: inherit;
+  }
+  .archive-item:first-child { padding-top: 0; }
+  .archive-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .archive-item:hover .archive-item-label { color: var(--rouge); }
+  .archive-item-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .archive-item-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    transition: color 0.15s;
+  }
+  .archive-item-date {
+    font-size: 11px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .archive-item-teaser {
+    font-size: 13.5px;
+    color: var(--charcoal);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+  /* ISSUE NAV BAR (standalone issue pages only) */
+  .issue-nav-bar {
+    background: var(--ink);
+    padding: 11px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .issue-nav-bar a {
+    font-size: 10px;
+    color: var(--nude);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .issue-nav-bar a:hover { color: var(--cream); }
+  .issue-nav-bar span {
+    font-size: 10px;
+    color: var(--warm-gray);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .footer {
+    background: var(--ink);
+    padding: 28px 24px;
+    text-align: center;
+    border-top: 3px solid var(--rouge);
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .footer-text {
+    font-size: 12px;
+    color: var(--warm-gray);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    font-size: 10px;
+    color: var(--warm-gray);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .footer-links a:hover { color: var(--nude); }
+  .ornament {
+    text-align: center;
+    color: var(--rouge);
+    font-size: 18px;
+    letter-spacing: 8px;
+    padding: 8px 0 0;
+    opacity: 0.5;
+  }
+  a.inline-link {
+    color: var(--rouge);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
+  }
+  @media (max-width: 480px) {
+    .masthead { font-size: 36px; }
+    .section { padding: 28px 20px; }
+    .hero { padding: 0 20px 28px; }
+    .rotation-section { padding: 24px 20px; }
+    .section-headline { font-size: 18px; }
+    .last-word-quote { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<div class="issue-nav-bar" style="background:var(--rouge);color:#fff;">
+  <span>👁 PREVIEW — goes live at 6am PST</span>
+  <span>Issue No. 86 &middot; April 1, 2026</span>
+</div>
+<div class="email-wrapper">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="masthead">Lip Service</div>
+    <div class="tagline">The most fun a girl can have without taking her clothes off</div>
+    <div class="header-meta">
+      <span>Issue No. 86</span>
+      <span>·</span>
+      <span>April 1, 2026</span>
+      <span>·</span>
+      <span>Daily</span>
+    </div>
+  </div>
+
+  <!-- BUT FIRST / HERO -->
+  <div class="hero">
+    <div class="hero-box">
+      <div class="hero-label">But First</div>
+      <div class="hero-text">A Korean research team just caught polycaprolactone fillers triggering a chronic low-grade immune loop, and your injector probably hasn't read it yet.</div>
+    </div>
+  </div>
+
+  <!-- QUOTE OF DAY -->
+  <div class="quote-block">
+    <div class="quote-block-label">Quote of the Day</div>
+    <div class="quote-block-text">"The mouth is the front door of the body. If you ignore the doorbell, eventually someone kicks it in."</div>
+    <div class="quote-block-attribution">— Dr. Mark Burhenne, DDS, oral-systemic health researcher</div>
+  </div>
+
+  <!-- 01 THE INJECTION REPORT -->
+  <div class="section" data-section="injection_report">
+    <div class="section-label">
+      <div class="section-number">01</div>
+      <div class="section-title">The Injection Report</div>
+    </div>
+    <div class="section-headline">Polycaprolactone Fillers Are Waking Up Your Immune System, and Not in a Good Way</div>
+    <div class="body-text">
+      <p><strong>What's going on:</strong> A study published March 29 in the Journal of Dermatological Science by researchers at Seoul National University found that polycaprolactone-based fillers (think Ellansé) trigger a sustained Th2 inflammatory response lasting up to 14 months post-injection. The team biopsied tissue from 38 patients and found elevated IL-4 and IL-13 at every follow-up. <strong>What it means:</strong> PCL fillers are marketed as "biostimulators" that build your own collagen. That part is true. But this data suggests the mechanism involves chronic immune activation, not a clean handoff. If you've ever had unexplained swelling months after a biostimulator session, this may be why. <strong>What's next:</strong> Ask your injector whether they've reviewed the Seoul National data before your next biostimulator appointment. If they haven't heard of it, that tells you something too.</p>
+    </div>
+    <div class="highlight-box">The question to bring to your next consult: "What's the inflammatory profile of the biostimulator you use, and how long does immune activation typically persist?"</div>
+    <div class="related-link-row">Related: <a href="#" class="inline-link">How polycaprolactone biostimulators differ from hyaluronic acid fillers at the cellular level(URL_PLACEHOLDER)</a></div>
+  </div>
+
+  <!-- IN OUR ROTATION (first) -->
+  <div class="rotation-section">
+    <div class="rotation-label">In Our Rotation</div>
+    <div class="rotation-sponsor-tag">Sponsored</div>
+    <div class="rotation-item">We've been using the Laneige Lip Sleeping Mask in Gummy Bear for three weeks and it's the only overnight lip product that's still there when we wake up. The texture is heavier than the original berry, which is why it works better. Not sponsored, just obsessed.</div>
+<div class="rotation-item">Dr. Bronner's Organic Lip Balm in Naked (unscented) is the unglamorous workhorse we keep in every bag. Four ingredients, no fragrance, no wax buildup. It costs $4 and outperforms things that cost $38. *Keep scrolling…more recs below*</div>
+    <div class="rotation-footer">Keep scrolling&hellip;more recs below</div>
+  </div>
+
+  <!-- 02 PUT IT IN YOUR MOUTH -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">02</div>
+      <div class="section-title">Put It In Your Mouth</div>
+    </div>
+    <div class="section-headline">The Selenium Study That Has GI Docs Group-Texting</div>
+    <div class="body-text">
+      <p><strong>What's going on:</strong> A randomized controlled trial out of the University of Porto, published March 30 in Gut, found that 200mcg of supplemental selenium daily reduced inflammatory markers in patients with mild intestinal permeability by 34% over 12 weeks. The control group saw no change. <strong>What that means:</strong> Selenium has always been the quiet mineral in the thyroid conversation, but this is the first RCT linking it directly to gut barrier function. If your skin has been reactive and your gut panel keeps coming back borderline, this is worth flagging with your doctor. <strong>This week's cheat meal:</strong> A seared salmon collar from your nearest Japanese restaurant. Fatty, crispy-skinned, absurdly rich in selenium, and it costs less than the fillet because nobody else knows to order it.</p>
+    </div>
+    <div class="cheat-meal-box">
+      <div class="cheat-meal-label">This Week's Cheat Meal</div>
+      <div class="cheat-meal-text">Seared salmon collar from any Japanese restaurant. Crispy skin, obscene omega-3s, naturally loaded with selenium, and it's the cheapest thing on the omakase menu.</div>
+    </div>
+    <div class="highlight-box">Brazil nuts remain the single most selenium-dense food on earth. Two per day hits 200mcg without a capsule.</div>
+    <div class="related-link-row">Related: <a href="#" class="inline-link">The full Porto RCT on selenium and intestinal permeability, with dosing protocol and biomarker breakdown(URL_PLACEHOLDER)</a></div>
+  </div>
+
+  <!-- 03 LIP LAB -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">03</div>
+      <div class="section-title">Lip Lab</div>
+    </div>
+    <div class="section-headline">Rare Beauty Quietly Reformulated Its Soft Pinch Tinted Lip Oil, and the New Version Is a Different Product</div>
+    <div class="body-text">
+      <p><strong>What's going on:</strong> Rare Beauty pushed a reformulated Soft Pinch Tinted Lip Oil to Sephora shelves this week with no announcement. Reddit's r/Sephora caught it March 28 when batch codes didn't match and the texture was visibly thinner. <strong>Why it matters:</strong> The old formula used a jojoba-and-squalane base. The new one swaps in a lighter meadowfoam seed oil blend and adds tocopheryl acetate. It's less cushiony, more glossy, and dries down faster. <strong>The verdict:</strong> If you loved the balmy slip of the original, stock up on old-batch inventory while it exists. The new version is fine. It's just a lip gloss now, not a lip treatment.</p>
+    </div>
+    <div class="highlight-box">Check the batch code printed near the crimp. If it starts with "25L," that's the old formula. "26A" is the reformulation.</div>
+    <div class="related-link-row">Related: <a href="#" class="inline-link">A full ingredient comparison between the original and reformulated Rare Beauty Soft Pinch Tinted Lip Oil(URL_PLACEHOLDER)</a></div>
+  </div>
+
+  <!-- IMAGE BREAK -->
+  <div class="image-break">
+    <img src="https://images.unsplash.com/photo-1512207736890-6ffed8a84e8d?w=600&q=80" alt="Luxury beauty editorial close up" />
+  </div>
+
+  <!-- 04 THE LIPS IN 6 -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">04</div>
+      <div class="section-title">The Lips in 6</div>
+    </div>
+    <div class="lips-list">
+      <div class="lips-item"><span class="lips-emoji">💉</span><span class="lips-text">Galderma filed a new FDA application March 28 for a lower-viscosity Restylane variant designed specifically for superficial lip lines. Approval timeline is estimated at Q4 2026.</span></div>
+<div class="lips-item"><span class="lips-emoji">🍽️</span><span class="lips-text">A March 31 preprint from Stanford links daily pomegranate consumption to a measurable increase in oral mucosal hydration over 8 weeks. Your dry-lip winter may have a produce-aisle fix.</span></div>
+<div class="lips-item"><span class="lips-emoji">💄</span><span class="lips-text">Tower 28 just launched ShineOn Lip Jelly in three new nude shades this week, and the formula now includes ceramide NP for the first time.</span></div>
+<div class="lips-item"><span class="lips-emoji">🧪</span><span class="lips-text">Nature Communications published a paper March 29 identifying a new collagen subtype, type XXIX, found exclusively in lip vermillion border tissue. Researchers say it could explain why lip skin ages differently than surrounding facial skin.</span></div>
+<div class="lips-item"><span class="lips-emoji">🚫</span><span class="lips-text">The EU's SCCS issued a preliminary opinion March 30 flagging titanium dioxide nanoparticles in lip products as requiring further inhalation data before reauthorization. Several European brands are already reformulating.</span></div>
+<div class="lips-item"><span class="lips-emoji">🦷</span><span class="lips-text">A meta-analysis published March 28 in the Journal of Periodontology confirmed that electric toothbrushes reduce gingivitis markers by 22% more than manual brushing. If you're still on manual, this is your sign.</span></div>
+    </div>
+  </div>
+
+  <!-- 05 QUICK HITS -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number">05</div>
+      <div class="section-title">Quick Hits</div>
+    </div>
+    <div class="quick-hits-list">
+      <div class="quick-hit-item"><span class="qh-emoji">💋</span><span class="qh-body"><span class="qh-label">Best Kiss:</span> Beyoncé at the NAACP Image Awards on March 29, wearing what makeup artist Sir John confirmed was a custom-mixed brown lip stain with zero gloss. The matte-on-melanin combination was the most-screenshotted beauty moment of the weekend.</span></div>
+<div class="quick-hit-item"><span class="qh-emoji">🚫</span><span class="qh-body"><span class="qh-label">Keep It Out:</span> Cinnamon-flavored lip plumpers that rely on capsaicin derivatives for the tingle. A March 30 case series in Contact Dermatitis documented 11 new cases of allergic cheilitis traced to cinnamal in plumping glosses. The tingle is not worth the peeling.</span></div>
+<div class="quick-hit-item"><span class="qh-emoji">🧪</span><span class="qh-body">MIT researchers published a proof-of-concept March 31 for a dissolvable microneedle patch that delivers botulinum toxin to crow's feet without a needle. Human trials are at least two years out, but the mechanism works in primate models.</span></div>
+<div class="quick-hit-item"><span class="qh-emoji">💊</span><span class="qh-body">A small but well-designed trial from King's College London, published March 28, found that oral hyaluronic acid supplements (120mg/day) did not significantly improve skin hydration versus placebo after 12 weeks. If you're taking HA pills for your skin, the evidence just got weaker.</span></div>
+    </div>
+  </div>
+
+  <!-- ON OUR CALENDAR -->
+  <div class="section">
+    <div class="section-label">
+      <div class="section-number" style="background:var(--rouge);">&#x1F5D3;</div>
+      <div class="section-title">On Our Calendar</div>
+    </div>
+    <div class="calendar-list">
+      <div class="calendar-item"><span class="cal-emoji">🗓️</span><span class="cal-text">April 1: Sephora's Spring Savings Event opens for Rouge members today. 20% off everything, including the good stuff they never discount.</span></div>
+<div class="calendar-item"><span class="cal-emoji">🗓️</span><span class="cal-text">April 2: The American Academy of Dermatology's annual meeting kicks off in San Francisco. Expect a flood of new injectable data by midweek.</span></div>
+<div class="calendar-item"><span class="cal-emoji">🗓️</span><span class="cal-text">April 3: Charlotte Tilbury drops a new Pillow Talk shade extension, reportedly expanding the lip liner range to 16 shades. Details are under NDA until launch morning.</span></div>
+    </div>
+  </div>
+
+  <!-- IN OUR ROTATION (second) -->
+  <div class="rotation-section">
+    <div class="rotation-label">In Our Rotation</div>
+    <div class="rotation-sponsor-tag">Sponsored</div>
+    <div class="rotation-item">The Saie Glossybounce Hydrating Lip Oil in Clear is the thing we reach for when we want shine without committing to a color. It layers over everything, never gets sticky, and the doe-foot applicator is genuinely well-designed. We notice when applicators are bad, so we notice when they're good.</div>
+<div class="rotation-item">Summer Fridays Lip Butter Balm in Vanilla Beige is the tinted balm we keep recommending because people keep asking us what we're wearing. It's pigmented enough to skip liner, hydrating enough to skip treatment. That's the whole pitch. *We only feature things we'd actually use on our own face.*</div>
+    <div class="rotation-footer">We only feature things we'd actually use on our own face.</div>
+  </div>
+
+  <!-- 06 LAST WORD -->
+  <div class="section last-word-section">
+    <div class="section-label">
+      <div class="section-number" style="background:var(--rouge);">06</div>
+      <div class="section-title">Last Word</div>
+    </div>
+    <div class="last-word-quote">"Beauty is the only thing that time cannot harm. Philosophies fall away like sand, and creeds follow one another like the withered leaves of autumn, but what is beautiful is a joy for all seasons and a possession for all eternity."</div>
+    <div class="last-word-attribution">— Oscar Wilde</div>
+  </div>
+
+  <!-- ARCHIVE_SECTION_PREVIEW_PLACEHOLDER -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Lip Service</div>
+    <div class="footer-text">
+      Daily. Opinionated. Never preachy.<br>
+      You're receiving this because you have excellent taste.<br><br>
+      <span style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</span>
+    </div>
+    <div class="footer-links">
+      <a href="./issues/2026-04-01.html">View in browser</a>
+      <a href="../archive.html">Archive</a>
+      <a href="../subscribe.html" target="_blank">Subscribe</a>
+      <a href="../unsubscribe.html">Unsubscribe</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
