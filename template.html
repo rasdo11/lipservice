@@ -95,7 +95,6 @@
   .hero-text {
     font-family: 'Playfair Display', serif;
     font-size: 20px;
-    font-style: italic;
     color: #fff;
     line-height: 1.4;
     font-weight: 400;
@@ -115,9 +114,8 @@
     font-weight: 500;
   }
   .quote-block-text {
-    font-family: 'Playfair Display', serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 17px;
-    font-style: italic;
     color: var(--cream);
     line-height: 1.55;
     font-weight: 400;
@@ -144,18 +142,7 @@
     margin-bottom: 20px;
   }
   .section-number {
-    width: 24px;
-    height: 24px;
-    background: var(--ink);
-    color: var(--cream);
-    font-size: 10px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 0.5px;
-    flex-shrink: 0;
-    border-radius: 50%;
+    display: none;
   }
   .section-title {
     font-family: 'DM Sans', sans-serif;
@@ -164,19 +151,35 @@
     letter-spacing: 3.5px;
     text-transform: uppercase;
     color: var(--rouge);
+    border-left: 3px solid var(--rouge);
+    padding-left: 10px;
   }
   .section-headline {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    font-weight: 700;
-    line-height: 1.25;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
     color: var(--ink);
     margin-bottom: 16px;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.2px;
   }
   .section-headline em {
-    font-style: italic;
+    font-style: normal;
     color: var(--rouge);
+  }
+  [data-section="injection_report"] .body-text strong {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--rouge);
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-right: 6px;
+    vertical-align: middle;
   }
   .body-text {
     font-size: 15.5px;
@@ -290,7 +293,6 @@
   .rotation-footer {
     font-size: 12px;
     color: var(--warm-gray);
-    font-style: italic;
     margin-top: 14px;
     font-weight: 300;
   }
@@ -389,9 +391,8 @@
   }
   .last-word-section .section-title { color: var(--nude); }
   .last-word-quote {
-    font-family: 'Playfair Display', serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 22px;
-    font-style: italic;
     color: var(--cream);
     line-height: 1.5;
     font-weight: 400;
@@ -460,7 +461,6 @@
     color: var(--charcoal);
     font-weight: 300;
     line-height: 1.55;
-    font-style: italic;
   }
   /* ISSUE NAV BAR (standalone issue pages only) */
   .issue-nav-bar {
@@ -543,7 +543,7 @@
     .section { padding: 28px 20px; }
     .hero { padding: 0 20px 28px; }
     .rotation-section { padding: 24px 20px; }
-    .section-headline { font-size: 23px; }
+    .section-headline { font-size: 18px; }
     .last-word-quote { font-size: 19px; }
   }
 </style>
@@ -580,7 +580,7 @@
   </div>
 
   <!-- 01 THE INJECTION REPORT -->
-  <div class="section">
+  <div class="section" data-section="injection_report">
     <div class="section-label">
       <div class="section-number">01</div>
       <div class="section-title">The Injection Report</div>
@@ -697,7 +697,7 @@
     <div class="footer-text">
       Daily. Opinionated. Never preachy.<br>
       You're receiving this because you have excellent taste.<br><br>
-      <em style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</em>
+      <span style="color: var(--nude); font-size: 13px;">"The most fun a girl can have without taking her clothes off."</span>
     </div>
     <div class="footer-links">
       <a href="{{ISSUE_URL}}">View in browser</a>
