@@ -66,7 +66,7 @@ Write all six sections, in order.
 - **What it means:** 2–3 sentences. The so-what. Clinical context, mechanism, what a good injector would tell you.
 - **What's next:** 1–2 sentences. One specific action, question to ask, or thing to watch.
 - One **highlight** callout: the single most actionable thing. 1–2 sentences max.
-- Close with one **Related:** link placeholder in the format: `Related: [descriptive anchor text](URL_PLACEHOLDER)`
+- Close with one **Related:** link. Output only the anchor text in the `related` field — plain text, no markdown, no URL.
 
 ---
 
@@ -76,9 +76,10 @@ Write all six sections, in order.
 **Beat structure (80–100 words total):**
 - **What's going on:** 2–3 sentences. The study, the finding, the food moment.
 - **What that means:** 2 sentences. Direct implication. Skip the caveats.
-- **This week's cheat meal:** 2 sentences max. Named, described, zero apology.
 - **What to cut (if relevant):** 1 sentence. Evidence only. Not every issue needs this beat — skip it if the peg doesn't call for it.
-- One **highlight** callout. Close with one **Related:** link placeholder.
+- One **highlight** callout. Close with one **Related:** link. Output only the anchor text in the `related` field — plain text, no markdown, no URL.
+
+The cheat meal goes in the `cheat_meal` JSON field only — do NOT include it in `body`.
 
 ---
 
@@ -89,7 +90,7 @@ Write all six sections, in order.
 - **What's going on:** 1–2 sentences. The peg.
 - **Why it matters:** 2 sentences. Ingredient angle, mechanism, or brand context.
 - **The verdict:** 1–2 sentences. If reviewing: formula, finish, who it's for. No hedging.
-- One **highlight** callout. Close with one **Related:** link placeholder.
+- One **highlight** callout. Close with one **Related:** link. Output only the anchor text in the `related` field — plain text, no markdown, no URL.
 
 ---
 
@@ -136,10 +137,10 @@ Two product or resource recommendations per slot. Written in Lip Service voice �
 
 ## THE RELATED LINK FORMAT
 
-Every long-form section (Injection Report, Put It In Your Mouth, Lip Lab) closes with:
-`Related: [descriptive anchor text that tells her exactly what she'll learn](URL_PLACEHOLDER)`
+Every long-form section (Injection Report, Put It In Your Mouth, Lip Lab) closes with a related link. Output only the anchor text as a plain string in the `related` JSON field — no markdown, no URL, no brackets or parentheses. The template provides the `<a>` wrapper.
 
-Write the anchor text as a full sentence or near-sentence. "Read more" is not anchor text.
+Write the anchor text as a full sentence or near-sentence that tells her exactly what she'll learn. "Read more" is not anchor text.
+Example: `"The full Seoul National University study on PCL filler immune response"`
 
 ---
 
@@ -159,20 +160,20 @@ Respond with valid JSON only. No markdown. No backticks. No preamble. Exactly th
     "headline": "Section headline.",
     "body": "Full section body. Use **What's going on:** / **What it means:** / **What's next:** beat labels inline as bold text.",
     "highlight": "One key callout — a question to ask, a stat, a direct action. 1–2 sentences.",
-    "related": "Descriptive anchor text for related link"
+    "related": "Plain anchor text only — no markdown, no URL, no brackets or parentheses. Example: The full Seoul National University study on PCL filler immune response"
   },
   "put_it_in_your_mouth": {
     "headline": "Section headline.",
-    "body": "Full section body. Use beat labels inline.",
+    "body": "Full section body. Use beat labels inline. DO NOT include cheat meal in body.",
     "highlight": "One key callout.",
-    "cheat_meal": "One specific dish. Named, described briefly.",
-    "related": "Descriptive anchor text for related link"
+    "cheat_meal": "One specific dish. Named, described briefly. Output here only — do NOT repeat in body.",
+    "related": "Plain anchor text only — no markdown, no URL, no brackets or parentheses. Example: The full Porto RCT on selenium and intestinal permeability"
   },
   "lip_lab": {
     "headline": "Section headline.",
     "body": "Full section body. Use beat labels inline.",
     "highlight": "One key callout.",
-    "related": "Descriptive anchor text for related link"
+    "related": "Plain anchor text only — no markdown, no URL, no brackets or parentheses. Example: The full Sephora formula transparency report on lip plumpers"
   },
   "lips_in_6": [
     { "emoji": "💉", "text": "Item one." },
