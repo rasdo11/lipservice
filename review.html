@@ -604,15 +604,14 @@
 
   function updateCountdown() {
     const now = new Date();
-    // 6am PST = UTC-8, so 14:00 UTC (standard) or 13:00 UTC (daylight)
-    const pstOffset = -8 * 60; // minutes, conservative (PST)
-    const pstNow = new Date(now.getTime() + (pstOffset + now.getTimezoneOffset()) * 60000);
+    // Use America/Los_Angeles so PST/PDT is handled automatically by the browser
+    const pacificNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }));
 
-    const target = new Date(pstNow);
+    const target = new Date(pacificNow);
     target.setHours(6, 0, 0, 0);
-    if (pstNow >= target) target.setDate(target.getDate() + 1);
+    if (pacificNow >= target) target.setDate(target.getDate() + 1);
 
-    const diff = target - pstNow;
+    const diff = target - pacificNow;
     const h = Math.floor(diff / 3600000);
     const m = Math.floor((diff % 3600000) / 60000);
     document.getElementById('countdown').textContent =
