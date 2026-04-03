@@ -2,18 +2,10 @@ name: Daily Newsletter
 
 on:
   schedule:
-    # Preview: 9pm PST (Nov–Mar) = 05:00 UTC
-    - cron: '0 5 * * *'
-    # Preview: 9pm PDT (Mar–Nov) = 04:00 UTC
+    # Preview: 9pm PT (±1hr DST drift accepted) = 04:00 UTC
     - cron: '0 4 * * *'
-    # Publish: 5:25am PDT (Mar–Nov) = 12:25 UTC
-    - cron: '25 12 * * *'
-    # Publish: 5:25am PST (Nov–Mar) = 13:25 UTC  /  PDT retry
-    - cron: '25 13 * * *'
-    # Publish: PST retry
-    - cron: '25 14 * * *'
-    # Publish: PST fallback
-    - cron: '25 15 * * *'
+    # Publish: 5:30am PT (±1hr DST drift accepted) = 12:30 UTC
+    - cron: '30 12 * * *'
   workflow_dispatch:
     inputs:
       mode:
