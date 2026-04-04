@@ -3,6 +3,41 @@ import { getFile, putFile, csvQuote } from './_github.js';
 const FILE = 'subscribers.csv';
 const HEADER = 'timestamp,firstName,email,source\n';
 
+const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
+const BEEHIIV_PUB_ID = process.env.BEEHIIV_PUBLICATION_ID || 'b33a3dc2-5d4a-42e4-b08d-284e84b97b54';
+
+async function addToBeehiiv(email, firstName) {
+  if (!BEEHIIV_API_KEY) return;
+  try {
+    const body = {
+      email,
+      reactivate_existing: false,
+      send_welcome_email: true,
+      utm_source: 'website',
+    };
+    if (firstName) {
+      body.custom_fields = [{ name: 'first_name', value: firstName }];
+    }
+    const resp = await fetch(
+      `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUB_ID}/subscriptions`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${BEEHIIV_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    if (!resp.ok) {
+      const text = await resp.text();
+      console.error(`beehiiv subscribe error ${resp.status}:`, text);
+    }
+  } catch (err) {
+    console.error('beehiiv subscribe error:', err.message);
+  }
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -21,9 +56,13 @@ export default async function handler(req, res) {
     const { content, sha } = await getFile(FILE, HEADER);
     const updated = content.endsWith('\n') ? content + row : content + '\n' + row;
     await putFile(FILE, updated, sha, `subscriber: ${email}`);
-    return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('subscribe error:', err.message);
     return res.status(500).json({ error: 'Failed to save' });
   }
+
+  // Fire-and-forget — don't fail the response if beehiiv is down
+  addToBeehiiv(email, firstName);
+
+  return res.status(200).json({ ok: true });
 }
