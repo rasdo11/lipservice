@@ -1,12 +1,19 @@
 #!/usr/bin/env python3
 """
 Lip Service — Issue Generator
-Reads the system prompt, calls Claude, renders HTML, updates issues.json.
+Reads the system prompt, calls Claude, renders HTML, saves the issue.
 
 Required env vars:
-  ANTHROPIC_API_KEY  — Anthropic API key
-  ISSUE_NUMBER       — Issue number (integer)
-  BRIEF              — Weekly editorial brief (pasted text)
+  ANTHROPIC_API_KEY       — Anthropic API key
+
+Optional env vars:
+  ISSUE_NUMBER            — Issue number (auto-detects if blank)
+  BRIEF                   — Editorial brief (generates freely if blank)
+  MODE                    — 'preview' or 'immediate' (default: immediate)
+                            preview  → save to preview/, schedule beehiiv post
+                            immediate → save to issues/, update issues.json now
+  BEEHIIV_API_KEY         — Required for preview mode email scheduling
+  BEEHIIV_PUBLICATION_ID  — Required for preview mode email scheduling
 """
 
 import datetime
@@ -14,6 +21,8 @@ import json
 import os
 import re
 import sys
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 import anthropic
@@ -793,6 +802,266 @@ def extract_json(raw: str) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Email HTML — CSS var map and conversion
+# ---------------------------------------------------------------------------
+
+_CSS_VARS = {
+    'var(--black)':  '#0A0A0A',
+    'var(--white)':  '#FFFFFF',
+    'var(--paper)':  '#FAFAF8',
+    'var(--accent)': '#B8341B',
+    'var(--accent2)':'#1B4B8A',
+    'var(--mid)':    '#555550',
+    'var(--rule)':   '#DDDDD8',
+    'var(--light)':  '#F2F2EE',
+}
+
+# Selectors whose display:flex / gap must be stripped for Gmail
+_FLEX_SELECTORS = [
+    '.mast-top', '.mast-rule-row', '.sec-cat',
+    '.lip6-item', '.qh-item', '.cal-item',
+    '.footer', '.rotation-kicker',
+]
+
+
+def _fix_style_block(match: re.Match) -> str:
+    style = match.group(1)
+    for sel in _FLEX_SELECTORS:
+        sel_esc = re.escape(sel)
+        style = re.sub(
+            rf'({sel_esc}\s*\{{[^}}]*?)(\s*display:\s*flex\s*;)',
+            r'\1', style, flags=re.DOTALL,
+        )
+        style = re.sub(
+            rf'({sel_esc}\s*\{{[^}}]*?)(\s*gap:[^;]+;)',
+            r'\1', style, flags=re.DOTALL,
+        )
+        style = re.sub(
+            rf'({sel_esc}\s*\{{[^}}]*?)(\s*align-items:[^;]+;)',
+            r'\1', style, flags=re.DOTALL,
+        )
+    return f'<style>{style}</style>'
+
+
+def make_email_html(html: str) -> str:
+    """Convert web HTML to email-safe HTML (for beehiiv / Gmail compatibility)."""
+
+    # 1. Replace CSS custom properties
+    for var, value in _CSS_VARS.items():
+        html = html.replace(var, value)
+
+    # 2. Remove :root block (all vars now inlined)
+    html = re.sub(r'\s*:root\s*\{[^}]+\}', '', html)
+
+    # 3. Font-stack fallbacks
+    html = html.replace(
+        "'Cormorant Garamond', serif",
+        "'Cormorant Garamond', Georgia, serif",
+    )
+    html = html.replace(
+        "'Outfit', sans-serif",
+        "'Outfit', -apple-system, system-ui, sans-serif",
+    )
+
+    # 4. Strip display:flex / gap / align-items from the style block
+    html = re.sub(r'<style>(.*?)</style>', _fix_style_block, html, flags=re.DOTALL)
+
+    # 5. .lip6-item  →  table
+    html = re.sub(
+        r'<div class="lip6-item">'
+        r'<span class="lip6-emoji">(.*?)</span>'
+        r'<span class="lip6-text">([\s\S]*?)</span>'
+        r'</div>',
+        lambda m: (
+            '<table width="100%" cellpadding="0" cellspacing="0" border="0"'
+            ' style="border-bottom:1px solid #DDDDD8;padding:12px 0">'
+            '<tr>'
+            f'<td width="28" valign="top" style="font-size:15px;padding-right:14px;'
+            f'padding-top:2px;white-space:nowrap">{m.group(1)}</td>'
+            f'<td style="font-size:14px;color:#333330;font-weight:300;'
+            f'line-height:1.65">{m.group(2)}</td>'
+            '</tr></table>'
+        ),
+        html,
+    )
+
+    # 6. .qh-item  →  table
+    html = re.sub(
+        r'<div class="qh-item">'
+        r'<span class="qh-emoji">(.*?)</span>'
+        r'<span class="qh-text">([\s\S]*?)</span>'
+        r'</div>',
+        lambda m: (
+            '<table width="100%" cellpadding="0" cellspacing="0" border="0"'
+            ' style="border-bottom:1px solid #DDDDD8;padding:13px 0">'
+            '<tr>'
+            f'<td width="28" valign="top" style="font-size:15px;padding-right:14px;'
+            f'padding-top:2px;white-space:nowrap">{m.group(1)}</td>'
+            f'<td style="font-size:14.5px;color:#333330;font-weight:300;'
+            f'line-height:1.65">{m.group(2)}</td>'
+            '</tr></table>'
+        ),
+        html,
+    )
+
+    # 7. .cal-item  →  table
+    html = re.sub(
+        r'<div class="cal-item">'
+        r'<span class="cal-emoji">(.*?)</span>'
+        r'<span class="cal-text">([\s\S]*?)</span>'
+        r'</div>',
+        lambda m: (
+            '<table width="100%" cellpadding="0" cellspacing="0" border="0"'
+            ' style="border-bottom:1px solid #DDDDD8;padding:10px 0">'
+            '<tr>'
+            f'<td width="26" valign="top" style="font-size:14px;padding-right:14px;'
+            f'padding-top:2px;white-space:nowrap">{m.group(1)}</td>'
+            f'<td style="font-size:14px;color:#333330;font-weight:300;'
+            f'line-height:1.6">{m.group(2)}</td>'
+            '</tr></table>'
+        ),
+        html,
+    )
+
+    # 8. .mast-top  →  table
+    html = re.sub(
+        r'<div class="mast-top">\s*'
+        r'<div class="mast-eyebrow">(.*?)</div>\s*'
+        r'<div class="mast-meta">(.*?)</div>\s*'
+        r'</div>',
+        lambda m: (
+            '<table width="100%" cellpadding="0" cellspacing="0" border="0"'
+            ' style="margin-bottom:20px"><tr>'
+            f'<td style="font-size:9px;letter-spacing:3px;text-transform:uppercase;'
+            f'color:#555550;font-weight:400">{m.group(1)}</td>'
+            f'<td align="right" style="font-size:9px;letter-spacing:2px;'
+            f'text-transform:uppercase;color:#555550;font-weight:400">{m.group(2)}</td>'
+            '</tr></table>'
+        ),
+        html, flags=re.DOTALL,
+    )
+
+    # 9. .mast-rule-row  →  table
+    html = re.sub(
+        r'<div class="mast-rule-row">\s*'
+        r'<div class="mast-tagline">(.*?)</div>\s*'
+        r'<div class="mast-issue">(.*?)</div>\s*'
+        r'</div>',
+        lambda m: (
+            '<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>'
+            f'<td style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;'
+            f'color:#555550;font-weight:400;padding:12px 0">{m.group(1)}</td>'
+            f'<td align="right" style="font-size:11px;color:#555550;font-weight:400;'
+            f'letter-spacing:1px;padding:12px 0">{m.group(2)}</td>'
+            '</tr></table>'
+        ),
+        html, flags=re.DOTALL,
+    )
+
+    # 10. .sec-cat  →  table (label + rule line)
+    html = re.sub(
+        r'<div class="sec-cat">\s*'
+        r'<div class="sec-cat-label">(.*?)</div>\s*'
+        r'<div class="sec-cat-rule"></div>\s*'
+        r'</div>',
+        lambda m: (
+            '<table width="100%" cellpadding="0" cellspacing="0" border="0"'
+            ' style="margin-bottom:14px"><tr>'
+            f'<td style="font-size:9px;letter-spacing:3px;text-transform:uppercase;'
+            f'font-weight:500;color:#B8341B;white-space:nowrap;padding-right:10px">'
+            f'{m.group(1)}</td>'
+            '<td style="border-top:1px solid #DDDDD8;width:100%">&nbsp;</td>'
+            '</tr></table>'
+        ),
+        html, flags=re.DOTALL,
+    )
+
+    # 11. .footer  →  table
+    html = re.sub(
+        r'<div class="footer">\s*'
+        r'<div class="footer-logo">(.*?)</div>\s*'
+        r'<div class="footer-right">([\s\S]*?)</div>\s*'
+        r'</div>',
+        lambda m: (
+            '<table width="100%" cellpadding="0" cellspacing="0" border="0"'
+            ' style="background:#FAFAF8;border-top:1px solid #0A0A0A;padding:28px 40px"><tr>'
+            f'<td style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:20px;'
+            f'font-weight:300;font-style:italic;color:#0A0A0A">{m.group(1)}</td>'
+            f'<td align="right">{m.group(2)}</td>'
+            '</tr></table>'
+        ),
+        html, flags=re.DOTALL,
+    )
+
+    return html
+
+
+# ---------------------------------------------------------------------------
+# Beehiiv API
+# ---------------------------------------------------------------------------
+
+def create_beehiiv_post(
+    api_key: str,
+    pub_id: str,
+    title: str,
+    subtitle: str,
+    email_html: str,
+    send_at_unix: int,
+    issue_number: int,
+    email_subject: str,
+) -> None:
+    """Create a scheduled beehiiv post and print QC summary."""
+    payload = json.dumps({
+        'title': title,
+        'subtitle': subtitle,
+        'content_html': email_html,
+        'status': 'confirmed',
+        'scheduled_at': send_at_unix,
+    }).encode('utf-8')
+
+    url = f'https://api.beehiiv.com/v2/publications/{pub_id}/posts'
+    req = urllib.request.Request(
+        url,
+        data=payload,
+        method='POST',
+        headers={
+            'Authorization': f'Bearer {api_key}',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+    )
+
+    try:
+        with urllib.request.urlopen(req) as resp:
+            result = json.loads(resp.read().decode('utf-8'))
+    except urllib.error.HTTPError as e:
+        body = e.read().decode('utf-8', errors='replace')
+        print(f'⚠️  BEEHIIV WARNING: HTTP {e.code} — {body[:400]}', file=sys.stderr)
+        return
+    except urllib.error.URLError as e:
+        print(f'⚠️  BEEHIIV WARNING: {e.reason}', file=sys.stderr)
+        return
+
+    post_id = result.get('data', {}).get('id', 'unknown')
+
+    # Human-readable PST send time (UTC−8)
+    send_dt_utc = datetime.datetime.utcfromtimestamp(send_at_unix)
+    send_dt_pst = send_dt_utc - datetime.timedelta(hours=8)
+    send_time_str = send_dt_pst.strftime('%A, %B %-d at %-I:%M %p PST')
+
+    nnn = f'{issue_number:03d}'
+    print('\n' + '━' * 43)
+    print('BEEHIIV POST SCHEDULED')
+    print('━' * 43)
+    print(f'Issue:        #{nnn}')
+    print(f'Title:        {title}')
+    print(f'Subject:      {email_subject}')
+    print(f'Send time:    {send_time_str}')
+    print(f'Beehiiv URL:  https://app.beehiiv.com/posts/{post_id}')
+    print('━' * 43 + '\n')
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -801,6 +1070,13 @@ def main():
     api_key = os.environ.get('ANTHROPIC_API_KEY', '').strip()
     issue_number_str = os.environ.get('ISSUE_NUMBER', '').strip()
     brief = os.environ.get('BRIEF', '').strip()
+    mode = os.environ.get('MODE', 'immediate').strip().lower()
+    beehiiv_api_key = os.environ.get('BEEHIIV_API_KEY', '').strip()
+    beehiiv_pub_id = os.environ.get('BEEHIIV_PUBLICATION_ID', '').strip()
+
+    if mode not in ('preview', 'immediate'):
+        print(f'ERROR: MODE must be "preview" or "immediate", got: {mode}', file=sys.stderr)
+        sys.exit(1)
 
     if not api_key:
         print('ERROR: ANTHROPIC_API_KEY is not set.', file=sys.stderr)
@@ -948,23 +1224,6 @@ def main():
     html = html.replace('{{LAST_WORD_QUOTE}}', lw_quote)
     html = html.replace('{{LAST_WORD_ATTR}}', lw_attr)
 
-    # Save issue HTML
-    issues_dir.mkdir(exist_ok=True)
-    issue_path = issues_dir / f'{slug}.html'
-    issue_path.write_text(html, encoding='utf-8')
-
-    # Update issues.json
-    if issues_json_path.exists():
-        try:
-            issues = json.loads(issues_json_path.read_text(encoding='utf-8'))
-        except (json.JSONDecodeError, ValueError):
-            issues = []
-    else:
-        issues = []
-
-    # Remove any existing entry for this issue number
-    issues = [e for e in issues if e.get('issue') != issue_number]
-
     new_entry = {
         'issue': issue_number,
         'date': issue_date_iso,
@@ -975,24 +1234,87 @@ def main():
         'url': f'./issues/{slug}.html',
     }
 
-    # Prepend new entry
-    issues.insert(0, new_entry)
-    issues_json_path.write_text(
-        json.dumps(issues, indent=2, ensure_ascii=False),
-        encoding='utf-8',
-    )
+    if mode == 'preview':
+        # --- PREVIEW MODE ---
+        preview_dir = repo_root / 'preview'
+        preview_dir.mkdir(exist_ok=True)
 
-    # Write outputs to GitHub Actions (if running in Actions)
+        meta_path = preview_dir / 'meta.json'
+        if meta_path.exists():
+            try:
+                existing_meta = json.loads(meta_path.read_text(encoding='utf-8'))
+                print(
+                    f'⚠️  WARNING: preview/meta.json already exists '
+                    f'(Issue #{existing_meta.get("issue")} — {existing_meta.get("title")})\n'
+                    '   Overwriting with new generation.'
+                )
+            except (json.JSONDecodeError, ValueError):
+                pass
+
+        issue_path = preview_dir / f'{slug}.html'
+        issue_path.write_text(html, encoding='utf-8')
+
+        meta_path.write_text(
+            json.dumps(new_entry, indent=2, ensure_ascii=False),
+            encoding='utf-8',
+        )
+
+        print(f'✓ Preview saved: {issue_path}')
+        print(f'  Slug:  {slug}')
+        print(f'  Date:  {issue_date_iso}')
+
+        # Build email HTML and schedule beehiiv post
+        email_html = make_email_html(html)
+
+        if beehiiv_api_key and beehiiv_pub_id:
+            send_at_unix = int(
+                (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).timestamp()
+            )
+            create_beehiiv_post(
+                api_key=beehiiv_api_key,
+                pub_id=beehiiv_pub_id,
+                title=title,
+                subtitle=email_subject or preview,
+                email_html=email_html,
+                send_at_unix=send_at_unix,
+                issue_number=issue_number,
+                email_subject=email_subject,
+            )
+        else:
+            print('ℹ️  BEEHIIV_API_KEY / BEEHIIV_PUBLICATION_ID not set — skipping beehiiv.')
+
+    else:
+        # --- IMMEDIATE MODE ---
+        issues_dir.mkdir(exist_ok=True)
+        issue_path = issues_dir / f'{slug}.html'
+        issue_path.write_text(html, encoding='utf-8')
+
+        if issues_json_path.exists():
+            try:
+                issues = json.loads(issues_json_path.read_text(encoding='utf-8'))
+            except (json.JSONDecodeError, ValueError):
+                issues = []
+        else:
+            issues = []
+
+        issues = [e for e in issues if e.get('issue') != issue_number]
+        issues.insert(0, new_entry)
+        issues_json_path.write_text(
+            json.dumps(issues, indent=2, ensure_ascii=False),
+            encoding='utf-8',
+        )
+
+        print(f'✓ Issue {issue_number}: {title}')
+        print(f'  Saved: {issue_path}')
+        print(f'  Slug:  {slug}')
+        print(f'  Date:  {issue_date_iso}')
+
+    # Write GitHub Actions outputs
     github_output = os.environ.get('GITHUB_OUTPUT', '')
     if github_output:
         with open(github_output, 'a', encoding='utf-8') as f:
             f.write(f'ISSUE_TITLE={title}\n')
             f.write(f'ISSUE_NUMBER={issue_number}\n')
-
-    print(f'✓ Issue {issue_number}: {title}')
-    print(f'  Saved: {issue_path}')
-    print(f'  Slug:  {slug}')
-    print(f'  Date:  {issue_date_iso}')
 
 
 if __name__ == '__main__':
