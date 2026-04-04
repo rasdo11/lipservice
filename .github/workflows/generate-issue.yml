@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       issue_number:
-        description: 'Issue number (e.g. 90)'
-        required: true
+        description: 'Issue number — leave blank to auto-detect (next after latest in issues.json)'
+        required: false
         type: string
       brief:
-        description: 'Weekly brief — paste full text here'
-        required: true
+        description: 'Weekly brief — paste editorial notes, or leave blank to generate freely'
+        required: false
         type: string
 
 jobs:
@@ -41,5 +41,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add issues/ issues.json
-          git commit -m "Issue ${{ inputs.issue_number }}: ${{ steps.generate.outputs.ISSUE_TITLE }}"
+          git commit -m "Issue ${{ steps.generate.outputs.ISSUE_NUMBER }}: ${{ steps.generate.outputs.ISSUE_TITLE }}"
           git push

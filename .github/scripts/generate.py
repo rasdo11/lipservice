@@ -805,24 +805,32 @@ def main():
     if not api_key:
         print('ERROR: ANTHROPIC_API_KEY is not set.', file=sys.stderr)
         sys.exit(1)
-    if not issue_number_str:
-        print('ERROR: ISSUE_NUMBER is not set.', file=sys.stderr)
-        sys.exit(1)
-    if not brief:
-        print('ERROR: BRIEF is not set.', file=sys.stderr)
-        sys.exit(1)
-
-    try:
-        issue_number = int(issue_number_str)
-    except ValueError:
-        print(f'ERROR: ISSUE_NUMBER must be an integer, got: {issue_number_str}', file=sys.stderr)
-        sys.exit(1)
 
     # Paths
     repo_root = Path(__file__).parent.parent.parent
     system_prompt_path = repo_root / '.github' / 'prompts' / 'system.md'
     issues_dir = repo_root / 'issues'
     issues_json_path = repo_root / 'issues.json'
+
+    # Auto-detect issue number if not provided
+    if issue_number_str:
+        try:
+            issue_number = int(issue_number_str)
+        except ValueError:
+            print(f'ERROR: ISSUE_NUMBER must be an integer, got: {issue_number_str}', file=sys.stderr)
+            sys.exit(1)
+    else:
+        # Derive next issue number from issues.json
+        if issues_json_path.exists():
+            try:
+                existing = json.loads(issues_json_path.read_text(encoding='utf-8'))
+                max_issue = max((e.get('issue', 0) for e in existing), default=0)
+                issue_number = max_issue + 1
+            except (json.JSONDecodeError, ValueError):
+                issue_number = 1
+        else:
+            issue_number = 1
+        print(f'Auto-detected issue number: {issue_number}')
 
     # Read system prompt
     if not system_prompt_path.exists():
@@ -832,7 +840,12 @@ def main():
 
     # Call Anthropic API
     client = anthropic.Anthropic(api_key=api_key)
-    user_message = f'Write issue {issue_number}.\n\n{brief}'
+
+    # Build user message — brief is optional
+    if brief:
+        user_message = f'Write issue {issue_number}.\n\n{brief}'
+    else:
+        user_message = f'Write issue {issue_number}.'
 
     print(f'Calling Claude API for issue {issue_number}...')
     response = client.messages.create(
@@ -969,11 +982,12 @@ def main():
         encoding='utf-8',
     )
 
-    # Write title to GitHub Actions output (if running in Actions)
+    # Write outputs to GitHub Actions (if running in Actions)
     github_output = os.environ.get('GITHUB_OUTPUT', '')
     if github_output:
         with open(github_output, 'a', encoding='utf-8') as f:
             f.write(f'ISSUE_TITLE={title}\n')
+            f.write(f'ISSUE_NUMBER={issue_number}\n')
 
     print(f'✓ Issue {issue_number}: {title}')
     print(f'  Saved: {issue_path}')
