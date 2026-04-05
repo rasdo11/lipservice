@@ -7,7 +7,6 @@ const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
 const BEEHIIV_PUB_ID = process.env.BEEHIIV_PUBLICATION_ID || 'pub_b33a3dc2-5d4a-42e4-b08d-284e84b97b54';
 
 async function addToBeehiiv(email, firstName) {
-  console.log('beehiiv: key present?', !!BEEHIIV_API_KEY, '| key prefix:', BEEHIIV_API_KEY ? BEEHIIV_API_KEY.slice(0, 6) : 'MISSING');
   if (!BEEHIIV_API_KEY) return;
   try {
     const body = {
@@ -30,8 +29,10 @@ async function addToBeehiiv(email, firstName) {
         body: JSON.stringify(body),
       }
     );
-    const text = await resp.text();
-    console.log(`beehiiv response ${resp.status}:`, text);
+    if (!resp.ok) {
+      const text = await resp.text();
+      console.error(`beehiiv subscribe error ${resp.status}:`, text);
+    }
   } catch (err) {
     console.error('beehiiv subscribe error:', err.message);
   }
