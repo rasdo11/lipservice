@@ -60,8 +60,7 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Failed to save' });
   }
 
-  // Fire-and-forget — don't fail the response if beehiiv is down
-  addToBeehiiv(email, firstName);
+  await addToBeehiiv(email, firstName);
 
   return res.status(200).json({ ok: true });
 }
