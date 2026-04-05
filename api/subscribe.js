@@ -4,7 +4,7 @@ const FILE = 'subscribers.csv';
 const HEADER = 'timestamp,firstName,email,source\n';
 
 const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
-const BEEHIIV_PUB_ID = process.env.BEEHIIV_PUBLICATION_ID || 'b33a3dc2-5d4a-42e4-b08d-284e84b97b54';
+const BEEHIIV_PUB_ID = process.env.BEEHIIV_PUBLICATION_ID || 'pub_b33a3dc2-5d4a-42e4-b08d-284e84b97b54';
 
 async function addToBeehiiv(email, firstName) {
   console.log('beehiiv: key present?', !!BEEHIIV_API_KEY, '| key prefix:', BEEHIIV_API_KEY ? BEEHIIV_API_KEY.slice(0, 6) : 'MISSING');
