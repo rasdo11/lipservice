@@ -1126,7 +1126,7 @@ def main():
 
     print(f'Calling Claude API for issue {issue_number}...')
     response = client.messages.create(
-        model='claude-opus-4-5',
+        model='claude-opus-4-6',
         max_tokens=4096,
         system=system_prompt,
         messages=[{'role': 'user', 'content': user_message}],
@@ -1307,12 +1307,14 @@ def main():
 
         index_path = repo_root / 'index.html'
         shutil.copy2(issue_path, index_path)
+        newsletter_path = repo_root / 'newsletter.html'
+        shutil.copy2(issue_path, newsletter_path)
 
         print(f'✓ Issue {issue_number}: {title}')
         print(f'  Saved: {issue_path}')
         print(f'  Slug:  {slug}')
         print(f'  Date:  {issue_date_iso}')
-        print(f'  index.html updated')
+        print(f'  index.html + newsletter.html updated')
 
     # Write GitHub Actions outputs
     github_output = os.environ.get('GITHUB_OUTPUT', '')
