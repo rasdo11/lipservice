@@ -59,6 +59,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add preview/ issues/ issues.json index.html
+          git add issues/ issues.json index.html
+          git add preview/ 2>/dev/null || true
           git diff --cached --quiet || git commit -m "Issue ${{ steps.generate.outputs.ISSUE_NUMBER }}: ${{ steps.generate.outputs.ISSUE_TITLE }}"
           git push
