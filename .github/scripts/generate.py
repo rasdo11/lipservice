@@ -20,6 +20,7 @@ import datetime
 import json
 import os
 import re
+import shutil
 import sys
 import urllib.error
 import urllib.request
@@ -1016,7 +1017,7 @@ def create_beehiiv_post(
         'subtitle': subtitle,
         'content_html': email_html,
         'status': 'confirmed',
-        'scheduled_at': send_at_unix,
+        'scheduled_at': str(send_at_unix),
     }).encode('utf-8')
 
     url = f'https://api.beehiiv.com/v2/publications/{pub_id}/posts'
@@ -1304,10 +1305,14 @@ def main():
             encoding='utf-8',
         )
 
+        index_path = repo_root / 'index.html'
+        shutil.copy2(issue_path, index_path)
+
         print(f'✓ Issue {issue_number}: {title}')
         print(f'  Saved: {issue_path}')
         print(f'  Slug:  {slug}')
         print(f'  Date:  {issue_date_iso}')
+        print(f'  index.html updated')
 
     # Write GitHub Actions outputs
     github_output = os.environ.get('GITHUB_OUTPUT', '')

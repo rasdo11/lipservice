@@ -70,6 +70,11 @@ def main():
     )
     print(f'✓ issues.json updated (issue #{issue_number} prepended)')
 
+    # Update index.html with latest issue
+    index_path = repo_root / 'index.html'
+    shutil.copy2(dest_path, index_path)
+    print(f'✓ index.html updated')
+
     # Clean up preview files
     preview_html_path.unlink()
     meta_path.unlink()
