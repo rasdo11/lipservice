@@ -56,7 +56,7 @@ TEMPLATE = """\
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: #E8E8E4;
+    background: #FFFFFF;
     font-family: 'Outfit', sans-serif;
     font-size: 15px;
     line-height: 1.65;
@@ -313,51 +313,63 @@ TEMPLATE = """\
     color: var(--mid);
   }
 
-  /* ── ROTATION ── */
-  .rotation {
+  /* ── DEALS BOX ── */
+  .deals {
     background: var(--light);
     padding: 28px 40px;
+    text-align: center;
   }
 
-  .rotation-kicker {
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--mid);
+  .deals-icon { font-size: 28px; margin-bottom: 10px; }
+
+  .deals-hed {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
     font-weight: 400;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    color: var(--black);
+    margin-bottom: 8px;
   }
 
-  .rotation-kicker::after {
-    content: 'SPONSORED';
-    font-size: 8px;
-    letter-spacing: 2px;
-    border: 1px solid var(--rule);
-    padding: 2px 6px;
+  .deals-sub {
+    font-size: 13px;
     color: var(--mid);
-  }
-
-  .rotation-item {
-    font-size: 14px;
-    line-height: 1.7;
-    color: #444440;
     font-weight: 300;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--rule);
+    line-height: 1.6;
+    margin-bottom: 18px;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .rotation-item:first-of-type { padding-top: 0; }
-  .rotation-item:last-of-type { border-bottom: none; padding-bottom: 0; }
-  .rotation-item a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .deals-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #FFFFFF;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 12px 28px;
+    text-decoration: none;
+  }
 
-  .rotation-note {
-    margin-top: 14px;
-    font-size: 11px;
-    font-style: normal;
+  .deals-fine {
+    font-size: 10px;
     color: #AAAAAA;
+    margin-top: 12px;
+  }
+
+  /* ── PIYM IMAGE ── */
+  .piym-image {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .piym-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
   }
 
   /* ── CHEAT MEAL ── */
@@ -580,15 +592,20 @@ TEMPLATE = """\
     {{INJECTION_RELATED}}
   </div>
 
-  <!-- ROTATION 1 -->
-  <div class="rotation">
-    <div class="rotation-kicker">In Our Rotation</div>
-    {{ROTATION_1}}
-    <div class="rotation-note">Keep scrolling&hellip;more recs below</div>
+  <!-- DEALS -->
+  <div class="deals">
+    <div class="deals-icon">🎁</div>
+    <div class="deals-hed">Lip Service Deals</div>
+    <div class="deals-sub">Weekly deal codes and the chance to win a free beauty product in our monthly giveaway.</div>
+    <a href="/subscribe.html" class="deals-btn">Get the Deals</a>
+    <div class="deals-fine">Separate from this newsletter. No spam.</div>
   </div>
 
   <!-- PUT IT IN YOUR MOUTH -->
   <div class="sec">
+    <div class="piym-image">
+      <img src="https://images.unsplash.com/photo-{{PIYM_IMAGE_ID}}?w=600&auto=format&q=80" alt="{{PIYM_IMAGE_ALT}}" loading="lazy">
+    </div>
     <div class="sec-cat">
       <div class="sec-cat-label">Put It In Your Mouth</div>
       <div class="sec-cat-rule"></div>
@@ -647,13 +664,6 @@ TEMPLATE = """\
     {{CALENDAR}}
   </div>
 
-  <!-- ROTATION 2 -->
-  <div class="rotation">
-    <div class="rotation-kicker">In Our Rotation</div>
-    {{ROTATION_2}}
-    <div class="rotation-note"><em>We only feature things we&#8217;d actually use on our own face. Or inject into it.</em></div>
-  </div>
-
   <!-- LAST WORD -->
   <div class="last-word">
     <div class="lw-kicker">Last Word</div>
@@ -668,7 +678,7 @@ TEMPLATE = """\
       <div class="footer-links">
         <a href="../archive.html">Archive</a>
         <a href="../subscribe.html">Subscribe</a>
-        <a href="../unsubscribe.html">Unsubscribe</a>
+        <a href="../unsubscribe.html">Leave us</a>
       </div>
       <div class="footer-copy">Weekly &middot; Free forever &middot; &copy; 2026</div>
     </div>
@@ -680,6 +690,16 @@ TEMPLATE = """\
 """
 
 
+# Curated wellness/food image pool — cycles by issue number
+PIYM_IMAGES = [
+    {'id': '1490645935967-10de6ba17061', 'alt': 'Fresh ingredients flatlay'},
+    {'id': '1512621776951-a57ef59afbe4', 'alt': 'Colorful vegetables and superfoods'},
+    {'id': '1490818702666-4da9b4e68a6e', 'alt': 'Healthy meal prep'},
+    {'id': '1543362906-acfc16c67564', 'alt': 'Green smoothie bowl'},
+    {'id': '1498837167922-ddd27525d352', 'alt': 'Fresh produce market'},
+]
+
+
 # ---------------------------------------------------------------------------
 # Rendering helpers
 # ---------------------------------------------------------------------------
@@ -689,9 +709,16 @@ def md_bold(text: str) -> str:
     return re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
 
 
+def clean_text(text: str) -> str:
+    """Strip em dashes and Markdown horizontal-rule markers."""
+    text = re.sub(r'\s*\u2014\s*', ' ', text)  # em dash → space
+    text = re.sub(r'^[-*_]{3,}\s*$', '', text, flags=re.MULTILINE)  # --- *** ___
+    return text.strip()
+
+
 def body_to_html(text: str) -> str:
-    """Split body text into <p> tags, applying bold conversion."""
-    paragraphs = [p.strip() for p in text.strip().split('\n\n') if p.strip()]
+    """Split body text into <p> tags, applying em-dash strip and bold conversion."""
+    paragraphs = [p.strip() for p in clean_text(text).split('\n\n') if p.strip()]
     if not paragraphs:
         return ''
     return '\n'.join(f'<p>{md_bold(p)}</p>' for p in paragraphs)
@@ -701,30 +728,24 @@ def render_related(anchor_text: str, pub: str) -> str:
     """Render the Related link block. Skips pub span if empty."""
     if not anchor_text:
         return ''
-    pub_span = f' <span class="related-pub">*({pub})*</span>' if pub else ''
+    pub_span = f' <span class="related-pub">({pub})</span>' if pub else ''
     return (
         f'<div class="related">Related: '
         f'<a href="#">{anchor_text}</a>{pub_span}</div>'
     )
 
 
-def render_rotation(items: list) -> str:
-    parts = []
-    for item in items:
-        text = item.get('text', '')
-        parts.append(f'    <div class="rotation-item">{text}</div>')
-    return '\n'.join(parts)
-
-
 def render_lips_in_6(items: list) -> str:
     parts = []
     for item in items:
         emoji = item.get('emoji', '')
-        text = item.get('text', '')
+        text = md_bold(item.get('text', ''))
+        url = item.get('url', '')
+        text_html = f'<a href="{url}">{text}</a>' if url else text
         parts.append(
             f'    <div class="lip6-item">'
             f'<span class="lip6-emoji">{emoji}</span>'
-            f'<span class="lip6-text">{text}</span>'
+            f'<span class="lip6-text">{text_html}</span>'
             f'</div>'
         )
     return '\n'.join(parts)
@@ -739,9 +760,9 @@ def render_quick_hits(items: list) -> str:
         url = item.get('url')
 
         if url:
-            text_html = f'<a href="{url}">{text}</a>'
+            text_html = f'<a href="{url}">{md_bold(text)}</a>'
         else:
-            text_html = text
+            text_html = md_bold(text)
 
         if label:
             inner = f'<strong>{label}:</strong> {text_html}'
@@ -758,14 +779,18 @@ def render_quick_hits(items: list) -> str:
 
 
 def render_calendar(items: list) -> str:
+    """Render calendar items — only items with a URL are included."""
     parts = []
     for item in items:
+        url = item.get('url', '')
+        if not url:
+            continue
         emoji = item.get('emoji', '')
-        text = item.get('text', '')
+        text = md_bold(item.get('text', ''))
         parts.append(
             f'    <div class="cal-item">'
             f'<span class="cal-emoji">{emoji}</span>'
-            f'<span class="cal-text">{text}</span>'
+            f'<span class="cal-text"><a href="{url}">{text}</a></span>'
             f'</div>'
         )
     return '\n'.join(parts)
@@ -778,7 +803,7 @@ def render_opening_section(opening_note: str) -> str:
     return (
         '  <div class="opening">\n'
         '    <div class="opening-kicker">A note from the editor</div>\n'
-        f'    <div class="opening-body">{opening_note}</div>\n'
+        f'    <div class="opening-body">{md_bold(opening_note)}</div>\n'
         '  </div>\n'
     )
 
@@ -821,7 +846,7 @@ _CSS_VARS = {
 _FLEX_SELECTORS = [
     '.mast-top', '.mast-rule-row', '.sec-cat',
     '.lip6-item', '.qh-item', '.cal-item',
-    '.footer', '.rotation-kicker',
+    '.footer',
 ]
 
 
@@ -994,6 +1019,46 @@ def make_email_html(html: str) -> str:
         html, flags=re.DOTALL,
     )
 
+    # 12. .piym-image img → add email-safe inline width (object-fit not supported)
+    html = re.sub(
+        r'<div class="piym-image">\s*'
+        r'(<img [^>]+>)\s*'
+        r'</div>',
+        lambda m: (
+            '<div style="width:100%;margin-bottom:20px">'
+            + re.sub(
+                r'(<img)',
+                r'\1 width="600" style="width:100%;height:200px;display:block"',
+                m.group(1),
+            )
+            + '</div>'
+        ),
+        html,
+    )
+
+    # 13. .deals  →  email-safe centered table
+    html = re.sub(
+        r'<div class="deals">[\s\S]*?</div>\s*\n',
+        (
+            '<table width="100%" cellpadding="0" cellspacing="0" border="0"'
+            ' style="background:#F2F2EE;padding:28px 40px;text-align:center">'
+            '<tr><td align="center">'
+            '<p style="font-size:28px;margin:0 0 10px">🎁</p>'
+            '<p style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:22px;'
+            'font-weight:400;color:#0A0A0A;margin:0 0 8px">Lip Service Deals</p>'
+            '<p style="font-size:13px;color:#555550;font-weight:300;line-height:1.6;'
+            'margin:0 0 18px">Weekly deal codes and the chance to win a free beauty product '
+            'in our monthly giveaway.</p>'
+            '<a href="/subscribe.html" style="display:inline-block;background:#B8341B;'
+            'color:#FFFFFF;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;'
+            'font-weight:500;padding:12px 28px;text-decoration:none">Get the Deals</a>'
+            '<p style="font-size:10px;color:#AAAAAA;margin:12px 0 0">'
+            'Separate from this newsletter. No spam.</p>'
+            '</td></tr></table>\n'
+        ),
+        html,
+    )
+
     return html
 
 
@@ -1007,17 +1072,16 @@ def create_beehiiv_post(
     title: str,
     subtitle: str,
     email_html: str,
-    send_at_unix: int,
     issue_number: int,
     email_subject: str,
 ) -> None:
-    """Create a scheduled beehiiv post and print QC summary."""
+    """Create a Beehiiv draft post for manual review and send."""
+    subject = email_subject or title
     payload = json.dumps({
-        'title': title,
+        'title': subject,
         'subtitle': subtitle,
         'content_html': email_html,
-        'status': 'confirmed',
-        'scheduled_at': str(send_at_unix),
+        'status': 'draft',
     }).encode('utf-8')
 
     url = f'https://api.beehiiv.com/v2/publications/{pub_id}/posts'
@@ -1045,20 +1109,14 @@ def create_beehiiv_post(
 
     post_id = result.get('data', {}).get('id', 'unknown')
 
-    # Human-readable PST send time (UTC−8)
-    send_dt_utc = datetime.datetime.utcfromtimestamp(send_at_unix)
-    send_dt_pst = send_dt_utc - datetime.timedelta(hours=8)
-    send_time_str = send_dt_pst.strftime('%A, %B %-d at %-I:%M %p PST')
-
     nnn = f'{issue_number:03d}'
     print('\n' + '━' * 43)
-    print('BEEHIIV POST SCHEDULED')
+    print('BEEHIIV DRAFT CREATED')
     print('━' * 43)
     print(f'Issue:        #{nnn}')
-    print(f'Title:        {title}')
-    print(f'Subject:      {email_subject}')
-    print(f'Send time:    {send_time_str}')
+    print(f'Subject:      {subject}')
     print(f'Beehiiv URL:  https://app.beehiiv.com/posts/{post_id}')
+    print('Review in Beehiiv, then Confirm + Send when ready.')
     print('━' * 43 + '\n')
 
 
@@ -1119,10 +1177,14 @@ def main():
     client = anthropic.Anthropic(api_key=api_key)
 
     # Build user message — brief is optional
+    rules = (
+        'IMPORTANT: Never use an em dash (\u2014) anywhere. Rewrite any sentence that would need one. '
+        'Never use --- or *** or ___ as dividers.'
+    )
     if brief:
-        user_message = f'Write issue {issue_number}.\n\n{brief}'
+        user_message = f'Write issue {issue_number}.\n\n{rules}\n\n{brief}'
     else:
-        user_message = f'Write issue {issue_number}.'
+        user_message = f'Write issue {issue_number}.\n\n{rules}'
 
     print(f'Calling Claude API for issue {issue_number}...')
     response = client.messages.create(
@@ -1170,14 +1232,14 @@ def main():
     lab_related_pub = lab.get('related_pub', '')
 
     lips_in_6 = data.get('lips_in_6', [])
-    rotation_1 = data.get('rotation_1', [])
-    rotation_2 = data.get('rotation_2', [])
     quick_hits = data.get('quick_hits', [])
     calendar = data.get('on_our_calendar', [])
 
     last_word = data.get('last_word', {})
     lw_quote = last_word.get('quote', '')
     lw_attr = last_word.get('attribution', '')
+
+    piym_img = PIYM_IMAGES[issue_number % len(PIYM_IMAGES)]
 
     # Date/label helpers
     today = datetime.date.today()
@@ -1204,8 +1266,8 @@ def main():
     html = html.replace('{{INJECTION_HIGHLIGHT}}', md_bold(inj_highlight))
     html = html.replace('{{INJECTION_RELATED}}', render_related(inj_related, inj_related_pub))
 
-    html = html.replace('{{ROTATION_1}}', render_rotation(rotation_1))
-
+    html = html.replace('{{PIYM_IMAGE_ID}}', piym_img['id'])
+    html = html.replace('{{PIYM_IMAGE_ALT}}', piym_img['alt'])
     html = html.replace('{{PIYM_HEADLINE}}', piym_headline)
     html = html.replace('{{PIYM_BODY}}', body_to_html(piym_body))
     html = html.replace('{{PIYM_HIGHLIGHT}}', md_bold(piym_highlight))
@@ -1220,7 +1282,6 @@ def main():
     html = html.replace('{{LIPS_IN_6}}', render_lips_in_6(lips_in_6))
     html = html.replace('{{QUICK_HITS}}', render_quick_hits(quick_hits))
     html = html.replace('{{CALENDAR}}', render_calendar(calendar))
-    html = html.replace('{{ROTATION_2}}', render_rotation(rotation_2))
 
     html = html.replace('{{LAST_WORD_QUOTE}}', lw_quote)
     html = html.replace('{{LAST_WORD_ATTR}}', lw_attr)
@@ -1253,6 +1314,7 @@ def main():
                 pass
 
         issue_path = preview_dir / f'{slug}.html'
+        html = clean_text(html)
         issue_path.write_text(html, encoding='utf-8')
 
         meta_path.write_text(
@@ -1264,20 +1326,16 @@ def main():
         print(f'  Slug:  {slug}')
         print(f'  Date:  {issue_date_iso}')
 
-        # Build email HTML and schedule beehiiv post
+        # Build email HTML and create beehiiv draft
         email_html = make_email_html(html)
 
         if beehiiv_api_key and beehiiv_pub_id:
-            send_at_unix = int(
-                (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).timestamp()
-            )
             create_beehiiv_post(
                 api_key=beehiiv_api_key,
                 pub_id=beehiiv_pub_id,
                 title=title,
                 subtitle=email_subject or preview,
                 email_html=email_html,
-                send_at_unix=send_at_unix,
                 issue_number=issue_number,
                 email_subject=email_subject,
             )
@@ -1288,6 +1346,7 @@ def main():
         # --- IMMEDIATE MODE ---
         issues_dir.mkdir(exist_ok=True)
         issue_path = issues_dir / f'{slug}.html'
+        html = clean_text(html)
         issue_path.write_text(html, encoding='utf-8')
 
         if issues_json_path.exists():

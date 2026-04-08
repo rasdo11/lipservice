@@ -96,7 +96,7 @@ Write all six sections, in order.
 ### 4. THE LIPS IN 6
 Six bullets. Each is 1–2 sentences. Scannable, not readable — this section takes 45 seconds. Every item must be from this week. Cover the range: injectables, nutrition, products, culture, oral health, science.
 
-**Format:** `[emoji] Text. [linked anchor text if relevant.]`
+**Format:** `[emoji] Text. [linked anchor text — required for every item.]` Every bullet must include a `url` field with a real source link.
 
 Emoji guide:
 - 💉 injectable/derm · 🍽️ food/nutrition · 💄 product · 🧪 science/study
@@ -128,10 +128,7 @@ One sentence. The most interesting or provocative thing in this issue. Written l
 One quote. Attributed. Beauty, health, culture, wit — anything that fits the Lip Service voice. Goes in `quote_of_day.text` and `quote_of_day.attribution`.
 
 ### On Our Calendar
-Two to three dated items from this week or the coming week. Aesthetic events, product launches, clinical conferences, cultural moments, sales worth knowing about. Format: emoji + one sentence + optional link.
-
-### In Our Rotation (appears twice — mid-issue and near end)
-Two product or resource recommendations per slot. Written in Lip Service voice — not ad copy, not a press release. Conversational, specific, honest about why. End each slot with: `*Keep scrolling…more recs below*` (first slot) or `*We only feature things we'd actually use on our own face.*` (second slot). Mark with `sponsored` label in output.
+Two to three dated items from this week or the coming week. Aesthetic events, product launches, clinical conferences, cultural moments, sales worth knowing about. **Only include items where you have a real URL to link to. Skip any item without a link.** Format: emoji + one sentence + URL.
 
 ---
 
@@ -141,6 +138,13 @@ Every long-form section (Injection Report, Put It In Your Mouth, Lip Lab) closes
 `Related: [descriptive anchor text that tells her exactly what she'll learn](URL_PLACEHOLDER)`
 
 Write the anchor text as a full sentence or near-sentence. "Read more" is not anchor text.
+
+---
+
+## STYLE RULES
+
+- Never use an em dash (—). Rewrite any sentence that would need one.
+- Never use `---`, `***`, or `___` as dividers.
 
 ---
 
@@ -182,16 +186,12 @@ Respond with valid JSON only. No markdown. No backticks. No preamble. Exactly th
     "related_pub": "Publication name only, no formatting. e.g. NewBeauty, ACSH, NYT, Cosmetics & Toiletries"
   },
   "lips_in_6": [
-    { "emoji": "💉", "text": "Item one." },
-    { "emoji": "🍽️", "text": "Item two." },
-    { "emoji": "💄", "text": "Item three." },
-    { "emoji": "🧪", "text": "Item four." },
-    { "emoji": "🚫", "text": "Item five." },
-    { "emoji": "💋", "text": "Item six." }
-  ],
-  "rotation_1": [
-    { "text": "First rec. Conversational. Specific." },
-    { "text": "Second rec." }
+    { "emoji": "💉", "text": "1–2 sentence teaser.", "url": "https://source.com/article" },
+    { "emoji": "🍽️", "text": "1–2 sentence teaser.", "url": "https://source.com/article" },
+    { "emoji": "💄", "text": "1–2 sentence teaser.", "url": "https://source.com/article" },
+    { "emoji": "🧪", "text": "1–2 sentence teaser.", "url": "https://source.com/article" },
+    { "emoji": "🚫", "text": "1–2 sentence teaser.", "url": "https://source.com/article" },
+    { "emoji": "💋", "text": "1–2 sentence teaser.", "url": "https://source.com/article" }
   ],
   "quick_hits": [
     { "emoji": "💋", "label": "Best Kiss", "text": "Text." },
@@ -201,13 +201,8 @@ Respond with valid JSON only. No markdown. No backticks. No preamble. Exactly th
     { "emoji": "💊", "label": null, "text": "Timely item." }
   ],
   "on_our_calendar": [
-    { "emoji": "🗓️", "text": "Item one." },
-    { "emoji": "🗓️", "text": "Item two." },
-    { "emoji": "🗓️", "text": "Item three." }
-  ],
-  "rotation_2": [
-    { "text": "First rec." },
-    { "text": "Second rec." }
+    { "emoji": "🗓️", "text": "Item one.", "url": "https://..." },
+    { "emoji": "🗓️", "text": "Item two.", "url": "https://..." }
   ],
   "last_word": {
     "quote": "The quote.",
