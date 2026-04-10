@@ -47,8 +47,9 @@ jobs:
         id: generate
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          BEEHIIV_API_KEY: ${{ secrets.BEEHIIV_API_KEY }}
-          BEEHIIV_PUBLICATION_ID: ${{ secrets.BEEHIIV_PUBLICATION_ID }}
+          MAILERLITE_API_KEY: ${{ secrets.MAILERLITE_API_KEY }}
+          MAILERLITE_FROM_NAME: ${{ secrets.MAILERLITE_FROM_NAME }}
+          MAILERLITE_FROM_EMAIL: ${{ secrets.MAILERLITE_FROM_EMAIL }}
           ISSUE_NUMBER: ${{ inputs.issue_number }}
           BRIEF: ${{ inputs.brief }}
           # Scheduled runs always use preview mode; manual runs default to immediate

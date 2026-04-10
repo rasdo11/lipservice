@@ -10,10 +10,11 @@ Optional env vars:
   ISSUE_NUMBER            — Issue number (auto-detects if blank)
   BRIEF                   — Editorial brief (generates freely if blank)
   MODE                    — 'preview' or 'immediate' (default: immediate)
-                            preview  → save to preview/, schedule beehiiv post
+                            preview  → save to preview/, create MailerLite draft
                             immediate → save to issues/, update issues.json now
-  BEEHIIV_API_KEY         — Required for preview mode email scheduling
-  BEEHIIV_PUBLICATION_ID  — Required for preview mode email scheduling
+  MAILERLITE_API_KEY      — Required for preview mode MailerLite draft creation
+  MAILERLITE_FROM_NAME    — Sender display name (default: Lip Service)
+  MAILERLITE_FROM_EMAIL   — Sender email address (must be verified in MailerLite)
 """
 
 import datetime
@@ -870,7 +871,7 @@ def _fix_style_block(match: re.Match) -> str:
 
 
 def make_email_html(html: str) -> str:
-    """Convert web HTML to email-safe HTML (for beehiiv / Gmail compatibility)."""
+    """Convert web HTML to email-safe HTML (for MailerLite / Gmail compatibility)."""
 
     # 1. Replace CSS custom properties
     for var, value in _CSS_VARS.items():
@@ -1063,30 +1064,44 @@ def make_email_html(html: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Beehiiv API
+# MailerLite API
 # ---------------------------------------------------------------------------
 
-def create_beehiiv_post(
+def _save_email_fallback(email_html: str, path: Path) -> None:
+    """Save email HTML to a local file when the API call fails."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(email_html, encoding='utf-8')
+    print(f'📄 Email HTML saved locally as fallback: {path}', file=sys.stderr)
+
+
+def create_mailerlite_campaign(
     api_key: str,
-    pub_id: str,
+    from_name: str,
+    from_email: str,
     title: str,
-    subtitle: str,
+    email_subject: str,
     email_html: str,
     issue_number: int,
-    email_subject: str,
+    fallback_path: Path,
 ) -> None:
-    """Create a Beehiiv draft post for manual review and send."""
+    """Create a MailerLite draft campaign for manual review and send."""
     subject = email_subject or title
+    nnn = f'{issue_number:03d}'
+    campaign_name = f'Lip Service #{nnn} \u2014 {title}'
+
     payload = json.dumps({
-        'title': subject,
-        'subtitle': subtitle,
-        'content_html': email_html,
-        'status': 'draft',
+        'name': campaign_name,
+        'type': 'regular',
+        'emails': [{
+            'subject': subject,
+            'from_name': from_name,
+            'from': from_email,
+            'content': email_html,
+        }],
     }).encode('utf-8')
 
-    url = f'https://api.beehiiv.com/v2/publications/{pub_id}/posts'
     req = urllib.request.Request(
-        url,
+        'https://connect.mailerlite.com/api/campaigns',
         data=payload,
         method='POST',
         headers={
@@ -1101,23 +1116,24 @@ def create_beehiiv_post(
             result = json.loads(resp.read().decode('utf-8'))
     except urllib.error.HTTPError as e:
         body = e.read().decode('utf-8', errors='replace')
-        print(f'⚠️  BEEHIIV WARNING: HTTP {e.code} — {body[:400]}', file=sys.stderr)
+        print(f'⚠️  MAILERLITE WARNING: HTTP {e.code} — {body[:400]}', file=sys.stderr)
+        _save_email_fallback(email_html, fallback_path)
         return
     except urllib.error.URLError as e:
-        print(f'⚠️  BEEHIIV WARNING: {e.reason}', file=sys.stderr)
+        print(f'⚠️  MAILERLITE WARNING: {e.reason}', file=sys.stderr)
+        _save_email_fallback(email_html, fallback_path)
         return
 
-    post_id = result.get('data', {}).get('id', 'unknown')
+    campaign_id = result.get('data', {}).get('id', 'unknown')
 
-    nnn = f'{issue_number:03d}'
-    print('\n' + '━' * 43)
-    print('BEEHIIV DRAFT CREATED')
-    print('━' * 43)
-    print(f'Issue:        #{nnn}')
-    print(f'Subject:      {subject}')
-    print(f'Beehiiv URL:  https://app.beehiiv.com/posts/{post_id}')
-    print('Review in Beehiiv, then Confirm + Send when ready.')
-    print('━' * 43 + '\n')
+    print('\n' + '━' * 50)
+    print('MAILERLITE DRAFT CREATED')
+    print('━' * 50)
+    print(f'Issue:    #{nnn}')
+    print(f'Subject:  {subject}')
+    print(f'Edit URL: https://dashboard.mailerlite.com/campaigns/{campaign_id}/edit')
+    print('Review in MailerLite, then Send when ready.')
+    print('━' * 50 + '\n')
 
 
 # ---------------------------------------------------------------------------
@@ -1130,8 +1146,9 @@ def main():
     issue_number_str = os.environ.get('ISSUE_NUMBER', '').strip()
     brief = os.environ.get('BRIEF', '').strip()
     mode = os.environ.get('MODE', 'immediate').strip().lower()
-    beehiiv_api_key = os.environ.get('BEEHIIV_API_KEY', '').strip()
-    beehiiv_pub_id = os.environ.get('BEEHIIV_PUBLICATION_ID', '').strip()
+    mailerlite_api_key = os.environ.get('MAILERLITE_API_KEY', '').strip()
+    mailerlite_from_name = os.environ.get('MAILERLITE_FROM_NAME', 'Lip Service').strip()
+    mailerlite_from_email = os.environ.get('MAILERLITE_FROM_EMAIL', '').strip()
 
     if mode not in ('preview', 'immediate'):
         print(f'ERROR: MODE must be "preview" or "immediate", got: {mode}', file=sys.stderr)
@@ -1326,21 +1343,24 @@ def main():
         print(f'  Slug:  {slug}')
         print(f'  Date:  {issue_date_iso}')
 
-        # Build email HTML and create beehiiv draft
+        # Build email HTML and create MailerLite draft campaign
         email_html = make_email_html(html)
+        fallback_path = issue_path.parent / f'{slug}-email.html'
 
-        if beehiiv_api_key and beehiiv_pub_id:
-            create_beehiiv_post(
-                api_key=beehiiv_api_key,
-                pub_id=beehiiv_pub_id,
+        if mailerlite_api_key and mailerlite_from_email:
+            create_mailerlite_campaign(
+                api_key=mailerlite_api_key,
+                from_name=mailerlite_from_name,
+                from_email=mailerlite_from_email,
                 title=title,
-                subtitle=email_subject or preview,
+                email_subject=email_subject,
                 email_html=email_html,
                 issue_number=issue_number,
-                email_subject=email_subject,
+                fallback_path=fallback_path,
             )
         else:
-            print('ℹ️  BEEHIIV_API_KEY / BEEHIIV_PUBLICATION_ID not set — skipping beehiiv.')
+            print('ℹ️  MAILERLITE_API_KEY / MAILERLITE_FROM_EMAIL not set — skipping MailerLite.')
+            _save_email_fallback(email_html, fallback_path)
 
     else:
         # --- IMMEDIATE MODE ---
