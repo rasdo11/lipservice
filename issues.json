@@ -1,5 +1,14 @@
 [
   {
+    "issue": 96,
+    "date": "2026-04-25",
+    "title": "Your Injector Has a Wait List and a Podcast Now",
+    "preview": "Allergan's loyalty app just leaked your purchase history, a high-dose omega-3 trial is rewriting the collagen conversation, and the lip gloss that outsold every prestige SKU in Q1 just got reformulated.",
+    "email_subject": "allergan leaked your botox receipts",
+    "slug": "issue-096",
+    "url": "./issues/issue-096.html"
+  },
+  {
     "issue": 95,
     "date": "2026-04-21",
     "title": "Your Ozempic Face Has a New Fix",
