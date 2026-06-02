@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lip Service — Your Ozempic Face Has a New Fix</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A0A;
+    --white: #FFFFFF;
+    --paper: #FAFAF8;
+    --accent: #B8341B;
+    --accent2: #1B4B8A;
+    --mid: #555550;
+    --rule: #DDDDD8;
+    --light: #F2F2EE;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #E8E8E4;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--black);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .shell {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--white);
+  }
+
+  /* ── MASTHEAD ── */
+  .mast {
+    padding: 40px 40px 0;
+    border-bottom: 1px solid var(--black);
+  }
+
+  .mast-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 20px;
+  }
+
+  .mast-eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 400;
+  }
+
+  .mast-meta {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 400;
+  }
+
+  .mast-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    letter-spacing: -3px;
+    line-height: 0.9;
+    color: var(--black);
+    margin-bottom: 16px;
+    font-style: normal;
+  }
+
+  .mast-logo em {
+    font-style: normal;
+    font-weight: 300;
+  }
+
+  .mast-rule-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 0;
+  }
+
+  .mast-tagline {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 400;
+    padding: 12px 0;
+    flex: 1;
+  }
+
+  .mast-issue {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    color: var(--mid);
+    padding: 12px 0;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+
+  /* ── BUT FIRST ── */
+  .but-first {
+    background: var(--accent);
+    padding: 16px 40px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    font-weight: 300;
+    letter-spacing: 0.2px;
+  }
+
+  .but-first strong {
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.5px;
+    margin-right: 6px;
+  }
+
+  /* ── OPENING NOTE ── */
+  .opening {
+    padding: 32px 40px 32px;
+  }
+
+  .opening-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.6;
+    color: var(--black);
+    margin-bottom: 14px;
+  }
+
+  .opening-kicker {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .opening-sig {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* ── QUOTE OF DAY ── */
+  .qotd {
+    background: var(--light);
+    padding: 24px 40px;
+    border-bottom: 1px solid var(--black);
+  }
+
+  .qotd-kicker {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .qotd-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    color: var(--black);
+    line-height: 1.45;
+    margin-bottom: 8px;
+  }
+
+  .qotd-attr {
+    font-size: 12px;
+    color: var(--mid);
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  /* ── SECTIONS ── */
+  .sec {
+    padding: 36px 40px;
+  }
+
+  .sec-cat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .sec-cat-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  .sec-cat-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .sec-hed {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    color: var(--black);
+    margin-bottom: 18px;
+  }
+
+  .sec-hed em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .body {
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: #333330;
+    font-weight: 300;
+  }
+
+  .body p { margin-bottom: 12px; }
+  .body p:last-child { margin-bottom: 0; }
+
+  .body strong {
+    font-weight: 500;
+    color: var(--black);
+  }
+
+  .callout {
+    border-top: 2px solid var(--black);
+    padding: 16px 0;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--black);
+  }
+
+  .related {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--mid);
+    font-weight: 300;
+  }
+
+  .related a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
+  }
+
+  .related-pub {
+    font-style: normal;
+    color: var(--mid);
+  }
+
+  /* ── ROTATION ── */
+  .rotation {
+    background: var(--light);
+    padding: 28px 40px;
+  }
+
+  .rotation-kicker {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 400;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .rotation-kicker::after {
+    content: 'SPONSORED';
+    font-size: 8px;
+    letter-spacing: 2px;
+    border: 1px solid var(--rule);
+    padding: 2px 6px;
+    color: var(--mid);
+  }
+
+  .rotation-item {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #444440;
+    font-weight: 300;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .rotation-item:first-of-type { padding-top: 0; }
+  .rotation-item:last-of-type { border-bottom: none; padding-bottom: 0; }
+  .rotation-item a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  .rotation-note {
+    margin-top: 14px;
+    font-size: 11px;
+    font-style: normal;
+    color: #AAAAAA;
+  }
+
+  /* ── CHEAT MEAL ── */
+  .cheat {
+    margin: 18px 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--accent);
+    background: rgba(184,52,27,0.04);
+  }
+
+  .cheat-kicker {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .cheat-text {
+    font-size: 14px;
+    color: #333330;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── LIPS IN 6 ── */
+  .lip6-item {
+    display: flex;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+
+  .lip6-item:first-child { padding-top: 0; }
+  .lip6-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .lip6-emoji { font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+
+  .lip6-text {
+    font-size: 14px;
+    color: #333330;
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  .lip6-text a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ── QUICK HITS ── */
+  .qh-item {
+    display: flex;
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+
+  .qh-item:first-child { padding-top: 0; }
+  .qh-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .qh-emoji { font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+
+  .qh-text {
+    font-size: 14.5px;
+    color: #333330;
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  .qh-text strong { font-weight: 500; color: var(--black); }
+  .qh-text a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ── CALENDAR ── */
+  .cal-item {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+
+  .cal-item:first-child { padding-top: 0; }
+  .cal-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .cal-emoji { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+  .cal-text { font-size: 14px; color: #333330; font-weight: 300; line-height: 1.6; }
+  .cal-text a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  .cal-intro {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-style: normal;
+    color: var(--mid);
+    margin-bottom: 14px;
+    font-weight: 400;
+  }
+
+  /* ── LAST WORD ── */
+  .last-word {
+    padding: 40px 40px;
+    background: var(--black);
+    border-top: 3px solid var(--accent);
+  }
+
+  .lw-kicker {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .lw-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--white);
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+
+  .lw-attr {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 300;
+    font-style: normal;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--paper);
+    border-top: 1px solid var(--black);
+    padding: 28px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--black);
+  }
+
+  .footer-right {
+    text-align: right;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    margin-bottom: 6px;
+  }
+
+  .footer-links a {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+  }
+
+  .footer-copy {
+    font-size: 10px;
+    color: #AAAAAA;
+  }
+
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- MASTHEAD -->
+  <div class="mast">
+    <div class="mast-top">
+      <div class="mast-eyebrow">Health &amp; Beauty · Est. 2020</div>
+      <div class="mast-meta">Issue No. 105 · Tuesday</div>
+    </div>
+    <div class="mast-logo">Lip Service</div>
+    <div class="mast-rule-row">
+      <div class="mast-tagline">Everything that touches your lips</div>
+      <div class="mast-issue">June 2, 2026</div>
+    </div>
+  </div>
+
+  <!-- BUT FIRST -->
+  <div class="but-first">
+    <strong>But first:</strong> Sculptra is quietly becoming the Ozempic-face antidote your derm won't shut up about — and the data finally backs the hype.
+  </div>
+
+  <!-- OPENING NOTE -->
+  <div class="opening">
+    <div class="opening-kicker">A note from the editor</div>
+    <div class="opening-body">I spent forty minutes this week reading a Reddit thread where women were rating their injectors the way sommeliers rate Burgundy — by hand pressure, needle gauge preference, and whether they play Sade in the treatment room. I have never felt more seen. Anyway, this week's issue has real news: your GLP-1 glow-up just got a clinical co-sign, cocoa is doing cardio's job, and there's a lip oil ingredient you should Google immediately.</div>
+  </div>
+
+
+  <!-- QUOTE OF DAY -->
+  <div class="qotd">
+    <div class="qotd-kicker">Quote of the Day</div>
+    <div class="qotd-text">&#8220;Beauty is the promise of happiness.&#8221;</div>
+    <div class="qotd-attr">— Stendhal, 1822. Still holding up.</div>
+  </div>
+
+  <!-- INJECTION REPORT -->
+  <div class="sec">
+    <div class="sec-cat">
+      <div class="sec-cat-label">The Injection Report</div>
+      <div class="sec-cat-rule"></div>
+    </div>
+    <div class="sec-hed">Sculptra Gets Its Ozempic-Face Moment</div>
+    <div class="body">
+      <p><strong>What's going on:</strong> Galderma published new 24-month data this week showing poly-L-lactic acid (Sculptra) restores mid-face volume loss with a 92% patient satisfaction rate at two years — and the company is explicitly marketing the results toward GLP-1-related facial fat loss. Dermatologists at the AACS meeting in Orlando reported a 40% increase in Sculptra consultations tied directly to semaglutide patients.</p>
+<p><strong>What it means:</strong> Unlike HA fillers that add volume day-of, Sculptra stimulates your own collagen over 3–6 months, which makes it a better match for the diffuse, gradual hollowing GLP-1s cause. It's not replacing what's lost — it's rebuilding the scaffolding. Two to three vials per session, two to three sessions, and you're looking at results that outlast most filler by a year.</p>
+<p><strong>What's next:</strong> If you're on a GLP-1 and noticing temple or cheek deflation, ask your injector about biostimulators before reaching for Voluma. The timing matters — starting Sculptra early in your weight-loss arc gets better results than trying to backfill after the fact.</p>
+    </div>
+    <div class="callout">Ask your injector: 'Am I a better candidate for a biostimulator or a traditional HA filler given my rate of volume loss?' That one question separates a good plan from an expensive bandaid.</div>
+    <div class="related">Related: <a href="#">How poly-L-lactic acid compares to hyaluronic acid fillers for GLP-1-related facial volume loss</a> <span class="related-pub">*(NewBeauty)*</span></div>
+  </div>
+
+  <!-- ROTATION 1 -->
+  <div class="rotation">
+    <div class="rotation-kicker">In Our Rotation</div>
+        <div class="rotation-item">We've been using the SkinCeuticals HA Intensifier Multi-Glycan as a lip-area serum for three weeks and the perioral lines are noticeably softer. It's not cheap ($120) but the multi-weight HA approach actually delivers where single-weight serums fall flat. Apply before your lip balm, not after.</div>
+    <div class="rotation-item">If you haven't tried Cocofloss yet, this is your sign. The woven texture actually grabs debris instead of sliding past it, and the flavors (coconut, strawberry, mint) make flossing the one part of your routine you don't dread. Oral health is lip health — we say it every week because it's true.</div>
+    <div class="rotation-note">Keep scrolling&hellip;more recs below</div>
+  </div>
+
+  <!-- PUT IT IN YOUR MOUTH -->
+  <div class="sec">
+    <div class="sec-cat">
+      <div class="sec-cat-label">Put It In Your Mouth</div>
+      <div class="sec-cat-rule"></div>
+    </div>
+    <div class="sec-hed">Cocoa Just Got a Cardiology Co-Sign</div>
+    <div class="body">
+      <p><strong>What's going on:</strong> Results from the COSMOS follow-up published this week in the American Journal of Clinical Nutrition confirmed that 500mg/day of cocoa flavanols reduced cardiovascular events by 15% over a 5-year period — and the subgroup analysis showed the strongest benefit in women over 40 with low baseline fruit intake. This is the largest flavanol RCT ever completed.</p>
+<p><strong>What that means:</strong> Flavanols improve endothelial function, which is a fancy way of saying they help your blood vessels relax. That's circulation to your skin, your brain, and everything else you care about. The dose is specific: 500mg flavanols, not "dark chocolate." A standard bar gets you maybe 40mg. You need a supplement or pure cocoa powder.</p>
+<p><strong>This week's cheat meal:</strong> A double-thick frozen hot chocolate from Jacques Torres in NYC — or your own version with two tablespoons of Dutch-process cocoa, oat milk, and a stupid amount of whipped cream. It's 90°F outside and I don't care.</p>
+<p><strong>What to cut:</strong> Those "beauty chocolate" bars marketing 80% cacao as a flavanol source — the processing destroys most of it. Check for actual flavanol content on the label or skip it.</p>
+    </div>
+    <div class="cheat">
+      <div class="cheat-kicker">This Week&#8217;s Cheat Meal</div>
+      <div class="cheat-text">Double frozen hot chocolate — Jacques Torres style. Dutch-process cocoa, oat milk, ice, blender, obscene whipped cream. Flavanols and serotonin in one glass.</div>
+    </div>
+    <div class="callout">The dose that moved the needle in COSMOS: 500mg cocoa flavanols daily. CocoaVia is the supplement the trial actually used. Not sponsored — just the fact.</div>
+    <div class="related">Related: <a href="#">The full COSMOS cocoa flavanol trial results and what the 5-year cardiovascular data actually showed</a> <span class="related-pub">*(American Journal of Clinical Nutrition)*</span></div>
+  </div>
+
+  <!-- LIP LAB -->
+  <div class="sec">
+    <div class="sec-cat">
+      <div class="sec-cat-label">Lip Lab</div>
+      <div class="sec-cat-rule"></div>
+    </div>
+    <div class="sec-hed">That Lip Oil Might Be an Endocrine Disruptor</div>
+    <div class="body">
+      <p><strong>What's going on:</strong> A new Environmental Health Perspectives study out this week tested 48 popular lip oils and glosses and found that 31 of them contained lavender or tea tree oil derivatives at concentrations linked to estrogenic and anti-androgenic activity in cell assays. Several products from Dior, Clarins, and a cult K-beauty brand were flagged.</p>
+<p><strong>Why it matters:</strong> You reapply lip products 5–14 times a day and ingest a significant portion. Lavender oil has been linked to prepubertal gynecomastia in prior case studies — the dose-on-lips-all-day exposure model hasn't been studied yet, but the endocrine disruption signal is real at these concentrations.</p>
+<p><strong>The verdict:</strong> Check your lip oil ingredient list for lavandula angustifolia or melaleuca alternifolia. If it's in the top ten ingredients, consider swapping. The Tower 28 ShineOn and Merit Shade Slick lines are both free of both — and the formulas actually perform.</p>
+    </div>
+    <div class="callout">Quick label check: if lavandula angustifolia (lavender) or melaleuca alternifolia (tea tree) appears in the first ten ingredients of your lip oil, that's a meaningful exposure given reapplication frequency.</div>
+    <div class="related">Related: <a href="#">Which lip oils tested positive for estrogenic activity and what concentrations were flagged</a> <span class="related-pub">*(Environmental Health Perspectives)*</span></div>
+  </div>
+
+  <!-- LIPS IN 6 -->
+  <div class="sec">
+    <div class="sec-cat">
+      <div class="sec-cat-label">The Lips in 6</div>
+      <div class="sec-cat-rule"></div>
+    </div>
+        <div class="lip6-item"><span class="lip6-emoji">💉</span><span class="lip6-text">Allergan filed a new FDA application this week for a longer-lasting Botox formulation rumored to hit 5–6 months of efficacy. Approval timeline: late 2026 at earliest.</span></div>
+    <div class="lip6-item"><span class="lip6-emoji">🍽️</span><span class="lip6-text">A Tufts meta-analysis published Monday found that collagen peptide supplements (10g/day for 12+ weeks) improved skin hydration in 7 of 9 RCTs — but had zero effect on wrinkle depth. Manage expectations accordingly.</span></div>
+    <div class="lip6-item"><span class="lip6-emoji">💄</span><span class="lip6-text">Rhode just dropped a tinted version of the Peptide Lip Treatment in six shades. Early reviews say the formula is slightly less occlusive than the original — worth testing before you commit.</span></div>
+    <div class="lip6-item"><span class="lip6-emoji">🧪</span><span class="lip6-text">MIT researchers published a paper Wednesday on a microneedle patch that delivers hyaluronic acid transdermally to lip tissue with 3x the penetration of topical application. Still pre-clinical, but the lip filler alternative pipeline is heating up.</span></div>
+    <div class="lip6-item"><span class="lip6-emoji">🚫</span><span class="lip6-text">The EU's SCCS issued a preliminary opinion this week recommending a ban on lilial (butylphenyl methylpropional) in all lip-contact cosmetics. Check older lipstick formulas — several legacy shades still contain it.</span></div>
+    <div class="lip6-item"><span class="lip6-emoji">💋</span><span class="lip6-text">A viral TikTok of Pedro Pascal applying cherry ChapStick mid-interview has 22 million views and counting. Representation matters.</span></div>
+  </div>
+
+  <!-- QUICK HITS -->
+  <div class="sec">
+    <div class="sec-cat">
+      <div class="sec-cat-label">Quick Hits</div>
+      <div class="sec-cat-rule"></div>
+    </div>
+        <div class="qh-item"><span class="qh-emoji">💋</span><span class="qh-text"><strong>Best Kiss:</strong> Kiehl's reformulated Butterstick Lip Treatment dropped this week with added squalane and no more synthetic fragrance. The balm-to-gloss finish is the best they've ever done — and SPF 30 actually tested at SPF 30 in independent lab results posted by the brand.</span></div>
+    <div class="qh-item"><span class="qh-emoji">🚫</span><span class="qh-text"><strong>Keep It Out:</strong> Activated charcoal toothpaste. A systematic review in the British Dental Journal this week confirmed it's more abrasive than standard whitening pastes with no superior stain removal — and it's stripping enamel over time. Swap it out.</span></div>
+    <div class="qh-item"><span class="qh-emoji">😂</span><span class="qh-text"><strong>Healthy Tears:</strong> <a href="https://www.tiktok.com/@goldenglowpup">A golden retriever getting a full Korean skincare routine set to Enya — the 7-step double cleanse we all deserve.</a></span></div>
+    <div class="qh-item"><span class="qh-emoji">🧪</span><span class="qh-text">Stanford published a preprint this week showing that intermittent fasting (16:8) had no measurable impact on skin aging biomarkers over 12 months compared to caloric restriction alone. If you're doing it for your skin, the evidence isn't there.</span></div>
+    <div class="qh-item"><span class="qh-emoji">💊</span><span class="qh-text">Seed's DS-01 probiotic just released a small RCT (n=64) showing improved skin clarity scores at 8 weeks. Promising but underpowered — we'd wait for the larger trial before switching your stack.</span></div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="sec">
+    <div class="sec-cat">
+      <div class="sec-cat-label">On Our Calendar</div>
+      <div class="sec-cat-rule"></div>
+    </div>
+    <div class="cal-intro">A few things worth knowing this week&hellip;</div>
+        <div class="cal-item"><span class="cal-emoji">🗓️</span><span class="cal-text">July 17–19: Summer Skin Summit in Scottsdale — the aesthetic derm conference where next year's filler trends get previewed. We'll be reporting back.</span></div>
+    <div class="cal-item"><span class="cal-emoji">🗓️</span><span class="cal-text">July 18: Sephora's summer sale starts for Rouge members. The Tower 28 and Merit lines we recommended above will both be 15% off.</span></div>
+    <div class="cal-item"><span class="cal-emoji">🗓️</span><span class="cal-text">July 20: National Lip Gloss Day. Yes, it's a real thing. No, we didn't make it up. Ulta is doing BOGO on select lip products.</span></div>
+  </div>
+
+  <!-- ROTATION 2 -->
+  <div class="rotation">
+    <div class="rotation-kicker">In Our Rotation</div>
+        <div class="rotation-item">The Supergoop Lipscreen SPF 40 is the only dedicated lip sunscreen we've found that doesn't pill under lipstick. Sheer, non-greasy, and it plays well with everything from matte liquids to glosses. Reapply every two hours — yes, even under your mask of lip oil.</div>
+    <div class="rotation-item">We keep a tin of Smith's Rosebud Salve on every surface of our apartment like a psychopath and we're not apologizing. The original formula (cottonseed oil, beeswax, rosebud extract) hasn't changed since 1892 and it still outperforms products that cost five times as much. $8. Done.</div>
+    <div class="rotation-note"><em>We only feature things we&#8217;d actually use on our own face. Or inject into it.</em></div>
+  </div>
+
+  <!-- LAST WORD -->
+  <div class="last-word">
+    <div class="lw-kicker">Last Word</div>
+    <div class="lw-quote">&#8220;I'm not high-maintenance. I'm correctly maintained.&#8221;</div>
+    <div class="lw-attr">— Tabitha Brown, in an interview this week about her new beauty line. We're getting it tattooed.</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Lip Service</div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="../archive.html">Archive</a>
+        <a href="../subscribe.html">Subscribe</a>
+        <a href="../unsubscribe.html">Unsubscribe</a>
+      </div>
+      <div class="footer-copy">Weekly &middot; Free forever &middot; &copy; 2026</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
