@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lip Service — Your Filler Might Be Funding a Cartel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A0A;
+    --white: #FFFFFF;
+    --paper: #FAFAF8;
+    --accent: #B8341B;
+    --accent2: #1B4B8A;
+    --mid: #555550;
+    --rule: #DDDDD8;
+    --light: #F2F2EE;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #E8E8E4;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--black);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .shell {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--white);
+  }
+
+  /* ── MASTHEAD ── */
+  .mast {
+    padding: 40px 40px 0;
+    border-bottom: 1px solid var(--black);
+  }
+
+  .mast-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 20px;
+  }
+
+  .mast-eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 400;
+  }
+
+  .mast-meta {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 400;
+  }
+
+  .mast-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    letter-spacing: -3px;
+    line-height: 0.9;
+    color: var(--black);
+    margin-bottom: 16px;
+    font-style: normal;
+  }
+
+  .mast-logo em {
+    font-style: normal;
+    font-weight: 300;
+  }
+
+  .mast-rule-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 0;
+  }
+
+  .mast-tagline {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 400;
+    padding: 12px 0;
+    flex: 1;
+  }
+
+  .mast-issue {
+    font-family: 'Outfit', sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    color: var(--mid);
+    padding: 12px 0;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+
+  /* ── BUT FIRST ── */
+  .but-first {
+    background: var(--accent);
+    padding: 16px 40px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    font-weight: 300;
+    letter-spacing: 0.2px;
+  }
+
+  .but-first strong {
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.5px;
+    margin-right: 6px;
+  }
+
+  /* ── OPENING NOTE ── */
+  .opening {
+    padding: 32px 40px 32px;
+  }
+
+  .opening-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.6;
+    color: var(--black);
+    margin-bottom: 14px;
+  }
+
+  .opening-kicker {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .opening-sig {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  /* ── QUOTE OF DAY ── */
+  .qotd {
+    background: var(--light);
+    padding: 24px 40px;
+    border-bottom: 1px solid var(--black);
+  }
+
+  .qotd-kicker {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .qotd-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 500;
+    color: var(--black);
+    line-height: 1.45;
+    margin-bottom: 8px;
+  }
+
+  .qotd-attr {
+    font-size: 12px;
+    color: var(--mid);
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  /* ── SECTIONS ── */
+  .sec {
+    padding: 36px 40px;
+  }
+
+  .sec-cat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .sec-cat-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  .sec-cat-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .sec-hed {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    color: var(--black);
+    margin-bottom: 18px;
+  }
+
+  .sec-hed em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .body {
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: #333330;
+    font-weight: 300;
+  }
+
+  .body p { margin-bottom: 12px; }
+  .body p:last-child { margin-bottom: 0; }
+
+  .body strong {
+    font-weight: 500;
+    color: var(--black);
+  }
+
+  .callout {
+    border-top: 2px solid var(--black);
+    padding: 16px 0;
+    margin: 20px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--black);
+  }
+
+  .related {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--mid);
+    font-weight: 300;
+  }
+
+  .related a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
+  }
+
+  .related-pub {
+    font-style: normal;
+    color: var(--mid);
+  }
+
+  /* ── ROTATION ── */
+  .rotation {
+    background: var(--light);
+    padding: 28px 40px;
+  }
+
+  .rotation-kicker {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 400;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .rotation-kicker::after {
+    content: 'SPONSORED';
+    font-size: 8px;
+    letter-spacing: 2px;
+    border: 1px solid var(--rule);
+    padding: 2px 6px;
+    color: var(--mid);
+  }
+
+  .rotation-item {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #444440;
+    font-weight: 300;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .rotation-item:first-of-type { padding-top: 0; }
+  .rotation-item:last-of-type { border-bottom: none; padding-bottom: 0; }
+  .rotation-item a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  .rotation-note {
+    margin-top: 14px;
+    font-size: 11px;
+    font-style: normal;
+    color: #AAAAAA;
+  }
+
+  /* ── CHEAT MEAL ── */
+  .cheat {
+    margin: 18px 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--accent);
+    background: rgba(184,52,27,0.04);
+  }
+
+  .cheat-kicker {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .cheat-text {
+    font-size: 14px;
+    color: #333330;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── LIPS IN 6 ── */
+  .lip6-item {
+    display: flex;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+
+  .lip6-item:first-child { padding-top: 0; }
+  .lip6-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .lip6-emoji { font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+
+  .lip6-text {
+    font-size: 14px;
+    color: #333330;
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  .lip6-text a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ── QUICK HITS ── */
+  .qh-item {
+    display: flex;
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+
+  .qh-item:first-child { padding-top: 0; }
+  .qh-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .qh-emoji { font-size: 15px; flex-shrink: 0; margin-top: 2px; }
+
+  .qh-text {
+    font-size: 14.5px;
+    color: #333330;
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  .qh-text strong { font-weight: 500; color: var(--black); }
+  .qh-text a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ── CALENDAR ── */
+  .cal-item {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+
+  .cal-item:first-child { padding-top: 0; }
+  .cal-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .cal-emoji { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+  .cal-text { font-size: 14px; color: #333330; font-weight: 300; line-height: 1.6; }
+  .cal-text a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  .cal-intro {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-style: normal;
+    color: var(--mid);
+    margin-bottom: 14px;
+    font-weight: 400;
+  }
+
+  /* ── LAST WORD ── */
+  .last-word {
+    padding: 40px 40px;
+    background: var(--black);
+    border-top: 3px solid var(--accent);
+  }
+
+  .lw-kicker {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .lw-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--white);
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+
+  .lw-attr {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 300;
+    font-style: normal;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--paper);
+    border-top: 1px solid var(--black);
+    padding: 28px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--black);
+  }
+
+  .footer-right {
+    text-align: right;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    margin-bottom: 6px;
+  }
+
+  .footer-links a {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+  }
+
+  .footer-copy {
+    font-size: 10px;
+    color: #AAAAAA;
+  }
+
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- MASTHEAD -->
+  <div class="mast">
+    <div class="mast-top">
+      <div class="mast-eyebrow">Health &amp; Beauty · Est. 2020</div>
+      <div class="mast-meta">Issue No. 110 · Tuesday</div>
+    </div>
+    <div class="mast-logo">Lip Service</div>
+    <div class="mast-rule-row">
+      <div class="mast-tagline">Everything that touches your lips</div>
+      <div class="mast-issue">June 23, 2026</div>
+    </div>
+  </div>
+
+  <!-- BUT FIRST -->
+  <div class="but-first">
+    <strong>But first:</strong> U.S. Customs just published its biggest-ever counterfeit filler seizure report — and the sourcing map reads like a true-crime podcast.
+  </div>
+
+  <!-- OPENING NOTE -->
+  <div class="opening">
+    <div class="opening-kicker">A note from the editor</div>
+    <div class="opening-body">I spent Tuesday night reading a 47-page CBP enforcement bulletin about fake Juvederm and by page 12 I had texted my injector asking for lot numbers. She sent them back in four minutes, which is either very professional or very telling. Anyway — this week is wild. Let's get into it.</div>
+  </div>
+
+
+  <!-- QUOTE OF DAY -->
+  <div class="qotd">
+    <div class="qotd-kicker">Quote of the Day</div>
+    <div class="qotd-text">&#8220;Beauty is the promise of happiness.&#8221;</div>
+    <div class="qotd-attr">— Stendhal, who never had to vet his injector's supply chain</div>
+  </div>
+
+  <!-- INJECTION REPORT -->
+  <div class="sec">
+    <div class="sec-cat">
+      <div class="sec-cat-label">The Injection Report</div>
+      <div class="sec-cat-rule"></div>
+    </div>
+    <div class="sec-hed">The Counterfeit Filler Pipeline Just Got Its Biggest Spotlight</div>
+    <div class="body">
+      <p><strong>What's going on:</strong> U.S. Customs and Border Protection disclosed this week that it seized over 90,000 units of counterfeit dermal fillers and neuromodulators in May alone — the largest single-month haul on record. The bulk originated from unlicensed manufacturing facilities in China and South Korea, with packaging sophisticated enough to fool even experienced buyers. Several seized lots tested positive for non-medical-grade silicone and industrial polymers.</p>
+<p><strong>What it means:</strong> This isn't a med-spa-in-a-strip-mall problem anymore. Counterfeit product is entering legitimate-looking supply chains through gray-market distributors who undercut Allergan and Galderma pricing by 40–60%. Your injector may not even know. The tell is price: if your syringe of Juvederm Voluma costs dramatically less than the ~$800 average, someone in the chain made a substitution.</p>
+<p><strong>What's next:</strong> Ask your provider two questions at your next appointment: *Where do you source your product?* and *Can I see the lot number on the box before you open it?* Any injector worth seeing will answer both without flinching.</p>
+    </div>
+    <div class="callout">Legitimate filler always comes with a traceable lot number and holographic seal. If your provider opens the syringe before you're in the room, that's your cue to ask why.</div>
+    <div class="related">Related: <a href="#">How counterfeit injectables enter the U.S. medical supply chain — and what patients can verify before treatment</a> <span class="related-pub">*(ACSH)*</span></div>
+  </div>
+
+  <!-- ROTATION 1 -->
+  <div class="rotation">
+    <div class="rotation-kicker">In Our Rotation</div>
+        <div class="rotation-item">**SkinCeuticals HA Intensifier** — We've been using this on lips as an off-label overnight treatment for three weeks. The multi-weight hyaluronic acid formula plumps without that tacky film most lip masks leave. Layer it under Aquaphor and wake up unreasonable.</div>
+    <div class="rotation-item">**Sakara Life Metabolism Super Powder** — We're not supplement people usually, but the combination of green tea extract and chromium picolinate in this one has actual RCT support for blood sugar regulation. Tastes like matcha's slightly bitter cousin. Mix into cold water, not smoothies.</div>
+    <div class="rotation-note">Keep scrolling&hellip;more recs below</div>
+  </div>
+
+  <!-- PUT IT IN YOUR MOUTH -->
+  <div class="sec">
+    <div class="sec-cat">
+      <div class="sec-cat-label">Put It In Your Mouth</div>
+      <div class="sec-cat-rule"></div>
+    </div>
+    <div class="sec-hed">Collagen Peptides Just Failed Another Skin Trial</div>
+    <div class="body">
+      <p><strong>What's going on:</strong> A randomized controlled trial published this week in *Nutrients* followed 120 women taking 10g of hydrolyzed collagen peptides daily for 12 weeks. The result: no statistically significant improvement in skin elasticity or hydration versus placebo. Gut health markers did improve modestly, but the beauty claims — the ones on every tub at Erewhon — didn't hold.</p>
+<p><strong>What that means:</strong> Your body breaks collagen peptides into amino acids before absorption. Where those aminos end up is not something a supplement can direct. The glycine and proline are useful, but you get the same aminos from bone broth, chicken skin, or a pork shoulder.</p>
+<p><strong>This week's cheat meal:</strong> The crispy pork belly bao at any dim sum spot that takes itself seriously. Collagen-rich skin, rendered fat, pickled cucumber, zero pretense about it being a wellness food.</p>
+    </div>
+    <div class="cheat">
+      <div class="cheat-kicker">This Week&#8217;s Cheat Meal</div>
+      <div class="cheat-text">Crispy pork belly bao — rendered, pickled, and more honest about its collagen content than any supplement brand.</div>
+    </div>
+    <div class="callout">If you like your collagen powder in smoothies, keep using it — it's a fine protein source. Just stop expecting it to act like a topical from the inside.</div>
+    <div class="related">Related: <a href="#">The full RCT on oral collagen peptides and skin outcomes — what the data actually showed across 12 weeks</a> <span class="related-pub">*(Nutrients)*</span></div>
+  </div>
+
+  <!-- LIP LAB -->
+  <div class="sec">
+    <div class="sec-cat">
+      <div class="sec-cat-label">Lip Lab</div>
+      <div class="sec-cat-rule"></div>
+    </div>
+    <div class="sec-hed">Dior Lip Oil Got a Quiet Reformulation and Reddit Noticed First</div>
+    <div class="body">
+      <p><strong>What's going on:</strong> Dior Addict Lip Glow Oil — the $40 lip oil that launched a thousand dupes — has been quietly reformulated. Batch codes from May 2025 show a revised INCI list that swaps cherry oil for a synthetic emollient blend and drops the pH-reactive color technology down the ingredient list. Users on r/MakeupAddiction flagged the change before any beauty editor did.</p>
+<p><strong>Why it matters:</strong> The original's cult status was built on that color-shift mechanic and the fruit-oil base. The new formula feels thinner on application and the color payoff skews more uniform — which some will prefer, but it's functionally a different product wearing the same name.</p>
+<p><strong>The verdict:</strong> If you loved the original, the reformulation is a lateral move at best. The finish is glossier but less balm-like, and the shade range now leans cooler. Stockpile old batches if you spot them, or pivot to the Rare Beauty Soft Pinch Tinted Lip Oil, which is doing what the old Dior used to.</p>
+    </div>
+    <div class="callout">Check the batch code on the bottom of your Dior Lip Glow Oil — codes starting with 5A are the new formula. Anything starting with 4 is the original.</div>
+    <div class="related">Related: <a href="#">Side-by-side ingredient comparison of the old and new Dior Addict Lip Glow Oil formulations</a> <span class="related-pub">*(Cosmetics & Toiletries)*</span></div>
+  </div>
+
+  <!-- LIPS IN 6 -->
+  <div class="sec">
+    <div class="sec-cat">
+      <div class="sec-cat-label">The Lips in 6</div>
+      <div class="sec-cat-rule"></div>
+    </div>
+        <div class="lip6-item"><span class="lip6-emoji">💉</span><span class="lip6-text">Revance filed a supplemental BLA this week seeking FDA approval for Daxxify in masseter reduction — the first long-acting neuromodulant to pursue the jawline slimming indication specifically.</span></div>
+    <div class="lip6-item"><span class="lip6-emoji">🍽️</span><span class="lip6-text">A new meta-analysis in *The BMJ* links ultra-processed food intake to accelerated periodontal disease progression. Your gums care about what you eat, not just what you brush.</span></div>
+    <div class="lip6-item"><span class="lip6-emoji">💄</span><span class="lip6-text">Rhode dropped a Cinnamon Roll Peptide Lip Treatment this week and it sold out in nine minutes. Resale is already at 3x on Mercari.</span></div>
+    <div class="lip6-item"><span class="lip6-emoji">🧪</span><span class="lip6-text">MIT researchers published a proof-of-concept for a microneedle lip patch that delivers hyaluronic acid transdermally — no injection, clinical-grade hydration. Human trials planned for Q1 2026.</span></div>
+    <div class="lip6-item"><span class="lip6-emoji">🚫</span><span class="lip6-text">The EU's SCCS issued a preliminary opinion this week flagging butylphenyl methylpropional (Lilial) in lip products as a reproductive toxicant — still legal in the U.S. Check your glosses.</span></div>
+    <div class="lip6-item"><span class="lip6-emoji">💋</span><span class="lip6-text">Sabrina Carpenter's *Short n' Sweet* tour rider reportedly requires a fresh tube of Clinique Black Honey at every venue. The 1971 shade is outselling everything in the line again.</span></div>
+  </div>
+
+  <!-- QUICK HITS -->
+  <div class="sec">
+    <div class="sec-cat">
+      <div class="sec-cat-label">Quick Hits</div>
+      <div class="sec-cat-rule"></div>
+    </div>
+        <div class="qh-item"><span class="qh-emoji">💋</span><span class="qh-text"><strong>Best Kiss:</strong> Glossier just released their annual transparency report and it's genuinely good — full ingredient sourcing origins, supplier audit results, and a reformulation changelog. This is what 'clean beauty' should have meant all along.</span></div>
+    <div class="qh-item"><span class="qh-emoji">🚫</span><span class="qh-text"><strong>Keep It Out:</strong> Activated charcoal toothpastes. A systematic review in *JADA* this week confirmed they're more abrasive than standard pastes with no additional whitening benefit and measurable enamel erosion over six months of use.</span></div>
+    <div class="qh-item"><span class="qh-emoji">😂</span><span class="qh-text"><strong>Healthy Tears:</strong> <a href="https://www.tiktok.com/@lipservicenewsletter/placeholder">A woman on TikTok tried to dissolve her own filler with hyaluronidase she bought from a veterinary supply website and live-streamed the entire thing.</a></span></div>
+    <div class="qh-item"><span class="qh-emoji">🧪</span><span class="qh-text">Stanford researchers published results this week showing that topical niacinamide at 5% concentration significantly reduces transepidermal water loss on the vermillion border — the first study to test niacinamide specifically on lip skin rather than extrapolating from facial data.</span></div>
+    <div class="qh-item"><span class="qh-emoji">💊</span><span class="qh-text">Seed's DS-01 probiotic just added a strain (*L. reuteri* ATCC PTA 6475) with emerging evidence for oral microbiome support. If you're already taking it, the formula auto-updates with your next shipment.</span></div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="sec">
+    <div class="sec-cat">
+      <div class="sec-cat-label">On Our Calendar</div>
+      <div class="sec-cat-rule"></div>
+    </div>
+    <div class="cal-intro">A few things worth knowing this week&hellip;</div>
+        <div class="cal-item"><span class="cal-emoji">🗓️</span><span class="cal-text">**June 19** — Sephora's summer sale kicks off for Rouge members. The Rare Beauty lip oil and Merit flush balm are both included for the first time.</span></div>
+    <div class="cal-item"><span class="cal-emoji">🗓️</span><span class="cal-text">**June 20–22** — American Society for Dermatologic Surgery annual meeting in Chicago. Watch for new data on cannula vs. needle technique outcomes in lip augmentation.</span></div>
+    <div class="cal-item"><span class="cal-emoji">🗓️</span><span class="cal-text">**June 21** — Summer solstice. SPF lip balm is not optional. We like Supergoop Lipscreen SPF 40 and the Coola Classic Liplux — both pass the napkin test (stays on through a coffee).</span></div>
+  </div>
+
+  <!-- ROTATION 2 -->
+  <div class="rotation">
+    <div class="rotation-kicker">In Our Rotation</div>
+        <div class="rotation-item">**Dr. Dan's Cortibalm** — The unsexy hero. Developed by a dermatologist, 1% hydrocortisone in a lanolin base. This is what we reach for when a lip is genuinely inflamed — post-procedure, post-wind-chap, post-retinoid-migration. Not for daily use, but nothing else works as fast for actual irritation.</div>
+    <div class="rotation-item">**Tower 28 LipSoftie** — The daily driver. Shea butter and sea buckthorn in a tinted hydrating balm that doesn't migrate, doesn't taste like sunscreen, and comes in a shade called Dulce de Leche that makes every skin tone look like it just came back from somewhere warm.</div>
+    <div class="rotation-note"><em>We only feature things we&#8217;d actually use on our own face. Or inject into it.</em></div>
+  </div>
+
+  <!-- LAST WORD -->
+  <div class="last-word">
+    <div class="lw-kicker">Last Word</div>
+    <div class="lw-quote">&#8220;I lied and said I was busy. I was busy; but not in a way most people understand. I was busy taking deeper breaths. I was busy silencing irrational thoughts. I was busy calming a racing heart. I was busy telling myself I am okay.&#8221;</div>
+    <div class="lw-attr">— Brittin Oakman, shared because sometimes the most radical beauty routine is the one where you don't leave the house</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">Lip Service</div>
+    <div class="footer-right">
+      <div class="footer-links">
+        <a href="../archive.html">Archive</a>
+        <a href="../subscribe.html">Subscribe</a>
+        <a href="../unsubscribe.html">Unsubscribe</a>
+      </div>
+      <div class="footer-copy">Weekly &middot; Free forever &middot; &copy; 2026</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
