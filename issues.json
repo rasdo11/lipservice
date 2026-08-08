@@ -1,5 +1,14 @@
 [
   {
+    "issue": 123,
+    "date": "2026-08-08",
+    "title": "Your Injector Is Lying About Tyndall Effect",
+    "preview": "A new filler depth study changes where HA should go, high-dose cocoa got a cardiovascular upgrade, and Glossier quietly reformulated.",
+    "email_subject": "that blue tint under your eye isn't a vein",
+    "slug": "issue-123",
+    "url": "./issues/issue-123.html"
+  },
+  {
     "issue": 122,
     "date": "2026-08-04",
     "title": "Your Injector Has a Waiting List Now",
