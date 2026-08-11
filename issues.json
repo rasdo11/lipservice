@@ -1,5 +1,14 @@
 [
   {
+    "issue": 124,
+    "date": "2026-08-11",
+    "title": "Your Injector Is Lying About Batch Sizes",
+    "preview": "A new counterfeit Botox bust, the collagen-boosting fruit no one's talking about, and the lip oil that finally doesn't taste like a candle.",
+    "email_subject": "the feds seized 300 vials of fake botox",
+    "slug": "issue-124",
+    "url": "./issues/issue-124.html"
+  },
+  {
     "issue": 123,
     "date": "2026-08-08",
     "title": "Your Injector Is Lying About Tyndall Effect",
